@@ -1,5 +1,6 @@
 <?php
     $_SESSION["page"] = "register";
+    // var_dump($_SESSION);
 ?>
 <div class="container">
 
@@ -13,11 +14,11 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             <?php 
-                                    if(isset($_SESSION['message'])){
+                                    if(isset($_SESSION["data"])){
                                 ?>
-                                    <div id="reg-alert" class="alert alert-<?php echo $_SESSION['status']; ?>"><?php echo $_SESSION["message"] ?></div>
+                                    <div id="reg-alert" class="alert alert-<?php echo $_SESSION['data']['status']; ?>"><?php echo $_SESSION["data"]["message"] ?></div>
                                 <?php
-                                        unset($_SESSION['data']);
+                                        unset($_SESSION["data"]);
                                     }
                             ?>
                         </div>
@@ -55,16 +56,10 @@
                             </button>
                             <hr>
                             <a class="btn btn-secondary btn-user btn-block" id="b-lgn">Login</a>
-                            <a href="index.html" class="btn btn-google btn-user btn-block">
-                                <i class="fab fa-google fa-fw"></i> Register with Google
-                            </a>
-                            <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                            </a>
                         </form>
                         <hr>
                         <div class="text-center">
-                            <a class="small" href="forgot-password.html">Forgot Password?</a>
+                            <!-- <a class="small" href="forgot-password.html">Forgot Password?</a> -->
                         </div>
                     </div>
                 </div>
@@ -121,6 +116,6 @@
     $(document).ready(function(){
         setTimeout(function() {
             $("#reg-alert").fadeOut(300);
-        }, (3000));
+        }, (10000));
     });
 </script>

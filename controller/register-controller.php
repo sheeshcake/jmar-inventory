@@ -1,6 +1,6 @@
 <?php
     include "../controller/connect.php";
-
+    session_start();
     if(isset($_POST['submit'])){
         $f_name = $_POST['f_name'];
         $l_name = $_POST['l_name'];
@@ -15,14 +15,17 @@
                         VALUES
                             ('$f_name', '$l_name', '$email', '$username', '$password')";
             if($result = mysqli_query($conn, $sql)){
-                $_SESSION["message"] = "Account Registered!";
-                $_SESSION["status"] = "primary";
+                $_SESSION["data"]["message"] = "Account Registered!";
+                $_SESSION["data"]["status"] = "success";
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            }else{
+                $_SESSION["data"]["message"] = "Server Error!";
+                $_SESSION["data"]["status"] = "danger";
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
             }
-
         }else{
-            $_SESSION["message"] = "Account Already Registered!";
-            $_SESSION["status"] = "warning";
+            $_SESSION["data"]["message"] = "Account Already Registered!";
+            $_SESSION["data"]["status"] = "warning";
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
     }else{
