@@ -1,19 +1,12 @@
 <?php
     session_start();
-    if(isset($_SESSION["user"])){
-        include "includes/home.php";
-        if(isset($_GET["p"])){
-            if(file_exists("includes/" . $_GET["p"] . ".php")){
-                include "includes/" . $_GET["p"] . ".php";
-            }
-            else{
-                include "includes/error404.php";
-            }
-        }
-        else{
-            include "includes/dashboard.php";
-        }
+    if(isset($_SESSION["page"])){
+        include "includes/" . $_SESSION["page"] . ".php";
     }else{
-        include "includes/login.php";
+        if(isset($_SESSION["user"])){
+            include "includes/home.php";
+        }else{
+            include "includes/login.php";
+        }
     }
 ?>

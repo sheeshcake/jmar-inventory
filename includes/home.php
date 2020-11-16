@@ -11,24 +11,26 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <!-- Insert content here -->
-            <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+            <?php
+                if(isset($_GET["p"])){
+                    if(file_exists("includes/" . $_GET["p"] . ".php")){
+                        include "includes/" . $_GET["p"] . ".php";
+                    }
+                    else{
+                        include "includes/error404.php";
+                    }
+                }
+                else{
+                    include "includes/dashboard.php";
+                }
+            ?>
+            
 
         </div>
         <!-- /.container-fluid -->
 
     </div>
     <!-- End of Main Content -->
-
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Your Website 2020</span>
-            </div>
-        </div>
-    </footer>
-    <!-- End of Footer -->
 
 </div>
 <!-- End of Content Wrapper -->

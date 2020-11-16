@@ -1,3 +1,6 @@
+<?php
+    $_SESSION["page"] = "login";
+?>
 <div class="container">
 
     <!-- Outer Row -->
@@ -19,10 +22,11 @@
                                     ?>
                                         <div id="lgn-alert" class="alert alert-danger"><?php echo $_SESSION["data"] ?></div>
                                     <?php
+                                            unset($_SESSION['data']);
                                         }
                                     ?>
                                 </div>
-                                <form class="user" method="POST" action="api/login-controller.php">
+                                <form class="user" method="POST" action="controller/login-controller.php">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user"
                                             name="username" aria-describedby="emailHelp"
@@ -70,10 +74,13 @@
 <script>
     $(document).on("click", "#b-reg", function(){
         $.ajax({
-            url : url(window.location.href) + "/includes/register.php",
-            method : "GET",
+            url : url(window.location.href) + "/controller/page-controller.php",
+            method : "POST",
+            data: {
+                "page" : "register"
+            },
             success: function(data){
-                $("#main-content").fadeIn(500).html(data);
+                $(".main-content").fadeIn(500).html(data);
             },
             error : function(xhr, textStatus, errorThrown) {
                 if (textStatus == 'timeout') {

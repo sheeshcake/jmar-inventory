@@ -1,3 +1,6 @@
+<?php
+    $_SESSION["page"] = "register";
+?>
 <div class="container">
 
     <div class="card o-hidden border-0 shadow-lg my-5">
@@ -9,8 +12,16 @@
                     <div class="p-5">
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            <?php 
+                                    if(isset($_SESSION['message'])){
+                                ?>
+                                    <div id="reg-alert" class="alert alert-<?php echo $_SESSION['status']; ?>"><?php echo $_SESSION["message"] ?></div>
+                                <?php
+                                        unset($_SESSION['data']);
+                                    }
+                            ?>
                         </div>
-                        <form class="user" method="POST" action="api/register-controller.php"> 
+                        <form class="user" method="POST" action="controller/register-controller.php"> 
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <input type="text" name="f_name" class="form-control form-control-user"
@@ -66,22 +77,28 @@
 <script>
     $(document).on("click", "#b-lgn", function(){
         $.ajax({
-            url : url(window.location.href) + "/includes/login.php",
-            method : "GET",
+            url : url(window.location.href) + "/controller/page-controller.php",
+            method : "POST",
+            data: {
+                "page" : "login"
+            },
             success: function(data){
-                $("#main-content").fadeIn(500).html(data);
+                $(".main-content").fadeIn(500).html(data);
             },
             error : function(xhr, textStatus, errorThrown) {
                 if (textStatus == 'timeout') {
                     this.tryCount++;
                     if (this.tryCount <= this.retryLimit) {
+                        //try again
                         $.ajax(this);
                         return;
                     }
                     return;
                 }
                 if (xhr.status == 500) {
+                    //handle error
                 } else {
+                    //handle error
                 }
             }
         });
@@ -100,5 +117,10 @@
             $("#b-reg").removeAttr("type");
             $("#b-reg").removeAttr("name");
         }
+    });
+    $(document).ready(function(){
+        setTimeout(function() {
+            $("#reg-alert").fadeOut(300);
+        }, (3000));
     });
 </script>
