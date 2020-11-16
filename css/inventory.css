@@ -1,0 +1,23 @@
+.desc {
+    word-wrap: break-word;
+}
+
+.item-data {
+    width: 100% !important;
+}
+
+.dtr-title {
+    font-weight: bold;
+}
+
+#add-item {
+    float: right;
+}
+
+.dataTables_filter {
+    float: right;
+}
+
+.example_wrapper {
+    width: 100% !important;
+}

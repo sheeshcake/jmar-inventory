@@ -183,10 +183,10 @@
             </a>
             <a class="dropdown-item" href="#" disabled>
                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                Activity Log(Comming Soon)
+                Activity Log
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+            <a class="dropdown-item" href="#" data-toggle="modal" id='logout-modal' data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Logout
             </a>
@@ -198,7 +198,7 @@
 </nav>
 <!-- End of Topbar -->
 
-<!-- Logout Modal-->
+<!-- All Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true">
 <div class="modal-dialog" role="document">
@@ -217,16 +217,3 @@ aria-hidden="true">
     </div>
 </div>
 </div>
-<script>
-    $(document).on("click", "#logout", function(){
-        window.location.href = url(window.location.href) + "/controller/logout-controller.php";
-    });
-    $(document).on("click", "#sidebarToggleTop", function(){
-        $("#page-top").toggleClass("sidebar-toggled");
-        $("#accordionSidebar").toggleClass("toggled");
-    });
-    $(document).on("click", "#sidebarToggle", function(){
-        $("#page-top").toggleClass("sidebar-toggled");
-        $("#accordionSidebar").toggleClass("toggled");
-    });
-</script>
