@@ -1,24 +1,24 @@
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/inventory.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
-<div class="inventory-head d-flex">
-    <h3>Inventory</h3>
+<div class="inventory-head d-flex mb-3">
+    <h1 class="h3 mb-0 text-gray-800">Inventory</h1>
     <div class="ml-auto p-2">
-        <button class="btn btn-primary" id="add-item">
+        <button class="btn btn-primary btn-sm" id="add-item">
             <i class="fa fa-plus" aria-hidden="true"></i>
             Add Item
         </button>
     </div>
 </div>
-<div class="container">
+<div class="container card shadow mb-4 p-3">
 	<div class="row">
 		<div class="col">
 <div class="dropdown" id="stock-filter">
-	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	<button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		Filter <span class="caret"></span>
 	</button>
 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -34,6 +34,7 @@
 <table id="example" class="table table-striped table-bordered" width="100%">
         <thead>
             <tr>
+                <th></th>
                 <th>Item ID</th>
                 <th>Name</th>
                 <th>Brand</th>
@@ -44,6 +45,7 @@
         </thead>
         <tfoot>
             <tr>
+                <th></th>
                 <th>Item ID</th>
                 <th>Name</th>
                 <th>Brand</th>
@@ -54,6 +56,7 @@
         </tfoot>
         <tbody>
             <tr>
+                <td><button class="btn details-toggle open-details"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
                 <td>1</td>
                 <td>Bulb1</td>
                 <td>Firefly</td>
@@ -62,6 +65,7 @@
                 <td>100</td>
             </tr>
             <tr>
+                <td><button class="btn details-toggle open-details"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
                 <td>1</td>
                 <td>Bulb1</td>
                 <td>Fireflyasdasdasdd</td>

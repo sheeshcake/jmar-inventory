@@ -21,3 +21,11 @@
 .example_wrapper {
     width: 100% !important;
 }
+
+.open-details {
+    border-radius: 50%;
+}
+
+table.dataTable tbody td {
+    outline: none;
+}

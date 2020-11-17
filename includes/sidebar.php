@@ -38,8 +38,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Inventory Tools:</h6>
                         <a class="collapse-item" href="?p=inventory">Show All Items</a>
-                        <a class="collapse-item" href="buttons.html">Add Item</a>
-                        <a class="collapse-item" href="buttons.html">Items</a>
+                        <a class="collapse-item" href="buttons.html">Incoming Items</a>
+                        <a class="collapse-item" href="buttons.html">Outgoing Items</a>
                         <h6 class="collapse-header">Categories:</h6>
                         <a class="collapse-item" href="buttons.html">Nails</a>
                         <a class="collapse-item" href="buttons.html">Paints</a>
