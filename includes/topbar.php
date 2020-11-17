@@ -59,11 +59,11 @@
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
             aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="?p=account">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 My Account
             </a>
-            <a class="dropdown-item" href="#" disabled>
+            <a class="dropdown-item" href="?p=activity" disabled>
                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                 Activity Log
             </a>

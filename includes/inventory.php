@@ -3,8 +3,8 @@
 <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/inventory.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="css/inventory.css">
 <div class="inventory-head d-flex mb-3">
     <h1 class="h3 mb-0 text-gray-800">Inventory</h1>
     <div class="ml-auto p-2">

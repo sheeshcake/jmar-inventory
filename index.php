@@ -28,5 +28,6 @@
 </head>
 <body id="page-top" class="main-content">
         <?php include "controller/core.php"; ?>
+        <script src="js/core.js"></script>
 </body>
 </html>

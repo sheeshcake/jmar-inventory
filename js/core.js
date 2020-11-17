@@ -22,14 +22,6 @@ function getData(div) {
 $(document).on("click", "#logout", function() {
     window.location.href = url(window.location.href) + "/controller/logout-controller.php";
 });
-$(document).on("click", "#sidebarToggleTop", function() {
-    $("#page-top").toggleClass("sidebar-toggled");
-    $("#accordionSidebar").toggleClass("toggled");
-});
-$(document).on("click", "#sidebarToggle", function() {
-    $("#page-top").toggleClass("sidebar-toggled");
-    $("#accordionSidebar").toggleClass("toggled");
-});
 
 $(document).on("click", "#logout-modal", function() {
     $("#exampleModalLabel").text("Ready to Leave?");
@@ -39,6 +31,10 @@ $(document).on("click", "#logout-modal", function() {
         '<a class="btn btn-primary" id="logout">Logout</a>'
     );
 });
+$(document).ready(function() {
+    $("#cat-table").DataTable();
+});
+
 // $(document).ready(function() {
 //     // localStorage.setItem("user", 1);
 //     if (localStorage.getItem("user") === null) {
