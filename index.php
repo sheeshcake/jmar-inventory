@@ -1,5 +1,6 @@
 <?php
     include "controller/connect.php";
+    include "controller/core.php"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +28,7 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 </head>
 <body id="page-top" class="main-content">
-        <?php include "controller/core.php"; ?>
+        <?php page(); ?>
         <script src="js/core.js"></script>
 </body>
 </html>

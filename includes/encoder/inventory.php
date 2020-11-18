@@ -34,44 +34,64 @@
 <table id="example" class="table table-striped table-bordered" width="100%">
         <thead>
             <tr>
-                <th></th>
+                <th>Item Capital</th>
                 <th>Item ID</th>
                 <th>Name</th>
                 <th>Brand</th>
                 <th>Category</th>
+                <th>Tax</th>
                 <th>Price</th>
                 <th>Stock</th>
+                <th></th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th></th>
-                <th>Item ID</th>
+                <th>Item Capital</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Brand</th>
                 <th>Category</th>
+                <th>Tax</th>
                 <th>Price</th>
                 <th>Stock</th>
+                <th></th>
             </tr>
         </tfoot>
         <tbody>
             <tr>
-                <td><button class="btn details-toggle open-details"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
+                <td>55.2</td>
                 <td>1</td>
                 <td>Bulb1</td>
                 <td>Firefly</td>
                 <td>Bulbs</td>
-                <td>69.00</td>
+                <td>20%</td>
+                <td>
+                <div class="form-group">
+                <button class="btn"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                    <input type="number" value="100" class="form-control w-50">
+                    <button class="btn"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
+                </div>
+                </td>
                 <td>100</td>
+                <td>
+                    <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                </td>
             </tr>
             <tr>
-                <td><button class="btn details-toggle open-details"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
+                <td>55.2</td>
                 <td>1</td>
                 <td>Bulb1</td>
                 <td>Fireflyasdasdasdd</td>
                 <td>Bulbs</td>
+                <td>20%</td>
                 <td>69.00</td>
                 <td>100</td>
+                <td>
+                <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>			

@@ -12,17 +12,7 @@
 
             <!-- Page Heading -->
             <?php
-                if(isset($_GET["p"])){
-                    if(file_exists("includes/" . $_GET["p"] . ".php")){
-                        include "includes/" . $_GET["p"] . ".php";
-                    }
-                    else{
-                        include "includes/error404.php";
-                    }
-                }
-                else{
-                    include "includes/dashboard.php";
-                }
+                home_core();
             ?>
             
 
