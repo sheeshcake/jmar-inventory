@@ -67,13 +67,15 @@
                 <td>Bulbs</td>
                 <td>20%</td>
                 <td>
-                <div class="form-group">
-                <button class="btn"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-                    <input type="number" value="100" class="form-control w-50">
-                    <button class="btn"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
-                </div>
+                    <div class="form-group">
+                        <input type="number" value="69" class="form-control w-50">
+                    </div>
                 </td>
-                <td>100</td>
+                <td>                
+                    <div class="form-group">
+                        <input type="number" value="100" class="form-control w-50">
+                    </div>
+                </td>
                 <td>
                     <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                     <button class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i></button>
@@ -81,13 +83,21 @@
             </tr>
             <tr>
                 <td>55.2</td>
-                <td>1</td>
+                <td>2</td>
                 <td>Bulb1</td>
                 <td>Fireflyasdasdasdd</td>
                 <td>Bulbs</td>
                 <td>20%</td>
-                <td>69.00</td>
-                <td>100</td>
+                <td>
+                    <div class="form-group">
+                        <input type="number" value="69" class="form-control w-50">
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="number" value="100" class="form-control w-50">
+                    </div>
+                </td>
                 <td>
                 <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 <button class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i></button>

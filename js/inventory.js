@@ -29,7 +29,7 @@ $(document).on("click", ".close-details", function() {
     $(this).addClass("open-details");
     $(this).removeClass("close-details");
 });
-$(function() {
+$(document).ready(function() {
     //     $('a.toggle-vis').on( 'click', function (e) {
     //         e.preventDefault();
     //         // Get the column API object
@@ -37,10 +37,13 @@ $(function() {
     //         // Toggle the visibility
     //         column.visible( ! column.visible() );
     //     } );
-    var table = $('#example').DataTable({
-            responsive: true,
-            "dom": '<"toolbar">frtip'
-        }),
-        options = ['option1', 'option2', 'option3', 'option4', 'option5', 'option6'];
+    $('#example').DataTable({
+        scrollY: '50vh',
+        scrollCollapse: true,
+        scrollX: true,
+        scrollCollapse: true,
+        paging: false,
+        "responsive": true
+    });
     $("div.toolbar").append($('#stock-filter'));
 });

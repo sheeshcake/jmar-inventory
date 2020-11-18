@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2020 at 07:43 AM
+-- Generation Time: Nov 18, 2020 at 09:22 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -24,6 +24,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`category_id`, `category_name`) VALUES
+(1, 'Bulbs');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `items`
 --
 
@@ -34,10 +52,18 @@ CREATE TABLE `items` (
   `item_brand` varchar(32) NOT NULL,
   `item_desc` text NOT NULL,
   `item_unit` varchar(32) NOT NULL,
+  `item_tax` varchar(32) NOT NULL,
   `item_price` varchar(32) NOT NULL,
   `item_added` varchar(32) NOT NULL,
   `category_id` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`item_id`, `item_img`, `item_name`, `item_brand`, `item_desc`, `item_unit`, `item_tax`, `item_price`, `item_added`, `category_id`) VALUES
+(1, 'item.jpg', 'LED Bulb', 'Firefly', '18watts', 'pcs', '20', '55.2', 'now', '1');
 
 -- --------------------------------------------------------
 
@@ -76,11 +102,18 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `f_name`, `l_name`, `user_img`, `role`, `email`) VALUES
-(3, 'jmar', '$2y$10$dvXWYm98AEVb9eil5Hd/FeNK2FWfp2Ej.iOGxyU9fRpGk.YVG9wd2', 'J', 'Mar', 'user.jpg', 'admin', 'admin@gmail.com');
+(3, 'jmar', '$2y$10$dvXWYm98AEVb9eil5Hd/FeNK2FWfp2Ej.iOGxyU9fRpGk.YVG9wd2', 'J', 'Mar', 'user.jpg', 'admin', 'admin@gmail.com'),
+(4, 'asd', '$2y$10$ESGVyK.l.RidFxLHIVVrt.meLydXjqDddbTu7/z4UihDm7ZnXs/VK', 'asd', 'asd', 'user.jpg', 'encoder', 'asd@gmail.com');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`category_id`);
 
 --
 -- Indexes for table `items`
@@ -105,10 +138,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `transactions`
@@ -120,7 +159,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

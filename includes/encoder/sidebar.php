@@ -8,3 +8,5 @@
         <a class="collapse-item" href="?p=inventory">Manage Inventory</a>
     </div>
 </div>
+<link rel="stylesheet" href="css/sidebar.css">
+<script src="js/sidebar.js"></script>

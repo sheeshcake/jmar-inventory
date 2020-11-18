@@ -31,9 +31,6 @@ $(document).on("click", "#logout-modal", function() {
         '<a class="btn btn-primary" id="logout">Logout</a>'
     );
 });
-$(document).ready(function() {
-    $("#cat-table").DataTable();
-});
 
 // $(document).ready(function() {
 //     // localStorage.setItem("user", 1);
