@@ -24,7 +24,7 @@
                 }
             }
             else{
-                include "includes/dashboard.php";
+                include "includes/" . $_SESSION["user"]["role"] . "/dashboard.php";
             }
         }
     }
