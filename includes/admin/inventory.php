@@ -10,7 +10,7 @@
 <div class="inventory-head d-flex mb-3">
     <h1 class="h3 mb-0 text-gray-800">Inventory</h1>
     <div class="ml-auto p-2">
-        <button class="btn btn-primary btn-sm" id="add-item">
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".add-item-modal" id="add-item">
             <i class="fa fa-plus" aria-hidden="true"></i>
             Add Item
         </button>
@@ -33,7 +33,7 @@
     <option>In Stock</option>
     <option>Out Of Stock</option>
 </select> -->
-<table id="example" class="table table-striped table-bordered mw-400" width="100%">
+<table id="example" class="table table-striped table-bordered mw-400 no-wrap" width="100%">
         <thead>
             <tr>
                 <th></th>
@@ -70,5 +70,14 @@
     </table>			
 		</div>
 	</div>
+</div>
+<div class="modal fade add-item-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <h1>Loudy butangi ra gud ug mga input dri please</h1>
+        <p>para sa pag add ug item</p>
+        <p>gamit ang bootstrap nga mga input ha</p>
+    </div>
+  </div>
 </div>
 <script src="js/inventory.js"></script>

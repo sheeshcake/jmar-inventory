@@ -30,20 +30,20 @@ $(document).on("click", ".close-details", function() {
     $(this).removeClass("close-details");
 });
 $(document).ready(function() {
-    //     $('a.toggle-vis').on( 'click', function (e) {
-    //         e.preventDefault();
-    //         // Get the column API object
-    //         var column = table.column( $(this).attr('data-column') );
-    //         // Toggle the visibility
-    //         column.visible( ! column.visible() );
-    //     } );
     $('#example').DataTable({
-        scrollY: '50vh',
-        scrollCollapse: true,
-        scrollX: true,
-        scrollCollapse: true,
-        paging: false,
-        "responsive": true
+        responsive: true,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: 1 },
+            { responsivePriority: 3, targets: 2 },
+            { responsivePriority: 4, targets: 3 }
+        ]
     });
     $("div.toolbar").append($('#stock-filter'));
+});
+$(document).on("click", ".delete", function() {
+
+});
+$(document).on("click", ".update", function() {
+
 });

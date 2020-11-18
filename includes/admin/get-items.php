@@ -75,8 +75,8 @@
     </td>
     <td>
     <div class="d-flex">
-        <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-        <button class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+        <button class="btn btn-danger delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        <button class="btn btn-success update"><i class="fa fa-refresh" aria-hidden="true"></i></button>
     </div>
     </td>
 </tr>
