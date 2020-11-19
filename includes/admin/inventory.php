@@ -104,9 +104,6 @@
                         <label for="item-description">Item Description</label>
                         <textarea class="form-control" id="item-description" rows="3"></textarea>
                     </div>
-                    <div class="input-group">
-                        <label for="item-description">Item Description</label>
-                    </div>
                 </div>
                 <div class="form-row m-3">
                     
