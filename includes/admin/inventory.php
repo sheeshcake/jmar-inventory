@@ -100,9 +100,16 @@
                     </div>
                 </div>
                 <div class="form-row m-3">
+                <label for="category">Category</label>
+                    <select class="form-control" id="category">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                </div>
+                <div class="form-row m-3">
                     <div class="input-group">
-                        <label for="item-description">Item Description</label>
-                        <textarea class="form-control" id="item-description" rows="3"></textarea>
+                        <textarea class="form-control" id="item-description" rows="3" placeholder="Item Description"></textarea>
                     </div>
                 </div>
                 <div class="form-row m-3">
