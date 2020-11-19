@@ -1,3 +1,7 @@
+<?php
+    include "controller/connect.php";
+?>
+
 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
     <i class="fas fa-fw fa-archive"></i>
     <span>Inventory</span>
@@ -9,9 +13,16 @@
         <a class="collapse-item" href="?p=incoming">Incoming Items</a>
         <a class="collapse-item" href="?p=outgoing">Outgoing Items</a>
         <h6 class="collapse-header">Categories:</h6>
-        <a class="collapse-item" href="?p=inventory&cat=nails">Nails</a>
-        <a class="collapse-item" href="?p=inventory&cat=paints">Paints</a>
-        <a class="collapse-item" href="?p=inventory&cat=bars">Bars</a>
+        <?php
+            $sql = "SELECT * FROM category";
+            $result = mysqli_query($conn, $sql);
+            while($data = $result->fetch_assoc()){
+        ?>
+            <a class="collapse-item cat" href="?p=inventory&cat=<?php echo $data["category_name"] ?>"><?php echo $data["category_name"] ?></a>
+        <?php
+            }
+
+        ?>
         <button class="collapse-item btn btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;Manage Category</button>
     </div>
 </div>
@@ -29,10 +40,11 @@
                 <div class="card p-3">
                     <h4>Add Category</h4>
                     <hr class="divider"></hr>
+                    <div id="category-message"></div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="category" placeholder="New Category">
+                        <input type="text" class="form-control" id="input-category" placeholder="New Category">
                     </div>
-                    <button class="btn btn-primary btn-sm">Add</button>
+                    <button class="btn btn-primary btn-sm" id="add-cat-btn" style="display: none;">Add</button>
                 </div>
                 <hr class="divider"></hr>
                 <div class="card p-3">
@@ -45,30 +57,22 @@
                             <td></td>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td contenteditable>1</td>
-                                <td contenteditable>Nails</td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                    <button class="btn btn-success btn-sm">Update</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td contenteditable>2</td>
-                                <td contenteditable>Paints</td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                    <button class="btn btn-success btn-sm">Update</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td contenteditable>3</td>
-                                <td contenteditable>Bars</td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                    <button class="btn btn-success btn-sm">Update</button>
-                                </td>
-                            </tr>
+                            <?php
+                                $sql = "SELECT * FROM category";
+                                $result = mysqli_query($conn, $sql);
+                                while($data = $result->fetch_assoc()){
+                            ?>
+                                <tr>
+                                    <td><?php echo $data["category_id"] ?></td>
+                                    <td contenteditable><?php echo $data["category_name"] ?></td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm">Delete</button>
+                                        <button class="btn btn-success btn-sm">Update</button>
+                                    </td>
+                                </tr>
+                            <?php
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>
