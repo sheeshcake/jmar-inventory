@@ -68,3 +68,7 @@ $(document).on("input", "#input-capital", function() {
 $(document).on("input", "#input-tax", function() {
     calculate();
 });
+// Material Select Initialization
+$(document).ready(function() {
+    $('.mdb-select').materialSelect();
+    });

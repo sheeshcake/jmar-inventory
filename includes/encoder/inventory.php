@@ -133,6 +133,12 @@
                     </div>
                 </div>
                 </div>
+                <select class="mdb-select md-form">
+                    <option value="" disabled selected>Category</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                </select>
                 <div class="form-group">
                 <label for="exampleFormControlTextarea1">Item Description</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
