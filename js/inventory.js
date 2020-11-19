@@ -40,10 +40,31 @@ $(document).ready(function() {
         ]
     });
     $("div.toolbar").append($('#stock-filter'));
+    $
 });
 $(document).on("click", ".delete", function() {
 
 });
 $(document).on("click", ".update", function() {
 
+});
+
+
+$(document).on('change', '.custom-file-input', function(e) {
+    var filename = $('input[type=file]').val().split('\\').pop();
+    $(".custom-file-label").text(filename);
+})
+
+function calculate() {
+    var price = parseFloat($("#input-capital").val());
+    var tax = parseFloat($("#input-tax").val());
+    var total = ((tax / 100) * price) + price;
+    console.log(total + " " + price + " " + tax);
+    $("#total-item-price").val(total);
+}
+$(document).on("input", "#input-capital", function() {
+    calculate();
+});
+$(document).on("input", "#input-tax", function() {
+    calculate();
 });
