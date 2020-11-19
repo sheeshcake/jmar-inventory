@@ -1,3 +1,6 @@
+<?php
+    include "controller/connect.php";
+?>
 <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
@@ -102,9 +105,15 @@
                 <div class="form-row m-3">
                 <label for="category">Category</label>
                     <select class="form-control" id="category">
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
+                        <?php
+                            $sql = "SELECT * FROM category";
+                            $result = mysqli_query($conn, $sql);
+                            while($data = $result->fetch_assoc()){
+                        ?>
+                            <option value="<?php echo $data["category_name"] ?>"><?php echo $data["category_name"] ?></option>
+                        <?php
+                            }
+                        ?>
                     </select>
                 </div>
                 <div class="form-row m-3">
