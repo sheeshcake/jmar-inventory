@@ -9,9 +9,7 @@
 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Inventory Tools:</h6>
-        <a class="collapse-item" href="?p=inventory">Show All Items</a>
         <a class="collapse-item" href="?p=incoming">Incoming Items</a>
-        <a class="collapse-item" href="?p=outgoing">Outgoing Items</a>
         <h6 class="collapse-header">Categories:</h6>
         <?php
             $sql = "SELECT * FROM category";
@@ -23,7 +21,7 @@
             }
 
         ?>
-        <button class="collapse-item btn btn-sm" id="open-cat" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;Manage Category</button>
+        <button class="collapse-item btn btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;Manage Category</button>
     </div>
 </div>
 
@@ -66,8 +64,8 @@
                                     <td><?php echo $data["category_id"] ?></td>
                                     <td contenteditable><?php echo $data["category_name"] ?></td>
                                     <td>
-                                        <button class="cat-del btn btn-danger btn-sm">Delete</button>
-                                        <button class="cat-up btn btn-success btn-sm">Update</button>
+                                        <button class="btn btn-danger btn-sm">Delete</button>
+                                        <button class="btn btn-success btn-sm">Update</button>
                                     </td>
                                 </tr>
                             <?php
@@ -87,3 +85,8 @@
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/sidebar.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+<script>
+$(document).ready(function() {
+    $("#cat-table").DataTable();
+});
+</script>

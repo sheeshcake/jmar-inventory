@@ -16,15 +16,15 @@
     function home_core(){
         if(isset($_SESSION["user"])){
             if(isset($_GET["p"])){
-                if(file_exists("includes/" . $_SESSION["user"]["role"] . "/" . $_GET["p"] . ".php")){
-                    include "includes/" . $_SESSION["user"]["role"] . "/" . $_GET["p"] . ".php";
+                if(file_exists("includes/" . $_GET["p"] . ".php")){
+                    include "includes/" . $_GET["p"] . ".php";
                 }
                 else{
                     include "includes/error404.php";
                 }
             }
             else{
-                include "includes/" . $_SESSION["user"]["role"] . "/dashboard.php";
+                include "includes/dashboard.php";
             }
         }
     }

@@ -9,7 +9,7 @@
             $sql = "INSERT INTO category (category_name) VALUES ('$category')";
             $result = mysqli_query($conn, $sql);
             if($result){
-                $data = array("message"=>"Category Added!", "status"=>"success", "name"=>"$category");
+                $data = array("message"=>"Category Added!", "status"=>"success", "name"=>"$category", "id"=>"$conn->insert_id");
                 echo json_encode($data);
             }
         }else{

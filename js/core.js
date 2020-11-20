@@ -38,8 +38,11 @@ $(document).on("input", "#input-category", function() {
         $("#add-cat-btn").show(500);
     }
 });
+var $t;
+$(document).on("click", "#open-cat", function() {
+    $t = $("#cat-table").DataTable();
+})
 $("#add-cat-btn").click(function() {
-    var $button = $(this);
     $.ajax({
         url: url(window.location.href) + "/controller/add-category.php",
         method: "POST",
@@ -62,8 +65,37 @@ $("#add-cat-btn").click(function() {
                 var new_cat = $('<a style="display: none" class="collapse-item" href="?p=inventory&cat=' + data.name + '">' + data.name + '</a>');
                 new_cat.insertAfter('.cat:last');
                 new_cat.show(500);
+                $t.row.add([
+                    data.id + '',
+                    data.name + '',
+                    '<button class="cat-del btn btn-danger btn-sm">Delete</button>' +
+                    '<button class="cat-up btn btn-success btn-sm">Update</button>'
+                ]).draw(false);
             }
         }
     });
+});
+$(".cat-del").click(function() {
+    var row_data = $t.row($(this).parents('tr')).data();
+    $.ajax({
+        url: url(window.location.href) + "/controller/delete-category.php",
+        method: "POST",
+        data: {
+            submit: "submit",
+            id: row_data[0]
+        },
+        success: function(d) {
+            var data = JSON.parse(d);
 
+        }
+    })
+});
+
+$(document).on("click", "#sidebarToggleTop", function() {
+    $("#page-top").toggleClass("sidebar-toggled");
+    $("#accordionSidebar").toggleClass("toggled");
+});
+$(document).on("click", "#sidebarToggle", function() {
+    $("#page-top").toggleClass("sidebar-toggled");
+    $("#accordionSidebar").toggleClass("toggled");
 });
