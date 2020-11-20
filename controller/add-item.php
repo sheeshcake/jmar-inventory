@@ -1,12 +1,26 @@
 <?php
     include "../controller/connect.php";
     session_start();
-    if(isset($_POST["submit"])){
+    if(isset($_FILES["item_img"]["name"])){
         // Add Code 
+        $item_img = urldecode($_FILES["item_img"]["name"]);
+        move_uploaded_file($_FILES["item_img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/jmar-inventory-1/img/item/" . $item_img);
+        $item_name = $_POST["item_name"];
+        $item_brand = $_POST["item_brand"];
+        $item_desc = $_POST["item_desc"];
+        $item_unit = $_POST["item_unit"];
+        $item_price = $_POST["item_capital"];
+        $item_tax = $_POST["item_tax"];
+        $item_added = date("Y-m-d h:i:sa");
+        $category_id = $_POST["category_id"];
+        $sql = "SELECT * FROM items WHERE item_name = '$item_name' and item_brand='$item_brand'";
+        $result = mysqli_query($conn, $sql);
         if(mysqli_num_rows($result) == 0){
-            // Add Code
+            $sql = "INSERT INTO items (item_img, item_name, item_brand, item_desc, item_unit, item_price, item_tax, item_added, category_id) VALUES (
+                '$item_img', '$item_name', '$item_brand', '$item_desc', '$item_unit', '$item_price', '$item_tax', '$item_added', '$category_id')";
+            $result = mysqli_query($conn, $sql);
             if($result){
-                $data = array("message"=>"Item Added!", "status"=>"success", "name"=>"$category", "id"=>"$conn->insert_id");
+                $data = array("message"=>"Item Added!", "status"=>"success", "id"=>"$conn->insert_id");
                 echo json_encode($data);
             }
         }else{
