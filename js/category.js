@@ -1,3 +1,6 @@
+//Dri sha na bug
+
+
 $(document).on("click", ".cat-del", function() {
     var $row_data = $t.row($(this).parents('tr')).data();
     $(document).find(".cat:contains('" + $row_data[1] + "')").remove();
