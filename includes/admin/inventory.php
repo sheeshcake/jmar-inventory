@@ -98,13 +98,41 @@
                             <label class="custom-file-label" for="image-file">Choose Image</label>
                         </div>
                     </div>
+                    
                 </div>
+
+
                 <div class="form-row m-3">
-                    <div class="input-group">
-                        <label for="item-description">Item Description</label>
-                        <textarea class="form-control" id="item-description" rows="3"></textarea>
+                    <div class="col-md-6 my-4">
+                        <div class="input-group">
+                            <textarea class="form-control" id="item-description" rows="3" placeholder="Item Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-3 my-4">
+                        <label for="category">Category</label>
+                        <select class="form-control" id="category">
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 my-4">
+                        <label for="category">Unit</label>
+                        <select class="form-control" id="category">
+                            <option value="1">meter (m)</option>
+                            <option value="2">grams (g)</option>
+                            <option value="3">milliliters (mL)</option>
+                            <option value="4">kilograms (kg</option>
+                            <option value="5">liters (L)</option>
+                            <option value="6">centimeters (cm)</option>
+                            <option value="7">density (kg/m)</option>
+                            <option value="8">length</option>
+                            <option value="9">inches (")</option>
+                        </select>
                     </div>
                 </div>
+
+
                 <div class="form-row m-3">
                     
                     <div class="input-group col-md-4">
@@ -126,6 +154,9 @@
                         <input type="text" class="form-control" id="total-item-price" aria-label="Price" placeholder="Price" readonly>
                     </div>
                 </div>
+                <br><div class="container">
+                        <button type="button" class="btn btn-success btn-lg float-right">Submit</button>
+                </div></br>
             </div>
         </div>
     </div>
