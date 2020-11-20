@@ -36,3 +36,15 @@
 <a class="scroll-to-top rounded" href="#page-top">
 <i class="fas fa-angle-up"></i>
 </a>
+<script>
+$(document).ready(function() {
+    $(document).on("click", "#sidebarToggleTop", function() {
+        $("#page-top").toggleClass("sidebar-toggled");
+        $("#accordionSidebar").toggleClass("toggled");
+    });
+    $(document).on("click", "#sidebarToggle", function() {
+        $("#page-top").toggleClass("sidebar-toggled");
+        $("#accordionSidebar").toggleClass("toggled");
+    });
+});
+</script>

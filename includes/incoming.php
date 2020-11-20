@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/inventory.css">
 <div class="inventory-head d-flex mb-3">
-    <h1 class="h3 mb-0 text-gray-800">Inventory</h1>
+    <h1 class="h3 mb-0 text-gray-800">Incoming</h1>
     <div class="ml-auto p-2">
         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".add-item-modal" id="add-item">
             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -19,7 +19,7 @@
         </button>
     </div>
     <div class="p-2">
-        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".add-item-modal" id="add-item">
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".incoming-modal" id="add-item">
             <i class="fa fa-exchange" aria-hidden="true"></i>
             New Transaction
         </button>
