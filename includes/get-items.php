@@ -9,7 +9,7 @@
 ?>
 <tr>
     <td>
-        <img src="img/<?php echo $data["item_img"] ?>" alt="" width="100" >
+        <img src="img/item/<?php echo $data["item_img"] ?>" alt="" width="100" >
     </td>
     <td>
         <div class="col-auto">
