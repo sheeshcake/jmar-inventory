@@ -19,7 +19,11 @@
         </button>
     </div>
     <div class="p-2">
+<<<<<<< HEAD
         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".add-item-modal" id="new-item-modal">
+=======
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".incoming-modal" id="add-item">
+>>>>>>> d36db50c0a0ac5cf86d9184db4240631d3a92674
             <i class="fa fa-exchange" aria-hidden="true"></i>
             New Transaction
         </button>
