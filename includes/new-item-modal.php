@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <input type="submit"  class="btn btn-primary" name="submit" id="btn-add-item" value="Submit">
+                        <input type="submit"  class="btn btn-primary" name="submit" id="btn-add-item" data-target=".add-item-modal" data-toggle="modal" value="Submit">
                     </div>
                 </form>
             </div>
@@ -114,8 +114,13 @@ $("form#add-item-form").submit(function(e) {
         url: url(window.location.href) + "/controller/add-item.php",
         method: "POST",
         data: formData,
-        success: function (data) {
-            console.log(data);
+        success: function (d) {
+            var data = JSON.parse(d);
+            $(".alert").addClass("alert" + data.status);
+            $(".alert").text(data.message);
+            $(".alert").fadeTo(3000, 500).slideUp(500, function() {
+                $(".alert").slideUp(500);
+            });
         },
         cache: false,
         contentType: false,

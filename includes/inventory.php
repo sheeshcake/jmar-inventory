@@ -19,6 +19,9 @@
         </button>
     </div>
 </div>
+<div class="alert alert-success" role="alert" style="display: none">
+  This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>
 <div class="container shadow mb-4 p-3">
 	<div class="row">
 		<div class="col">
