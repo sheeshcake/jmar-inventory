@@ -11,16 +11,19 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/inventory.css">
 <div class="inventory-head d-flex mb-3">
-    <h1 class="h3 mb-0 text-gray-800">Outgoing</h1>
+    <h1 class="h3 mb-0 text-gray-800">Inventory</h1>
     <div class="ml-auto p-2">
-        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".new-transaction-modal" id="add-item">
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".add-item-modal" id="add-item">
             <i class="fa fa-plus" aria-hidden="true"></i>
-            New Transaction
+            Add Item
         </button>
     </div>
 </div>
-<div class="container shadow mb-4 p-3">
-	<div class="row">
+<div class="alert alert-success" role="alert" style="display: none">
+  This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>
+<div class="shadow mb-4 p-3">
+	<!-- <div class="row">
 		<div class="col">
 <div class="dropdown" id="stock-filter">
 	<button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,13 +33,13 @@
 		<a class="toggle-vis dropdown-item" data-column="1" data-value="option2" tabIndex="-1"><input type="checkbox" checked />&nbsp;In Stock</a>
 		<a class="toggle-vis dropdown-item" data-column="2" data-value="option3" tabIndex="-1"><input type="checkbox" checked />&nbsp;Out Of Stock</a>
 	</div>
-</div>
+</div> -->
 <!-- <select class="form-control w-25 mb-2">
     <option>All</option>
     <option>In Stock</option>
     <option>Out Of Stock</option>
 </select> -->
-<table id="example" class="table table-striped table-bordered mw-400 no-wrap" width="100%">
+    <table id="example"  class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th></th>
@@ -71,80 +74,6 @@
             <?php include "get-items.php"; ?>
         </tbody>
     </table>			
-		</div>
-	</div>
 </div>
-<div class="modal fade add-item-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl ">
-    <div class="modal-content">
-        <div class="card">
-            <h4 class="card-header">
-                New Transactions
-            </h4>
-            <div class="card-body">
-                <div class="form-row">
-                    <div class="col-md-2">
-                        <img src="img/item.jpg" alt="item image" width="150px">
-                    </div>
-                    <div class="col-md-3 my-4">
-                        <label for="item-name">Item Name</label>
-                        <input type="text" class="form-control" id="item-name" placeholder="Item Name" required>
-                    </div>
-                    <div class="col-md-3 my-4">
-                        <label for="item-brand">Item Brand</label>
-                        <input type="text" class="form-control" id="item-brand" placeholder="Item Brand" required>
-                    </div>
-                    <div class="col-md-3 my-4">
-                        <label for="image-file">Item Brand</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="image-file">
-                            <label class="custom-file-label" for="image-file">Choose Image</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row m-3">
-                <label for="category">Category</label>
-                    <select class="form-control" id="category">
-                        <?php
-                            $sql = "SELECT * FROM category";
-                            $result = mysqli_query($conn, $sql);
-                            while($data = $result->fetch_assoc()){
-                        ?>
-                            <option value="<?php echo $data["category_name"] ?>"><?php echo $data["category_name"] ?></option>
-                        <?php
-                            }
-                        ?>
-                    </select>
-                </div>
-                <div class="form-row m-3">
-                    <div class="input-group">
-                        <textarea class="form-control" id="item-description" rows="3" placeholder="Item Description"></textarea>
-                    </div>
-                </div>
-                <div class="form-row m-3">
-                    
-                    <div class="input-group col-md-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">₱</span>
-                        </div>
-                        <input type="number" id="input-capital" class="form-control" aria-label="Capital Price" placeholder="Capital Price">
-                    </div>
-                    <div class="input-group col-md-4">
-                        <input type="number" id="input-tax" class="form-control" aria-label="Tax" placeholder="Tax">
-                        <div class="input-group-append">
-                            <span class="input-group-text">%</span>
-                        </div>
-                    </div>
-                    <div class="input-group col-md-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">₱</span>
-                        </div>
-                        <input type="text" class="form-control" id="total-item-price" aria-label="Price" placeholder="Price" readonly>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
-</div>
+<?php include "new-item-modal.php"; ?>
 <script src="js/inventory.js"></script>

@@ -1,7 +1,9 @@
 <?php
     include "controller/connect.php";
 ?>
-
+<a class="nav-link" href="?p=transaction">
+<i class="fa fa-exchange" aria-hidden="true"></i>  
+    <span>Transaction</span></a>
 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
     <i class="fas fa-fw fa-archive"></i>
     <span>Inventory</span>
@@ -10,8 +12,6 @@
     <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Inventory Tools:</h6>
         <a class="collapse-item" href="?p=inventory">Show All Items</a>
-        <a class="collapse-item" href="?p=incoming">Incoming Items</a>
-        <a class="collapse-item" href="?p=outgoing">Outgoing Items</a>
         <h6 class="collapse-header">Categories:</h6>
         <?php
             $sql = "SELECT * FROM category";

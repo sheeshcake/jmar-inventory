@@ -2,6 +2,11 @@
     include "controller/connect.php";
 ?>
 
+<li class="nav-item">
+    <a class="nav-link" href="?p=dashboard">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Transaction</span></a>
+</li>
 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
     <i class="fas fa-fw fa-archive"></i>
     <span>Inventory</span>
