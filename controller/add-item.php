@@ -11,7 +11,8 @@
         $item_unit = $_POST["item_unit"];
         $item_price = $_POST["item_capital"];
         $item_tax = $_POST["item_tax"];
-        $item_added = date("Y-m-d h:i:sa");
+        $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
+        $item_added = $date->format("m-d-Y h:i a");
         $category_id = $_POST["category_id"];
         $sql = "SELECT * FROM items WHERE item_name = '$item_name' and item_brand='$item_brand'";
         $result = mysqli_query($conn, $sql);

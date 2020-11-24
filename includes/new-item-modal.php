@@ -120,6 +120,7 @@ $("form#add-item-form").submit(function(e) {
             $(".alert").text(data.message);
             $(".alert").fadeTo(3000, 500).slideUp(500, function() {
                 $(".alert").slideUp(500);
+                location.reload();
             });
         },
         cache: false,

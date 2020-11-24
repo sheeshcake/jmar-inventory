@@ -30,19 +30,15 @@ $(document).on("click", ".close-details", function() {
     $(this).removeClass("close-details");
 });
 var $t;
-var $t_id;
+var $t_id1;
+var $t_id2;
 $(document).ready(function() {
     $t = $('#example').DataTable({
-        // responsive: true,
-        // "scrollX": true,
-        // columnDefs: [
-        //     { responsivePriority: 1, targets: 0 },
-        //     { responsivePriority: 2, targets: 1 },
-        //     { responsivePriority: 3, targets: 2 },
-        //     { responsivePriority: 4, targets: 3 }
-        // ]
+        "responsive": true,
     });
-    $("div.toolbar").append($('#stock-filter'));
+    $('#example_wrapper').css("width", "100%");
+    // $('#example_wrapper').removeAttr('class');
+
 });
 $(document).on("click", "#confirm-delete", function() {
     var $id = $(this).val();
@@ -55,12 +51,13 @@ $(document).on("click", "#confirm-delete", function() {
         },
         success: function(d) {
             var data = JSON.parse(d);
-            $t.row($t_id).remove().draw();
-            $("#example").find("$row_" + $t_id).remove();
+            $t_id1.fadeOut(500);
+            $t_id2.fadeOut(500);
             $(".alert").addClass("alert" + data.status);
             $(".alert").text(data.message);
             $(".alert").fadeTo(3000, 500).slideUp(500, function() {
                 $(".alert").slideUp(500);
+                // location.reload();
             });
         }
     });
@@ -68,8 +65,8 @@ $(document).on("click", "#confirm-delete", function() {
 });
 $(document).on("click", ".delete", function() {
     var $id = $(this).val();
-    $t_id = $(this).parent().parent().parent().parent();
-    console.log($t_id);
+    $t_id1 = $(this).parent().parent().parent().parent().parent().parent();
+    $t_id2 = $t_id1.prev();
     $('.alert').alert('show');
     $("#exampleModalLabel").text("Please Confirm Item Delete");
     $(".modal-body").html(
