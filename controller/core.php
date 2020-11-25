@@ -19,8 +19,8 @@
 
     function home_core(){
         $roles = [
-            "admin" => ["transaction", "inventory", "incoming", "default" =>"dashboard"],
-            "encoder" => ["inventory", "incoming", "default" =>"inventory"],
+            "admin" => ["transaction", "inventory", "incoming", "return", "default" =>"dashboard"],
+            "encoder" => ["inventory", "incoming", "return", "default" =>"inventory"],
             "accountant" => ["transaction",  "default" =>"transaction"]
         ];
         if(isset($_SESSION["user"])){
