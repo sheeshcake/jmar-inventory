@@ -23,25 +23,28 @@
     <td>
         <?php $price = (($data["item_tax"] / 100) * $data["item_price"]) + $data["item_price"]; echo "₱" . $price; ?>
     </td>
-    <td width="300px">
-        <div class="d-flex">
-            <?php
-                if($data["item_stock"] > 0){
-            ?>
-                <input type="text" class="form-control border-success" value="<?php echo $data["item_stock"] ?>" readonly>
-                <i class="fa fa-minus p-2" aria-hidden="true"></i>
-                <input type="text" class="form-control mr-1" value="1">
-                <button class="add btn btn-success mb-2" value="<?php echo $data["item_id"] ?>">OK</button>
-            <?php
-                }else{
-            ?>
-                <input type="text" class="form-control is-invalid mb-2" value="Out Of Stock" readonly>
-            <?php
-                }
-            ?>
+    <td width="200px">
+        <?php
+            if($data["item_stock"] > 0){
+        ?>
+        <div class="d-flex mb-2">
+            <input type="text" class="form-control border-success" value="<?php echo $data["item_stock"] ?>" readonly>
         </div>
+        <div class="d-flex">
+            <input type="text" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
+            <button class="add btn btn-success" value="<?php echo $data["item_id"] ?>">Add</button>
+        </div>
+        <?php
+            }else{
+        ?>
+        <div class="d-flex mb-2">
+            <input type="text" class="form-control is-invalid mb-2" value="Out Of Stock" readonly>
+        </div>
+        <?php
+            }
+        ?>
         <div class="alert alert-success" role="alert" style="display: none">
-            This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+            Item Added!
         </div>
     </td>
 </tr>

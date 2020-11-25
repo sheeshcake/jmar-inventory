@@ -24,8 +24,8 @@
                     <th></th>
                     <th>Name</th>
                     <th>Brand</th>
-                    <th>Price</th>
                     <th>Category</th>
+                    <th>Price</th>
                     <th>Stock</th>
                 </tr>
             </thead>
@@ -34,8 +34,8 @@
                     <th></th>
                     <th>Name</th>
                     <th>Brand</th>
-                    <th>Price</th>
                     <th>Category</th>
+                    <th>Price</th>
                     <th>Stock</th>
                 </tr>
             </tfoot>
@@ -46,11 +46,11 @@
     </div>
     <div class="shadow m-1 p-3">
         <h4>New Transaction</h4>
-        <div class="overflow-auto" style="width: 400px; height: 350px;" id="items">
+        <div class="overflow-auto" style="height: 350px;" id="items">
         </div>
         <div class="mt-2">
-            <p><b>Total Items: </b> 5</p>
-            <p><b>Total: </b>₱ 300.00</p>
+            <div class="d-flex"><b>Total Items:&nbsp;</b><p id="total_items">0</p></div>
+            <div class="d-flex"><b>Total:&nbsp;</b>₱ <p id="total">0</p></div>
             <button class="btn btn-primary">Submit</button>
         </div>
     </div>
