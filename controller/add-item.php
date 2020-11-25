@@ -21,7 +21,7 @@
                 '$item_img', '$item_name', '$item_brand', '$item_desc', '$item_unit', '$item_price', '$item_tax', '$item_added', '$category_id')";
             $result = mysqli_query($conn, $sql);
             if($result){
-                $data = array("message"=>"Item Added!", "status"=>"success", "id"=>"$conn->insert_id");
+                $data = array("message"=>"Item Added! Refreshing Items Please wait..", "status"=>"success", "id"=>"$conn->insert_id");
                 echo json_encode($data);
             }
         }else{

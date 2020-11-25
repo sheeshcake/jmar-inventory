@@ -1,6 +1,6 @@
 <div id="wrapper">
     <?php include "sidebar.php" ?>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column ">
     <!-- Main Content -->

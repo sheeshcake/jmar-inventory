@@ -6,7 +6,7 @@
         $sql = "DELETE FROM items WHERE item_id=$id";
         $result = mysqli_query($conn, $sql);
         if($result){
-            $data= array("message"=>"Item Deleted!", "status"=>"success");
+            $data= array("message"=>"Item Deleted! Refreshing Items Please wait..", "status"=>"success");
             echo json_encode($data);
         }else{
             $data= array("message"=>"Item Already Deleted!", "status"=>"warning");
