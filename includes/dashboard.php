@@ -80,6 +80,10 @@
     </div>
 </div>
 
+<div class="shadow p3">
+    <?php dashboard_core($_POST["action"]) ?>
+</div>
+
 
 <div class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
