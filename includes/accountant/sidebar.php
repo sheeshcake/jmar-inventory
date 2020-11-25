@@ -11,6 +11,11 @@
         <i class="fa fa-exchange" aria-hidden="true"></i>  
         <span>Transaction</span></a>
 </li>
+<li class="nav-item">
+    <a class="nav-link" href="?p=return">
+        <i class="fa fa-exchange" aria-hidden="true"></i>  
+        <span>Customer Concern</span></a>
+</li>
 <!-- Divider -->
 <hr class="sidebar-divider">
 
