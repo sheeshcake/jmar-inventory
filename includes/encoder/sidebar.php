@@ -21,6 +21,7 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Inventory Tools:</h6>
+            <a class="collapse-item" href="?p=inventory">Inventory</a>
             <a class="collapse-item" href="?p=incoming">Incoming Items</a>
             <h6 class="collapse-header">Categories:</h6>
             <?php
