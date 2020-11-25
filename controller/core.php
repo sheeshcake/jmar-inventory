@@ -14,13 +14,13 @@
     }
 
     function dashboard_core($action){
-        
+
     }
 
     function home_core(){
         $roles = [
-            "admin" => ["transaction", "inventory", "default" =>"dashboard"],
-            "encoder" => ["inventory", "default" =>"inventory"],
+            "admin" => ["transaction", "inventory", "incoming", "default" =>"dashboard"],
+            "encoder" => ["inventory", "incoming", "default" =>"inventory"],
             "accountant" => ["transaction",  "default" =>"transaction"]
         ];
         if(isset($_SESSION["user"])){

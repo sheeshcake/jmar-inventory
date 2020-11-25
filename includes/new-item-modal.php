@@ -82,7 +82,7 @@
                         <div class="input-group-append">
                                 <span class="input-group-text">Stock</span>
                             </div>
-                            <input type="number" class="form-control">      
+                            <input type="number" name="item_stock" class="form-control">      
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">

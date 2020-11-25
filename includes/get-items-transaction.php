@@ -32,23 +32,24 @@
     <td>
         <?php echo $data["item_desc"] ?>
     </td>
-    <td width="200px">
+    <td width="300px">
         <div class="d-flex">
             <?php
                 if($data["item_stock"] > 0){
             ?>
                 <input type="text" class="form-control border-success" value="<?php echo $data["item_stock"] ?>" readonly>
                 <i class="fa fa-minus p-2" aria-hidden="true"></i>
-                <input type="text" class="form-control" value="1">
-                <button class="min btn btn-danger" value="<?php echo $data["item_id"] ?>">OK</button>
+                <input type="text" class="form-control mr-1" value="1">
+                <button class="min btn btn-success mb-2" value="<?php echo $data["item_id"] ?>">OK</button>
             <?php
                 }else{
             ?>
-                <input type="text" class="form-control is-invalid" value="Out Of Stock" readonly>
+                <input type="text" class="form-control is-invalid mb-2" value="Out Of Stock" readonly>
             <?php
                 }
             ?>
         </div>
+        <button class="min btn btn-danger" value="<?php echo $data["item_id"] ?>">Damaged</button>
         <div class="alert alert-success" role="alert" style="display: none">
             This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
         </div>

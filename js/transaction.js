@@ -38,9 +38,9 @@ $(".min").click(function() {
                     $btn.prev().prev().prev().val(data.stock);
                 }
             }
-            $btn.parent().next().removeClass().addClass("alert alert-" + data.status);
-            $btn.parent().next().html(data.message);
-            $btn.parent().next().fadeTo(3000, 500).slideUp(500, function() {
+            $btn.parent().next().next().removeClass().addClass("alert alert-" + data.status);
+            $btn.parent().next().next().html(data.message);
+            $btn.parent().next().next().fadeTo(3000, 500).slideUp(500, function() {
                 $btn.prev().prev().prev().removeClass("border-success");
             });
         }
