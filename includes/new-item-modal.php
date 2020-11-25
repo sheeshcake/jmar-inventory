@@ -82,15 +82,7 @@
                         <div class="input-group-append">
                                 <span class="input-group-text">Stock</span>
                             </div>
-                            <select class="form-control" id="item-unit" name="item_unit">
-                                <option value="meter">10</option>
-                                <option value="grams">20</option>
-                                <option value="kilogram">30</option>
-                                <option value="liter">40</option>
-                                <option value="gallon">50</option>
-                                <option value="pieces">60</option>
-                            </select> 
-                                 
+                            <input type="number" class="form-control">      
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
