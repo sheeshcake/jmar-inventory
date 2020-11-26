@@ -103,7 +103,7 @@ $(".submit-transaction").click(function() {
 });
 $(document).on("click", ".remove-item", function() {
     var elem = $(this).parent().parent().parent()
-    elem.slideUp();
+    elem.slideUp("normal", function() { $(this).remove(); });
     $counter--;
     $("#total").text((parseFloat($("#total").text()) - parseFloat(elem.attr("price"))).toFixed(2));
     $("#total_items").text($counter);
