@@ -60,28 +60,35 @@
                         </div>
                     </div>
                     <div class="form-row m-3">
-                        <div class="input-group col-md-4">
+                        <div class="input-group col-md-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">₱</span>
                             </div>
                             <input type="number" id="input-capital" name="item_capital" class="form-control" aria-label="Capital Price" placeholder="Capital Price">
                         </div>
-                        <div class="input-group col-md-4">
+                        <div class="input-group col-md-3">
                             <input type="number" id="input-tax" class="form-control" name="item_tax" aria-label="Tax" placeholder="Tax">
                             <div class="input-group-append">
                                 <span class="input-group-text">%</span>
                             </div>
                         </div>
-                        <div class="input-group col-md-4">
+                        <div class="input-group col-md-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">₱</span>
                             </div>
                             <input type="text" class="form-control" id="total-item-price" aria-label="Price" placeholder="Price" readonly>
                         </div>
+                        <div class="input-group col-md-3">
+                        <div class="input-group-append">
+                                <span class="input-group-text">Stock</span>
+                            </div>
+                            <input type="number" name="item_stock" class="form-control">      
+                        </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <input type="submit"  class="btn btn-primary" name="submit" id="btn-add-item" value="Submit">
+                        <input type="submit"  class="btn btn-primary" name="submit" id="btn-add-item" data-target=".add-item-modal" data-toggle="modal" value="Submit">
                     </div>
+                    
                 </form>
             </div>
         </div>
@@ -114,8 +121,14 @@ $("form#add-item-form").submit(function(e) {
         url: url(window.location.href) + "/controller/add-item.php",
         method: "POST",
         data: formData,
-        success: function (data) {
-            console.log(data);
+        success: function (d) {
+            var data = JSON.parse(d);
+            $(".alert").addClass("alert" + data.status);
+            $(".alert").text(data.message);
+            $(".alert").fadeTo(3000, 500).slideUp(500, function() {
+                $(".alert").slideUp(500);
+                location.reload();
+            });
         },
         cache: false,
         contentType: false,

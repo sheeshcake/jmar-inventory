@@ -19,8 +19,11 @@
         </button>
     </div>
 </div>
-<div class="container shadow mb-4 p-3">
-	<div class="row">
+<div class="alert alert-success" role="alert" style="display: none">
+  This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>
+<div class="shadow mb-4 p-3">
+	<!-- <div class="row">
 		<div class="col">
 <div class="dropdown" id="stock-filter">
 	<button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,13 +33,13 @@
 		<a class="toggle-vis dropdown-item" data-column="1" data-value="option2" tabIndex="-1"><input type="checkbox" checked />&nbsp;In Stock</a>
 		<a class="toggle-vis dropdown-item" data-column="2" data-value="option3" tabIndex="-1"><input type="checkbox" checked />&nbsp;Out Of Stock</a>
 	</div>
-</div>
+</div> -->
 <!-- <select class="form-control w-25 mb-2">
     <option>All</option>
     <option>In Stock</option>
     <option>Out Of Stock</option>
 </select> -->
-<table id="example" class="table table-striped table-bordered mw-400 no-wrap" width="100%">
+    <table id="example"  class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th></th>
@@ -71,8 +74,6 @@
             <?php include "get-items.php"; ?>
         </tbody>
     </table>			
-		</div>
-	</div>
 </div>
 <?php include "new-item-modal.php"; ?>
 <script src="js/inventory.js"></script>

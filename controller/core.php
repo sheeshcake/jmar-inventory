@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+    // var_dump(in_array($_GET["p"], $roles[$_SESSION["user"]["role"]]));
     function page(){
         if(isset($_SESSION["page"])){
             include "includes/" . $_SESSION["page"] . ".php";
@@ -13,9 +13,18 @@
         }
     }
 
+    function dashboard_core($action){
+        var_dump($action);
+    }
+
     function home_core(){
+        $roles = [
+            "admin" => ["transaction", "inventory", "transaction-new", "incoming", "return", "default" =>"dashboard"],
+            "encoder" => ["inventory", "incoming", "return", "default" =>"inventory"],
+            "accountant" => ["transaction", "transaction-new", "default" =>"transaction"]
+        ];
         if(isset($_SESSION["user"])){
-            if(isset($_GET["p"])){
+            if(isset($_GET["p"]) && in_array($_GET["p"], $roles[$_SESSION["user"]["role"]])){
                 if(file_exists("includes/" . $_GET["p"] . ".php")){
                     include "includes/" . $_GET["p"] . ".php";
                 }
@@ -24,7 +33,7 @@
                 }
             }
             else{
-                include "includes/dashboard.php";
+                include "includes/" . $roles[$_SESSION["user"]["role"]]["default"] . ".php";
             }
         }
     }

@@ -1,38 +1,4 @@
-.desc {
-    word-wrap: break-word;
-}
-
-.item-data {
-    width: 100% !important;
-}
-
-.dtr-title {
-    font-weight: bold;
-}
-
-#add-item {
-    float: right;
-}
-
-.dataTables_filter {
-    float: right;
-}
-
-.example_wrapper {
-    width: 100% !important;
-}
-
-.open-details {
-    border-radius: 50%;
-}
-
-table.dataTable tbody td {
-    outline: none;
-}
-
-table {
-    overflow: scroll;
-    /* Scrollbar are always visible */
-    overflow: auto;
-    /* Scrollbar is displayed as it's needed */
+div.dataTables_wrapper {
+    width: 800px;
+    margin: 0 auto;
 }
