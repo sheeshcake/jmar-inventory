@@ -95,7 +95,11 @@ $(".submit-transaction").click(function() {
                         $(this).remove();
                     });
                 });
-                $("#trans-message").fadeTo(3000, 500).slideUp(500, function() {}).text(data["message"]).attr('class', 'alert-' + data['status']).addClass('alert');
+                $(".submit-transaction").slideUp();
+                $("#trans-message").fadeTo(3000, 500).slideUp(500, function() {
+                    $("#total").text(0);
+                    $("#total_items").text(0);
+                }).text(data["message"]).attr('class', 'alert-' + data['status']).addClass('alert');
             } else {
 
             }
