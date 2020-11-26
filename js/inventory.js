@@ -31,8 +31,10 @@ $(document).on("click", ".close-details", function() {
 });
 var $t;
 $(document).ready(function() {
-    $t = $('#example').DataTable();
-    $('#example_wrapper').css("width", "100%");
+    $t = $('#example').DataTable({});
+    $('#example').css("width", "2000px");
+    $('tbody').css("overflow-x", "auto");
+    $('tbody,tr,td').attr("width", "300px");
     // $('#example_wrapper').removeAttr('class');
 
 });
