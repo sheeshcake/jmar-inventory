@@ -237,6 +237,7 @@ caption {
 }
 
 th {
+    background-color: #bbbbbb;
     text-align: inherit;
     text-align: -webkit-match-parent
 }
@@ -1622,12 +1623,13 @@ pre code {
 
 .table-bordered td,
 .table-bordered th {
-    border: 1px solid #e3e6f0
+    border: 1px solid #bbbbbb
 }
 
 .table-bordered thead td,
 .table-bordered thead th {
-    border-bottom-width: 2px
+    border-bottom-width: 0px;
+    background-color: #bbbbbb;
 }
 
 .table-borderless tbody+tbody,
@@ -10082,7 +10084,7 @@ a.text-dark:hover {
     }
     .table-bordered td,
     .table-bordered th {
-        border: 1px solid #dddfeb!important
+        border: 1px solid #bbbbbb!important
     }
     .table-dark {
         color: inherit

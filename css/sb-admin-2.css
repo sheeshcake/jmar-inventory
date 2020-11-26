@@ -221,6 +221,7 @@ caption {
 }
 
 th {
+  background-color: #bbbbbb;
   text-align: inherit;
   text-align: -webkit-match-parent;
 }
@@ -1516,12 +1517,13 @@ pre code {
 
 .table-bordered th,
 .table-bordered td {
-  border: 1px solid #e3e6f0;
+  border: 1px solid #bbbbbb;
 }
 
 .table-bordered thead th,
 .table-bordered thead td {
-  border-bottom-width: 2px;
+  border-bottom-width: 0px;
+  background-color: #bbbbbb;
 }
 
 .table-borderless th,
@@ -9730,7 +9732,7 @@ a.text-dark:hover, a.text-dark:focus {
   }
   .table-bordered th,
   .table-bordered td {
-    border: 1px solid #dddfeb !important;
+    border: 1px solid ##bbbbbb !important;
   }
   .table-dark {
     color: inherit;
