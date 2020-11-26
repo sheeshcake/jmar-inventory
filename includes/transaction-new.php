@@ -46,12 +46,14 @@
     </div>
     <div class="shadow m-1 p-3">
         <h4>New Transaction</h4>
+        <div class="alert alert-success" id="trans-message" role="alert" style="display: none">
+        </div>
         <div class="overflow-auto" style="height: 350px;" id="items">
         </div>
         <div class="mt-2">
             <div class="d-flex"><b>Total Items:&nbsp;</b><p id="total_items">0</p></div>
             <div class="d-flex"><b>Total:&nbsp;</b>₱ <p id="total">0</p></div>
-            <button class="btn btn-primary">Submit</button>
+            <button class="submit-transaction btn btn-primary">Submit</button>
         </div>
     </div>
 
