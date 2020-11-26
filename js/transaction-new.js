@@ -8,6 +8,7 @@ $(document).ready(function() {
 var $counter = 0;
 
 $(".add").click(function() {
+    $(".submit-transaction").slideDown();
     var $id = $(this).val();
     var $count = $("#item_" + $id);
     $(this).parent().next().fadeTo(3000, 500).slideUp(500, function() {});
@@ -102,6 +103,9 @@ $(".submit-transaction").click(function() {
     })
 });
 $(document).on("click", ".remove-item", function() {
+    if (!$(".mydivclass")[0]) {
+        $(".submit-transaction").slideUp();
+    }
     var elem = $(this).parent().parent().parent()
     elem.slideUp("normal", function() { $(this).remove(); });
     $counter--;

@@ -53,7 +53,7 @@
         <div class="mt-2">
             <div class="d-flex"><b>Total Items:&nbsp;</b><p id="total_items">0</p></div>
             <div class="d-flex"><b>Total:&nbsp;</b>₱ <p id="total">0</p></div>
-            <button class="submit-transaction btn btn-primary">Submit</button>
+            <button class="submit-transaction btn btn-primary" style="display: none; width: 100%;">Submit</button>
         </div>
     </div>
 
