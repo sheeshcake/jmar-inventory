@@ -28,10 +28,10 @@
             if($data["item_stock"] > 0){
         ?>
         <div class="d-flex mb-2">
-            <input type="text" class="form-control border-success" value="<?php echo $data["item_stock"] ?>" readonly>
+            <input type="text" class="form-control border-success" id="stock_<?php echo $data["item_id"] ?>" value="<?php echo $data["item_stock"] ?>" readonly>
         </div>
-        <div class="d-flex">
-            <input type="text" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
+        <div class="d-flex" id="count_input_<?php echo $data["item_id"] ?>">
+            <input type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
             <button class="add btn btn-success" value="<?php echo $data["item_id"] ?>">Add</button>
         </div>
         <?php
