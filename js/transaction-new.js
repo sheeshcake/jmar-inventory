@@ -92,14 +92,13 @@ $(".submit-transaction").click(function() {
             if (data["status"] == "success") {
                 $(".item").map(function() {
                     $(this).fadeTo(1000, 500).slideUp(500, function() {
+                        $("#total").text(0);
+                        $("#total_items").text(0);
                         $(this).remove();
                     });
                 });
                 $(".submit-transaction").slideUp();
-                $("#trans-message").fadeTo(3000, 500).slideUp(500, function() {
-                    $("#total").text(0);
-                    $("#total_items").text(0);
-                }).text(data["message"]).attr('class', 'alert-' + data['status']).addClass('alert');
+                $("#trans-message").fadeTo(3000, 500).slideUp(500, function() {}).text(data["message"]).attr('class', 'alert-' + data['status']).addClass('alert');
             } else {
 
             }
