@@ -36,15 +36,15 @@ var $counter = 0;
 $(document).on("click", ".add", function() {
     var $id = $(this).val();
     var $count = $("#item_" + $id);
-    if (parseInt($count.val()) <= parseInt($("#stock_" + $id).val()) && parseInt($count.val()) >= 1) {
+    if (parseFloat($count.val()) <= parseFloat($("#stock_" + $id).val()).toFixed(2) && parseFloat($count.val()).toFixed(2) > 0) {
         $(".submit-transaction").slideDown();
-        $("#stock_" + $id).val(parseInt($("#stock_" + $id).val()) - parseInt($count.val()));
+        $("#stock_" + $id).val((parseFloat(parseFloat($("#stock_" + $id).val()) - parseFloat($count.val()))).toFixed(2));
         $("#item_" + $id).removeClass("border-danger");
         $("#item_" + $id).addClass("border-success");
         $(this).parent().next().text("Item Added!");
         $(this).parent().next().attr('class', 'alert-success').addClass('alert');
         $(this).parent().next().fadeTo(3000, 500).slideUp(500, function() {});
-        if (parseInt($("#stock_" + $id).val()) == 0) {
+        if (parseFloat($("#stock_" + $id).val()) == 0) {
             $("#count_input_" + $id).removeClass("d-flex");
             $("#stock_" + $id).removeClass("border-success");
             $("#stock_" + $id).addClass("is-invalid");
@@ -60,11 +60,11 @@ $(document).on("click", ".add", function() {
             },
             success: function(d) {
                 var data = JSON.parse(d);
-                var item_price = (((data.item_tax / 100) * data.item_price) + data.item_price);
+                var item_price = (((parseFloat(data.item_tax) / 100) * parseFloat(data.item_price)) + parseFloat(data.item_price)).toFixed(2);
                 var item_count = $count.val();
                 var sub_total = (parseFloat(item_price) * parseFloat(item_count)).toFixed(2);
                 $("#items").prepend(
-                    '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + $count.val() + '">' +
+                    '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($count.val()).toFixed(2) + '">' +
                     '<div class="card-body">' +
                     '<div class="d-flex">' +
                     '<img style="max-width: 100px" src="img/item/' + data.item_img + '">' +
@@ -72,7 +72,7 @@ $(document).on("click", ".add", function() {
                     '<p><b>Name:</b>&nbsp;' + data.item_name + '</p>' +
                     '<p><b>Brand:</b>&nbsp;' + data.item_brand + '</p>' +
                     '<p><b>Price:</b>&nbsp;₱&nbsp;' + item_price + '</p>' +
-                    '<p><b>Count:</b>&nbsp;' + $count.val() + '</p>' +
+                    '<p><b>' + data.item_unit + ':</b>&nbsp;' + $count.val() + '</p>' +
                     '<p><b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
                     '</div>' +
                     '<button class="remove-item btn btn-danger" style="height: 40px;" item_id="' + $id + '" value="' + $count.val() + '">x</button>' +
@@ -108,6 +108,7 @@ function formatAMPM(date) {
     return strTime;
 }
 $(".submit-transaction").click(function() {
+    $counter = 0;
     var now = new Date();
     var strDateTime = [
         [
@@ -153,7 +154,9 @@ $(document).on("click", ".remove-item", function() {
     $("#stock_" + $btn.attr("item_id")).removeClass("is-invalid");
     $("#stock_" + $btn.attr("item_id")).addClass("border-success");
     $("#count_input_" + $btn.attr("item_id")).fadeIn();
-    $("#stock_" + $(this).attr("item_id")).val(parseInt($("#stock_" + $(this).attr("item_id")).val()) + parseInt($btn.val()));
+    var d1 = parseFloat($btn.val());
+    var d2 = parseFloat($("#stock_" + $(this).attr("item_id")).val());
+    $("#stock_" + $(this).attr("item_id")).val((d1 + d2).toFixed(2));
     var elem = $(this).parent().parent().parent()
     elem.slideUp("normal", function() {
         $(this).remove();

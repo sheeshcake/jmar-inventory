@@ -25,7 +25,7 @@
         <div class="col-auto">
             <div class="input-group">
             <div class="input-group-append">
-                <input type="text" class="form-control w-50" id="name<?php echo $data["item_id"]; ?>" value="<?php echo $data["item_name"] ?>" placeholder="Name">
+                <input type="text" class="form-control" id="name<?php echo $data["item_id"]; ?>" value="<?php echo $data["item_name"] ?>" placeholder="Name">
             </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
         <div class="col-auto">
             <div class="input-group">
             <div class="input-group-append">
-                <input type="text" id="brand<?php echo $data["item_id"]; ?>" class="form-control w-50" value="<?php echo $data["item_brand"] ?>" placeholder="Brand">
+                <input type="text" id="brand<?php echo $data["item_id"]; ?>" class="form-control" value="<?php echo $data["item_brand"] ?>" placeholder="Brand">
             </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
             <div class="input-group">
             <div class="input-group-append">
                 <label class="sr-only" for="inlineFormInputGroup">Tax</label>
-                <input type="number" id="tax<?php echo $data["item_id"]; ?>" class="form-control w-50" value="<?php echo $data["item_tax"] ?>" placeholder="Tax">
+                <input type="number" id="tax<?php echo $data["item_id"]; ?>" class="form-control" value="<?php echo $data["item_tax"] ?>" placeholder="Tax">
                 <div class="input-group-text">%</div>
             </div>
             </div>
@@ -54,7 +54,7 @@
         <div class="col-auto">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="unit<?php echo $data["item_id"]; ?>"># of items</label>
+                    <label class="input-group-text" for="unit<?php echo $data["item_id"]; ?>"><?php echo $data["item_stock"]; ?></label>
                 </div>
                 <select class="custom-select" id="unit<?php echo $data["item_id"]; ?>">
                     <?php 
