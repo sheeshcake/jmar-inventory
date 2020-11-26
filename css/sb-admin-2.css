@@ -2925,7 +2925,7 @@ fieldset:disabled a.btn {
   border-radius: 0.3rem;
 }
 
-.btn-sm, .btn-group-sm > .btn {
+, .btn-group-sm > .btn {
   width: 150px;
     height: 50px;
     border-color: #bbbbbb;
@@ -7826,7 +7826,11 @@ button.bg-dark:focus {
 }
 
 .p-3 {
-  padding: 1rem !important;
+  border-style: solid;
+    border-color: #bbbbbb;
+    border-radius: 10px;
+    padding: 1rem!important;
+  
 }
 
 .pt-3,
