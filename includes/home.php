@@ -7,7 +7,7 @@
     <div id="content">
         <?php include "topbar.php"; ?>
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+        <div class="container-fluid" style = "overflow-y: auto;">
             <!-- Page Heading -->
             <?php
                 home_core();

@@ -1,12 +1,39 @@
 var $t;
+var $last_data;
+
+function reload() {
+    setTimeout(function() {
+        if (!$(".item").length) {
+            $.ajax({
+                url: url(window.location.href) + "/controller/get-items.php",
+                method: "GET",
+                success: function(d) {
+                    if ($last_data != d.replace(/\s/g, '')) {
+                        $last_data = d.replace(/\s/g, '');
+                        $("#item_data").html(d);
+                    }
+                }
+            });
+            $t = $('#example').DataTable();
+        }
+        reload();
+    }, 500);
+}
 $(document).ready(function() {
-    $t = $('#example').DataTable();
+    $.ajax({
+        url: url(window.location.href) + "/controller/get-items.php",
+        method: "GET",
+        success: function(d) {
+            $last_data = d.replace(/\s/g, '');
+        }
+    });
     $('#example_wrapper').css("width", "100%");
+    reload();
 });
 
 var $counter = 0;
 
-$(".add").click(function() {
+$(document).on("click", ".add", function() {
     var $id = $(this).val();
     var $count = $("#item_" + $id);
     if (parseInt($count.val()) <= parseInt($("#stock_" + $id).val()) && parseInt($count.val()) >= 1) {
@@ -90,11 +117,9 @@ $(".submit-transaction").click(function() {
         ].join("-"), formatAMPM(new Date)
     ].join(" ");
     var $date = strDateTime;
-    console.log($date);
     var $all = $(".item").map(function() {
         return $(this).attr("price") + "," + $(this).attr("item-id") + "," + $(this).attr("item-count");
     }).get();
-    console.log($all.join());
     $.ajax({
         url: url(window.location.href) + "/controller/transaction-new-controller.php",
         method: "POST",
@@ -105,7 +130,6 @@ $(".submit-transaction").click(function() {
         },
         success: function(d) {
             var data = JSON.parse(d);
-            console.log(d);
             if (data["status"] == "success") {
                 $(".item").map(function() {
                     $(this).fadeTo(1000, 500).slideUp(500, function() {
@@ -124,16 +148,22 @@ $(".submit-transaction").click(function() {
 });
 $(document).on("click", ".remove-item", function() {
     $btn = $(this);
-    if (!$(".mydivclass")[0]) {
-        $(".submit-transaction").slideUp();
-    }
+    $(".submit-transaction").prop('disabled', true);
     $("#count_input_" + $btn.attr("item_id")).addClass("d-flex");
     $("#stock_" + $btn.attr("item_id")).removeClass("is-invalid");
     $("#stock_" + $btn.attr("item_id")).addClass("border-success");
     $("#count_input_" + $btn.attr("item_id")).fadeIn();
     $("#stock_" + $(this).attr("item_id")).val(parseInt($("#stock_" + $(this).attr("item_id")).val()) + parseInt($btn.val()));
     var elem = $(this).parent().parent().parent()
-    elem.slideUp("normal", function() { $(this).remove(); });
+    elem.slideUp("normal", function() {
+        $(this).remove();
+        $(".submit-transaction").prop('disabled', false);
+        if (!$(".item").length) {
+            $(".submit-transaction").slideUp();
+        } else {
+            $(".submit-transaction").slideDown();
+        }
+    });
     $counter--;
     $("#total").text((parseFloat($("#total").text()) - parseFloat(elem.attr("price"))).toFixed(2));
     $("#total_items").text($counter);

@@ -14,7 +14,7 @@
     }
 
     function dashboard_core($action){
-
+        var_dump($action);
     }
 
     function home_core(){

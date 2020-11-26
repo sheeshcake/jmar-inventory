@@ -22,6 +22,12 @@
             // var_dump($value);
             $item_id = $value[1];
             $item_count = $value[2];
+            // Update Item Stock
+            $sql1 = "UPDATE items
+            SET item_stock = item_stock - $item_count
+            WHERE item_id = '$item_id'";
+            $result = mysqli_query($conn, $sql1);
+            //Insert Purchased Item
             $sql1 = "INSERT INTO purchased_item (transaction_id, item_id, item_count) VALUES ($last_id, '$item_id', '$item_count')";
             $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);;
             if(!$result1){

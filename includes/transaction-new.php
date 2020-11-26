@@ -39,7 +39,7 @@
                     <th>Stock</th>
                 </tr>
             </tfoot>
-            <tbody>
+            <tbody id="item_data">
                 <?php include "get-items-transaction-new.php"; ?>
             </tbody>
         </table>			
