@@ -29,7 +29,7 @@
             $result = mysqli_query($conn, $sql1);
             //Insert Purchased Item
             $sql1 = "INSERT INTO purchased_item (transaction_id, item_id, item_count) VALUES ($last_id, '$item_id', '$item_count')";
-            $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);;
+            $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);
             if(!$result1){
                 $data1 = array("message"=>"An Error Occured!", "status"=>"danger");
                 echo json_encode($data1);

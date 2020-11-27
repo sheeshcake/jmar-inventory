@@ -39,10 +39,10 @@
     <option>In Stock</option>
     <option>Out Of Stock</option>
 </select> -->
-    <table id="example"  class="table table-striped table-bordered">
+    <table id="example" style="width:1500px"  class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th></th>
+                <th>Image</th>
                 <th>Item Capital</th>
                 <th>Name</th>
                 <th>Brand</th>
@@ -52,7 +52,7 @@
                 <th>ID</th>
                 <th>Category</th>
                 <th>Description</th>
-                <th></th>
+                <th>Selection</th>
             </tr>
         </thead>
         <tfoot>

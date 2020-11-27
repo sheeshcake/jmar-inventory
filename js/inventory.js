@@ -31,7 +31,20 @@ $(document).on("click", ".close-details", function() {
 });
 var $t;
 $(document).ready(function() {
-    $t = $('#example').DataTable({});
+    $t = $('#example').DataTable({
+        // scrollY: "300px",
+        scrollX: true,
+        // "columnDefs": [
+        //     { "width": "20%", "targets": 0 }
+        // ],
+        scrollCollapse: true,
+        paging: false,
+        fixedColumns: {
+            leftColumns: 1,
+            rightColumns: 1
+        }
+    });
+    $('#example_wrapper').css("margin", "0");
     $('#example').css("width", "2000px");
     $('tbody').css("overflow-x", "auto");
     $('tbody,tr,td').attr("width", "300px");

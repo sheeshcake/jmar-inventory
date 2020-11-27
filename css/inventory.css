@@ -1,4 +1,21 @@
-div.dataTables_wrapper {
-    width: 800px;
-    margin: 0 auto;
+table.dataTable th {
+    width: 100px;
+    max-width: 100px;
+    word-break: break-all;
+    white-space: pre-line;
 }
+
+table.dataTable td {
+    width: 100px;
+    max-width: 100px;
+    word-break: break-all;
+    white-space: pre-line;
+}
+
+
+/* table.dataTable th {
+    width: 500px !important;
+    max-width: 500px !important;
+    word-break: break-all;
+    white-space: pre-line;
+} */

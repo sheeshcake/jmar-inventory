@@ -14,7 +14,7 @@
     }
 
     function dashboard_core($action){
-        var_dump($action);
+        include "includes/$action.php";
     }
 
     function home_core(){

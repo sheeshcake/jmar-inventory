@@ -4,14 +4,14 @@
 </div>
 <div class="row">
     <!-- Earnings (Monthly) Card Example -->
-    <a href="?p=dashboard&action=earnings-daily" class="col-xl-3 col-md-6 mb-4">
+    <a href="?p=dashboard&action=sales-daily" class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Earnings (Daily)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">₱40,000</div>
+                        <div  class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Sales (Daily)</div>
+                        <div id="daily-total" class="h5 mb-0 font-weight-bold text-gray-800">₱00.00</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -22,14 +22,14 @@
     </a>
 
     <!-- Earnings (Monthly) Card Example -->
-    <a href="?p=dashboard&action=earnings-monthly" class="col-xl-3 col-md-6 mb-4">
+    <a href="?p=dashboard&action=sales-monthly" class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Earnings (Monthly)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">₱215,000</div>
+                            Sales (Monthly)</div>
+                        <div id="monthly-total" class="h5 mb-0 font-weight-bold text-gray-800">₱00.00</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -81,7 +81,84 @@
 </div>
 
 <div class="shadow p3">
-    <?php dashboard_core(isset($_GET["action"]) ? $_GET["action"] : 'earnings-daily') ?>
+    <script>
+        // var $data = <?php //dashboard_core(isset($_GET["action"]) ? $_GET["action"] : 'sales-daily') ?>;
+        // var $page = '<?php //echo isset($_GET["action"]) ? $_GET["action"] : 'sales-daily'; ?>';
+        // console.log($page);
+        // var $grand_total = 0;
+        // if($page == "sales-daily"){
+        //     $data.forEach(function(d) {
+        //         var $price = ((d.item_tax / 100) * d.item_price) + d.item_price;
+        //         var $sub_total = $price * d.item_count;
+        //         $grand_total += $sub_total;
+        //     });
+        //     $("#daily-total").text("₱" + $grand_total.toFixed(2));
+        //     console.log($grand_total);
+        // }else if($page == "sales-monthly"){
+        //     $data.forEach(function(d) {
+        //         var $price = ((d.item_tax / 100) * d.item_price) + d.item_price;
+        //         var $sub_total = $price * d.item_count;
+        //         $grand_total += $sub_total;
+        //     });
+        //     $("#monthly-total").text("₱" + $grand_total.toFixed(2));
+        //     console.log($grand_total);
+        // }
+        $(document).ready(function(){
+            var $now = new Date();
+            var strDateTime = [
+                [
+                    $now.getMonth() + 1,
+                    $now.getDate(),
+                    $now.getFullYear()
+                ].join("-")
+            ].join(" ");
+            var $date = strDateTime;
+            var $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            var $d = new Date(strDateTime);
+            var dayName = $days[$d.getDay()];
+            console.log(dayName);
+            $.ajax({
+                url: url(window.location.href) + "/controller/get-sales-data-controller.php",
+                method: "POST",
+                data: {
+                    type: "sales-daily",
+                },
+                success: function(data){
+                    var $data = JSON.parse(data);
+                    console.log($data);
+                    var $grand_total = 0;
+                    $data.forEach(function(d) {
+                        var $price = ((d.item_tax / 100) * d.item_price) + d.item_price;
+                        var $sub_total = $price * d.item_count;
+                        $grand_total += $sub_total;
+                        console.log(d.transaction_datetime);
+                        console.log($days[new Date(d.transaction_datetime).getDay()]);
+                    });
+
+                    $("#daily-total").text("₱" + $grand_total.toFixed(2));
+                }
+            });
+            $.ajax({
+                url: url(window.location.href) + "/controller/get-sales-data-controller.php",
+                method: "POST",
+                data: {
+                    type: "sales-monthly",
+                },
+                success: function(data){
+                    var $data = JSON.parse(data);
+                    var $grand_total = 0;
+                    $data.forEach(function(d) {
+                        var $price = ((d.item_tax / 100) * d.item_price) + d.item_price;
+                        var $sub_total = $price * d.item_count;
+                        $grand_total += $sub_total;
+                        console.log(d.transaction_datetime);
+                        console.log($days[new Date(d.transaction_datetime).getDay()]);
+                    });
+                    $("#monthly-total").text("₱" + $grand_total.toFixed(2));
+                }
+            });
+        });
+    </script>
 </div>
 
 

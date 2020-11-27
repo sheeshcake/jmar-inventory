@@ -107,10 +107,10 @@
         </div>
     </td>
     <td>
-        <div class="d-flex">
+        <!-- <div class="d-flex"> -->
             <button class="btn btn-danger delete" data-target="#logoutModal" data-toggle="modal" value="<?php echo $data["item_id"]; ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
             <button class="btn btn-success update" value="<?php echo $data["item_id"]; ?>"><i class="fa fa-refresh" aria-hidden="true"></i></button>
-        </div>
+        <!-- </div> -->
     </td>
 </tr>
 <?php
