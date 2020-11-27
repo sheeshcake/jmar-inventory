@@ -2350,8 +2350,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #3a3f47;
+  border-color: ##bbbbbb;
 }
 
 .btn-primary:hover {
@@ -4992,10 +4992,10 @@ a.badge-dark:focus, a.badge-dark.focus {
 
 .alert {
   position: relative;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.35rem;
+    padding: 0.75rem 0.25rem;
+    margin-bottom: 0rem;
+    border: 1px solid transparent;
+    border-radius: .35rem;
 }
 
 .alert-heading {
@@ -6634,6 +6634,11 @@ button.bg-dark:focus {
     display: inline !important;
   }
   .d-sm-inline-block {
+    width: 171px;
+    height: 37px;
+    border-color: #bbbbbb;
+    background-color: #393e46;
+    font-size: 15px;
     display: inline-block !important;
   }
   .d-sm-block {

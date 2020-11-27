@@ -22,7 +22,7 @@
 </li>
 <li class="nav-item">
     <a class="nav-link" href="?p=return">
-        <i class="fa fa-exchange" aria-hidden="true"></i>  
+    <i class="fa fa-comments-o" aria-hidden="true"></i>  
         <span>Customer Concern</span></a>
 </li>
 <!-- Divider -->
