@@ -45,7 +45,7 @@
         </table>			
     </div>
     <div class="shadow m-1 p-3">
-        <h4>New Transaction</h4>
+        <h4 id="transaction" >New Transaction</h4>
         <div class="alert alert-success" id="trans-message" role="alert" style="display: none">
         </div>
         <div class="overflow-auto" style="height: 350px;" id="items">

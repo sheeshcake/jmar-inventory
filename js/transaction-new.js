@@ -14,20 +14,21 @@ function reload() {
                     }
                 }
             });
+            $.ajax({
+                url: url(window.location.href) + "/controller/transaction-new-controller.php",
+                method: "GET",
+                success: function(d) {
+                    console.log(d);
+                    $("#transaction").text("Transaction ID: " + (parseInt(JSON.parse(d).transaction_id) + 1));
+                }
+            });
+            $('#example_wrapper').css("width", "100%");
             $t = $('#example').DataTable();
         }
         reload();
     }, 500);
 }
 $(document).ready(function() {
-    $.ajax({
-        url: url(window.location.href) + "/controller/get-items.php",
-        method: "GET",
-        success: function(d) {
-            $last_data = d.replace(/\s/g, '');
-        }
-    });
-    $('#example_wrapper').css("width", "100%");
     reload();
 });
 
@@ -126,6 +127,7 @@ $(".submit-transaction").click(function() {
         method: "POST",
         data: {
             date: $date,
+            type: "transaction",
             trans_type: "incoming",
             data: $all
         },
