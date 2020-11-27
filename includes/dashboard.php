@@ -82,6 +82,11 @@
 
 <div class="shadow p3">
     <script>
+        function thousands_separators(num){
+            var num_parts = num.toString().split(".");
+            num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return num_parts.join(".");
+        }
         // var $data = <?php //dashboard_core(isset($_GET["action"]) ? $_GET["action"] : 'sales-daily') ?>;
         // var $page = '<?php //echo isset($_GET["action"]) ? $_GET["action"] : 'sales-daily'; ?>';
         // console.log($page);
@@ -135,7 +140,7 @@
                         console.log($days[new Date(d.transaction_datetime).getDay()]);
                     });
 
-                    $("#daily-total").text("₱" + $grand_total.toFixed(2));
+                    $("#daily-total").text("₱" + thousands_separators($grand_total.toFixed(2)));
                 }
             });
             $.ajax({
@@ -154,7 +159,7 @@
                         console.log(d.transaction_datetime);
                         console.log($days[new Date(d.transaction_datetime).getDay()]);
                     });
-                    $("#monthly-total").text("₱" + $grand_total.toFixed(2));
+                    $("#monthly-total").text("₱" + thousands_separators($grand_total.toFixed(2)));
                 }
             });
         });
