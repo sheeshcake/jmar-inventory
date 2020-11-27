@@ -2350,7 +2350,7 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #4e73df;
+  background-color: #3a3f47;
   border-color: #4e73df;
 }
 
@@ -6634,6 +6634,11 @@ button.bg-dark:focus {
     display: inline !important;
   }
   .d-sm-inline-block {
+    width: 171px;
+    height: 37px;
+    border-color: #bbbbbb;
+    background-color: #393e46;
+    font-size: 15px;
     display: inline-block !important;
   }
   .d-sm-block {

@@ -2489,8 +2489,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #4e73df;
-    border-color: #4e73df
+    background-color: #3a3f47;
+    border-color: #bbbbbb
 }
 
 .btn-primary:hover {
@@ -3138,7 +3138,6 @@ fieldset:disabled a.btn {
     width: 150px;
     height: 50px;
     border-color: #bbbbbb;
-    background-color: #393e46;
     font-size: 20px;
 }
 
@@ -6975,6 +6974,11 @@ button.bg-dark:hover {
         display: inline!important
     }
     .d-sm-inline-block {
+        width: 171px;
+        height: 37px;
+        border-color: #bbbbbb;
+        background-color: #393e46;
+        font-size: 15px;
         display: inline-block!important
     }
     .d-sm-block {
@@ -8173,7 +8177,7 @@ button.bg-dark:hover {
     border-style: solid;
     border-color: #bbbbbb;
     border-radius: 10px;
-    padding: 1rem!important;
+    padding: 2rem!important;
     
 }
 
