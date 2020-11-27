@@ -14,17 +14,17 @@ function reload() {
                     }
                 }
             });
-            $.ajax({
-                url: url(window.location.href) + "/controller/transaction-new-controller.php",
-                method: "GET",
-                success: function(d) {
-                    console.log(d);
-                    $("#transaction").text("Transaction ID: " + (parseInt(JSON.parse(d).transaction_id) + 1));
-                }
-            });
-            $('#example_wrapper').css("width", "100%");
             $t = $('#example').DataTable();
         }
+        $.ajax({
+            url: url(window.location.href) + "/controller/transaction-new-controller.php",
+            method: "GET",
+            success: function(d) {
+                console.log(d);
+                $("#transaction").text("Transaction ID: " + (parseInt(JSON.parse(d).transaction_id) + 1));
+            }
+        });
+        $('#example_wrapper').css("width", "100%");
         reload();
     }, 500);
 }
