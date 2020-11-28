@@ -31,7 +31,7 @@
                 INNER JOIN
                     items ON purchased_item.item_id = items.item_id
                 WHERE 
-                    transactions.transaction_datetime LIKE '$date_now%'
+                    transactions.transaction_datetime LIKE '$date_now-%-2020'
                 AND 
                     transactions.transaction_type = 'incoming'
                 ";
