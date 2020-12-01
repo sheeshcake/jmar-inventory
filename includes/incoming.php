@@ -42,37 +42,29 @@
         <thead>
             <tr>
                 <th></th>
-                <th>Item Capital</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Brand</th>
-                <th>Tax</th>
-                <th>Stock</th>
-                <th>Price</th>
-                <th>ID</th>
                 <th>Category</th>
-                <th>Description</th>
+                <th>Stock</th>
                 <th></th>
             </tr>
         </thead>
         <tfoot>
             <tr>
                 <th></th>
-                <th>Item Capital</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Brand</th>
-                <th>Tax</th>
-                <th>Stock</th>
-                <th>Price</th>
-                <th>ID</th>
                 <th>Category</th>
-                <th>Description</th>
+                <th>Stock</th>
                 <th></th>
             </tr>
         </tfoot>
         <tbody>
-            <?php include "get-items.php"; ?>
+            <?php include "incoming-get-items.php"; ?>
         </tbody>
     </table>			
 </div>
 <?php include "new-item-modal.php"; ?>
-<script src="js/inventory.js"></script>
+<script src="js/incoming.js"></script>
