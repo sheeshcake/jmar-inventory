@@ -28,7 +28,7 @@
                 <td><?php echo $data["transaction_datetime"] ?></td>
                 <td><?php echo $total_items ?></td>
                 <td><?php echo $total_paid ?></td>
-                <td><button class="open btn btn-primary">Open</button></td>
+                <td><button class="open btn btn-primary" value="<?php echo $data["transaction_id"] ?>" data-toggle="modal" data-target="#transmodal">Open</button></td>
             </tr>
 <?php
     }
