@@ -32,22 +32,22 @@ $(document).on("click", ".close-details", function() {
 var $t;
 $(document).ready(function() {
     $t = $('#example').DataTable({
-        // scrollY: "300px",
+        // // scrollY: "300px",
         scrollX: true,
-        // "columnDefs": [
-        //     { "width": "20%", "targets": 0 }
-        // ],
-        scrollCollapse: true,
+        // // "columnDefs": [
+        // //     { "width": "20%", "targets": 0 }
+        // // ],
+        // scrollCollapse: true,
         paging: false,
         fixedColumns: {
             leftColumns: 1,
             rightColumns: 1
         }
     });
-    $('#example_wrapper').css("margin", "0");
-    $('#example').css("width", "2000px");
-    $('tbody').css("overflow-x", "auto");
-    $('tbody,tr,td').attr("width", "300px");
+    // $('#example_wrapper').css("margin", "0");
+    // $('#example').css("width", "2000px");
+    // $('tbody').css("overflow-x", "auto");
+    // $('tbody,tr,td').attr("width", "300px");
     // $('#example_wrapper').removeAttr('class');
 
 });
@@ -97,13 +97,12 @@ $(document).on("click", ".update", function() {
         data: {
             submit: "submit",
             item_id: $id,
-            item_capital: $("#capital" + $id).val(),
-            item_name: $("#name" + $id).val(),
-            item_brand: $("#brand" + $id).val(),
-            item_tax: $("#tax" + $id).val(),
-            item_desc: $("#desc" + $id).val(),
-            item_category: $("#cat" + $id).val(),
-            item_unit: $("#unit" + $id).val(),
+            item_capital: $("#capital" + $id).text(),
+            item_name: $("#name" + $id).text(),
+            item_brand: $("#brand" + $id).text(),
+            item_tax: $("#tax" + $id).text(),
+            item_desc: $("#desc" + $id).text(),
+            item_category: $("#cat" + $id).text(),
         },
         success: function(d) {
             var data = JSON.parse(d);
