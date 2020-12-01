@@ -21,7 +21,10 @@
         <?php echo $data["category_name"] ?>
     </td>
     <td>
-        <?php $price = (($data["item_tax"] / 100) * $data["item_price"]) + $data["item_price"]; echo "₱" . $price; ?>
+        <?php            
+            $price = (floatval(($data["item_tax"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price"]); 
+            echo "₱" . $price;
+        ?>
     </td>
     <td width="200px">
         <?php

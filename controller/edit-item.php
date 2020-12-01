@@ -8,7 +8,6 @@
         $item_price = $_POST["item_capital"];
         $item_tax = $_POST["item_tax"];
         $item_desc = $_POST["item_desc"];
-        $item_unit = $_POST["item_unit"];
         $category_id = $_POST["item_category"];
         $sql = "UPDATE items
             SET 
@@ -17,7 +16,6 @@
                 item_price = '$item_price',
                 item_tax = '$item_tax',
                 item_desc = '$item_desc',
-                item_unit = '$item_unit',
                 category_id = '$category_id'
             WHERE
                 item_id = '$item_id'
