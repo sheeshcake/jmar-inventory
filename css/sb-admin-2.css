@@ -2928,7 +2928,6 @@ fieldset:disabled a.btn {
 }
 
 , .btn-group-sm > .btn {
-  width: 150px;
     height: 50px;
     border-color: #bbbbbb;
     background-color: #393e46;

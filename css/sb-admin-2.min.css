@@ -3135,7 +3135,6 @@ fieldset:disabled a.btn {
 
 .btn-group-sm>.btn,
 .btn-sm {
-    width: 150px;
     height: 50px;
     border-color: #bbbbbb;
     font-size: 20px;
