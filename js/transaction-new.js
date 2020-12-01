@@ -11,10 +11,11 @@ function reload() {
                     if ($last_data != d.replace(/\s/g, '')) {
                         $last_data = d.replace(/\s/g, '');
                         $("#item_data").html(d);
+                        $t = $('#example').DataTable();
+                        console.log("üpadte");
                     }
                 }
             });
-            $t = $('#example').DataTable();
         }
         $.ajax({
             url: url(window.location.href) + "/controller/transaction-new-controller.php",
