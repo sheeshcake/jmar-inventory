@@ -32,17 +32,18 @@ $(document).on("click", ".close-details", function() {
 var $t;
 $(document).ready(function() {
     $t = $('#example').DataTable({
-        // // scrollY: "300px",
-        scrollX: true,
-        // // "columnDefs": [
-        // //     { "width": "20%", "targets": 0 }
-        // // ],
-        // scrollCollapse: true,
-        paging: false,
-        fixedColumns: {
-            leftColumns: 1,
-            rightColumns: 1
-        }
+        "responsive": true
+            // // scrollY: "300px",
+            // scrollX: true,
+            // // "columnDefs": [
+            // //     { "width": "20%", "targets": 0 }
+            // // ],
+            // scrollCollapse: true,
+            // paging: false,
+            // fixedColumns: {
+            //     leftColumns: 1,
+            //     rightColumns: 1
+            // }
     });
     // $('#example_wrapper').css("margin", "0");
     // $('#example').css("width", "2000px");
@@ -97,12 +98,12 @@ $(document).on("click", ".update", function() {
         data: {
             submit: "submit",
             item_id: $id,
-            item_capital: $("#capital" + $id).text(),
+            item_capital: parseFloat($("#capital" + $id).text()).toFixed(2),
             item_name: $("#name" + $id).text(),
             item_brand: $("#brand" + $id).text(),
-            item_tax: $("#tax" + $id).text(),
+            item_tax: parseFloat($("#tax" + $id).text()).toFixed(2),
             item_desc: $("#desc" + $id).text(),
-            item_category: $("#cat" + $id).text(),
+            item_category: $("#cat" + $id).attr("cat-id"),
         },
         success: function(d) {
             var data = JSON.parse(d);

@@ -47,7 +47,7 @@
     <td>
         <?php echo $data["item_id"] ?>
     </td>
-    <td id="cat<?php echo $data["item_id"]; ?>">
+    <td id="cat<?php echo $data["item_id"]; ?>" cat-id="<?php echo $data["category_id"]; ?>">
         <?php echo $data["category_name"] ?>
     </td>
     <td id="desc<?php echo $data["item_id"]; ?>" contenteditable>
