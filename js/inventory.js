@@ -118,8 +118,12 @@ $(document).on("click", ".update", function() {
 
 
 $(document).on('change', '.custom-file-input', function(e) {
-    var filename = $('input[type=file]').val().split('\\').pop();
-    $(".custom-file-label").text(filename);
+    var name = $('input[type=file]').val().split('\\').pop();
+    var shortname = "";
+    if (name.length > 20) {
+        var shortname = name.substring(0, 20) + " ...";
+    }
+    $(".custom-file-label").text(shortname);
 })
 
 function calculate() {

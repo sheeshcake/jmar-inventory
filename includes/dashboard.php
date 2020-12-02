@@ -45,11 +45,11 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Output 3
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Daily Expenses
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Data</div>
+                                <div id="daily-expenses" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">₱00.00</div>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                             Damage</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">Data</div>
+                        <div id="damaged" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
                     </div>
                     <div class="col-auto">
                         <i class="fa fa-chain-broken fa-2x text-gray-300"></i>
@@ -147,6 +147,27 @@
                 url: url(window.location.href) + "/controller/get-sales-data-controller.php",
                 method: "POST",
                 data: {
+                    type: "daily-expenses",
+                },
+                success: function(data){
+                    var $data = JSON.parse(data);
+                    console.log($data);
+                    var $grand_total = 0;
+                    $data.forEach(function(d) {
+                        var $price = (((parseFloat(d.item_tax) / 100) * parseFloat(d.item_price)) + parseFloat(d.item_price)).toFixed(2);
+                        var $sub_total = $price * d.item_count;
+                        $grand_total += $sub_total;
+                        console.log(d.transaction_datetime);
+                        console.log($days[new Date(d.transaction_datetime).getDay()]);
+                    });
+
+                    $("#daily-expenses").text("₱" + thousands_separators($grand_total.toFixed(2)));
+                }
+            });
+            $.ajax({
+                url: url(window.location.href) + "/controller/get-sales-data-controller.php",
+                method: "POST",
+                data: {
                     type: "sales-monthly",
                 },
                 success: function(data){
@@ -161,6 +182,17 @@
                         console.log($days[new Date(d.transaction_datetime).getDay()]);
                     });
                     $("#monthly-total").text("₱" + thousands_separators($grand_total.toFixed(2)));
+                }
+            });
+            $.ajax({
+                url: url(window.location.href) + "/controller/get-sales-data-controller.php",
+                method: "POST",
+                data: {
+                    type: "damaged",
+                },
+                success: function(data){
+                    console.log(data);
+                    $("#damaged").text(data);
                 }
             });
         });

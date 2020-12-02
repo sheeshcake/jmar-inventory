@@ -1,5 +1,5 @@
 <?php
-    include "controller/connect.php";
+    include "connect.php";
     $sql = "SELECT * FROM items 
     INNER JOIN
     category ON category.category_id = items.category_id
