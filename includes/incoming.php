@@ -45,7 +45,7 @@
             </tbody>
         </table>		
     </div>
-    <div class="shadow m-1 p-3" style="max-width: 400px; min-width: 400px">
+    <div class="shadow mb-1 p-3" style="max-width: 400px; min-width: 400px">
         <h4 id="transaction" >Incoming Transaction</h4>
         <div class="alert alert-success" id="trans-message" role="alert" style="display: none">
         </div>
