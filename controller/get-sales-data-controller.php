@@ -14,7 +14,7 @@
                 WHERE 
                     transactions.transaction_datetime LIKE '$date_now%'
                 AND 
-                    transactions.transaction_type = 'incoming'
+                    transactions.transaction_type = 'outgoing'
                 ";
             $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
             $all_data = [];
@@ -36,7 +36,7 @@
                 AND 
                     transactions.transaction_datetime LIKE '%$year_now%'
                 AND 
-                    transactions.transaction_type = 'incoming'
+                    transactions.transaction_type = 'outgoing'
                 ";
             $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
             $all_data = [];
@@ -44,14 +44,14 @@
                 array_push($all_data, $data);
             }
             echo json_encode($all_data);
-        }else if($type == "damaged"){
+        }else if($type == "daily-expenses"){
             $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
-            $date_now = $date->format("m");
+            $date_now = $date->format("m-d-Y");
             $sql = "SELECT * FROM transactions 
                 INNER JOIN 
-                    purchased_item ON transactions.transaction_id  =purchased_item.transaction_id 
+                    incoming_transaction ON transactions.transaction_id  =incoming_transaction.transaction_id 
                 INNER JOIN
-                    items ON purchased_item.item_id = items.item_id
+                    items ON incoming_transaction.item_id = items.item_id
                 WHERE 
                     transactions.transaction_datetime LIKE '$date_now%'
                 AND 
@@ -63,6 +63,13 @@
                 array_push($all_data, $data);
             }
             echo json_encode($all_data);
+        }
+        else if($type == "damaged"){
+            $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
+            $date_now = $date->format("m");
+            $sql = "SELECT * FROM damaged_items";
+            $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
+            echo mysqli_num_rows($result);
         }
     }
 

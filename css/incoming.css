@@ -1,0 +1,13 @@
+table.dataTable th {
+    width: 100px;
+    max-width: 100px;
+    word-break: break-all;
+    white-space: pre-line;
+}
+
+table.dataTable td {
+    width: 100px;
+    max-width: 100px;
+    word-break: break-all;
+    white-space: pre-line;
+}
