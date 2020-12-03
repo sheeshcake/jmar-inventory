@@ -4496,6 +4496,7 @@ input[type="button"].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1.25rem;
+  border: ridge;
 }
 
 .card-title {
@@ -10836,9 +10837,11 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
-  background-position: center;
+  background: url(https://cpng.pikpng.com/pngl/s/209-2090002_your-logo-here-png-monochrome-clipart.png);
+  background-position: inherit;
   background-size: cover;
+  background-clip: content-box;
+
 }
 
 .bg-register-image {
