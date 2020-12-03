@@ -129,7 +129,7 @@ $(".submit-transaction").click(function() {
         data: {
             date: $date,
             type: "transaction",
-            trans_type: "incoming",
+            trans_type: "outgoing",
             data: $all
         },
         success: function(d) {

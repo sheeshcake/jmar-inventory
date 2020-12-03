@@ -192,7 +192,12 @@
                 },
                 success: function(d){
                     var data = JSON.parse(d);
-                    $("#damaged").text(data.total);
+                    if(data.total != null){
+                        $("#damaged").text(data.total);
+                    }else{
+                        $("#damaged").text(0);
+                    }
+                    
                 }
             });
         });
