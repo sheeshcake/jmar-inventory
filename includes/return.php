@@ -1,6 +1,3 @@
-<h1><i class="fa fa-wrench" aria-hidden="true"></i>Under Development</h1>
-
-
 <?php
     //include "controller/connect.php";
 ?>
@@ -32,7 +29,7 @@
                 <th></th>
             </tr>
         </tfoot>
-        <tbody>
+        <tbody id="data-trans">
             <?php include "get-transactions.php"; ?>
         </tbody>
     </table>			

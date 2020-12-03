@@ -190,9 +190,9 @@
                 data: {
                     type: "damaged",
                 },
-                success: function(data){
-                    console.log(data);
-                    $("#damaged").text(data);
+                success: function(d){
+                    var data = JSON.parse(d);
+                    $("#damaged").text(data.total);
                 }
             });
         });

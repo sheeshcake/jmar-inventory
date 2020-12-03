@@ -67,9 +67,9 @@
         else if($type == "damaged"){
             $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
             $date_now = $date->format("m");
-            $sql = "SELECT * FROM damaged_items";
+            $sql = "SELECT SUM(item_count) total FROM damaged_items";
             $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
-            echo mysqli_num_rows($result);
+            echo json_encode($result->fetch_assoc());
         }
     }
 
