@@ -15,7 +15,7 @@
 </head>
 <body id="page-top" class="main-content">
 <div class="d-flex m-2 p-2">
-    <button onclick="window.history.back();" class="btn btn-secondary mr-auto"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+    <button onclick="window.history.back();" id="back" class="btn btn-secondary mr-auto"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
     <button onClick="window.print();" id="print" class="btn btn-primary ml-auto"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
 
 </div>
@@ -82,7 +82,7 @@
 
 <style>
 @media print {
-  #print {
+  #back,#print {
     display: none;
   }
 }
