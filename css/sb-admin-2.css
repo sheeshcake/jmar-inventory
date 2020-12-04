@@ -381,6 +381,7 @@ h3, .h3 {
 }
 
 h4, .h4 {
+  color: black;
   font-size: 1.5rem;
 }
 
@@ -2928,7 +2929,6 @@ fieldset:disabled a.btn {
 }
 
 , .btn-group-sm > .btn {
-  width: 150px;
     height: 50px;
     border-color: #bbbbbb;
     background-color: #393e46;
@@ -4496,6 +4496,7 @@ input[type="button"].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1.25rem;
+  border: ridge;
 }
 
 .card-title {
@@ -4522,7 +4523,7 @@ input[type="button"].btn-block {
 .card-header {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  background-color: #f8f9fc;
+  background-color: #bbbbbb;
   border-bottom: 1px solid #e3e6f0;
 }
 
@@ -10836,9 +10837,11 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
-  background-position: center;
+  background: url(https://cpng.pikpng.com/pngl/s/209-2090002_your-logo-here-png-monochrome-clipart.png);
+  background-position: inherit;
   background-size: cover;
+  background-clip: content-box;
+
 }
 
 .bg-register-image {

@@ -32,7 +32,7 @@
         </div>
         <div class="d-flex" id="count_input_<?php echo $data["item_id"] ?>">
             <input type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
-            <button class="add btn btn-success" value="<?php echo $data["item_id"] ?>">Add</button>
+            <button class="add btn btn-success" value="<?php echo $data["item_id"] ?>"><i class="fa fa-plus" aria-hidden="true"></i></button>
         </div>
         <?php
             }else{

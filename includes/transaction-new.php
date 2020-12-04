@@ -17,7 +17,7 @@
   This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
 </div>
 <div class="d-flex mb-4">
-    <div class="shadow m-1 p-3">
+    <div class="shadow m-1 p-3" style="max-width: 1000px; min-width: 1000px">
         <table id="example"  class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -39,21 +39,21 @@
                     <th>Stock</th>
                 </tr>
             </tfoot>
-            <tbody>
+            <tbody id="item_data">
                 <?php include "get-items-transaction-new.php"; ?>
             </tbody>
         </table>			
     </div>
-    <div class="shadow m-1 p-3">
+    <div class="shadow m-1 p-3" style="max-width: 400px; min-width: 400px">
         <h4 id="transaction" >New Transaction</h4>
         <div class="alert alert-success" id="trans-message" role="alert" style="display: none">
         </div>
-        <div class="overflow-auto" style="height: 350px;" id="items">
+        <div class="overflow-auto" style="min-height: 600px; max-heigth: 600px" id="items">
         </div>
         <div class="mt-2">
             <div class="d-flex"><b>Total Items:&nbsp;</b><p id="total_items">0</p></div>
             <div class="d-flex"><b>Total:&nbsp;</b>₱ <p id="total">0</p></div>
-            <button class="submit-transaction btn btn-primary">Submit</button>
+            <button class="submit-transaction btn btn-primary" style="display: none; min-width: 100%">Submit</button>
         </div>
     </div>
 

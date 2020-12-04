@@ -1,3 +1,6 @@
+function strtrim(x) {
+    return x.replace(/^\s+|\s+$/gm, '');
+}
 $(document).on("click", ".open-details", function() {
     // Add this later
     var $t = $(this);
@@ -32,22 +35,23 @@ $(document).on("click", ".close-details", function() {
 var $t;
 $(document).ready(function() {
     $t = $('#example').DataTable({
-        // scrollY: "300px",
-        scrollX: true,
-        // "columnDefs": [
-        //     { "width": "20%", "targets": 0 }
-        // ],
-        scrollCollapse: true,
-        paging: false,
-        fixedColumns: {
-            leftColumns: 1,
-            rightColumns: 1
-        }
+        "responsive": true
+            // // scrollY: "300px",
+            // scrollX: true,
+            // // "columnDefs": [
+            // //     { "width": "20%", "targets": 0 }
+            // // ],
+            // scrollCollapse: true,
+            // paging: false,
+            // fixedColumns: {
+            //     leftColumns: 1,
+            //     rightColumns: 1
+            // }
     });
-    $('#example_wrapper').css("margin", "0");
-    $('#example').css("width", "2000px");
-    $('tbody').css("overflow-x", "auto");
-    $('tbody,tr,td').attr("width", "300px");
+    // $('#example_wrapper').css("margin", "0");
+    // $('#example').css("width", "2000px");
+    // $('tbody').css("overflow-x", "auto");
+    // $('tbody,tr,td').attr("width", "300px");
     // $('#example_wrapper').removeAttr('class');
 
 });
@@ -90,20 +94,18 @@ $(document).on("click", ".delete", function() {
 $(document).on("click", ".update", function() {
     $('.toast').toast('show');
     var $id = $(this).val();
-    console.log($id);
     $.ajax({
         url: url(window.location.href) + "/controller/edit-item.php",
         method: "POST",
         data: {
             submit: "submit",
             item_id: $id,
-            item_capital: $("#capital" + $id).val(),
-            item_name: $("#name" + $id).val(),
-            item_brand: $("#brand" + $id).val(),
-            item_tax: $("#tax" + $id).val(),
-            item_desc: $("#desc" + $id).val(),
-            item_category: $("#cat" + $id).val(),
-            item_unit: $("#unit" + $id).val(),
+            item_capital: parseFloat($("#capital" + $id).text()).toFixed(2),
+            item_name: strtrim($("#name" + $id).text()),
+            item_brand: strtrim($("#brand" + $id).text()),
+            item_tax: parseFloat($("#tax" + $id).text()).toFixed(2),
+            item_desc: strtrim($("#desc" + $id).text()),
+            item_category: $("#cat" + $id).attr("cat-id"),
         },
         success: function(d) {
             var data = JSON.parse(d);
@@ -118,15 +120,18 @@ $(document).on("click", ".update", function() {
 
 
 $(document).on('change', '.custom-file-input', function(e) {
-    var filename = $('input[type=file]').val().split('\\').pop();
-    $(".custom-file-label").text(filename);
+    var name = $('input[type=file]').val().split('\\').pop();
+    var shortname = "";
+    if (name.length > 20) {
+        var shortname = name.substring(0, 20) + " ...";
+    }
+    $(".custom-file-label").text(shortname);
 })
 
 function calculate() {
     var price = parseFloat($("#input-capital").val());
     var tax = parseFloat($("#input-tax").val());
     var total = ((tax / 100) * price) + price;
-    console.log(total + " " + price + " " + tax);
     $("#total-item-price").val(total);
 }
 $(document).on("input", "#input-capital", function() {

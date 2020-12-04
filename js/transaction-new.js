@@ -11,16 +11,15 @@ function reload() {
                     if ($last_data != d.replace(/\s/g, '')) {
                         $last_data = d.replace(/\s/g, '');
                         $("#item_data").html(d);
+                        $t = $('#example').DataTable();
                     }
                 }
             });
-            $t = $('#example').DataTable();
         }
         $.ajax({
             url: url(window.location.href) + "/controller/transaction-new-controller.php",
             method: "GET",
             success: function(d) {
-                console.log(d);
                 $("#transaction").text("Transaction ID: " + (parseInt(JSON.parse(d).transaction_id) + 1));
             }
         });
@@ -128,7 +127,7 @@ $(".submit-transaction").click(function() {
         data: {
             date: $date,
             type: "transaction",
-            trans_type: "incoming",
+            trans_type: "outgoing",
             data: $all
         },
         success: function(d) {

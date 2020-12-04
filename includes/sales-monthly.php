@@ -11,7 +11,7 @@
         WHERE 
             transactions.transaction_datetime LIKE '$date_now%'
         AND 
-            transactions.transaction_type = 'incoming'
+            transactions.transaction_type = 'outgoing'
         ";
     $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
     $all_data = [];

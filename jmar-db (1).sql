@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2020 at 07:22 AM
+-- Generation Time: Dec 03, 2020 at 09:50 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -32,15 +32,6 @@ CREATE TABLE `category` (
   `category_name` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `category`
---
-
-INSERT INTO `category` (`category_id`, `category_name`) VALUES
-(74, 'Wires'),
-(78, 'Bulbs'),
-(79, 'Electrical');
-
 -- --------------------------------------------------------
 
 --
@@ -51,7 +42,6 @@ CREATE TABLE `damaged_items` (
   `damage_id` int(11) NOT NULL,
   `item_id` varchar(32) NOT NULL,
   `item_count` varchar(32) NOT NULL,
-  `damage_desc` text NOT NULL,
   `damage_datetime` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -63,10 +53,9 @@ CREATE TABLE `damaged_items` (
 
 CREATE TABLE `incoming_transaction` (
   `incoming_id` int(11) NOT NULL,
+  `transaction_id` varchar(32) NOT NULL,
   `item_id` varchar(32) NOT NULL,
-  `user_id` varchar(32) NOT NULL,
-  `item_count` varchar(32) NOT NULL,
-  `incoming_datetime` varchar(32) NOT NULL
+  `item_count` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -82,20 +71,13 @@ CREATE TABLE `items` (
   `item_brand` varchar(32) NOT NULL,
   `item_desc` text NOT NULL,
   `item_unit` varchar(32) NOT NULL,
+  `unit_count` varchar(32) NOT NULL DEFAULT 'none',
   `item_tax` varchar(32) NOT NULL,
   `item_price` varchar(32) NOT NULL,
   `item_stock` varchar(32) NOT NULL,
   `item_added` varchar(32) NOT NULL,
   `category_id` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `items`
---
-
-INSERT INTO `items` (`item_id`, `item_img`, `item_name`, `item_brand`, `item_desc`, `item_unit`, `item_tax`, `item_price`, `item_stock`, `item_added`, `category_id`) VALUES
-(53, 'Firefly-Basic-Series-LED-A-Bulb-TUV-SUD.png', 'Firefly Basic Series LED A-Bulb', 'Firefly', 'jhhhh', 'pieces', '12', '12', '0', '11-24-2020 03:36 pm', '74'),
-(54, 'Firefly-Basic-Series-LED-A-Bulb-TUV-SUD.png', 'asd', 'asd', 'asd', 'meter', '21', '12', '53', '11-25-2020 02:23 pm', '74');
 
 -- --------------------------------------------------------
 
@@ -111,21 +93,6 @@ CREATE TABLE `outgoing_transaction` (
   `outgoing_datetime` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `outgoing_transaction`
---
-
-INSERT INTO `outgoing_transaction` (`outgoing_id`, `item_id`, `user_id`, `item_count`, `outgoing_datetime`) VALUES
-(99, '54', '3', '1', '11-25-2020 02:24 pm'),
-(100, '54', '3', '8', '11-25-2020 02:26 pm'),
-(101, '54', '3', '1', '11-25-2020 02:34 pm'),
-(102, '54', '3', '1', '11-25-2020 02:35 pm'),
-(103, '54', '3', '1', '11-25-2020 02:35 pm'),
-(104, '54', '3', '1', '11-25-2020 02:35 pm'),
-(105, '54', '3', '1', '11-25-2020 02:36 pm'),
-(106, '54', '3', '1', '11-25-2020 02:37 pm'),
-(107, '54', '3', '1', '11-25-2020 02:38 pm');
-
 -- --------------------------------------------------------
 
 --
@@ -133,28 +100,11 @@ INSERT INTO `outgoing_transaction` (`outgoing_id`, `item_id`, `user_id`, `item_c
 --
 
 CREATE TABLE `purchased_item` (
+  `purchased_id` int(11) NOT NULL,
   `transaction_id` int(11) NOT NULL,
   `item_id` varchar(32) NOT NULL,
   `item_count` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `purchased_item`
---
-
-INSERT INTO `purchased_item` (`transaction_id`, `item_id`, `item_count`) VALUES
-(17, '54', '3'),
-(17, '54', '2'),
-(18, '54', '2'),
-(18, '54', '12'),
-(19, '54', '1'),
-(20, '54', '3'),
-(20, '54', '2'),
-(21, '54', '2'),
-(22, '54', '2'),
-(23, '54', '2'),
-(24, '54', '4'),
-(24, '54', '2');
 
 -- --------------------------------------------------------
 
@@ -182,20 +132,6 @@ CREATE TABLE `transactions` (
   `transaction_type` varchar(32) NOT NULL,
   `transaction_datetime` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `transactions`
---
-
-INSERT INTO `transactions` (`transaction_id`, `transaction_type`, `transaction_datetime`) VALUES
-(17, 'incoming', '11-26-2020 02:13 pm'),
-(18, 'incoming', '11-26-2020 02:13 pm'),
-(19, 'incoming', '11-26-2020 02:14 pm'),
-(20, 'incoming', '11-26-2020 02:17 pm'),
-(21, 'incoming', '11-26-2020 02:19 pm'),
-(22, 'incoming', '11-26-2020 02:19 pm'),
-(23, 'incoming', '11-26-2020 02:19 pm'),
-(24, 'incoming', '11-26-2020 02:21 pm');
 
 -- --------------------------------------------------------
 
@@ -257,6 +193,12 @@ ALTER TABLE `outgoing_transaction`
   ADD PRIMARY KEY (`outgoing_id`);
 
 --
+-- Indexes for table `purchased_item`
+--
+ALTER TABLE `purchased_item`
+  ADD PRIMARY KEY (`purchased_id`);
+
+--
 -- Indexes for table `returned_items`
 --
 ALTER TABLE `returned_items`
@@ -282,31 +224,37 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `damaged_items`
 --
 ALTER TABLE `damaged_items`
-  MODIFY `damage_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `damage_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `incoming_transaction`
 --
 ALTER TABLE `incoming_transaction`
-  MODIFY `incoming_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `incoming_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `outgoing_transaction`
 --
 ALTER TABLE `outgoing_transaction`
-  MODIFY `outgoing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `outgoing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+
+--
+-- AUTO_INCREMENT for table `purchased_item`
+--
+ALTER TABLE `purchased_item`
+  MODIFY `purchased_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `returned_items`
@@ -318,7 +266,7 @@ ALTER TABLE `returned_items`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `user`

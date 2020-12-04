@@ -17,23 +17,35 @@
         include "includes/$action.php";
     }
 
-    function home_core(){
+    function home_core($reason = NULL){
         $roles = [
             "admin" => ["account", "transaction", "inventory", "transaction-new", "incoming", "return", "default" =>"dashboard"],
-            "encoder" => ["account","inventory", "incoming", "return", "default" =>"inventory"],
-            "accountant" => ["account", "transaction", "transaction-new", "default" =>"transaction"]
+            "encoder" => ["account","inventory", "incoming", "default" =>"inventory"],
+            "accountant" => ["account", "transaction", "return", "transaction-new", "default" =>"transaction"]
         ];
-        if(isset($_SESSION["user"])){
-            if(isset($_GET["p"]) && in_array($_GET["p"], $roles[$_SESSION["user"]["role"]])){
-                if(file_exists("includes/" . $_GET["p"] . ".php")){
-                    include "includes/" . $_GET["p"] . ".php";
+        if($reason != NULL){
+            if($reason == "get"){
+                return $roles[$_SESSION["user"]["role"]]["default"];
+            }else{
+                return "hhmmmm... not today..";
+            }
+        }else{
+            if(isset($_SESSION["user"])){
+                if(isset($_GET["p"])){
+                    if(in_array($_GET["p"], $roles[$_SESSION["user"]["role"]])){
+                        if(file_exists("includes/" . $_GET["p"] . ".php")){
+                            include "includes/" . $_GET["p"] . ".php";
+                        }
+                        else{
+                            include "includes/error404.php";
+                        }
+                    }else{
+                        include "includes/error404.php";
+                    }
                 }
                 else{
-                    include "includes/error404.php";
+                    include "includes/" . $roles[$_SESSION["user"]["role"]]["default"] . ".php";
                 }
-            }
-            else{
-                include "includes/" . $roles[$_SESSION["user"]["role"]]["default"] . ".php";
             }
         }
     }
