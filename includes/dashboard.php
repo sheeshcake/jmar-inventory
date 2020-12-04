@@ -4,7 +4,7 @@
 </div>
 <div class="row">
     <!-- Earnings (Monthly) Card Example -->
-    <a href="?p=dashboard&action=sales-daily" class="col-xl-3 col-md-6 mb-4">
+    <a href="http://localhost/jmar-inventory-1/includes/daily-sales.php" class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
