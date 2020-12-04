@@ -12,7 +12,6 @@ function reload() {
                         $last_data = d.replace(/\s/g, '');
                         $("#item_data").html(d);
                         $t = $('#example').DataTable();
-                        console.log("üpadte");
                     }
                 }
             });
@@ -21,7 +20,6 @@ function reload() {
             url: url(window.location.href) + "/controller/transaction-new-controller.php",
             method: "GET",
             success: function(d) {
-                console.log(d);
                 $("#transaction").text("Transaction ID: " + (parseInt(JSON.parse(d).transaction_id) + 1));
             }
         });

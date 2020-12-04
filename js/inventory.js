@@ -1,3 +1,6 @@
+function strtrim(x) {
+    return x.replace(/^\s+|\s+$/gm, '');
+}
 $(document).on("click", ".open-details", function() {
     // Add this later
     var $t = $(this);
@@ -91,7 +94,6 @@ $(document).on("click", ".delete", function() {
 $(document).on("click", ".update", function() {
     $('.toast').toast('show');
     var $id = $(this).val();
-    console.log($id);
     $.ajax({
         url: url(window.location.href) + "/controller/edit-item.php",
         method: "POST",
@@ -99,10 +101,10 @@ $(document).on("click", ".update", function() {
             submit: "submit",
             item_id: $id,
             item_capital: parseFloat($("#capital" + $id).text()).toFixed(2),
-            item_name: $("#name" + $id).text(),
-            item_brand: $("#brand" + $id).text(),
+            item_name: strtrim($("#name" + $id).text()),
+            item_brand: strtrim($("#brand" + $id).text()),
             item_tax: parseFloat($("#tax" + $id).text()).toFixed(2),
-            item_desc: $("#desc" + $id).text(),
+            item_desc: strtrim($("#desc" + $id).text()),
             item_category: $("#cat" + $id).attr("cat-id"),
         },
         success: function(d) {
@@ -130,7 +132,6 @@ function calculate() {
     var price = parseFloat($("#input-capital").val());
     var tax = parseFloat($("#input-tax").val());
     var total = ((tax / 100) * price) + price;
-    console.log(total + " " + price + " " + tax);
     $("#total-item-price").val(total);
 }
 $(document).on("input", "#input-capital", function() {

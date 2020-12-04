@@ -2,6 +2,8 @@
     include "../controller/connect.php";
     $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
     $date_now = $date->format("m-d-Y");
+    $month_now = $date->format("m");
+    $year_now = $date->format("Y");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +26,7 @@
 <div class="container">
     <center><h4>JMAR Enterprise</h4></center>
     <div class="d-flex mb-4">
-        <h5 class="mr-auto">Daily Sales Report</h5>
+        <h5 class="mr-auto">Monthly Sales Report</h5>
         <h5 class="ml-auto"><b>Date:&nbsp;</b><u><?php echo $date_now; ?></u></h5>
     </div>
     <table class="table table-bordered">
@@ -44,8 +46,8 @@
                 INNER JOIN items as i
                 INNER JOIN transactions as t
                 ON p.item_id = i.item_id
-                WHERE t.transaction_datetime LIKE '$date_now%'
-                AND t.transaction_type = 'outgoing'
+                WHERE t.transaction_datetime LIKE '$month_now%'
+                AND t.transaction_datetime LIKE '%$year_now%'
                 AND t.transaction_id = p.transaction_id
                 GROUP BY i.item_id
              ";

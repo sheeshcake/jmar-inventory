@@ -1,6 +1,6 @@
 <?php
     include "connect.php";
-    $sql = "SELECT * FROM transactions";
+    $sql = "SELECT * FROM transactions WHERE transaction_type = 'outgoing'";
     $all_data = [];
     $result = mysqli_query($conn, $sql);
     while($data = $result->fetch_assoc()){

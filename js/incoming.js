@@ -10,13 +10,10 @@ function reload() {
                 url: url(window.location.href) + "/controller/incoming-get-items.php",
                 method: "GET",
                 success: function(d) {
-                    // console.log($(".item").length);
-                    // console.log($last_data + "\n" + d.replace(/\s/g, ''));
                     if ($last_data != d.replace(/\s/g, '')) {
                         $last_data = d.replace(/\s/g, '');
                         $("#item_data").html(d);
                         $t = $('#example').DataTable();
-                        console.log("üpadte");
                     }
                 }
             });

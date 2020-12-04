@@ -20,7 +20,6 @@ $(".min").click(function() {
             num: $num
         },
         success: function(d) {
-            console.log(d);
             var data = JSON.parse(d);
             if (data.status == "danger") {
                 $btn.prev().prev().prev().val("Out Of Stock");

@@ -28,7 +28,6 @@ $(document).on("click", ".open", function() {
             var data = JSON.parse(d);
             $(".modal-body").html("");
             data.forEach(function(element) {
-                console.log(element);
                 var price = (((parseFloat(element.item_tax) / 100) * parseFloat(element.item_price)) + parseFloat(element.item_price)).toFixed(2);
                 $("#transmodalLabel").text("Transaction: " + element.transaction_id);
                 $(".modal-body").append(
@@ -70,7 +69,6 @@ $(document).on("input", ".void-count", function() {
 });
 $(document).on("change", ".form-check-input", function() {
     $replace == false ? $replace = true : $replace = false;
-    console.log($replace);
 });
 var $purchased_id;
 $(document).on("click", ".void", function() {
@@ -107,7 +105,6 @@ $(document).on("click", ".void", function() {
                             var data = JSON.parse(d);
                             $(".modal-body").html("");
                             data.forEach(function(element) {
-                                console.log(element);
                                 var price = (((parseFloat(element.item_tax) / 100) * parseFloat(element.item_price)) + parseFloat(element.item_price)).toFixed(2);
                                 $("#transmodalLabel").text("Transaction: " + element.transaction_id);
                                 $(".modal-body").append(
@@ -178,7 +175,6 @@ $(document).on("click", ".damage", function() {
                             var data = JSON.parse(d);
                             $(".modal-body").html("");
                             data.forEach(function(element) {
-                                console.log(element);
                                 var price = (((parseFloat(element.item_tax) / 100) * parseFloat(element.item_price)) + parseFloat(element.item_price)).toFixed(2);
                                 $("#transmodalLabel").text("Transaction: " + element.transaction_id);
                                 $(".modal-body").append(

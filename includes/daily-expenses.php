@@ -24,7 +24,7 @@
 <div class="container">
     <center><h4>JMAR Enterprise</h4></center>
     <div class="d-flex mb-4">
-        <h5 class="mr-auto">Daily Sales Report</h5>
+        <h5 class="mr-auto">Daily Expenses Report</h5>
         <h5 class="ml-auto"><b>Date:&nbsp;</b><u><?php echo $date_now; ?></u></h5>
     </div>
     <table class="table table-bordered">
@@ -40,19 +40,19 @@
         <tbody>
     <?php
         $sql = "SELECT t.transaction_datetime, t.transaction_type, t.transaction_id, p.transaction_id, i.item_name, i.item_desc, i.item_price, i.item_tax, i.item_id, SUM(p.item_count) AS total_quantity
-                FROM purchased_item as p
+                FROM incoming_transaction as p
                 INNER JOIN items as i
                 INNER JOIN transactions as t
                 ON p.item_id = i.item_id
                 WHERE t.transaction_datetime LIKE '$date_now%'
-                AND t.transaction_type = 'outgoing'
+                AND t.transaction_type = 'incoming'
                 AND t.transaction_id = p.transaction_id
                 GROUP BY i.item_id
              ";
         $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
         $total = 0;
         while($data = $result->fetch_assoc()){
-            $price = (floatval(($data["item_tax"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price"]);
+            $price = $data["item_price"];
             $sub_total = $price * $data["total_quantity"];
             $total += $sub_total;
     ?>
