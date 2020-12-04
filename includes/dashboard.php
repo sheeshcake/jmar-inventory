@@ -4,7 +4,7 @@
 </div>
 <div class="row">
     <!-- Earnings (Monthly) Card Example -->
-    <a href="http://localhost/jmar-inventory-1/includes/daily-sales.php" class="col-xl-3 col-md-6 mb-4">
+    <a href="#" id="ds-btn" class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -87,6 +87,13 @@
             num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return num_parts.join(".");
         }
+        $("#ds-btn").click(function(){
+            var rawurl = window.location.href;
+            console.log(rawurl.lastIndexOf("/"));
+            var res = rawurl.split("/");
+            res.splice(-1,1);
+            window.location.href = res.join("/") + "/includes/daily-sales.php";
+        });
         // var $data = <?php //dashboard_core(isset($_GET["action"]) ? $_GET["action"] : 'sales-daily') ?>;
         // var $page = '<?php //echo isset($_GET["action"]) ? $_GET["action"] : 'sales-daily'; ?>';
         // console.log($page);
