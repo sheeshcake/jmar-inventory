@@ -20,7 +20,6 @@ function reload() {
             url: url(window.location.href) + "/controller/transaction-new-controller.php",
             method: "GET",
             success: function(d) {
-                0
                 $("#transaction").text("Transaction ID: " + (parseInt(JSON.parse(d).transaction_id) + 1));
             }
         });
