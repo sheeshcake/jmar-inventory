@@ -44,11 +44,11 @@
             </tbody>
         </table>			
     </div>
-    <div class="shadow m-1 p-3" style="max-width: 400px; min-width: 400px">
+    <div class="shadow m-1 p-3" style="max-height: 800px">
         <h4 id="transaction" >New Transaction</h4>
         <div class="alert alert-success" id="trans-message" role="alert" style="display: none">
         </div>
-        <div class="overflow-auto" style="min-height: 600px; max-heigth: 600px" id="items">
+        <div class="overflow-auto" style="max-height: 600px; min-height: 599px;min-width: 400px" id="items">
         </div>
         <div class="mt-2">
             <div class="d-flex"><b>Total Items:&nbsp;</b><p id="total_items">0</p></div>

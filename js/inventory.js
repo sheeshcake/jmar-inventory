@@ -2,7 +2,6 @@ function strtrim(x) {
     return x.replace(/^\s+|\s+$/gm, '');
 }
 $(document).on("click", ".open-details", function() {
-    // Add this later
     var $t = $(this);
     $(".item-data").remove();
     $(".details-toggle").html('<i class="fa fa-plus-circle" aria-hidden="true"></i>');
