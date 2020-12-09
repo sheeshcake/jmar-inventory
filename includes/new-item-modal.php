@@ -32,7 +32,14 @@
                             <div class="input-group">
                                 <textarea class="form-control" id="item-description" rows="10" name="item_desc" placeholder="Item Description"></textarea>
                             </div>
-                        </div>
+                            <label for="item-unit">Supplier </label>
+                        <select class="form-control" id="item-unit" name="item_unit" style="width:">
+                                            <option value="kilogram">kilogram</option>
+                                            <option value="liter">liter</option>
+                                            <option value="gallon">gallon</option>
+                                            <option value="pieces">pieces</option>
+                                        </select>
+                                    </div>
                     </div>
 
 
@@ -52,37 +59,40 @@
                                         <span class="input-group-text">₱</span>
                                     </div>
                                     
-                                    <input type="number" id="input-capital" name="item_capital" class="form-control" aria-label="Capital Price" placeholder="Capital Price">
-                                    <input type="number" id="input-capital" name="item_capital" class="form-control" aria-label="Capital Price" placeholder="Capital Price">
+                                    <input type="number" id="input-capital" name="item_capital" class="form-control" aria-label="Capital Price" placeholder="Capital Price" style="margin-right: 2%;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">₱</span>
+                                    </div>
+                                    <input type="number" id="input-capital" name="item_capital" class="form-control" aria-label="Capital Price" placeholder="Capital Price">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="d-flex bd-highlight mb-3">
+                                <div class="input-group w-100">
+                                    
+                                    <input type="number" id="input-tax" class="form-control" name="item_tax" aria-label="Tax" placeholder="Tax">
+                                    <div class="input-group-append" style="margin-right: 2%;">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                    <input type="number" id="input-tax" class="form-control" name="item_tax" aria-label="Tax" placeholder="Tax">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">%</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="d-flex bd-highlight mb-3">
                                 <div class="input-group w-100">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">%</span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">₱</span>
                                     </div>
-                                    <input type="number" id="input-tax" class="form-control" name="item_tax" aria-label="Tax" placeholder="Tax">
-                                    <input type="number" id="input-tax" class="form-control" name="item_tax" aria-label="Tax" placeholder="Tax">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">%</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="d-flex bd-highlight mb-3">
-                                <div class="input-group w-100">
+                                    <input type="text" class="form-control" id="total-item-price" aria-label="Price" placeholder="Price" style="margin-right: 2%;" readonly>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">₱</span>
                                     </div>
                                     <input type="text" class="form-control" id="total-item-price" aria-label="Price" placeholder="Price" readonly>
-                                    <input type="text" class="form-control" id="total-item-price" aria-label="Price" placeholder="Price" readonly>
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">₱</span>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
