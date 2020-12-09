@@ -17,7 +17,7 @@
         include "includes/$action.php";
     }
 
-    function home_core($reason = NULL){
+    function home_core($reason = NULL, $reason2 = NULL){
         $roles = [
             "admin" => ["account", "transaction", "inventory", "transaction-new", "incoming", "return", "default" =>"dashboard"],
             "encoder" => ["account","inventory", "incoming", "default" =>"inventory"],
@@ -26,6 +26,8 @@
         if($reason != NULL){
             if($reason == "get"){
                 return $roles[$_SESSION["user"]["role"]]["default"];
+            }else if($reason == "get_roles"){
+                return $roles[$reason2];
             }else{
                 return "hhmmmm... not today..";
             }
