@@ -26,6 +26,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/global.css" rel="stylesheet">
 </head>
 <body id="page-top" class="main-content">
         <?php page(); ?>

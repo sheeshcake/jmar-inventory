@@ -30,6 +30,7 @@
 <a class="scroll-to-top rounded" href="#page-top">
 <i class="fas fa-angle-up"></i>
 </a>
+<link rel="stylesheet" href="css/home.css">
 
 <script>
 
