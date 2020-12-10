@@ -3,7 +3,6 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "jmar-db";
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
