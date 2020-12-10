@@ -68,8 +68,7 @@ $(document).ready(function() {
             var $data = JSON.parse(data);
             var $grand_total = 0;
             $data.forEach(function(d) {
-                var $price = (((parseFloat(d.item_tax) / 100) * parseFloat(d.item_price)) + parseFloat(d.item_price)).toFixed(2);
-                var $sub_total = $price * d.item_count;
+                var $sub_total = d.item_price * d.item_count;
                 $grand_total += $sub_total;
             });
 
