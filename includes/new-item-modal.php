@@ -33,7 +33,7 @@
                                 <textarea class="form-control" id="item-description" rows="10" name="item_desc" placeholder="Item Description"></textarea>
                             </div>
                             <label for="item-unit">Supplier </label>
-                        <select class="form-control" id="item-unit" name="item_unit" style="width:">
+                        <select class="form-control" id="item-unit" name="supplier" style="width:">
                                             <option value="kilogram">kilogram</option>
                                             <option value="liter">liter</option>
                                             <option value="gallon">gallon</option>
