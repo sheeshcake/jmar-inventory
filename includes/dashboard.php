@@ -131,7 +131,7 @@
         </div>
     </div>
 </div>
-
+<script src="https://momentjs.com/downloads/moment.js"></script>
 <script src="vendor/chart.js/Chart.min.js"></script>
 <script src="js/demo/chart-area-demo.js"></script>
 <script src="js/demo/chart-bar-demo.js"></script>
