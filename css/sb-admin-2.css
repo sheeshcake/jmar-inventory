@@ -4529,6 +4529,7 @@ input[type="button"].btn-block {
 
 .card-header:first-child {
   border-radius: calc(0.35rem - 1px) calc(0.35rem - 1px) 0 0;
+  border-bottom-color: #e74a3b;
 }
 
 .card-footer {
@@ -7743,7 +7744,7 @@ button.bg-dark:focus {
 
 .mt-5,
 .my-5 {
-  margin-top: 3rem !important;
+  margin-top: 6rem !important;
 }
 
 .mr-5,
@@ -7762,7 +7763,8 @@ button.bg-dark:focus {
 }
 
 .p-0 {
-  padding: 0 !important;
+  border-style: solid;
+  border-image: linear-gradient( to bottom, #ff000b, rgb(255 0 0 / 0%) ) 1 100%;
 }
 
 .pt-0,
@@ -9876,8 +9878,7 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #888888;
-    background-image: linear-gradient(180deg, #393e46 20%, #393e46 100%);
+  background-color: #1d1d25;
     background-size: cover;
 }
 
@@ -10144,7 +10145,9 @@ a:focus {
 }
 
 .topbar {
-  height: 4.375rem;
+  border-bottom: solid;
+    height: 4.375rem;
+    border-bottom-color: #ff1600;
 }
 
 .topbar #sidebarToggleTop {
@@ -11246,7 +11249,9 @@ form.user .btn-user {
 
 footer.sticky-footer {
   padding: 2rem 0;
-  flex-shrink: 0;
+    flex-shrink: 0;
+    border-top: solid;
+    border-top-color: #ff1600;
 }
 
 footer.sticky-footer .copyright {

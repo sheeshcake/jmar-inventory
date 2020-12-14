@@ -2,8 +2,15 @@
     $_SESSION["page"] = "login";
     // var_dump($_SESSION);
 ?>
-<div class="container">
 
+<div class="back" style="z-index: -2; width: 100%; height: 100%; position:fixed; top:0; background-image: linear-gradient(12deg, #2f2626 0%, #ff787e 46%, #ffffff 80%);;
+ ">
+ 
+<svg viewBox="0 0 400 500" preserveAspectRatio="xMinYMin meet">
+<path fill="#fff" fill-opacity="1" d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"></path>
+  </svg>
+</div>
+<div class="container" >
     <!-- Outer Row -->
     <div class="row justify-content-center">
 
@@ -65,4 +72,5 @@
     </div>
 
 </div>
+
 <script src="js/login.js"></script>

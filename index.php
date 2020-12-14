@@ -31,5 +31,6 @@
 <body id="page-top" class="main-content">
         <?php page(); ?>
         <script src="js/core.js"></script>
+        
 </body>
 </html>
