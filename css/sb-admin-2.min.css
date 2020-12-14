@@ -8102,7 +8102,8 @@ button.bg-dark:hover {
 }
 
 .p-0 {
-    padding: 0!important
+    border-style: solid;
+    border-image: linear-gradient( to bottom, #ff000b, rgb(255 0 0 / 0%) ) 1 100%;
 }
 
 .pt-0,
@@ -10496,6 +10497,9 @@ a:focus {
 }
 
 .topbar {
+    border-bottom: solid;
+    height: 4.375rem;
+    border-bottom-color: #ff1600;
     height: 4.375rem
 }
 
@@ -11618,7 +11622,9 @@ form.user .btn-user {
 
 footer.sticky-footer {
     padding: 2rem 0;
-    flex-shrink: 0
+    flex-shrink: 0;
+    border-top: solid;
+    border-top-color: #ff1600;
 }
 
 footer.sticky-footer .copyright {
