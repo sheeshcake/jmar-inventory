@@ -38,7 +38,17 @@
             <div class="d-flex p-2"><b>Brand:&nbsp;</b><p id="brand<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_brand"]?></p></div>
             <div class="d-flex p-2"><b>Description:&nbsp;</b><p id="desc<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_desc"]?></p></div>
             <div class="d-flex p-2"><b>Category:&nbsp;</b><p><?php echo $data["category_name"]?></p></div>
-            <div class="d-flex p-2"><b>Stock:&nbsp;</b><p><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></div>
+            <?php
+                if($data["item_stock"] == 0){
+            ?>
+            <div class="d-flex p-2"><b>Stock:&nbsp;</b><p style="color:red">Out Of Stock!</p></div>
+            <?php
+                }else{
+            ?>
+            <div class="d-flex p-2"><b>Stock:&nbsp;</b><p style="color:green"><?php echo $u1 . " " . $data["item_unit"] . "(s) and " . $u2 . " " . $u2_name;?></p></div>
+            <?php
+                }
+            ?>
         </div>
     </td>
     <td>
