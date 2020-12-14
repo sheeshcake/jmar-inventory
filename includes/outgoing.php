@@ -73,7 +73,7 @@
         <tbody>
             <?php include "get-items.php"; ?>
         </tbody>
-    </table>			
+    </table>
 </div>
 <?php include "new-item-modal.php"; ?>
 <script src="js/inventory.js"></script>
