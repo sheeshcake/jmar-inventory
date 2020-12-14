@@ -6798,7 +6798,7 @@ button.bg-dark:hover {
 }
 
 .bg-white {
-    background-color: #bbbbbb!important
+    background-image: linear-gradient(12deg, #2f2626 0%, #ff787e 46%, #ffffff 80%);
 }
 
 .bg-transparent {
