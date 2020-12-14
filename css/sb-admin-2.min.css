@@ -237,6 +237,7 @@ caption {
 }
 
 th {
+    background-color: #bbbbbb;
     text-align: inherit;
     text-align: -webkit-match-parent
 }
@@ -410,6 +411,7 @@ h3 {
 
 .h4,
 h4 {
+    color: black;
     font-size: 1.5rem
 }
 
@@ -1622,12 +1624,13 @@ pre code {
 
 .table-bordered td,
 .table-bordered th {
-    border: 1px solid #e3e6f0
+    border: 1px solid #bbbbbb
 }
 
 .table-bordered thead td,
 .table-bordered thead th {
-    border-bottom-width: 2px
+    border-bottom-width: 0px;
+    background-color: #bbbbbb;
 }
 
 .table-borderless tbody+tbody,
@@ -2487,8 +2490,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #4e73df;
-    border-color: #4e73df
+    background-color: #3a3f47;
+    border-color: #bbbbbb
 }
 
 .btn-primary:hover {
@@ -3133,10 +3136,9 @@ fieldset:disabled a.btn {
 
 .btn-group-sm>.btn,
 .btn-sm {
-    padding: .25rem .5rem;
-    font-size: .875rem;
-    line-height: 1.5;
-    border-radius: .2rem
+    height: 50px;
+    border-color: #bbbbbb;
+    font-size: 20px;
 }
 
 .btn-block {
@@ -4793,7 +4795,7 @@ input[type=submit].btn-block {
 .card-header {
     padding: .75rem 1.25rem;
     margin-bottom: 0;
-    background-color: #f8f9fc;
+    background-color: #bbbbbb;
     border-bottom: 1px solid #e3e6f0
 }
 
@@ -5280,10 +5282,10 @@ a.badge-dark:focus {
 
 .alert {
     position: relative;
-    padding: .75rem 1.25rem;
-    margin-bottom: 1rem;
+    padding: 0.75rem 0.25rem;
+    margin-bottom: 0rem;
     border: 1px solid transparent;
-    border-radius: .35rem
+    border-radius: .35rem;
 }
 
 .alert-heading {
@@ -6795,7 +6797,7 @@ button.bg-dark:hover {
 }
 
 .bg-white {
-    background-color: #fff!important
+    background-color: #bbbbbb!important
 }
 
 .bg-transparent {
@@ -6972,6 +6974,11 @@ button.bg-dark:hover {
         display: inline!important
     }
     .d-sm-inline-block {
+        width: 171px;
+        height: 37px;
+        border-color: #bbbbbb;
+        background-color: #393e46;
+        font-size: 15px;
         display: inline-block!important
     }
     .d-sm-block {
@@ -8167,7 +8174,11 @@ button.bg-dark:hover {
 }
 
 .p-3 {
-    padding: 1rem!important
+    border-style: solid;
+    border-color: #bbbbbb;
+    border-radius: 10px;
+    padding: 1rem!important;
+    
 }
 
 .pt-3,
@@ -10077,7 +10088,7 @@ a.text-dark:hover {
     }
     .table-bordered td,
     .table-bordered th {
-        border: 1px solid #dddfeb!important
+        border: 1px solid #bbbbbb!important
     }
     .table-dark {
         color: inherit
@@ -10217,9 +10228,9 @@ a:focus {
 }
 
 .bg-gradient-primary {
-    background-color: #4e73df;
-    background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
-    background-size: cover
+    background-color: #888888;
+    background-image: linear-gradient(180deg, #393e46 20%, #393e46 100%);
+    background-size: cover;
 }
 
 .bg-gradient-secondary {
@@ -10697,7 +10708,7 @@ a:focus {
     text-transform: uppercase;
     font-weight: 800;
     font-size: .65rem;
-    color: #b7b9cc
+    color: #8a8d92
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item,
@@ -10826,7 +10837,7 @@ a:focus {
 
 @media (min-width:768px) {
     .sidebar {
-        width: 14rem!important
+        width: 20rem!important
     }
     .sidebar .nav-item .collapse {
         position: relative;

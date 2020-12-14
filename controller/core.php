@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+    // var_dump(in_array($_GET["p"], $roles[$_SESSION["user"]["role"]]));
     function page(){
         if(isset($_SESSION["page"])){
             include "includes/" . $_SESSION["page"] . ".php";
@@ -13,18 +13,39 @@
         }
     }
 
-    function home_core(){
-        if(isset($_SESSION["user"])){
-            if(isset($_GET["p"])){
-                if(file_exists("includes/" . $_GET["p"] . ".php")){
-                    include "includes/" . $_GET["p"] . ".php";
+    function dashboard_core($action){
+        include "includes/$action.php";
+    }
+
+    function home_core($reason = NULL){
+        $roles = [
+            "admin" => ["account", "transaction", "inventory", "transaction-new", "incoming", "return", "default" =>"dashboard"],
+            "encoder" => ["account","inventory", "incoming", "default" =>"inventory"],
+            "accountant" => ["account", "transaction", "return", "transaction-new", "default" =>"transaction"]
+        ];
+        if($reason != NULL){
+            if($reason == "get"){
+                return $roles[$_SESSION["user"]["role"]]["default"];
+            }else{
+                return "hhmmmm... not today..";
+            }
+        }else{
+            if(isset($_SESSION["user"])){
+                if(isset($_GET["p"])){
+                    if(in_array($_GET["p"], $roles[$_SESSION["user"]["role"]])){
+                        if(file_exists("includes/" . $_GET["p"] . ".php")){
+                            include "includes/" . $_GET["p"] . ".php";
+                        }
+                        else{
+                            include "includes/error404.php";
+                        }
+                    }else{
+                        include "includes/error404.php";
+                    }
                 }
                 else{
-                    include "includes/error404.php";
+                    include "includes/" . $roles[$_SESSION["user"]["role"]]["default"] . ".php";
                 }
-            }
-            else{
-                include "includes/dashboard.php";
             }
         }
     }

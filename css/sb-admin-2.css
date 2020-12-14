@@ -221,6 +221,7 @@ caption {
 }
 
 th {
+  background-color: #bbbbbb;
   text-align: inherit;
   text-align: -webkit-match-parent;
 }
@@ -380,6 +381,7 @@ h3, .h3 {
 }
 
 h4, .h4 {
+  color: black;
   font-size: 1.5rem;
 }
 
@@ -1516,12 +1518,13 @@ pre code {
 
 .table-bordered th,
 .table-bordered td {
-  border: 1px solid #e3e6f0;
+  border: 1px solid #bbbbbb;
 }
 
 .table-bordered thead th,
 .table-bordered thead td {
-  border-bottom-width: 2px;
+  border-bottom-width: 0px;
+  background-color: #bbbbbb;
 }
 
 .table-borderless th,
@@ -2348,8 +2351,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #3a3f47;
+  border-color: ##bbbbbb;
 }
 
 .btn-primary:hover {
@@ -2925,11 +2928,11 @@ fieldset:disabled a.btn {
   border-radius: 0.3rem;
 }
 
-.btn-sm, .btn-group-sm > .btn {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  border-radius: 0.2rem;
+, .btn-group-sm > .btn {
+    height: 50px;
+    border-color: #bbbbbb;
+    background-color: #393e46;
+    font-size: 20px;
 }
 
 .btn-block {
@@ -4493,6 +4496,7 @@ input[type="button"].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1.25rem;
+  border: ridge;
 }
 
 .card-title {
@@ -4519,7 +4523,7 @@ input[type="button"].btn-block {
 .card-header {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  background-color: #f8f9fc;
+  background-color: #bbbbbb;
   border-bottom: 1px solid #e3e6f0;
 }
 
@@ -4989,10 +4993,10 @@ a.badge-dark:focus, a.badge-dark.focus {
 
 .alert {
   position: relative;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.35rem;
+    padding: 0.75rem 0.25rem;
+    margin-bottom: 0rem;
+    border: 1px solid transparent;
+    border-radius: .35rem;
 }
 
 .alert-heading {
@@ -6454,7 +6458,7 @@ button.bg-dark:focus {
 }
 
 .bg-white {
-  background-color: #fff !important;
+  background-color: #bbbbbb!important;
 }
 
 .bg-transparent {
@@ -6631,6 +6635,11 @@ button.bg-dark:focus {
     display: inline !important;
   }
   .d-sm-inline-block {
+    width: 171px;
+    height: 37px;
+    border-color: #bbbbbb;
+    background-color: #393e46;
+    font-size: 15px;
     display: inline-block !important;
   }
   .d-sm-block {
@@ -7825,7 +7834,11 @@ button.bg-dark:focus {
 }
 
 .p-3 {
-  padding: 1rem !important;
+  border-style: solid;
+    border-color: #bbbbbb;
+    border-radius: 10px;
+    padding: 1rem!important;
+  
 }
 
 .pt-3,
@@ -9725,7 +9738,7 @@ a.text-dark:hover, a.text-dark:focus {
   }
   .table-bordered th,
   .table-bordered td {
-    border: 1px solid #dddfeb !important;
+    border: 1px solid ##bbbbbb !important;
   }
   .table-dark {
     color: inherit;
@@ -9863,9 +9876,9 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #4e73df;
-  background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
-  background-size: cover;
+  background-color: #888888;
+    background-image: linear-gradient(180deg, #393e46 20%, #393e46 100%);
+    background-size: cover;
 }
 
 .bg-gradient-secondary {
@@ -10472,7 +10485,7 @@ a:focus {
 
 @media (min-width: 768px) {
   .sidebar {
-    width: 14rem !important;
+    width: 20rem !important;
   }
   .sidebar .nav-item .collapse {
     position: relative;
@@ -10824,9 +10837,11 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
-  background-position: center;
+  background: url(https://cpng.pikpng.com/pngl/s/209-2090002_your-logo-here-png-monochrome-clipart.png);
+  background-position: inherit;
   background-size: cover;
+  background-clip: content-box;
+
 }
 
 .bg-register-image {

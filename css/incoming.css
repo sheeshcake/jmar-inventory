@@ -11,11 +11,3 @@ table.dataTable td {
     word-break: break-all;
     white-space: pre-line;
 }
-
-
-/* table.dataTable th {
-    width: 500px !important;
-    max-width: 500px !important;
-    word-break: break-all;
-    white-space: pre-line;
-} */
