@@ -40,6 +40,7 @@ function init_week_chart() {
                 backgroundColor: "#4e73df",
                 hoverBackgroundColor: "#2e59d9",
                 borderColor: "#4e73df",
+                maxBarThickness: 25,
                 data: $chart_week_data,
             }],
         },
@@ -65,7 +66,6 @@ function init_week_chart() {
                     ticks: {
                         maxTicksLimit: 6
                     },
-                    maxBarThickness: 25,
                 }],
                 yAxes: [{
                     ticks: {
@@ -122,18 +122,21 @@ $(document).ready(function() {
         },
         success: function(d) {
             var data = JSON.parse(d);
+            console.log(data);
             var data_day = 0;
             data.forEach(function(entry) {
-                var mydate = entry.transaction_datetime;
-                if (data_day != parseInt(moment(mydate).format('d'))) {
-                    $chart_week_data[data_day - 1] = 0;
-                    data_day = parseInt(moment(mydate).format('d'));
+                var mydate = entry.transaction_datetime.split(" ");
+                console.log(parseInt(moment(mydate[0], "MM-DD-YYYY").format('d')));
+                if (data_day != parseInt(moment(mydate[0], "MM-DD-YYYY").format('d'))) {
+                    $chart_week_data[data_day] = 0;
+                    console.log($chart_week_data);
+                    data_day = parseInt(moment(mydate[0], "MM-DD-YYYY").format('d'));
                 } else {
                     var item_price = parseFloat(entry.item_price);
                     var item_count = parseFloat(entry.item_count);
                     var item_tax = parseFloat(entry.item_tax);
                     var sub_total = item_tax / 100 * item_price + item_price;
-                    $chart_week_data[data_day - 1] += sub_total * item_count;
+                    $chart_week_data[data_day] += sub_total * item_count;
                 }
             });
             init_week_chart();

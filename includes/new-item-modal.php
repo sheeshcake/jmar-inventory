@@ -14,16 +14,16 @@
                         <div class="flex-fill m-1">
                             <div class="form-group ">
                                 <label for="item-name">Item Name</label>
-                                <input type="text" class="form-control" id="item-name" name="item_name" placeholder="Item Name" required>
+                                <input required type="text" class="form-control" id="item-name" name="item_name" placeholder="Item Name">
                             </div>
                             <div class="form-group mr-auto">
                                 <label for="item-brand">Item Brand</label>
-                                <input type="text" class="form-control" id="item-brand" name="item_brand" placeholder="Item Brand" required>
+                                <input required type="text" class="form-control" id="item-brand" name="item_brand" placeholder="Item Brand">
                             </div>
                             <div class="form-group ">
                                 <label for="image-file">Item Image</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="item_img" id="image-file">
+                                    <input required type="file" class="custom-file-input" name="item_img" id="image-file">
                                     <label class="custom-file-label" for="image-file">Choose Image</label>
                                 </div>
                             </div>
@@ -33,13 +33,18 @@
                                 <textarea class="form-control" id="item-description" rows="10" name="item_desc" placeholder="Item Description"></textarea>
                             </div>
                             <label for="item-unit">Supplier </label>
-                        <select class="form-control" id="item-unit" name="supplier" style="width:">
-                                            <option value="kilogram">kilogram</option>
-                                            <option value="liter">liter</option>
-                                            <option value="gallon">gallon</option>
-                                            <option value="pieces">pieces</option>
-                                        </select>
-                                    </div>
+                            <select class="form-control" id="supplier" name="supplier" style="width:">
+                            <?php
+                                $sql = "SELECT * FROM supplier";
+                                $result = mysqli_query($conn, $sql);
+                                while($data = $result->fetch_assoc()){
+                            ?>
+                                <option value="<?php echo $data["supplier_id"]; ?>"><?php echo $data["supplier_name"]; ?></option>
+                            <?php
+                                }
+                            ?>
+                            </select>
+                        </div>
                     </div>
 
 
@@ -59,11 +64,11 @@
                                         <span class="input-group-text">₱</span>
                                     </div>
                                     
-                                    <input type="number" id="input-capital" name="item_capital" class="form-control" aria-label="Capital Price" placeholder="Capital Price" style="margin-right: 2%;">
+                                    <input required type="number" min="0" value="0" id="input-capital-wholesale" name="item_capital_wholesale" class="form-control" aria-label="Capital Price" placeholder="Capital Price" style="margin-right: 2%;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">₱</span>
                                     </div>
-                                    <input type="number" id="input-capital" name="item_capital" class="form-control" aria-label="Capital Price" placeholder="Capital Price">
+                                    <input required type="number" min="0" value="0" id="input-capital" name="item_capital" class="form-control" aria-label="Capital Price" placeholder="Capital Price">
                                     
                                 </div>
                             </div>
@@ -71,11 +76,11 @@
                             <div class="d-flex bd-highlight mb-3">
                                 <div class="input-group w-100">
                                     
-                                    <input type="number" id="input-tax" class="form-control" name="item_tax" aria-label="Tax" placeholder="Tax">
+                                    <input required type="number" min="0" value="0" id="input-tax-wholesale" class="form-control" name="item_tax_wholesale" aria-label="Tax" placeholder="Tax">
                                     <div class="input-group-append" style="margin-right: 2%;">
                                         <span class="input-group-text">%</span>
                                     </div>
-                                    <input type="number" id="input-tax" class="form-control" name="item_tax" aria-label="Tax" placeholder="Tax">
+                                    <input required type="number" min="0" value="0" id="input-tax" class="form-control" name="item_tax" aria-label="Tax" placeholder="Tax">
                                     <div class="input-group-append">
                                         <span class="input-group-text">%</span>
                                     </div>
@@ -87,11 +92,11 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">₱</span>
                                     </div>
-                                    <input type="text" class="form-control" id="total-item-price" aria-label="Price" placeholder="Price" style="margin-right: 2%;" readonly>
+                                    <input required type="text" class="form-control" id="total-item-price1" aria-label="Price" placeholder="Price" style="margin-right: 2%;" readonly>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">₱</span>
                                     </div>
-                                    <input type="text" class="form-control" id="total-item-price" aria-label="Price" placeholder="Price" readonly>
+                                    <input required type="text" class="form-control" id="total-item-price2"  aria-label="Price" placeholder="Price" readonly>
                                     
                                 </div>
                             </div>
@@ -114,43 +119,31 @@
                                 ?>
                                 </select>
                             </div>
-                            <!-- <div class="col-md-3 my-4">
-                            <label for="item-unit">Unit</label>
-                            <select class="form-control" id="item-unit" name="item_unit">
-                                <option value="meter">meter</option>
-                                <option value="grams">grams</option>
-                                <option value="kilogram">kilogram</option>
-                                <option value="liter">liter</option>
-                                <option value="gallon">gallon</option>
-                                <option value="pieces">pieces</option>
-                            </select>
-                            </div> ---->
                             <div class="d-flex bd-highlight mb-3">
                                 <div class="col-md-6 my-1">
-                                    <label for="item-unit">Unit</label>
-                                        <select class="form-control" id="item-unit" name="item_unit" style="width:">
-                                            <option value="kilogram">kilogram</option>
-                                            <option value="liter">liter</option>
-                                            <option value="gallon">gallon</option>
-                                            <option value="pieces">pieces</option>
-                                        </select>
-                                        <input type="number" name="item_stock" class="form-control" placeholder="Stock">
+                                    <label for="item-unit">Unit - 1</label>
+                                    <input type="hidden" id="item_stock" name="item_stock" class="form-control" placeholder="Stock">
+                                        <div class="row pl-2 pr-2">
+                                            <select class="form-control w-50" id="item-unit" name="item_unit">
+                                                <option selected disabled></option>
+                                                <option value="Sack">Sack</option>
+                                                <option value="Roll">Roll</option>
+                                                <option value="Box">Box</option>
+                                            </select>
+                                            <input required type="number" name="item_unit_divisor" id="divisor" class="form-control w-50" placeholder="U1/U2" data-toggle="tooltip" data-placement="top" title="How Many U2 in U1?">
+                                        </div>
+                                        <input required type="number" id="u1-val" class="form-control" placeholder="Stock">
                                 </div>
                                     <div class="col-md-6 my-1">
-                                        <label for="item-unit">Pieces</label>
-                                            <select class="form-control" id="item-unit" name="item_unit" style="">
-                                                <option value="meter">meter</option>
-                                                <option value="grams">grams</option>
-                                                <option value="pieces">pieces</option>
-                                            </select>
-                                            <input type="number" name="item_stock" class="form-control" placeholder="Stock">
-                             
+                                        <label for="item-unit">Unit - 2</label>
+                                        <input required type="text" class="form-control" id="unit-2" readonly>
+                                        <input required type="number" id="u2-val" class="form-control" placeholder="Stock">
                                     </div>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <input type="submit"  class="btn btn-primary" name="submit" id="btn-add-item" data-target=".add-item-modal" data-toggle="modal" value="Submit">
+                        <input required type="submit"  class="btn btn-primary" name="submit" id="btn-add-item" data-target=".add-item-modal" data-toggle="modal" value="Submit">
                     </div>
                     
                 </form>

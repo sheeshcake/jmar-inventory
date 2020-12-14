@@ -1,7 +1,11 @@
 //update this then minify
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+});
 $("form#add-item-form").submit(function(e) {
     e.preventDefault();
     var formData = new FormData(this);
+    console.log(formData);
     $.ajax({
         url: url(window.location.href) + "/controller/add-item.php",
         method: "POST",
@@ -34,4 +38,21 @@ $('#image-file').change(function() {
     } else {
         $('#item-image-selected').attr('src', '/img/item.jpg');
     }
+});
+$(document).on("change", "#item-unit", function() {
+    var $unit = $(this).val();
+    if ($unit == "Roll") {
+        $("#unit-2").val("Meter");
+    } else if ($unit == "Sack") {
+        $("#unit-2").val("Kilo");
+    } else {
+        $("#unit-2").val("Pieces");
+    }
+});
+$(document).on("input", "#u1-val,#u2-val,#divisor", function() {
+    var u1 = $("#u1-val").val();
+    var u2 = $("#u2-val").val();
+    var divisor = $("#divisor").val();
+    var total = (u1 * divisor) + Number(u2);
+    $("#item_stock").val(total);
 });
