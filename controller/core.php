@@ -1,6 +1,13 @@
 <?php
     session_start();
     // var_dump(in_array($_GET["p"], $roles[$_SESSION["user"]["role"]]));
+    function guard(){
+        if(!isset($_SESSION["user"])){
+            echo "FORBIDDEN!!";
+        }else{
+            echo "FORBIDDEN!!";
+        }
+    }
     function page(){
         if(isset($_SESSION["page"])){
             include "includes/" . $_SESSION["page"] . ".php";

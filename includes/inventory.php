@@ -3,6 +3,8 @@
 ?>
 <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/inventory.css">
 <div class="inventory-head d-flex mb-3">
@@ -18,35 +20,21 @@
   This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
 </div>
 <div class="shadow mb-4 p-3">
-    <table id="example" style="width:1500px"  class="table table-striped table-bordered">
+    <table id="example"  class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>Image</th>
-                <th>Item Capital</th>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Tax</th>
-                <th>Stock</th>
+                <th>Details</th>
                 <th>Price</th>
-                <th>ID</th>
-                <th>Category</th>
-                <th>Description</th>
                 <th>Selection</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th></th>
-                <th>Item Capital</th>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Tax</th>
-                <th>Stock</th>
+                <th>Image</th>
+                <th>Details</th>
                 <th>Price</th>
-                <th>ID</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th></th>
+                <th>Selection</th>
             </tr>
         </tfoot>
         <tbody>

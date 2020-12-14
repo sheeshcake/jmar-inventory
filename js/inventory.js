@@ -2,6 +2,7 @@ function strtrim(x) {
     return x.replace(/^\s+|\s+$/gm, '');
 }
 $(document).on("click", ".open-details", function() {
+    // Add this later
     var $t = $(this);
     $(".item-data").remove();
     $(".details-toggle").html('<i class="fa fa-plus-circle" aria-hidden="true"></i>');
@@ -35,23 +36,7 @@ var $t;
 $(document).ready(function() {
     $t = $('#example').DataTable({
         "responsive": true
-            // // scrollY: "300px",
-            // scrollX: true,
-            // // "columnDefs": [
-            // //     { "width": "20%", "targets": 0 }
-            // // ],
-            // scrollCollapse: true,
-            // paging: false,
-            // fixedColumns: {
-            //     leftColumns: 1,
-            //     rightColumns: 1
-            // }
     });
-    // $('#example_wrapper').css("margin", "0");
-    // $('#example').css("width", "2000px");
-    // $('tbody').css("overflow-x", "auto");
-    // $('tbody,tr,td').attr("width", "300px");
-    // $('#example_wrapper').removeAttr('class');
 
 });
 $(document).on("click", "#confirm-delete", function() {
@@ -100,11 +85,12 @@ $(document).on("click", ".update", function() {
             submit: "submit",
             item_id: $id,
             item_capital: parseFloat($("#capital" + $id).text()).toFixed(2),
+            item_capital_wholesale: parseFloat($("#capital_w" + $id).text()).toFixed(2),
             item_name: strtrim($("#name" + $id).text()),
             item_brand: strtrim($("#brand" + $id).text()),
             item_tax: parseFloat($("#tax" + $id).text()).toFixed(2),
+            item_tax_wholesale: parseFloat($("#tax_w" + $id).text()).toFixed(2),
             item_desc: strtrim($("#desc" + $id).text()),
-            item_category: $("#cat" + $id).attr("cat-id"),
         },
         success: function(d) {
             var data = JSON.parse(d);
@@ -125,17 +111,31 @@ $(document).on('change', '.custom-file-input', function(e) {
         var shortname = name.substring(0, 20) + " ...";
     }
     $(".custom-file-label").text(shortname);
-})
+});
 
-function calculate() {
-    var price = parseFloat($("#input-capital").val());
-    var tax = parseFloat($("#input-tax").val());
-    var total = ((tax / 100) * price) + price;
-    $("#total-item-price").val(total);
+function calculate(type) {
+    if (type == "retail") {
+        var price = parseFloat($("#input-capital").val());
+        var tax = parseFloat($("#input-tax").val());
+        var total = ((tax / 100) * price) + price;
+        $("#total-item-price2").val(total);
+    } else {
+        var price = parseFloat($("#input-capital-wholesale").val());
+        var tax = parseFloat($("#input-tax-wholesale").val());
+        var total = ((tax / 100) * price) + price;
+        $("#total-item-price1").val(total);
+    }
 }
 $(document).on("input", "#input-capital", function() {
-    calculate();
+    calculate("retail");
 });
 $(document).on("input", "#input-tax", function() {
-    calculate();
+    calculate("retail");
+});
+
+$(document).on("input", "#input-capital-wholesale", function() {
+    calculate("wholesale");
+});
+$(document).on("input", "#input-tax-wholesale", function() {
+    calculate("wholesale");
 });

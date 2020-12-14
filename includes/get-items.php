@@ -18,46 +18,46 @@
         $result = mysqli_query($conn, $sql);
     }
     while($data = $result->fetch_assoc()){
+        $r_price = (floatval(($data["item_tax"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price"]);
+        $w_price = (floatval(($data["item_tax_wholesale"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price_wholesale"]);
+        $u1 = intval($data["item_stock"] / $data["item_unit_divisor"]);
+        $u2 =  floatval($data["item_stock"] - ($u1 * $data["item_unit_divisor"]));
+        $u2_name = "";
+        if($data["item_unit"] == "Box") $u2_name = "pieces";
+        else if($data["item_unit"] == "Roll") $u2_name = "meter(s)";
+        else if($data["item_unit"] == "Sack") $u2_name = "kilo(s)";
 ?>
 <tr>
     <td>
-        <img src="img/item/<?php echo $data["item_img"] ?>" alt="" width="100" >
-    </td>
-    <td id="capital<?php echo $data["item_id"]; ?>" contenteditable>
-        <?php echo $data["item_price"]; ?>
-    </td>
-    <td id="name<?php echo $data["item_id"]; ?>" contenteditable>
-        <?php echo $data["item_name"] ?>
-    </td>
-    <td id="brand<?php echo $data["item_id"]; ?>" contenteditable>
-        <?php echo $data["item_brand"] ?>
-    </td>
-    <td id="tax<?php echo $data["item_id"]; ?>"  contenteditable>
-        <?php echo $data["item_tax"] ?>
-    </td>
-    <td>                
-        <?php echo $data["item_stock"]; ?>
+        <img src="img/item/<?php echo $data["item_img"] ?>" alt="" width="200" >
     </td>
     <td>
-        <?php 
-            $price = (floatval(($data["item_tax"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price"]); 
-            echo "₱" . $price; 
-        ?>
+        <div class="p-2">
+            <div class="d-flex p-2"><b>ID:&nbsp;</b><p><?php echo $data["item_id"]?></p></div>
+            <div class="d-flex p-2"><b>Name:&nbsp;</b><p id="name<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_name"]?></p></div>
+            <div class="d-flex p-2"><b>Brand:&nbsp;</b><p id="brand<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_brand"]?></p></div>
+            <div class="d-flex p-2"><b>Description:&nbsp;</b><p id="desc<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_desc"]?></p></div>
+            <div class="d-flex p-2"><b>Category:&nbsp;</b><p><?php echo $data["category_name"]?></p></div>
+            <div class="d-flex p-2"><b>Stock:&nbsp;</b><p><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></div>
+        </div>
     </td>
     <td>
-        <?php echo $data["item_id"] ?>
-    </td>
-    <td id="cat<?php echo $data["item_id"]; ?>" cat-id="<?php echo $data["category_id"]; ?>">
-        <?php echo $data["category_name"] ?>
-    </td>
-    <td id="desc<?php echo $data["item_id"]; ?>" contenteditable>
-        <?php echo $data["item_desc"] ?>
+        <div class="p-2" style="width: 200px">
+            <center><h5><b>Retail</b></h5></center>
+            <div class="d-flex p-2"><b>Capital:&nbsp;₱</b><p id="capital<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_price"]?></p></div>
+            <div class="d-flex p-2"><b>Tax:&nbsp;</b><p id="tax<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_tax"]?></p>%</div>
+            <div class="d-flex p-2"><b>Price:&nbsp;₱<?php echo $r_price?></b></div>
+            <center><h5><b>Wholesale</b></h5></center>
+            <div class="d-flex p-2"><b>Capital:&nbsp;₱</b><p id="capital_w<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_price_wholesale"]?></p></div>
+            <div class="d-flex p-2"><b>Tax:&nbsp;</b><p id="tax_w<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_tax_wholesale"]?></p>%</div>
+            <div class="d-flex p-2"><b>Price:&nbsp;₱<?php echo $w_price?></b></div>
+        </div>
     </td>
     <td>
-        <!-- <div class="d-flex"> -->
-            <button class="btn btn-danger delete" data-target="#logoutModal" data-toggle="modal" value="<?php echo $data["item_id"]; ?>"><i class="fa fa-trash" aria-hidden="true"></i></button>
-            <button class="btn btn-success update" value="<?php echo $data["item_id"]; ?>"><i class="fa fa-refresh" aria-hidden="true"></i></button>
-        <!-- </div> -->
+        <div class="col p-2">
+            <button class="btn btn-danger delete m-1" style="width: 100%" data-target="#logoutModal" data-toggle="modal" value="<?php echo $data["item_id"]; ?>"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+            <button class="btn btn-success update m-1" style="width: 100%" value="<?php echo $data["item_id"]; ?>"><i class="fa fa-refresh" aria-hidden="true"></i> Update</button>
+        </div>
     </td>
 </tr>
 <?php

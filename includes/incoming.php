@@ -13,11 +13,6 @@
             Add Item
         </button>
     </div>
-        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".incoming-modal" id="add-item">
-            <i class="fa fa-exchange" aria-hidden="true"></i>
-            New Transaction
-        </button>
-    </div>
 </div>
 <div class="alert alert-success" role="alert" style="display: none">
   This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.

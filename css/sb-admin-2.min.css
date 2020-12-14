@@ -4800,8 +4800,7 @@ input[type=submit].btn-block {
 }
 
 .card-header:first-child {
-    border-radius: calc(.35rem - 1px) calc(.35rem - 1px) 0 0;
-    border-bottom-color: #e74a3b;
+    border-radius: calc(.35rem - 1px) calc(.35rem - 1px) 0 0
 }
 
 .card-footer {
@@ -6798,7 +6797,7 @@ button.bg-dark:hover {
 }
 
 .bg-white {
-    background-image: linear-gradient(12deg, #2f2626 0%, #ff787e 46%, #ffffff 80%);
+    background-color: #bbbbbb!important
 }
 
 .bg-transparent {
@@ -8084,7 +8083,7 @@ button.bg-dark:hover {
 
 .mt-5,
 .my-5 {
-    margin-top: 6rem!important
+    margin-top: 3rem!important
 }
 
 .mr-5,
@@ -8103,8 +8102,7 @@ button.bg-dark:hover {
 }
 
 .p-0 {
-    border-style: solid;
-    border-image: linear-gradient( to bottom, #ff000b, rgb(255 0 0 / 0%) ) 1 100%;
+    padding: 0!important
 }
 
 .pt-0,
@@ -10230,7 +10228,8 @@ a:focus {
 }
 
 .bg-gradient-primary {
-    background-color: #1d1d25;
+    background-color: #888888;
+    background-image: linear-gradient(180deg, #393e46 20%, #393e46 100%);
     background-size: cover;
 }
 
@@ -10497,9 +10496,7 @@ a:focus {
 }
 
 .topbar {
-    border-bottom: solid;
-    height: 4.375rem;
-    border-bottom-color: #ff1600;
+    height: 4.375rem
 }
 
 .topbar #sidebarToggleTop {
@@ -11621,9 +11618,7 @@ form.user .btn-user {
 
 footer.sticky-footer {
     padding: 2rem 0;
-    flex-shrink: 0;
-    border-top: solid;
-    border-top-color: #ff1600;
+    flex-shrink: 0
 }
 
 footer.sticky-footer .copyright {
