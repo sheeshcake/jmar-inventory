@@ -35,11 +35,14 @@ var $counter = 0;
 
 $(document).on("click", ".add", function() {
     var $id = $(this).val();
-    var $count = $(this).prev();
-    console.log($count.text());
-    if (parseFloat($count.val()) <= parseFloat($("#stock_" + $id).val()).toFixed(2) && parseFloat($count.val()).toFixed(2) > 0) {
+    var $count = $(this).prev().prev();
+    var $item_unit = $(this).prev();
+    console.log($item_unit.prop("options")[$item_unit.prop("options").selectedIndex]["value"]);
+    console.log($item_unit.prop("options")[$item_unit.prop("options").selectedIndex]["value"] * $count.val());
+    var $total_count = $item_unit.prop("options")[$item_unit.prop("options").selectedIndex]["value"] * $count.val();
+    if (parseFloat($total_count) <= parseFloat($("#stock_" + $id).val()).toFixed(2) && parseFloat($total_count).toFixed(2) > 0) {
         $(".submit-transaction").slideDown();
-        $("#stock_" + $id).val((parseFloat(parseFloat($("#stock_" + $id).val()) - parseFloat($count.val()))).toFixed(2));
+        $("#stock_" + $id).val((parseFloat(parseFloat($("#stock_" + $id).val()) - parseFloat($total_count))).toFixed(2));
         $("#item_" + $id).removeClass("border-danger");
         $("#item_" + $id).addClass("border-success");
         $(this).parent().next().text("Item Added!");
@@ -62,7 +65,7 @@ $(document).on("click", ".add", function() {
             success: function(d) {
                 var data = JSON.parse(d);
                 var item_price = (((parseFloat(data.item_tax) / 100) * parseFloat(data.item_price)) + parseFloat(data.item_price)).toFixed(2);
-                var item_count = $count.val();
+                var item_count = $total_count;
                 var sub_total = (parseFloat(item_price) * parseFloat(item_count)).toFixed(2);
                 $("#items").prepend(
                     '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($count.val()).toFixed(2) + '">' +
@@ -73,10 +76,10 @@ $(document).on("click", ".add", function() {
                     '<p><b>Name:</b>&nbsp;' + data.item_name + '</p>' +
                     '<p><b>Brand:</b>&nbsp;' + data.item_brand + '</p>' +
                     '<p><b>Price:</b>&nbsp;₱&nbsp;' + item_price + '</p>' +
-                    '<p><b>' + $count.text() + ':</b>&nbsp;' + $count.val() + '</p>' +
+                    '<p><b>' + $item_unit.prop("options")[$item_unit.prop("options").selectedIndex]["label"] + ':</b>&nbsp;' + $count.val() + '</p>' +
                     '<p><b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
                     '</div>' +
-                    '<button class="remove-item btn btn-danger" style="height: 40px;" item_id="' + $id + '" value="' + $count.val() + '">x</button>' +
+                    '<button class="remove-item btn btn-danger" style="height: 40px;" item_id="' + $id + '" value="' + $total_count + '">x</button>' +
                     '<div>' +
                     '</div>' +
                     '</div>'
@@ -173,7 +176,6 @@ $(document).on("click", ".remove-item", function() {
     $("#total").text((parseFloat($("#total").text()) - parseFloat(elem.attr("price"))).toFixed(2));
     $("#total_items").text($counter);
 });
-$(document).on("change", ".unit-select", function() {
-    $(this).prev().attr("max", $(this).val());
-    alert($(this).text());
-});
+// $(document).on("change", ".unit-select", function() {
+//     $(this).prev().attr("max", $(this).val());
+// });

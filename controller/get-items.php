@@ -28,8 +28,8 @@
     </td>
     <td>
         <?php            
-            $price = (floatval(($data["item_tax"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price"]); 
-            echo "₱" . $price;
+            echo "<b>₱" . number_format($r_price, 2) . " per " . $u2_name . "</b></br>";
+            echo "<b>₱" . number_format($w_price, 2) . " per " . $data["item_unit"] . "</b>";
         ?>
     </td>
     <td width="200px">
@@ -40,12 +40,13 @@
         <div class="d-flex mb-2">
             <b class="p-2">Total: </b>
             <input type="text" class="form-control border-success" id="stock_<?php echo $data["item_id"] ?>" value="<?php echo $data["item_stock"] ?>" readonly>
+                <b class="p-2"><?php echo $u2_name ?></b>
         </div>
         <div class="d-flex" id="count_input_<?php echo $data["item_id"] ?>">
             <input min="1" max="<?php echo $data["item_stock"]; ?>" type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
             <select id="unit" class="custom-select unit-select">
-                <option name="<?php echo $u2_name; ?>" value="<?php echo $data["item_stock"]; ?>"><?php echo $u2_name; ?></option>
-                <option name="<?php echo $data["item_unit"] ?>" value="<?php echo $u1; ?>"><?php echo $data["item_unit"] ?></option>
+                <option name="<?php echo $u2_name; ?>" value="1"><?php echo $u2_name; ?></option>
+                <option name="<?php echo $data["item_unit"] ?>" value="<?php echo $data["item_unit_divisor"]; ?>"><?php echo $data["item_unit"] ?></option>
             </select>
             <button class="add btn btn-success" value="<?php echo $data["item_id"] ?>"><i class="fa fa-plus" aria-hidden="true"></i></button>
         </div>
