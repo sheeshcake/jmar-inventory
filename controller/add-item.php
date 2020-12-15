@@ -2,7 +2,7 @@
     include "../controller/connect.php";
     session_start();
     if(isset($_FILES["item_img"]["name"])){
-        var_dump($_POST);
+        // var_dump($_POST);
         // var_dump($_FILES);
         // Add Code 
         $item_img = urldecode($_FILES["item_img"]["name"]);

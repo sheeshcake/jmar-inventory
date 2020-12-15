@@ -29,7 +29,7 @@
 ?>
 <tr>
     <td>
-        <img src="img/item/<?php echo $data["item_img"] ?>" alt="" width="200" >
+        <img id="img<?php echo $data["item_id"]?>" src="img/item/<?php echo $data["item_img"] ?>" alt="" width="200" >
     </td>
     <td>
         <div class="p-2">

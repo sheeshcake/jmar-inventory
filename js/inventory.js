@@ -65,9 +65,10 @@ $(document).on("click", ".delete", function() {
     $('.alert').alert('show');
     $("#exampleModalLabel").text("Please Confirm Item Delete");
     $(".modal-body").html(
-        '<b>Item Name:</b> ' + $("#name" + $id).val() + "</br>" +
-        '<b>Item Brand:</b> ' + $("#brand" + $id).val() + "</br>" +
-        '<b>Description:</b> ' + $("#desc" + $id).val() + "</br>"
+        '<img src="' + url(window.location.href) + "/" + $("#img" + $id).attr("src") + '" width="200"/></br>' +
+        '<b>Item Name:</b> ' + $("#name" + $id).text() + "</br>" +
+        '<b>Item Brand:</b> ' + $("#brand" + $id).text() + "</br>" +
+        '<b>Description:</b> ' + $("#desc" + $id).text() + "</br>"
     );
     $(".modal-footer").html(
         '<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>' +

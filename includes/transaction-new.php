@@ -17,14 +17,12 @@
   This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
 </div>
 <div class="d-flex mb-4">
-    <div class="shadow m-1 p-3" style="max-width: 1000px; min-width: 1000px">
+    <div class="shadow m-1 p-3" style="max-width: 1200px; min-width: 1200px">
         <table id="example"  class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th></th>
-                    <th>Name</th>
-                    <th>Brand</th>
-                    <th>Category</th>
+                    <th>Name & Description</th>
                     <th>Price</th>
                     <th>Stock</th>
                 </tr>
@@ -32,9 +30,7 @@
             <tfoot>
                 <tr>
                     <th></th>
-                    <th>Name</th>
-                    <th>Brand</th>
-                    <th>Category</th>
+                    <th>Name & Description</th>
                     <th>Price</th>
                     <th>Stock</th>
                 </tr>
