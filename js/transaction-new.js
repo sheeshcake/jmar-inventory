@@ -37,7 +37,7 @@ $(document).on("click", ".add", function() {
     var $id = $(this).val();
     var $count = $(this).prev().prev();
     var $item_unit = $(this).prev();
-    console.log($item_unit.prop("options")[$item_unit.prop("options").selectedIndex]["value"]);
+    console.log($count.val());
     console.log($item_unit.prop("options")[$item_unit.prop("options").selectedIndex]["value"] * $count.val());
     var $total_count = $item_unit.prop("options")[$item_unit.prop("options").selectedIndex]["value"] * $count.val();
     if (parseFloat($total_count) <= parseFloat($("#stock_" + $id).val()).toFixed(2) && parseFloat($total_count).toFixed(2) > 0) {
@@ -64,11 +64,20 @@ $(document).on("click", ".add", function() {
             },
             success: function(d) {
                 var data = JSON.parse(d);
-                var item_price = (((parseFloat(data.item_tax) / 100) * parseFloat(data.item_price)) + parseFloat(data.item_price)).toFixed(2);
-                var item_count = $total_count;
-                var sub_total = (parseFloat(item_price) * parseFloat(item_count)).toFixed(2);
+                var item_count = $count.val();
+                if ($item_unit.prop("options").selectedIndex == 0) {
+                    var item_unit = "retail";
+                    var item_price = (parseFloat(data.item_tax) / 100 * parseFloat(data.item_price) + parseFloat(data.item_price)).toFixed(2);
+                    var sub_total = (parseFloat(item_price) * parseFloat(item_count)).toFixed(2);
+                } else {
+                    var item_unit = "wholesale";
+                    var item_price = (parseFloat(data.item_tax_wholesale) / 100 * parseFloat(data.item_price_wholesale) + parseFloat(data.item_price_wholesale)).toFixed(2);
+                    var sub_total = (parseFloat(item_price) * parseFloat(item_count)).toFixed(2);
+                }
+                console.log(item_price);
+                console.log(item_count);
                 $("#items").prepend(
-                    '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($count.val()).toFixed(2) + '">' +
+                    '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '" item-unit="' + item_unit + '">' +
                     '<div class="card-body">' +
                     '<div class="d-flex">' +
                     '<img style="max-width: 100px" src="img/item/' + data.item_img + '">' +
@@ -123,7 +132,7 @@ $(".submit-transaction").click(function() {
     ].join(" ");
     var $date = strDateTime;
     var $all = $(".item").map(function() {
-        return $(this).attr("price") + "," + $(this).attr("item-id") + "," + $(this).attr("item-count");
+        return $(this).attr("price") + "," + $(this).attr("item-id") + "," + $(this).attr("item-count") + "," + $(this).attr("item-unit");
     }).get();
     $.ajax({
         url: url(window.location.href) + "/controller/transaction-new-controller.php",

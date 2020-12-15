@@ -1,5 +1,7 @@
 <?php
     include "../controller/connect.php";
+    include "../controller/core.php";
+    guard();
     $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
     $date_now = $date->format("m-d-Y");
 ?>

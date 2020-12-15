@@ -1,11 +1,14 @@
 <?php
     session_start();
-    // var_dump(in_array($_GET["p"], $roles[$_SESSION["user"]["role"]]));
+    $roles = [
+        "admin" => ["account", "transaction", "inventory", "transaction-new", "incoming", "return", "default" =>"dashboard"],
+        "encoder" => ["account","inventory", "incoming", "default" =>"inventory"],
+        "accountant" => ["account", "transaction", "return", "transaction-new", "default" =>"transaction"]
+    ];
     function guard(){
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/";
         if(!isset($_SESSION["user"])){
-            echo "FORBIDDEN!!";
-        }else{
-            echo "FORBIDDEN!!";
+            header('Location:' . $actual_link);
         }
     }
     function page(){
@@ -25,23 +28,19 @@
     }
 
     function home_core($reason = NULL, $reason2 = NULL){
-        $roles = [
-            "admin" => ["account", "transaction", "inventory", "transaction-new", "incoming", "return", "default" =>"dashboard"],
-            "encoder" => ["account","inventory", "incoming", "default" =>"inventory"],
-            "accountant" => ["account", "transaction", "return", "transaction-new", "default" =>"transaction"]
-        ];
+
         if($reason != NULL){
             if($reason == "get"){
-                return $roles[$_SESSION["user"]["role"]]["default"];
+                return $GLOBALS['roles'][$_SESSION["user"]["role"]]["default"];
             }else if($reason == "get_roles"){
-                return $roles[$reason2];
+                return $GLOBALS['roles'][$reason2];
             }else{
                 return "hhmmmm... not today..";
             }
         }else{
             if(isset($_SESSION["user"])){
                 if(isset($_GET["p"])){
-                    if(in_array($_GET["p"], $roles[$_SESSION["user"]["role"]])){
+                    if(in_array($_GET["p"], $GLOBALS['roles'][$_SESSION["user"]["role"]])){
                         if(file_exists("includes/" . $_GET["p"] . ".php")){
                             include "includes/" . $_GET["p"] . ".php";
                         }
@@ -53,7 +52,7 @@
                     }
                 }
                 else{
-                    include "includes/" . $roles[$_SESSION["user"]["role"]]["default"] . ".php";
+                    include "includes/" . $GLOBALS['roles'][$_SESSION["user"]["role"]]["default"] . ".php";
                 }
             }
         }
