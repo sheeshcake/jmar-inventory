@@ -27,7 +27,7 @@
                 <td><?php echo $data["transaction_id"] ?></td>
                 <td><?php echo $data["transaction_datetime"] ?></td>
                 <td><?php echo $total_items ?></td>
-                <td><?php echo $total_paid ?></td>
+                <td>₱<?php echo number_format($total_paid, 2) ?></td>
                 <td><button class="open btn btn-primary" value="<?php echo $data["transaction_id"] ?>" data-toggle="modal" data-target="#transmodal">Open</button></td>
             </tr>
 <?php

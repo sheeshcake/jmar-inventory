@@ -119,12 +119,12 @@ function calculate(type) {
         var price = parseFloat($("#input-capital").val());
         var tax = parseFloat($("#input-tax").val());
         var total = ((tax / 100) * price) + price;
-        $("#total-item-price2").val(total);
+        $("#total-item-price2").val(total.toFixed(2));
     } else {
         var price = parseFloat($("#input-capital-wholesale").val());
         var tax = parseFloat($("#input-tax-wholesale").val());
         var total = ((tax / 100) * price) + price;
-        $("#total-item-price1").val(total);
+        $("#total-item-price1").val(total.toFixed(2));
     }
 }
 $(document).on("input", "#input-capital", function() {
