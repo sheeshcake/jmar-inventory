@@ -1630,7 +1630,7 @@ pre code {
 .table-bordered thead td,
 .table-bordered thead th {
     border-bottom-width: 0px;
-    background-color: #bbbbbb;
+    
 }
 
 .table-borderless tbody+tbody,
@@ -4313,6 +4313,7 @@ input[type=submit].btn-block {
 }
 
 .navbar {
+    background-image: linear-gradient(12deg, #2f2626 0%, #ff787e 46%, #ffffff 80%);
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -8083,7 +8084,7 @@ button.bg-dark:hover {
 
 .mt-5,
 .my-5 {
-    margin-top: 3rem!important
+    margin-top: 6rem!important
 }
 
 .mr-5,
@@ -8151,7 +8152,7 @@ button.bg-dark:hover {
 }
 
 .p-2 {
-    padding: .5rem!important
+    padding: -0.5rem!important;
 }
 
 .pt-2,
@@ -11621,6 +11622,7 @@ form.user .btn-user {
 }
 
 footer.sticky-footer {
+    background-image: linear-gradient(170deg, #2f2626 0%, #ff787e 46%, #ffffff 80%);
     padding: 2rem 0;
     flex-shrink: 0;
     border-top: solid;

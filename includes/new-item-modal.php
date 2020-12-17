@@ -64,11 +64,11 @@
                                         <span class="input-group-text">₱</span>
                                     </div>
                                     
-                                    <input required type="number" min="0" value="0" id="input-capital-wholesale" name="item_capital_wholesale" class="form-control" aria-label="Capital Price" placeholder="Capital Price" style="margin-right: 2%;">
+                                    <input required type="number" min="0"  id="input-capital-wholesale" name="item_capital_wholesale" class="form-control" aria-label="Capital Price" placeholder="Capital Price" style="margin-right: 2%;">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">₱</span>
                                     </div>
-                                    <input required type="number" min="0" value="0" id="input-capital" name="item_capital" class="form-control" aria-label="Capital Price" placeholder="Capital Price">
+                                    <input required type="number" min="0"  id="input-capital" name="item_capital" class="form-control" aria-label="Capital Price" placeholder="Capital Price">
                                     
                                 </div>
                             </div>
@@ -76,11 +76,11 @@
                             <div class="d-flex bd-highlight mb-3">
                                 <div class="input-group w-100">
                                     
-                                    <input required type="number" min="0" value="0" id="input-tax-wholesale" class="form-control" name="item_tax_wholesale" aria-label="Tax" placeholder="Tax">
+                                    <input required type="number" min="0"  id="input-tax-wholesale" class="form-control" name="item_tax_wholesale" aria-label="Tax" placeholder="Revenue">
                                     <div class="input-group-append" style="margin-right: 2%;">
                                         <span class="input-group-text">%</span>
                                     </div>
-                                    <input required type="number" min="0" value="0" id="input-tax" class="form-control" name="item_tax" aria-label="Tax" placeholder="Tax">
+                                    <input required type="number" min="0"  id="input-tax" class="form-control" name="item_tax" aria-label="Tax" placeholder="Revenue">
                                     <div class="input-group-append">
                                         <span class="input-group-text">%</span>
                                     </div>

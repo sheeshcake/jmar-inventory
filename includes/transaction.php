@@ -40,7 +40,7 @@
                 <th>Item Capital</th>
                 <th>Name</th>
                 <th>Brand</th>
-                <th>Tax</th>
+                <th>Revenue</th>
                 <th>Price</th>
                 <th>ID</th>
                 <th>Category</th>
@@ -54,7 +54,7 @@
                 <th>Item Capital</th>
                 <th>Name</th>
                 <th>Brand</th>
-                <th>Tax</th>
+                <th>Revenue</th>
                 <th>Price</th>
                 <th>ID</th>
                 <th>Category</th>

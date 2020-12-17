@@ -46,7 +46,7 @@
                 <th>Item Capital</th>
                 <th>Name</th>
                 <th>Brand</th>
-                <th>Tax</th>
+                <th>Revenue</th>
                 <th>Stock</th>
                 <th>Price</th>
                 <th>ID</th>
@@ -61,7 +61,7 @@
                 <th>Item Capital</th>
                 <th>Name</th>
                 <th>Brand</th>
-                <th>Tax</th>
+                <th>Revenue</th>
                 <th>Stock</th>
                 <th>Price</th>
                 <th>ID</th>
