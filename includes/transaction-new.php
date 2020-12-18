@@ -17,7 +17,7 @@
   This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
 </div>
 <div class="d-flex mb-4">
-    <div class="shadow m-1 p-3" style="max-width: 1200px; min-width: 1200px">
+    <div class="shadow m-1 p-3" style="max-width: 1200px; min-width: 1200px; max-height: 1000px; overflow-y: scroll;">
         <table id="example"  class="table table-striped table-bordered">
             <thead>
                 <tr>
