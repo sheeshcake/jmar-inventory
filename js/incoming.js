@@ -56,7 +56,7 @@ $(document).on("click", ".add", function() {
             var item_price = data.item_price_wholesale;
             var item_count_in_div = $item_divisor * $count.val();
             var item_count = $count.val();
-            var sub_total = (parseFloat(item_price) * parseFloat(item_count_in_div)).toFixed(2);
+            var sub_total = (parseFloat(item_price) * parseFloat($count.val())).toFixed(2);
             $("#items").prepend(
                 '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($count.val()).toFixed(2) + '">' +
                 '<div class="card-body">' +
@@ -69,7 +69,7 @@ $(document).on("click", ".add", function() {
                 '<p><b>' + data.item_unit + ':</b>&nbsp;' + item_count + '</p>' +
                 '<p><b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
                 '</div>' +
-                '<button class="remove-item btn btn-danger" style="height: 40px;" item_id="' + $id + '" value="' + $count.val() + '">x</button>' +
+                '<button class="remove-item btn btn-danger" style="height: 40px;" item_id="' + $id + '" value="' + item_count + '">x</button>' +
                 '<div>' +
                 '</div>' +
                 '</div>'

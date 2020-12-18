@@ -20,7 +20,13 @@
         $total_paid = 0;
         while($data1 = $result1->fetch_assoc()){
             $total_items = mysqli_num_rows($result1);
-            $total_paid += ((($data1["item_tax"] / 100) * $data1["item_price"]) + $data1["item_price"]) * $data1["item_count"];
+            if($data1["item_type"] == "wholesale"){
+                $total_paid += ((($data1["item_tax_wholesale"] / 100) * $data1["item_price_wholesale"]) + $data1["item_price_wholesale"]) * ($data1["item_count"] / $data1["item_unit_divisor"]);
+            }
+            else{
+                $total_paid += ((($data1["item_tax"] / 100) * $data1["item_price"]) + $data1["item_price"]) * $data1["item_count"];
+            }
+            
         }
 ?>
             <tr>

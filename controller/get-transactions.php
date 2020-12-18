@@ -20,14 +20,20 @@
         $total_paid = 0;
         while($data1 = $result1->fetch_assoc()){
             $total_items = mysqli_num_rows($result1);
-            $total_paid += ((($data1["item_tax"] / 100) * $data1["item_price"]) + $data1["item_price"]) * $data1["item_count"];
+            if($data1["item_type"] == "wholesale"){
+                $total_paid += ((($data1["item_tax_wholesale"] / 100) * $data1["item_price_wholesale"]) + $data1["item_price_wholesale"]) * ($data1["item_count"] / $data1["item_unit_divisor"]);
+            }
+            else{
+                $total_paid += ((($data1["item_tax"] / 100) * $data1["item_price"]) + $data1["item_price"]) * $data1["item_count"];
+            }
+            
         }
 ?>
             <tr>
                 <td><?php echo $data["transaction_id"] ?></td>
                 <td><?php echo $data["transaction_datetime"] ?></td>
                 <td><?php echo $total_items ?></td>
-                <td><?php echo $total_paid ?></td>
+                <td>₱<?php echo number_format($total_paid, 2) ?></td>
                 <td><button class="open btn btn-primary" value="<?php echo $data["transaction_id"] ?>" data-toggle="modal" data-target="#transmodal">Open</button></td>
             </tr>
 <?php

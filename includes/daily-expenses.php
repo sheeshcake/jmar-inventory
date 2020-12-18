@@ -41,7 +41,7 @@
         </thead>
         <tbody>
     <?php
-        $sql = "SELECT t.transaction_datetime, t.transaction_type, t.transaction_id, p.transaction_id, i.item_name, i.item_desc, i.item_price, i.item_tax, i.item_id, SUM(p.item_count) AS total_quantity
+        $sql = "SELECT t.transaction_datetime, t.transaction_type, t.transaction_id, p.transaction_id, i.item_name, i.item_desc, i.item_price_wholesale, i.item_unit_divisor, i.item_tax, i.item_id, SUM(p.item_count) AS total_quantity
                 FROM incoming_transaction as p
                 INNER JOIN items as i
                 INNER JOIN transactions as t
@@ -54,14 +54,15 @@
         $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
         $total = 0;
         while($data = $result->fetch_assoc()){
-            $price = $data["item_price"];
-            $sub_total = $price * $data["total_quantity"];
+            $price = $data["item_price_wholesale"];
+            $total_quantity = ($data["total_quantity"] / $data["item_unit_divisor"]);
+            $sub_total = $price * $total_quantity;
             $total += $sub_total;
     ?>
         <tr>
             <td><?php echo $data["item_id"]; ?></td>
             <td><?php echo $data["item_name"] . " " . $data["item_desc"]; ?></td>
-            <td><?php echo $data["total_quantity"]; ?></td>
+            <td><?php echo $total_quantity; ?></td>
             <td><?php echo "₱" . number_format($price, 2, '.', ','); ?></td>
             <td class="table-warning"><?php echo "₱" . number_format($sub_total, 2, '.', ','); ?></td>
         </tr>

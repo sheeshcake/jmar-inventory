@@ -39,14 +39,20 @@ $(document).on("click", ".open", function() {
                 if (element.item_type == "retail") {
                     var price = (((parseFloat(element.item_tax) / 100) * parseFloat(element.item_price)) + parseFloat(element.item_price)).toFixed(2);
                     var unit_count = element.item_count * 1;
+                    var unit_count_str = element.item_count * 1;
                     if (element.item_unit == "Box") var item_unit = "pieces";
                     else if (element.item_unit == "Sack") var item_unit = "kilo(s)";
                     else if (element.item_unit == "Roll") var item_unit = "meter(s)";
                 } else {
                     var price = (((parseFloat(element.item_tax_wholesale) / 100) * parseFloat(element.item_price_wholesale)) + parseFloat(element.item_price_wholesale)).toFixed(2);
-                    var unit_div = element.item_unit_divisor / element.item_count;
-                    var unit_count = unit_div + " contains " + element.item_count;
+                    var unit_div = element.item_count / element.item_unit_divisor;
+                    if (element.item_unit == "Box") var item_unit1 = "pieces";
+                    else if (element.item_unit == "Sack") var item_unit1 = "kilo(s)";
+                    else if (element.item_unit == "Roll") var item_unit1 = "meter(s)";
+                    var unit_count_str = unit_div + " contains " + element.item_count + " " + item_unit1;
+                    var unit_count = unit_div;
                     var item_unit = element.item_unit;
+                    console.log(unit_div);
                 }
                 $("#transmodalLabel").text("Transaction: " + element.transaction_id);
                 $(".modal-body").append(
@@ -58,9 +64,9 @@ $(document).on("click", ".open", function() {
                     '<div class="p-2">' +
                     '<p><b>Name:&nbsp;</b>' + element.item_name + '</p>' +
                     '<p><b>Brand:&nbsp;</b>' + element.item_brand + '</p>' +
-                    '<p unit="' + element.item_unit + '" id="item_count_' + element.purchased_id + '"><b>' + item_unit + ':&nbsp;</b>' + unit_count + '</p>' +
+                    '<p unit="' + element.item_unit + '" id="item_count_' + element.purchased_id + '"><b>' + item_unit + ':&nbsp;</b>' + unit_count_str + '</p>' +
                     '<p><b>Price:&nbsp;</b>' + formatter(price) + '</p>' +
-                    '<p><b>Total:&nbsp;</b>' + formatter(price * element.item_count) + '</p>' +
+                    '<p><b>Total:&nbsp;</b>' + formatter(price * unit_count) + '</p>' +
                     '</div>' +
                     '</div>' +
                     '<div class="d-flex mb-2">' +
@@ -127,16 +133,20 @@ $(document).on("click", ".void", function() {
                                 if (element.item_type == "retail") {
                                     var price = (((parseFloat(element.item_tax) / 100) * parseFloat(element.item_price)) + parseFloat(element.item_price)).toFixed(2);
                                     var unit_count = element.item_count * 1;
+                                    var unit_count_str = element.item_count * 1;
                                     if (element.item_unit == "Box") var item_unit = "pieces";
                                     else if (element.item_unit == "Sack") var item_unit = "kilo(s)";
                                     else if (element.item_unit == "Roll") var item_unit = "meter(s)";
                                 } else {
                                     var price = (((parseFloat(element.item_tax_wholesale) / 100) * parseFloat(element.item_price_wholesale)) + parseFloat(element.item_price_wholesale)).toFixed(2);
-                                    var unit_div = element.item_unit_divisor / element.item_count;
-                                    var unit_count = unit_div + " contains " + element.item_count;
+                                    var unit_div = element.item_count / element.item_unit_divisor;
+                                    if (element.item_unit == "Box") var item_unit1 = "pieces";
+                                    else if (element.item_unit == "Sack") var item_unit1 = "kilo(s)";
+                                    else if (element.item_unit == "Roll") var item_unit1 = "meter(s)";
+                                    var unit_count_str = unit_div + " contains " + element.item_count + " " + item_unit1;
+                                    var unit_count = element.item_count / unit_div;
                                     var item_unit = element.item_unit;
                                 }
-
                                 $("#transmodalLabel").text("Transaction: " + element.transaction_id);
                                 $(".modal-body").append(
                                     '<div class="card p-2 mb-2">' +
@@ -147,9 +157,9 @@ $(document).on("click", ".void", function() {
                                     '<div class="p-2">' +
                                     '<p><b>Name:&nbsp;</b>' + element.item_name + '</p>' +
                                     '<p><b>Brand:&nbsp;</b>' + element.item_brand + '</p>' +
-                                    '<p unit="' + element.item_unit + '" id="item_count_' + element.purchased_id + '"><b>' + item_unit + ':&nbsp;</b>' + unit_count + '</p>' +
+                                    '<p unit="' + element.item_unit + '" id="item_count_' + element.purchased_id + '"><b>' + item_unit + ':&nbsp;</b>' + unit_count_str + '</p>' +
                                     '<p><b>Price:&nbsp;</b>' + formatter(price) + '</p>' +
-                                    '<p><b>Total:&nbsp;</b>' + foramtter(price * element.item_count) + '</p>' +
+                                    '<p><b>Total:&nbsp;</b>' + formatter(price * unit_count) + '</p>' +
                                     '</div>' +
                                     '</div>' +
                                     '<div class="d-flex mb-2">' +
@@ -209,16 +219,20 @@ $(document).on("click", ".damage", function() {
                                 if (element.item_type == "retail") {
                                     var price = (((parseFloat(element.item_tax) / 100) * parseFloat(element.item_price)) + parseFloat(element.item_price)).toFixed(2);
                                     var unit_count = element.item_count * 1;
+                                    var unit_count_str = element.item_count * 1;
                                     if (element.item_unit == "Box") var item_unit = "pieces";
                                     else if (element.item_unit == "Sack") var item_unit = "kilo(s)";
                                     else if (element.item_unit == "Roll") var item_unit = "meter(s)";
                                 } else {
                                     var price = (((parseFloat(element.item_tax_wholesale) / 100) * parseFloat(element.item_price_wholesale)) + parseFloat(element.item_price_wholesale)).toFixed(2);
-                                    var unit_div = element.item_unit_divisor / element.item_count;
-                                    var unit_count = unit_div + " contains " + element.item_count;
+                                    var unit_div = element.item_count / element.item_unit_divisor;
+                                    if (element.item_unit == "Box") var item_unit1 = "pieces";
+                                    else if (element.item_unit == "Sack") var item_unit1 = "kilo(s)";
+                                    else if (element.item_unit == "Roll") var item_unit1 = "meter(s)";
+                                    var unit_count_str = unit_div + " contains " + element.item_count + " " + item_unit1;
+                                    var unit_count = element.item_count / unit_div;
                                     var item_unit = element.item_unit;
                                 }
-
                                 $("#transmodalLabel").text("Transaction: " + element.transaction_id);
                                 $(".modal-body").append(
                                     '<div class="card p-2 mb-2">' +
@@ -229,9 +243,9 @@ $(document).on("click", ".damage", function() {
                                     '<div class="p-2">' +
                                     '<p><b>Name:&nbsp;</b>' + element.item_name + '</p>' +
                                     '<p><b>Brand:&nbsp;</b>' + element.item_brand + '</p>' +
-                                    '<p unit="' + element.item_unit + '" id="item_count_' + element.purchased_id + '"><b>' + item_unit + ':&nbsp;</b>' + unit_count + '</p>' +
+                                    '<p unit="' + element.item_unit + '" id="item_count_' + element.purchased_id + '"><b>' + item_unit + ':&nbsp;</b>' + unit_count_str + '</p>' +
                                     '<p><b>Price:&nbsp;</b>' + formatter(price) + '</p>' +
-                                    '<p><b>Total:&nbsp;</b>' + formatter(price * element.item_count) + '</p>' +
+                                    '<p><b>Total:&nbsp;</b>' + formatter(price * unit_count) + '</p>' +
                                     '</div>' +
                                     '</div>' +
                                     '<div class="d-flex mb-2">' +

@@ -6,6 +6,14 @@
     ";
     $result = mysqli_query($conn, $sql);
     while($data = $result->fetch_assoc()){
+        $u1 = intval($data["item_stock"] / $data["item_unit_divisor"]);
+        $u2 =  floatval($data["item_stock"] - ($u1 * $data["item_unit_divisor"]));
+        if($u1 <= 2 && $u1 != 0) $color = "warning";
+        else if($u1 == 0 && $u2 == 0) $color = "danger";
+        else $color = "success";
+        if($data["item_unit"] == "Box") $u2_name = "pieces";
+        else if($data["item_unit"] == "Roll") $u2_name = "meter(s)";
+        else if($data["item_unit"] == "Sack") $u2_name = "kilo(s)";
 ?>
 <tr>
         <td><img width="100" src="img/item/<?php echo $data["item_img"]; ?>"></td>
@@ -14,6 +22,7 @@
         <td><?php echo $data["category_name"]; ?></td>
         <td>₱<?php echo $data["item_price"]; ?></td>
         <td width="200px">
+            <div class="d-flex p-2"><b><p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></b></div>
             <?php echo $data["item_stock"]; ?>
             <div class="d-flex" id="count_input_<?php echo $data["item_id"] ?>">
                 <input type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
