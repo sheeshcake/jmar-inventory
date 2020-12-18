@@ -1524,7 +1524,7 @@ pre code {
 .table-bordered thead th,
 .table-bordered thead td {
   border-bottom-width: 0px;
-  background-color: #bbbbbb;
+  
 }
 
 .table-borderless th,
@@ -4092,6 +4092,7 @@ input[type="button"].btn-block {
 }
 
 .navbar {
+  
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -4523,7 +4524,7 @@ input[type="button"].btn-block {
 .card-header {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  background-color: #bbbbbb;
+  background-color: ##e74a3b47;
   border-bottom: 1px solid #e3e6f0;
 }
 
@@ -6458,7 +6459,7 @@ button.bg-dark:focus {
 }
 
 .bg-white {
-  background-color: #bbbbbb!important;
+  background-color: #ffffff!important;
 }
 
 .bg-transparent {
@@ -7743,7 +7744,7 @@ button.bg-dark:focus {
 
 .mt-5,
 .my-5 {
-  margin-top: 3rem !important;
+  margin-top: 6rem !important;
 }
 
 .mr-5,
@@ -7763,7 +7764,7 @@ button.bg-dark:focus {
 
 .p-0 {
   border-style: solid;
-    border-image: linear-gradient( to bottom, #ff000b, rgb(255 0 0 / 0%) ) 1 100%;
+    border-image: linear-gradient( to bottom, #f75d1b, rgb(255 0 0 / 0%) ) 1 100%;
 }
 
 .pt-0,
@@ -7811,7 +7812,7 @@ button.bg-dark:focus {
 }
 
 .p-2 {
-  padding: 0.5rem !important;
+  padding: -0.5rem !important;
 }
 
 .pt-2,
@@ -9569,7 +9570,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #4e73df !important;
+  color: #000000 !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {
@@ -10147,7 +10148,7 @@ a:focus {
 .topbar {
   border-bottom: solid;
     height: 4.375rem;
-    border-bottom-color: #ff1600;
+    border-bottom-color: #f75d1b;
   height: 4.375rem;
 }
 
@@ -11249,6 +11250,7 @@ form.user .btn-user {
 }
 
 footer.sticky-footer {
+  
   padding: 2rem 0;
     flex-shrink: 0;
     border-top: solid;
