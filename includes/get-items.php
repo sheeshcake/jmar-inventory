@@ -22,6 +22,9 @@
         $w_price = (floatval(($data["item_tax_wholesale"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price_wholesale"]);
         $u1 = intval($data["item_stock"] / $data["item_unit_divisor"]);
         $u2 =  floatval($data["item_stock"] - ($u1 * $data["item_unit_divisor"]));
+        if($u1 <= 2 && $u1 != 0) $color = "warning";
+        else if($u1 == 0 && $u2 == 0) $color = "danger";
+        else $color = "success";
         $u2_name = "";
         if($data["item_unit"] == "Box") $u2_name = "pieces";
         else if($data["item_unit"] == "Roll") $u2_name = "meter(s)";
@@ -38,7 +41,7 @@
             <div class="d-flex p-2"><b>Brand:&nbsp;</b><p id="brand<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_brand"]?></p></div>
             <div class="d-flex p-2"><b>Description:&nbsp;</b><p id="desc<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_desc"]?></p></div>
             <div class="d-flex p-2"><b>Category:&nbsp;</b><p><?php echo $data["category_name"]?></p></div>
-            <div class="d-flex p-2"><b>Stock:&nbsp;</b><p><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></div>
+            <div class="d-flex p-2"><b>Stock:&nbsp;</b><p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></div>
         </div>
     </td>
     <td>

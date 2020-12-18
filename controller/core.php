@@ -1,7 +1,7 @@
 <?php
     session_start();
     $roles = [
-        "admin" => ["account", "transaction", "inventory", "transaction-new", "incoming", "return", "default" =>"dashboard"],
+        "admin" => ["account", "transaction", "inventory", "transaction-new", "incoming", "all-items", "return", "default" =>"dashboard"],
         "encoder" => ["account","inventory", "incoming", "default" =>"inventory"],
         "accountant" => ["account", "transaction", "return", "transaction-new", "default" =>"transaction"]
     ];
