@@ -4,6 +4,14 @@ function url(the_url) {
     return (the_arr.join('/'));
 }
 
+function formatter(num) {
+    var formatter = new Intl.NumberFormat({
+        style: 'currency',
+        currency: 'PHP',
+    });
+    return formatter.format(num);
+}
+
 function getData(div) {
     var inputValues = $(div + ' :input').map(function() {
         var type = $(this).prop("type");

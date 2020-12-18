@@ -2,13 +2,7 @@ var $t;
 var $replace;
 var $id;
 
-function formatter(num) {
-    var formatter = new Intl.NumberFormat({
-        style: 'currency',
-        currency: 'PHP',
-    });
-    return formatter.format(num);
-}
+
 $(document).ready(function() {
     $t = $('#example').DataTable();
 });

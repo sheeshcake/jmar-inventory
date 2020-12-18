@@ -1,8 +1,3 @@
-function thousands_separators(num) {
-    var num_parts = num.toString().split(".");
-    num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return num_parts.join(".");
-}
 $("#ds-btn").click(function() {
     var rawurl = window.location.href;
     var res = rawurl.split("/");
@@ -48,22 +43,19 @@ $(document).ready(function() {
         },
         success: function(data) {
             var $data = JSON.parse(data);
-            console.log($data);
             var $grand_total = 0;
             $data.forEach(function(d) {
-                var $sub_total = 0;
                 if (d.item_type == "wholesale") {
                     var $price = (((parseFloat(d.item_tax_wholesale) / 100) * parseFloat(d.item_price_wholesale)) + parseFloat(d.item_price_wholesale)).toFixed(2);
-                    $sub_total = $price * (d.item_unit_divisor / d.item_count);
-                    $grand_total += $sub_total;
+                    var $sub_total = $price * (d.item_count / d.item_unit_divisor);
+                    $grand_total += Number($sub_total);
                 } else {
                     var $price = (((parseFloat(d.item_tax) / 100) * parseFloat(d.item_price)) + parseFloat(d.item_price)).toFixed(2);
-                    $sub_total = $price * d.item_count;
-                    $grand_total += $sub_total;
+                    var $sub_total = $price * d.item_count;
+                    $grand_total += Number($sub_total);
                 }
-                console.log($sub_total);
             });
-            $("#daily-total").text("₱" + thousands_separators($grand_total.toFixed(2)));
+            $("#daily-total").text("₱" + formatter($grand_total));
         }
     });
     $.ajax({
@@ -74,17 +66,15 @@ $(document).ready(function() {
         },
         success: function(data) {
             var $data = JSON.parse(data);
-            console.log($data);
             var $grand_total = 0;
             $data.forEach(function(d) {
                 var $sub_total = 0;
                 var $price = d.item_price_wholesale;
                 $sub_total = $price * (d.item_count / d.item_unit_divisor);
                 $grand_total += $sub_total;
-                console.log($price + "* (" + d.item_unit_divisor + "/" + d.item_count + ") = " + $grand_total);
             });
 
-            $("#daily-expenses").text("₱" + thousands_separators($grand_total.toFixed(2)));
+            $("#daily-expenses").text("₱" + formatter($grand_total));
         }
     });
     $.ajax({
@@ -100,7 +90,7 @@ $(document).ready(function() {
                 var $sub_total = 0;
                 if (d.item_type == "wholesale") {
                     var $price = (((parseFloat(d.item_tax_wholesale) / 100) * parseFloat(d.item_price_wholesale)) + parseFloat(d.item_price_wholesale)).toFixed(2);
-                    $sub_total = $price * (d.item_unit_divisor / d.item_count);
+                    var $sub_total = $price * (d.item_count / d.item_unit_divisor);
                     $grand_total += $sub_total;
                 } else {
                     var $price = (((parseFloat(d.item_tax) / 100) * parseFloat(d.item_price)) + parseFloat(d.item_price)).toFixed(2);
@@ -108,7 +98,7 @@ $(document).ready(function() {
                     $grand_total += $sub_total;
                 }
             });
-            $("#monthly-total").text("₱" + thousands_separators($grand_total.toFixed(2)));
+            $("#monthly-total").text("₱" + formatter($grand_total));
         }
     });
     $.ajax({
