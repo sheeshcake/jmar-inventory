@@ -7,9 +7,9 @@
             $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
             $date_now = $date->format("m-d-Y");
             $sql = "SELECT * FROM transactions 
-                INNER JOIN 
+                JOIN 
                     purchased_item ON transactions.transaction_id  =purchased_item.transaction_id 
-                INNER JOIN
+                JOIN
                     items ON purchased_item.item_id = items.item_id
                 WHERE 
                     transactions.transaction_datetime LIKE '$date_now%'
@@ -27,9 +27,9 @@
             $month_now = $date->format("m");
             $year_now = $date->format("Y");
             $sql = "SELECT * FROM transactions 
-                INNER JOIN 
+                JOIN 
                     purchased_item ON transactions.transaction_id  =purchased_item.transaction_id 
-                INNER JOIN
+                JOIN
                     items ON purchased_item.item_id = items.item_id
                 WHERE 
                     transactions.transaction_datetime LIKE '$month_now%'
@@ -48,9 +48,9 @@
             $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
             $date_now = $date->format("m-d-Y");
             $sql = "SELECT * FROM transactions 
-                INNER JOIN 
+                JOIN 
                     incoming_transaction ON transactions.transaction_id  =incoming_transaction.transaction_id 
-                INNER JOIN
+                JOIN
                     items ON incoming_transaction.item_id = items.item_id
                 WHERE 
                     transactions.transaction_datetime LIKE '$date_now%'
@@ -75,9 +75,9 @@
             $month_now = $date->format("m");
             $year_now = $date->format("Y");
             $sql = "SELECT * FROM transactions 
-            INNER JOIN 
+            JOIN 
                 purchased_item ON transactions.transaction_id  =purchased_item.transaction_id 
-            INNER JOIN
+            JOIN
                 items ON purchased_item.item_id = items.item_id
             WHERE 
                 transactions.transaction_datetime LIKE '%$year_now%'
@@ -94,9 +94,9 @@
             $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
             $date_now = $date->format("m-d-Y");
             $sql = "SELECT * FROM transactions 
-                INNER JOIN 
+                JOIN 
                     purchased_item ON transactions.transaction_id  =purchased_item.transaction_id 
-                INNER JOIN
+                JOIN
                     items ON purchased_item.item_id = items.item_id
                 WHERE
                     transactions.transaction_type = 'outgoing'

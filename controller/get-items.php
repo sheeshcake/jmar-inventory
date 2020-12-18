@@ -11,6 +11,9 @@
         $u1 = intval($data["item_stock"] / $data["item_unit_divisor"]);
         $u2 =  floatval($data["item_stock"] - ($u1 * $data["item_unit_divisor"]));
         $u2_name = "";
+        if($u1 <= 2 && $u1 != 0) $color = "warning";
+        else if($u1 == 0 && $u2 == 0) $color = "danger";
+        else $color = "success";
         if($data["item_unit"] == "Box") $u2_name = "pieces";
         else if($data["item_unit"] == "Roll") $u2_name = "meter(s)";
         else if($data["item_unit"] == "Sack") $u2_name = "kilo(s)";
@@ -33,7 +36,7 @@
         ?>
     </td>
     <td width="200px">
-        <div class="d-flex p-2"><b><p><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></b></div>
+        <div class="d-flex p-2"><b><p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></b></div>
         <?php
             if($data["item_stock"] > 0){
         ?>

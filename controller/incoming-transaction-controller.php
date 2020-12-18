@@ -20,9 +20,10 @@
             $count = 0;
             foreach ($arr as &$value) {
                 $value = explode(",", $value);
-                // var_dump($value);
                 $item_id = $value[1];
-                $item_count = $value[2];
+                $sql = "SELECT item_unit_divisor FROM items WHERE item_id='$item_id'";
+                $data2 = mysqli_query($conn, $sql) -> fetch_assoc();
+                $item_count = $value[2] * $data2["item_unit_divisor"];
                 // Update Item Stock
                 $sql1 = "UPDATE items
                 SET item_stock = item_stock + $item_count
