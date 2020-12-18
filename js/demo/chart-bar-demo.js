@@ -124,6 +124,7 @@ $(document).ready(function() {
             var data = JSON.parse(d);
             console.log(data);
             var data_day = 0;
+            var $grand_total = 0;
             data.forEach(function(entry) {
                 var mydate = entry.transaction_datetime.split(" ");
                 console.log(parseInt(moment(mydate[0], "MM-DD-YYYY").format('d')));
@@ -132,11 +133,16 @@ $(document).ready(function() {
                     console.log($chart_week_data);
                     data_day = parseInt(moment(mydate[0], "MM-DD-YYYY").format('d'));
                 } else {
-                    var item_price = parseFloat(entry.item_price);
-                    var item_count = parseFloat(entry.item_count);
-                    var item_tax = parseFloat(entry.item_tax);
-                    var sub_total = item_tax / 100 * item_price + item_price;
-                    $chart_week_data[data_day] += sub_total * item_count;
+                    if (entry.item_type == "wholesale") {
+                        var $price = (((parseFloat(entry.item_tax_wholesale) / 100) * parseFloat(entry.item_price_wholesale)) + parseFloat(entry.item_price_wholesale)).toFixed(2);
+                        var $sub_total = $price * (entry.item_count / entry.item_unit_divisor);
+                        $grand_total += $sub_total;
+                    } else {
+                        var $price = (((parseFloat(entry.item_tax) / 100) * parseFloat(entry.item_price)) + parseFloat(entry.item_price)).toFixed(2);
+                        $sub_total = $price * entry.item_count;
+                        $grand_total += $sub_total;
+                    }
+                    $chart_week_data[data_day] += $grand_total;
                 }
             });
             init_week_chart();
