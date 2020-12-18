@@ -58,11 +58,11 @@
                                 </div>
                             </div>    
                             <div class="d-flex bd-highlight mb-3">
-                            
-                                <div class="input-group w-100">
+                                <div class="input-group w-50">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">₱</span>
                                     </div>
+<<<<<<< HEAD
                                     
                                     <input required type="number" min="0"  id="input-capital-wholesale" name="item_capital_wholesale" class="form-control" aria-label="Capital Price" placeholder="Capital Price" style="margin-right: 2%;">
                                     <div class="input-group-prepend">
@@ -70,17 +70,41 @@
                                     </div>
                                     <input required type="number" min="0"  id="input-capital" name="item_capital" class="form-control" aria-label="Capital Price" placeholder="Capital Price">
                                     
+=======
+                                    <input required type="number" min="0" value="0" id="input-capital-wholesale" name="item_capital_wholesale" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price" style="margin-right: 2%;">
+                                </div>
+                                <div class="w-50 d-flex pl-1">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">₱</span>
+                                        </div>
+                                        <input required type="number" min="0" value="0" id="input-capital" name="item_capital" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price" readonly="true">
+                                    </div>
+                                    <div class="p-2">
+                                        <center>
+                                            <input type="checkbox"  id="manual-input" data-toggle="tooltip" data-placement="top" title="Manual Input">
+                                        </center>
+                                    </div>
+>>>>>>> 7631ae686ae6ec00f82df2b8ec0eaef6bd3719f7
                                 </div>
                             </div>
 
                             <div class="d-flex bd-highlight mb-3">
                                 <div class="input-group w-100">
                                     
+<<<<<<< HEAD
                                     <input required type="number" min="0"  id="input-tax-wholesale" class="form-control" name="item_tax_wholesale" aria-label="Tax" placeholder="Revenue">
                                     <div class="input-group-append" style="margin-right: 2%;">
                                         <span class="input-group-text">%</span>
                                     </div>
                                     <input required type="number" min="0"  id="input-tax" class="form-control" name="item_tax" aria-label="Tax" placeholder="Revenue">
+=======
+                                    <input required type="number" min="0" value="0" id="input-tax-wholesale" class="form-control" name="item_tax_wholesale" aria-label="Revenue" placeholder="Revenue">
+                                    <div class="input-group-append" style="margin-right: 2%;">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                    <input required type="number" min="0" value="0" id="input-tax" class="form-control" name="item_tax" aria-label="Revenue" placeholder="Revenue">
+>>>>>>> 7631ae686ae6ec00f82df2b8ec0eaef6bd3719f7
                                     <div class="input-group-append">
                                         <span class="input-group-text">%</span>
                                     </div>
@@ -124,8 +148,8 @@
                                     <label for="item-unit">Unit - 1</label>
                                     <input type="hidden" id="item_stock" name="item_stock" class="form-control" placeholder="Stock">
                                         <div class="row pl-2 pr-2">
-                                            <select class="form-control w-50" id="item-unit" name="item_unit">
-                                                <option selected disabled></option>
+                                            <select class="form-control w-50" id="item-unit" name="item_unit" required  >
+                                                <option selected disabled>Select</option>
                                                 <option value="Sack">Sack</option>
                                                 <option value="Roll">Roll</option>
                                                 <option value="Box">Box</option>
@@ -136,7 +160,7 @@
                                 </div>
                                     <div class="col-md-6 my-1">
                                         <label for="item-unit">Unit - 2</label>
-                                        <input required type="text" class="form-control" id="unit-2" readonly>
+                                        <input required type="text" class="form-control" id="unit-2" value="U2" readonly>
                                         <input required type="number" id="u2-val" class="form-control" placeholder="Stock">
                                     </div>
                             </div>

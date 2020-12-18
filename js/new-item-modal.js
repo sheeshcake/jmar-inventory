@@ -56,3 +56,16 @@ $(document).on("input", "#u1-val,#u2-val,#divisor", function() {
     var total = (u1 * divisor) + Number(u2);
     $("#item_stock").val(total);
 });
+$(document).on("input", "#divisor, #input-capital-wholesale", function() {
+    $("#input-capital").val(($("#input-capital-wholesale").val() / $("#divisor").val()).toFixed(2));
+    calculate("retail");
+});
+$("#manual-input").change(function() {
+    if ($(this).is(':checked')) {
+        $(this).parent().parent().prev().children().last().attr("readonly", false);
+    } else {
+        $(this).parent().parent().prev().children().last().attr("readonly", true);
+        $("#input-capital").val(($("#input-capital-wholesale").val() / $("#divisor").val()).toFixed(2));
+        calculate("retail");
+    }
+});

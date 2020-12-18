@@ -17,7 +17,7 @@
             <?php echo $data["item_stock"]; ?>
             <div class="d-flex" id="count_input_<?php echo $data["item_id"] ?>">
                 <input type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
-                <button class="add btn btn-success" value="<?php echo $data["item_id"] ?>"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <button class="add btn btn-success" item-div="<?php echo $data["item_unit_divisor"] ?>" value="<?php echo $data["item_id"] ?>"><i class="fa fa-plus" aria-hidden="true"></i></button>
             </div>
             <div class="alert alert-success" role="alert" style="display: none">
                 Item Added!
