@@ -1,5 +1,4 @@
 <?php
-    $_SESSION["page"] = "register";
     // var_dump($_SESSION);
 ?>
 <div class="container">
@@ -40,6 +39,14 @@
                             <div class="form-group">
                                 <input type="text" name="username" class="form-control form-control-user"
                                     placeholder="Username">
+                            </div>
+                            <div class="form-group">
+                                <select type="text" name="role" class="form-control"  require>
+                                    <option value="" selected disabled>Select Role</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="encoder">Encoder</option>
+                                    <option value="accountant">Accountant</option>
+                                </select>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">

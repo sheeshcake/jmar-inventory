@@ -56,7 +56,7 @@ linear-gradient(12deg, #2f2626 0%, #f75d1b 46%, #ffffff 80%);;">
                                         Login
                                     </button>
                                     <hr>
-                                    <a  class="btn btn-secondary btn-user btn-block" id="b-reg">Create an Account!</a>
+                                    
                                 </form>
                                 <hr>
                                 <div class="text-center">

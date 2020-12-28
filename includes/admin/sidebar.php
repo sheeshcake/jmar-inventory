@@ -71,6 +71,10 @@
 
 <!-- Nav Item - Charts -->
 <li class="nav-item">
+    <a  class="nav-link" href="#" id="b-reg">
+        <i class="fa fa-users" aria-hidden="true"></i>
+        Create an Account
+    </a>
     <a class="nav-link" href="?p=account">
         <i class="fas fa-fw fa-user"></i>
         <span>My Account</span>
