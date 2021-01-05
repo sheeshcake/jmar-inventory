@@ -31,17 +31,4 @@
 <i class="fas fa-angle-up"></i>
 </a>
 <link rel="stylesheet" href="css/home.css">
-
-<script>
-
-$(document).ready(function() {
-    $(document).on("click", "#sidebarToggleTop", function() {
-        $("#page-top").toggleClass("sidebar-toggled");
-        $("#accordionSidebar").toggleClass("toggled");
-    });
-    $(document).on("click", "#sidebarToggle", function() {
-        $("#page-top").toggleClass("sidebar-toggled");
-        $("#accordionSidebar").toggleClass("toggled");
-    });
-});
-</script>
+<script src="js/home.js"></script>

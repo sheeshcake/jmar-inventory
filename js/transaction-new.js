@@ -31,6 +31,8 @@ function reload() {
     }, 500);
 }
 $(document).ready(function() {
+    $("#page-top").toggleClass("sidebar-toggled");
+    $("#accordionSidebar").toggleClass("toggled");
     reload();
 });
 

@@ -6,15 +6,11 @@
 
 <!-- Nav Item - Dashboard -->
 
-<li class="nav-item">
-    <a class="nav-link" href="?p=transaction">
-        <i class="fa fa-exchange" aria-hidden="true"></i>  
-        <span>Transaction</span></a>
-</li>
+
 <li class="nav-item">
     <a class="nav-link" href="?p=transaction-new">
         <i class="fa fa-exchange" aria-hidden="true"></i>  
-        <span>New Transaction</span></a>
+        <span>Transaction</span></a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="?p=return">
