@@ -47,8 +47,8 @@
         <div class="overflow-auto" style="max-height: 600px; min-height: 599px;min-width: 400px" id="items">
         </div>
         <div class="mt-2">
-            <div class="d-flex"><b>Total Items:&nbsp;</b><p id="total_items">0</p></div>
-            <div class="d-flex"><b>Total:&nbsp;</b>₱ <p id="total">0</p></div>
+            <div class="d-flex"><p><b>Total Items:&nbsp;</b></p><p id="total_items">0</p></div>
+            <div class="d-flex"><p><b>Total:&nbsp;</b>₱</p><p id="total">0</p></div>
             <button class="submit-transaction btn btn-primary" style="display: none; min-width: 100%">Submit</button>
         </div>
     </div>

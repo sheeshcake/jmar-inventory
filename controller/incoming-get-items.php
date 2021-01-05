@@ -17,10 +17,15 @@
 ?>
 <tr>
         <td><img width="100" src="img/item/<?php echo $data["item_img"]; ?>"></td>
-        <td><?php echo $data["item_name"]; ?></td>
-        <td><?php echo $data["item_brand"]; ?></td>
+        <td>
+            <p><?php echo $data["item_name"]; ?></p>
+            <p><?php echo $data["item_brand"]; ?></p>
+        </td>
         <td><?php echo $data["category_name"]; ?></td>
-        <td>₱<?php echo $data["item_price"]; ?></td>
+        <td>
+            <p>₱<?php echo $data["item_price"] . "/" . $u2_name; ?></p>
+            <p>₱<?php echo $data["item_price_wholesale"] . "/" . $data["item_unit"]; ?></p>
+        </td>
         <td width="200px">
             <div class="d-flex p-2"><b><p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></b></div>
             <?php echo $data["item_stock"]; ?>

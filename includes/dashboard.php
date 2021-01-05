@@ -79,6 +79,8 @@
         </div>
     </a>
 </div>
+<h1>Statistic Page is Under Development</h1>
+<div style="filter: blur(8px);">
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Sales(Weekly) Overview</h6>
@@ -131,6 +133,8 @@
         </div>
     </div>
 </div>
+</div>
+
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script src="vendor/chart.js/Chart.min.js"></script>
 <script src="js/demo/chart-area-demo.js"></script>

@@ -34,10 +34,8 @@ $(document).on("click", ".close-details", function() {
 });
 var $t;
 $(document).ready(function() {
-    $t = $('#example').DataTable({
-        "responsive": true
-    });
-
+    $t = $('#example').DataTable({});
+    $(document).find("example").css({ width: '' });
 });
 $(document).on("click", "#confirm-delete", function() {
     var $id = $(this).val();

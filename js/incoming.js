@@ -14,6 +14,9 @@ function reload() {
                         $last_data = d.replace(/\s/g, '');
                         $("#item_data").html(d);
                         $t = $('#example').DataTable();
+                        $(document).find("#example_filter").css("position", "sticky");
+                        $(document).find("#example_filter").css("top", "0");
+                        $(document).find("#example_filter").css("background", "white");
                     }
                 }
             });

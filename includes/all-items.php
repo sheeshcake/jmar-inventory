@@ -4,7 +4,7 @@
     guard();
     $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
     $date_now = $date->format("m-d-Y");
-    $sql = "SELECT * FROM items INNER JOIN category ON items.category_id = category.category_id GROUP BY category.category_id";
+    $sql = "SELECT * FROM items INNER JOIN category ON items.category_id = category.category_id ";
     $result = mysqli_query($conn, $sql);
     if($result){
 ?>
@@ -36,8 +36,10 @@
         <thead>
             <tr class="table-primary">
                 <th>Item #</th>
+                <th>Image</th>
                 <th>Name & Description</th>
-                <th>Quantity</th>
+                <th>Item Stock</th>
+                <th>Item Capital</th>
                 <th>Price</th>
                 <th>Total</th>
             </tr>
@@ -50,6 +52,8 @@
             $u1 = intval($data["item_stock"] / $data["item_unit_divisor"]);
             $u2 =  floatval($data["item_stock"] - ($u1 * $data["item_unit_divisor"]));
             $u2_name = "";
+            $total_in_wholesale = $data["item_stock"] * $r_price;
+            $total_in_retail = ($data["item_stock"] / $data["item_unit_divisor"]) * $w_price;;
             if($u1 <= 2 && $u1 != 0) $color = "warning";
             else if($u1 == 0 && $u2 == 0) $color = "danger";
             else $color = "success";
@@ -60,21 +64,31 @@
 ?>
         <tr>
             <td><?php echo $data["item_id"]; ?></td>
+            <td><img src="../img/item/<?php echo $data["item_img"] ?>" alt="" width="100" ></td>
             <td><?php echo $data["item_name"] . " " . $data["item_desc"]; ?></td>
             <td><p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></td>
+            <td>
+                <?php            
+                    echo "<p>₱" . number_format($data["item_price"], 2) . " per " . $u2_name . "</p>";
+                    echo "<p>₱" . number_format($data["item_price_wholesale"], 2) . " per " . $data["item_unit"] . "</p>";
+                ?>
+            </td>
             <td>
                 <?php            
                     echo "<p>₱" . number_format($r_price, 2) . " per " . $u2_name . "</p>";
                     echo "<p>₱" . number_format($w_price, 2) . " per " . $data["item_unit"] . "</p>";
                 ?>
             </td>
-            <td class="table-warning"><?php echo "₱"; ?></td>
+            <td class="table-warning">
+                <p><?php echo "Retail: ₱" . number_format($total_in_retail, 2); ?></p>
+                <p><?php echo "Wholesale: ₱" . number_format($total_in_wholesale, 2); ?></p>
+            </td>
         </tr>
 <?php
         }
     }    
 ?>
-        <tfoot>
+        <!-- <tfoot>
             <tr>
                 <th></th>
                 <th></th>
@@ -82,7 +96,7 @@
                 <th class="table-secondary">Total</th>
                 <th class="table-secondary"><?php echo "₱"; ?></th>
             </tr>
-        </tfoot>
+        </tfoot> -->
     </tbody>
 
     </table>
