@@ -55,7 +55,6 @@ linear-gradient(12deg, #2f2626 0%, #f75d1b 46%, #ffffff 80%);;">
                                     <button type="submit" name="submit" class="btn btn-primary btn-user btn-block">
                                         Login
                                     </button>
-                                    <hr>
                                     
                                 </form>
                                 <hr>
