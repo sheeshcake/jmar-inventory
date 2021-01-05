@@ -61,7 +61,7 @@
                 $price = (floatval(($data["item_tax_wholesale"]) / 100) * floatval($data["item_price_wholesale"])) + floatval($data["item_price_wholesale"]);
                 $item_u2 = $data["item_unit"];
                 $sub_total = $price * $data["total_quantity"] / floatval($data["item_unit_divisor"]);
-                $quantity = $data["item_unit_divisor"] / $data["total_quantity"];
+                $quantity = $data["total_quantity"] / $data["item_unit_divisor"];
             }else{
                 $price = (floatval(($data["item_tax"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price"]);
                 $sub_total = $price * $data["total_quantity"];

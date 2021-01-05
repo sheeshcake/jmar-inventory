@@ -1,2 +1,6 @@
-$(document).on("click", "#b-reg", function() { $.ajax({ url: url(window.location.href) + "/controller/page-controller.php", method: "POST", data: { page: "register" }, success: function(t) { $(".main-content").fadeIn(500).html(t) }, error: function(t, n, e) { if ("timeout" == n) return this.tryCount++, this.tryCount <= this.retryLimit ? void $.ajax(this) : void 0;
-            t.status } }) }), $(document).ready(function() { setTimeout(function() { $("#lgn-alert").fadeOut(300) }, 3e3) });
+
+$(document).ready(function() {
+    setTimeout(function() {
+        $("#lgn-alert").fadeOut(300);
+    }, (3000));
+});

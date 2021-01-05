@@ -44,7 +44,7 @@
             <h6 class="collapse-header">Inventory Tools:</h6>
             <a class="collapse-item" href="?p=inventory">Inventory</a>
             <a class="collapse-item" href="?p=incoming">Incoming Items</a>
-            <a class="collapse-item" href="?p=all-items">All Items</a>
+            <a class="collapse-item" href="includes/all-items.php">All Items</a>
             <h6 class="collapse-header">Categories:</h6>
             <?php
                 $sql = "SELECT * FROM category";
@@ -71,6 +71,10 @@
 
 <!-- Nav Item - Charts -->
 <li class="nav-item">
+    <a  class="nav-link" href="#" id="b-reg">
+        <i class="fa fa-users" aria-hidden="true"></i>
+        Create an Account
+    </a>
     <a class="nav-link" href="?p=account">
         <i class="fas fa-fw fa-user"></i>
         <span>My Account</span>
