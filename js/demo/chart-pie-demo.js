@@ -43,7 +43,7 @@ function init_pie() {
     // Pie Chart Example
     var ctx = document.getElementById("myPieChart");
     var myPieChart = new Chart(ctx, {
-        type: 'doughnut',
+        type: 'pie',
         data: {
             labels: $name_data,
             datasets: [{
@@ -67,7 +67,7 @@ function init_pie() {
             legend: {
                 display: false
             },
-            cutoutPercentage: 80,
+            cutoutPercentage: 50,
         },
     });
 

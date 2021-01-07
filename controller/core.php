@@ -2,8 +2,8 @@
     session_start();
     $roles = [
         "admin" => ["account", "transaction", "inventory", "transaction-new","register", "incoming", "all-items", "return", "default" =>"dashboard"],
-        "encoder" => ["account","inventory", "incoming", "default" =>"inventory"],
-        "accountant" => ["account", "transaction", "return", "transaction-new", "default" =>"transaction"]
+        "encoder" => ["account","all-items","inventory", "incoming", "default" =>"inventory"],
+        "accountant" => ["account", "transaction", "return", "transaction-new", "default" =>"transaction-new"]
     ];
     function guard(){
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/";
