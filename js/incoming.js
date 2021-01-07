@@ -17,6 +17,7 @@ function reload() {
                         $(document).find("#example_filter").css("position", "sticky");
                         $(document).find("#example_filter").css("top", "0");
                         $(document).find("#example_filter").css("background", "white");
+                        $(document).find("#example_filter").css("z-index", "100");
                     }
                 }
             });

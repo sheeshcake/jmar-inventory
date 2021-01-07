@@ -35,6 +35,10 @@ $(document).on("click", ".close-details", function() {
 var $t;
 $(document).ready(function() {
     $t = $('#example').DataTable({});
+    $(document).find("#example_filter").css("position", "sticky");
+    $(document).find("#example_filter").css("top", "0");
+    $(document).find("#example_filter").css("background", "white");
+    $(document).find("#example_filter").css("z-index", "100");
     $(document).find("example").css({ width: '' });
 });
 $(document).on("click", "#confirm-delete", function() {
