@@ -79,18 +79,6 @@
         </div>
     </a>
 </div>
-<h1>Statistic Page is Under Development</h1>
-<div style="filter: blur(8px);">
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Sales(Weekly) Overview</h6>
-    </div>
-    <div class="card-body">
-        <div class="chart-bar"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-            <canvas id="myBarChart" width="400" height="160" class="chartjs-render-monitor" style="display: block; width: 400px; height: 160px;"></canvas>
-        </div>
-    </div>
-</div>
 <div class="row">
     <div class="col-xl-8 col-lg-7">
         <div class="card shadow mb-4">
@@ -118,23 +106,26 @@
                 <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
                     <canvas id="myPieChart" width="400" height="208" class="chartjs-render-monitor" style="display: block; width: 400px; height: 208px;"></canvas>
                 </div>
-                <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-info"></i> Referral
-                    </span>
+                <div class="mt-4 text-center small" id="legend">
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div style="filter: blur(8px);">
+<!-- <div> -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Sales(Weekly) Overview</h6>
+    </div>
+    <div class="card-body">
+        <div class="chart-bar"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+            <canvas id="myBarChart" width="400" height="160" class="chartjs-render-monitor" style="display: block; width: 400px; height: 160px;"></canvas>
+        </div>
+    </div>
 </div>
-
+</div>
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script src="vendor/chart.js/Chart.min.js"></script>
 <script src="js/demo/chart-area-demo.js"></script>

@@ -1,7 +1,7 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
-var $chart_week_data = [];
+var $chart_week_data = [0, 0, 0, 0, 0, 0];
 
 function number_format(number, decimals, dec_point, thousands_sep) {
     // *     example: number_format(1234.56, 2, ',', ' ');
@@ -142,6 +142,7 @@ $(document).ready(function() {
                         $sub_total = $price * entry.item_count;
                         $grand_total += $sub_total;
                     }
+                    console.log($chart_week_data[data_day] += $grand_total);
                     $chart_week_data[data_day] += $grand_total;
                 }
             });
