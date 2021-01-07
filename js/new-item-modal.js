@@ -1,4 +1,17 @@
 //update this then minify
+function calculate(type) {
+    if (type == "retail") {
+        var price = parseFloat($("#input-capital").val());
+        var tax = parseFloat($("#input-tax").val());
+        var total = ((tax / 100) * price) + price;
+        $("#total-item-price2").val(total.toFixed(2));
+    } else {
+        var price = parseFloat($("#input-capital-wholesale").val());
+        var tax = parseFloat($("#input-tax-wholesale").val());
+        var total = ((tax / 100) * price) + price;
+        $("#total-item-price1").val(total.toFixed(2));
+    }
+}
 $(function() {
     $('[data-toggle="tooltip"]').tooltip()
 });
@@ -56,9 +69,16 @@ $(document).on("input", "#u1-val,#u2-val,#divisor", function() {
     var total = (u1 * divisor) + Number(u2);
     $("#item_stock").val(total);
 });
-$(document).on("input", "#divisor, #input-capital-wholesale", function() {
+$(document).on("input", "#input-capital", function() {
+    calculate("retail");
+});
+$(document).on("input", "#divisor, #input-tax", function() {
     $("#input-capital").val(($("#input-capital-wholesale").val() / $("#divisor").val()).toFixed(2));
     calculate("retail");
+});
+$(document).on("input", "#input-capital-wholesale, #input-tax-wholesale", function() {
+    $("#input-capital").val(($("#input-capital-wholesale").val() / $("#divisor").val()).toFixed(2));
+    calculate("wholesale");
 });
 $("#manual-input").change(function() {
     if ($(this).is(':checked')) {

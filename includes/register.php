@@ -2,7 +2,6 @@
     // var_dump($_SESSION);
 ?>
 <div class="container">
-
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
@@ -62,8 +61,8 @@
                                 Register Account
                             </button>
                             <hr>
-                            <a class="btn btn-secondary btn-user btn-block" id="b-lgn">Login</a>
                         </form>
+                        <a class="btn btn-danger btn-user btn-block" id="b-lgn">Back</a>
                         <hr>
                         <div class="text-center">
                             <!-- <a class="small" href="forgot-password.html">Forgot Password?</a> -->
