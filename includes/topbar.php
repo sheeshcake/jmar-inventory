@@ -63,9 +63,9 @@
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 My Account
             </a>
-            <a class="dropdown-item" href="?p=activity" disabled>
+            <a class="dropdown-item" href="?p=notification" disabled>
                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                Activity Log
+                Notification
             </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" data-toggle="modal" id='logout-modal' data-target="#logoutModal">

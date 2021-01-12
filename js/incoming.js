@@ -5,23 +5,21 @@ var $counter = 0;
 
 function reload() {
     setTimeout(function() {
-        if ($(".item").length == 0) {
-            $.ajax({
-                url: url(window.location.href) + "/controller/incoming-get-items.php",
-                method: "GET",
-                success: function(d) {
-                    if ($last_data != d.replace(/\s/g, '')) {
-                        $last_data = d.replace(/\s/g, '');
-                        $("#item_data").html(d);
-                        $t = $('#example').DataTable();
-                        $(document).find("#example_filter").css("position", "sticky");
-                        $(document).find("#example_filter").css("top", "0");
-                        $(document).find("#example_filter").css("background", "white");
-                        $(document).find("#example_filter").css("z-index", "100");
-                    }
+        $.ajax({
+            url: url(window.location.href) + "/controller/incoming-get-items.php",
+            method: "GET",
+            success: function(d) {
+                if ($last_data != d.replace(/\s/g, '')) {
+                    $last_data = d.replace(/\s/g, '');
+                    $("#item_data").html(d);
+                    $t = $('#example').DataTable();
+                    $(document).find("#example_filter").css("position", "sticky");
+                    $(document).find("#example_filter").css("top", "0");
+                    $(document).find("#example_filter").css("background", "white");
+                    $(document).find("#example_filter").css("z-index", "100");
                 }
-            });
-        }
+            }
+        });
         $('#example_wrapper').css("width", "100%");
         reload();
     }, 500);

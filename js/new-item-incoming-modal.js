@@ -51,7 +51,7 @@ $("form#add-item-form").submit(function(e) {
                     });
                 } else {
                     var item_price = data.item_price_wholesale;
-                    var item_count = data.item_stock;
+                    var item_count = $count;
                     var $id = data.item_id;
                     var sub_total = (parseFloat(item_price) * parseFloat($count)).toFixed(2);
                     $("#items").prepend(

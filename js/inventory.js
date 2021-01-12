@@ -1,3 +1,37 @@
+var $t;
+var $last_data;
+var $counter = 0;
+
+
+function reload() {
+    setTimeout(function() {
+        if ($(".item").length == 0) {
+            $.ajax({
+                url: url(window.location.href) + "/controller/get-item-inventory.php",
+                method: "GET",
+                success: function(d) {
+                    if ($last_data != d.replace(/\s/g, '')) {
+                        $last_data = d.replace(/\s/g, '');
+                        $("#item_data").html(d);
+                        $t = $('#example').DataTable();
+                        $(document).find("#example_filter").css("position", "sticky");
+                        $(document).find("#example_filter").css("top", "0");
+                        $(document).find("#example_filter").css("background", "white");
+                        $(document).find("#example_filter").css("z-index", "100");
+                    }
+                }
+            });
+        }
+        $('#example_wrapper').css("width", "100%");
+        reload();
+    }, 500);
+}
+$(document).ready(function() {
+    $("#page-top").toggleClass("sidebar-toggled");
+    $("#accordionSidebar").toggleClass("toggled");
+    reload();
+});
+
 function strtrim(x) {
     return x.replace(/^\s+|\s+$/gm, '');
 }
@@ -56,7 +90,6 @@ $(document).on("click", "#confirm-delete", function() {
             $(".alert").text(data.message);
             $(".alert").fadeTo(3000, 500).slideUp(500, function() {
                 $(".alert").slideUp(500);
-                location.reload();
             });
         }
     });

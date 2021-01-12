@@ -145,7 +145,7 @@
                                     <div class="col-md-6 my-1">
                                         <label for="item-unit">Unit - 2</label>
                                         <input required type="text" class="form-control" id="unit-2" value="U2" readonly>
-                                        <input required type="number" id="u2-val" class="form-control" placeholder="Stock">
+                                        <input required type="number" id="u2-val" class="form-control" value="0" placeholder="Stock" disabled>
                                     </div>
                             </div>
                         </div>
