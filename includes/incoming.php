@@ -56,5 +56,5 @@
         </div>
     </div>
 </div>
-<?php include "new-item-modal.php"; ?>
+<?php include "new-item-incoming-modal.php"; ?>
 <script src="js/incoming.js"></script>

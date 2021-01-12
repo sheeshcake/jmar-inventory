@@ -81,7 +81,7 @@ $(document).on("click", ".add", function() {
                 '</div>'
             );
             $("#total").text((parseFloat($("#total").text()) + (parseFloat(item_price) * parseFloat(item_count))).toFixed(2));
-            $("#total_items").text($counter);
+            $("#total_items").text(parseInt($("#total_items").html()) + 1);
         }
     });
 });
@@ -163,5 +163,5 @@ $(document).on("click", ".remove-item", function() {
     });
     $counter--;
     $("#total").text((parseFloat($("#total").text()) - parseFloat(elem.attr("price"))).toFixed(2));
-    $("#total_items").text($counter);
+    $("#total_items").text(parseInt($("#total_items").html()) - 1);
 });

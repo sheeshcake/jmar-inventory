@@ -28,8 +28,11 @@
                 '$item_img', '$item_name', '$item_brand', '$item_desc', '$item_unit', '$item_price', '$item_tax', '$item_price_wholesale', '$item_unit_divisor', '$item_tax_wholesale', '$item_stock', '$item_added', '$category_id', '$supplier_id')";
             $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: " . mysqli_error($conn), E_USER_ERROR);
             if($result){
-                $data = array("message"=>"Item Added! Refreshing Items Please wait..", "status"=>"success", "id"=>"$conn->insert_id");
-                echo json_encode($data);
+                $last_id = $conn->insert_id;
+                $sql = "SELECT * FROM items WHERE item_id = $last_id";
+                $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: " . mysqli_error($conn), E_USER_ERROR);
+                // $data = array("message"=>"Item Added! Refreshing Items Please wait..", "status"=>"success", "id"=>"$conn->insert_id");
+                echo json_encode($result->fetch_assoc());
             }
         }else{
             $data= array("message"=>"Item Already Added!", "status"=>"warning");

@@ -1,4 +1,4 @@
-<div class="modal fade add-item-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade add-item-modal" id="add-item-modal-incoming" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl ">
     <div class="modal-content">
         <div class="card">
@@ -30,10 +30,10 @@
                        </div>
                        <div class="form-group flex-fill m-1">
                             <div class="input-group">
-                                <textarea class="form-control" id="item-description" rows="10" name="item_desc" placeholder="Item Description"></textarea>
+                                <textarea required class="form-control" id="item-description" rows="10" name="item_desc" placeholder="Item Description"></textarea>
                             </div>
                             <label for="item-unit">Supplier </label>
-                            <select class="form-control" id="supplier" name="supplier" style="width:">
+                            <select required class="form-control" id="supplier" name="supplier" style="width:">
                             <?php
                                 $sql = "SELECT * FROM supplier";
                                 $result = mysqli_query($conn, $sql);
@@ -131,7 +131,6 @@
                                     <input type="hidden" id="item_stock" name="item_stock" class="form-control" placeholder="Stock">
                                         <div class="row pl-2 pr-2">
                                             <select class="form-control w-50" id="item-unit" name="item_unit" required  >
-                                                <option selected disabled>Select</option>
                                                 <option value="Sack">Sack</option>
                                                 <option value="Roll">Roll</option>
                                                 <option value="Box">Box</option>
@@ -152,7 +151,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <input required type="submit"  class="btn btn-primary" name="submit" id="btn-add-item" data-target=".add-item-modal" data-toggle="modal" value="Submit">
+                        <input required type="submit"  class="btn btn-primary" name="submit" id="btn-add-item"  value="Submit">
                     </div>
                     
                 </form>
@@ -161,4 +160,4 @@
     </div>
   </div>
 </div>
-<script src="js/new-item-modal.js"></script>
+<script src="js/new-item-incoming-modal.js"></script>
