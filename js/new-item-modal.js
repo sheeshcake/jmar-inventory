@@ -15,27 +15,43 @@ function calculate(type) {
 $(function() {
     $('[data-toggle="tooltip"]').tooltip()
 });
+
+function validateForm() {
+    console.log("checking..");
+    $("form#add-item-form :input").each(function() {
+        var data = $(this).val();
+        console.log(data);
+        if (data == '') {
+            $(this).addClass("border,border-danger");
+            return false
+        }
+    });
+    return true;
+}
 $("form#add-item-form").submit(function(e) {
     e.preventDefault();
-    var formData = new FormData(this);
-    console.log(formData);
-    $.ajax({
-        url: url(window.location.href) + "/controller/add-item.php",
-        method: "POST",
-        data: formData,
-        success: function(d) {
-            var data = JSON.parse(d);
-            $(".alert").addClass("alert" + data.status);
-            $(".alert").text(data.message);
-            $(".alert").fadeTo(3000, 500).slideUp(500, function() {
-                $(".alert").slideUp(500);
-                location.reload();
-            });
-        },
-        cache: false,
-        contentType: false,
-        processData: false
-    });
+    if (validateForm()) {
+        $('#add-item-modal').modal('toggle');
+        var formData = new FormData(this);
+        console.log(formData);
+        $.ajax({
+            url: url(window.location.href) + "/controller/add-item.php",
+            method: "POST",
+            data: formData,
+            success: function(d) {
+                var data = JSON.parse(d);
+                $(".alert").addClass("alert" + data.status);
+                $(".alert").text(data.message);
+                $(".alert").fadeTo(3000, 500).slideUp(500, function() {
+                    $(".alert").slideUp(500);
+                    location.reload();
+                });
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    }
 });
 $('#image-file').change(function() {
     var input = this;
