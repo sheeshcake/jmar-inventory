@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <input required type="submit"  class="btn btn-primary" name="submit" id="btn-add-item" data-target=".add-item-modal" data-toggle="modal" value="Submit">
+                        <input required type="submit"  class="btn btn-primary" name="submit" id="btn-add-item" value="Submit">
                     </div>
                     
                 </form>
