@@ -91,16 +91,18 @@ $("#add-cat-btn").click(function() {
             $("#input-category").val("");
             $("#add-cat-btn").hide();
             $("#category-message").html(
-                '<div class="alert alert-' + data.status + ' role="alert" style="display:none">' +
+                '<div class="alert alert-' + data.status + ' role="alert" id="category_modal_message" style="display:none">' +
                 data.message +
                 '</div>'
             );
             $("#category").append(
                 '<option value="' + data.id + '">' + data.name + '</option>'
             );
-            $(".alert").show(500);
+            $("#category_modal_message").fadeTo(3000, 500).slideUp(500, function() {
+                $("#category_modal_message").slideUp(500);
+            });
             if (typeof data.name !== 'undefined') {
-                var new_cat = $('<a class="collapse-item" href="?p=inventory&cat=' + data.name + '">' + data.name + '</a>');
+                var new_cat = $('<a class="collapse-item" id="sc_' + data.id + '" href="?p=inventory&cat=' + data.name + '">' + data.name + '</a>');
                 new_cat.hide();
                 new_cat.insertAfter('.cat:last');
                 new_cat.show(500);
@@ -110,6 +112,8 @@ $("#add-cat-btn").click(function() {
                     '<button class="cat-del btn btn-danger btn-sm">Delete</button>' +
                     '<button class="cat-up btn btn-success btn-sm">Update</button>'
                 ]).draw();
+                $(rowNode.column(1).nodes()).attr("contenteditable", "true");
+                console.log(rowNode.column(1).nodes());
                 $t.draw();
             }
         }
