@@ -72,10 +72,25 @@
                             WHERE
                                 purchased_id = '$purchased_id'
                             ";
-                    $result = mysqli_query($conn, $sql);
+                $result = mysqli_query($conn, $sql);
                 if($result){
-                    $data = array("message"=>"Item Voided!", "status"=>"success");
-                    echo json_encode($data);
+                    $sql = "SELECT * FROM purchased_item WHERE purchased_id = '$purchased_id'";
+                    $result = mysqli_query($conn, $sql);
+                    $data = $result->fetch_assoc();
+                    if($data["item_count"] > 0){
+                        $data = array("message"=>"Item Voided!", "status"=>"success");
+                        echo json_encode($data);
+                    }else{
+                        $sql = "DELETE FROM purchased_item WHERE purchased_id = '$purchased_id'";
+                        $result = mysqli_query($conn, $sql);
+                        if($result){
+                            $data = array("message"=>"Item Voided!", "status"=>"success");
+                            echo json_encode($data);
+                        }else{
+                            $data = array("message"=>"An Error Occured!", "status"=>"danger");
+                            echo json_encode($data);
+                        }
+                    }
                 }   
             }else{
                 $data = array("message"=>"An Error Occured!", "status"=>"danger");

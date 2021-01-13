@@ -64,7 +64,7 @@ $(document).on("click", ".open", function() {
                     '</div>' +
                     '</div>' +
                     '<div class="d-flex mb-2">' +
-                    '<input class="form-control m-2 void-count" type="number" item_count="' + element.item_count + '" />' +
+                    '<input class="form-control m-2 void-count" type="number" value="0" item_count="' + element.item_count + '" />' +
                     '<button style="width: 100%;" class="void btn btn-warning m-2" value="' + element.item_id + '" purchased_void_id="' + element.purchased_id + '">Void</button>' +
                     '<button style="width: 100%;" class="damage btn btn-danger m-2" value="' + element.item_id + '" purchased_damage_id="' + element.purchased_id + '">Damage</button>' +
                     '<div class="form-check m-2">' +
