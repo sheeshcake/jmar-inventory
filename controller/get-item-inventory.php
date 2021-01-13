@@ -40,7 +40,24 @@
             <div class="d-flex p-2"><b>Name:&nbsp;</b><p id="name<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_name"]?></p></div>
             <div class="d-flex p-2"><b>Brand:&nbsp;</b><p id="brand<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_brand"]?></p></div>
             <div class="d-flex p-2"><b>Description:&nbsp;</b><p id="desc<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_desc"]?></p></div>
-            <div class="d-flex p-2"><b>Category:&nbsp;</b><p><?php echo $data["category_name"]?></p></div>
+            <div class="d-flex p-2">
+                <b>Category:&nbsp;</b>
+                <p style="width: 1px">
+                    <div class="form-group">
+                        <select class="form-control" style="width: 200px" id="category<?php echo $data["item_id"]?>">
+                        <?php
+                            $sql1 = "SELECT * FROM category";
+                            $result1 = mysqli_query($conn, $sql1);
+                            while($data1 = $result1->fetch_assoc()){
+                        ?>
+                            <option value="<?php echo $data1["category_id"]; ?>" <?php if($data1["category_id"] == $data["category_id"]) echo "selected"; ?>><?php echo $data1["category_name"] ?></option>
+                        <?php
+                            }
+                        ?>
+                        </select>
+                    </div>
+                </p>
+            </div>
             <div class="d-flex p-2"><b>Stock:&nbsp;</b><p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></div>
         </div>
     </td>
@@ -50,6 +67,7 @@
             <div class="d-flex p-2"><b>Capital:&nbsp;₱</b><p id="capital<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_price"]?></p></div>
             <div class="d-flex p-2"><b>Tax:&nbsp;</b><p id="tax<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_tax"]?></p>%</div>
             <div class="d-flex p-2"><b>Price:&nbsp;₱<?php echo $r_price?></b></div>
+            <hr class="sidebar-divider">
             <center><h5><b>Wholesale</b></h5></center>
             <div class="d-flex p-2"><b>Capital:&nbsp;₱</b><p id="capital_w<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_price_wholesale"]?></p></div>
             <div class="d-flex p-2"><b>Tax:&nbsp;</b><p id="tax_w<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_tax_wholesale"]?></p>%</div>

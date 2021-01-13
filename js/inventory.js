@@ -130,6 +130,7 @@ $(document).on("click", ".update", function() {
             item_tax: parseFloat($("#tax" + $id).text()).toFixed(2),
             item_tax_wholesale: parseFloat($("#tax_w" + $id).text()).toFixed(2),
             item_desc: strtrim($("#desc" + $id).text()),
+            category_id: $("#category" + $id).val()
         },
         success: function(d) {
             var data = JSON.parse(d);

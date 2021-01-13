@@ -10,6 +10,7 @@
         $item_price_wholesale = $_POST["item_capital_wholesale"];
         $item_tax_wholesale = $_POST["item_tax_wholesale"];
         $item_desc = $_POST["item_desc"];
+        $category_id = $_POST["category_id"];
         $sql = "UPDATE items
             SET 
                 item_name = '$item_name',
@@ -18,7 +19,8 @@
                 item_tax = '$item_tax',
                 item_price_wholesale = '$item_price_wholesale',
                 item_tax_wholesale = '$item_tax_wholesale',
-                item_desc = '$item_desc'
+                item_desc = '$item_desc',
+                category_id = '$category_id'
             WHERE
                 item_id = '$item_id'
         ";
