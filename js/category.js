@@ -30,6 +30,7 @@ $(document).on("click", ".cat-up", function() {
                 $(this).html(edited);
             });
             $("#sc_" + e.id).html(edited);
+            $("#sc_" + e.id).attr("href", "?p=inventory&cat=" + edited);
         }
     })
 });
