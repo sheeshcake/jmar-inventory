@@ -46,7 +46,7 @@
                 $result = mysqli_query($conn, $sql);
                 while($data = $result->fetch_assoc()){
             ?>
-                <a class="collapse-item cat" href="?p=inventory&cat=<?php echo $data["category_name"] ?>"><?php echo $data["category_name"] ?></a>
+                <a id="sc_<?php echo $data["category_id"] ?>" class="collapse-item cat" href="?p=inventory&cat=<?php echo $data["category_name"] ?>"><?php echo $data["category_name"] ?></a>
             <?php
                 }
 

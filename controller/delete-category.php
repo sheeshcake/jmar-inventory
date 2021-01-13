@@ -5,11 +5,12 @@
         $id = $_POST["id"];
         $sql = "SELECT * FROM category WHERE category_id = '$id'";
         $result = mysqli_query($conn, $sql);
+        $data1 = $result->fetch_assoc();
         if(mysqli_num_rows($result) == 1){
             $sql = "DELETE FROM category WHERE category_id = '$id'";
             $result = mysqli_query($conn, $sql);
             if($result){
-                $data = array("message"=>"Category Deleted!", "status"=>"success");
+                $data = array("message"=>"Category Deleted!", "status"=>"success", "id"=>$data1["category_id"], "name"=>$data1["category_name"]);
                 echo json_encode($data);
             }
         }else{

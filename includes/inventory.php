@@ -43,4 +43,7 @@
     </table>			
 </div>
 <?php include "new-item-modal.php"; ?>
+<script>
+    var $cat = "<?php if(isset($_GET["cat"])) echo $_GET["cat"]; else echo "all";?>";
+</script>
 <script src="js/inventory.js"></script>

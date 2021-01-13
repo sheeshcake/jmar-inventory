@@ -95,9 +95,13 @@ $("#add-cat-btn").click(function() {
                 data.message +
                 '</div>'
             );
+            $("#category").append(
+                '<option value="' + data.id + '">' + data.name + '</option>'
+            );
             $(".alert").show(500);
             if (typeof data.name !== 'undefined') {
-                var new_cat = $('<a style="display: none" class="collapse-item" href="?p=inventory&cat=' + data.name + '">' + data.name + '</a>');
+                var new_cat = $('<a class="collapse-item" href="?p=inventory&cat=' + data.name + '">' + data.name + '</a>');
+                new_cat.hide();
                 new_cat.insertAfter('.cat:last');
                 new_cat.show(500);
                 var rowNode = $t.row.add([

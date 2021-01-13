@@ -1,8 +1,8 @@
 <?php
     include "../controller/connect.php";
     $result;
-    if(isset($_GET["cat"])){
-        $cat = $_GET["cat"];
+    if($_POST["cat"] != "all"){
+        $cat = $_POST["cat"];
         $sql = "SELECT * FROM items 
         INNER JOIN
         category ON category.category_id = items.category_id

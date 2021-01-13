@@ -8,7 +8,10 @@ function reload() {
         if ($(".item").length == 0) {
             $.ajax({
                 url: url(window.location.href) + "/controller/get-item-inventory.php",
-                method: "GET",
+                method: "POST",
+                data: {
+                    cat: $cat
+                },
                 success: function(d) {
                     if ($last_data != d.replace(/\s/g, '')) {
                         $last_data = d.replace(/\s/g, '');
