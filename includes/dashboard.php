@@ -113,19 +113,23 @@
         </div>
     </div>
 </div>
-<div class="card shadow mb-4 p-3">
-    <div class="input-group mb-3 row">
-        <div class="input-group-prepend pl-1">
-            <span class="input-group-text" id="date_label">Date</span>
-        </div>
-        <input type="date" class="form-control mx-1" aria-label="Date" aria-describedby="date_label" id="date-pick">
-        <button class="btn btn-secondary mx-1" id="remove-chart">Remove Last</button>
-        <button class="btn btn-danger mx-1" id="clear-chart">Clear All</button>
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Calender Chart</h6>
     </div>
-    <div id="container">
-		<canvas id="canvas"></canvas>
-	</div>
-    <div id="result"></div>
+    <div class="card-body">
+        <div class="input-group mb-3 row">
+            <div class="input-group-prepend pl-1">
+                <span class="input-group-text" id="date_label">Date</span>
+            </div>
+            <input type="date" class="form-control mx-1" aria-label="Date" aria-describedby="date_label" id="date-pick">
+            <button class="btn btn-secondary mx-1" id="remove-chart">Remove Last</button>
+            <button class="btn btn-danger mx-1" id="clear-chart">Clear All</button>
+        </div>
+        <div id="container">
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
 </div>
 <div style="filter: blur(8px);">
 <!-- <div> -->
