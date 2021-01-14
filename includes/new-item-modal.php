@@ -131,7 +131,7 @@
                                     <input type="hidden" id="item_stock" name="item_stock" class="form-control" placeholder="Stock">
                                         <div class="row pl-2 pr-2">
                                             <select class="form-control w-50" id="item-unit" name="item_unit" required  >
-                                                <option selected disabled>Select</option>
+                                                <option disabled>Select</option>
                                                 <option value="Sack">Sack</option>
                                                 <option value="Roll">Roll</option>
                                                 <option value="Box">Box</option>

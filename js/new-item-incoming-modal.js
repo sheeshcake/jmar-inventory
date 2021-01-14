@@ -37,7 +37,7 @@ $("form#add-item-form").submit(function(e) {
         formData.set("item_stock", 0);
         console.log(formData);
         $.ajax({
-            url: url(window.location.href) + "/controller/add-item.php",
+            url: url(window.location.href) + "/controller/add-item-incoming.php",
             method: "POST",
             data: formData,
             success: function(d) {

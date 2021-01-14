@@ -40,11 +40,11 @@ $("form#add-item-form").submit(function(e) {
             data: formData,
             success: function(d) {
                 var data = JSON.parse(d);
+                console.log(d);
                 $(".alert").addClass("alert" + data.status);
-                $(".alert").text(data.message);
+                $(".alert").html(data.message);
                 $(".alert").fadeTo(3000, 500).slideUp(500, function() {
                     $(".alert").slideUp(500);
-                    location.reload();
                 });
             },
             cache: false,
