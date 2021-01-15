@@ -6,7 +6,7 @@
         // var_dump($_FILES);
         // Add Code 
         $item_img = urldecode($_FILES["item_img"]["name"]);
-        move_uploaded_file($_FILES["item_img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/jmar-inventory-1/img/item/" . $item_img);
+        move_uploaded_file($_FILES["item_img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/img/item/" . $item_img);
         $item_name = $_POST["item_name"];
         $item_brand = $_POST["item_brand"];
         $item_desc = $_POST["item_desc"];
