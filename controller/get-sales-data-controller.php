@@ -115,7 +115,11 @@
                     GROUP BY c.category_id
             ";
             $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
-            echo json_encode($result->fetch_all(MYSQLI_ASSOC));
+            $all_data = [];
+            while($data = $result->fetch_assoc()){
+                array_push($all_data, $data);
+            }
+            echo json_encode($all_data);
         }else if($type == "calendar-daily"){
             $date = $_POST["date"];
             $date_now = date("m-d-Y", strtotime($date));

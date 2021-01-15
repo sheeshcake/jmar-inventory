@@ -32,6 +32,7 @@
     <td>
         <?php            
             echo "<b>₱" . number_format($r_price, 2) . " per " . $u2_name . "</b></br>";
+            echo '<hr class="sidebar-divider">';
             echo "<b>₱" . number_format($w_price, 2) . " per " . $data["item_unit"] . "</b>";
         ?>
     </td>

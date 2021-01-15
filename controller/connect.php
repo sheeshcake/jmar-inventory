@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jmar-db";
+$username = "jmartest_jmar";
+$password = "I!hqGB=zWZQ&";
+$dbname = "jmartest_db";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
