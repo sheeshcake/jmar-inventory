@@ -17,7 +17,7 @@
   This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
 </div>
 <div class="row mb-4">
-    <div class="shadow m-1 p-3" style="max-width: 1200px; min-width: 1200px; max-height: 800px; overflow-y: scroll;">
+    <div class="shadow m-1 p-3" style="max-width: 72%; max-height: 800px; overflow-y: scroll;">
         <table id="example"  class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -40,11 +40,11 @@
             </tbody>
         </table>			
     </div>
-    <div class="shadow m-1 p-3" style="max-height: 800px">
+    <div class="shadow m-1 p-3" style="max-height: 800px; max-width: 25%;">
         <h4 id="transaction" >New Transaction</h4>
         <div class="alert alert-success" id="trans-message" role="alert" style="display: none">
         </div>
-        <div class="overflow-auto" style="max-height: 600px; min-height: 599px;min-width: 400px" id="items">
+        <div class="overflow-auto" style="max-height: 600px; min-height: 599px;min-width: 350px" id="items">
         </div>
         <div class="mt-2">
             <div class="d-flex"><p><b>Total Items:&nbsp;</b></p><p id="total_items">0</p></div>

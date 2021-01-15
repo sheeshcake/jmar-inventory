@@ -1,5 +1,5 @@
 <?php
-$servername = "localhost";
+$servername = "89.34.18.57";
 $username = "jmartest_jmar";
 $password = "I!hqGB=zWZQ&";
 $dbname = "jmartest_db";
