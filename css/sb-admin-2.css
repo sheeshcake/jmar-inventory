@@ -11210,7 +11210,7 @@ a:focus {
 }
 
 .bg-login-image {
-    background: url(https://cpng.pikpng.com/pngl/s/209-2090002_your-logo-here-png-monochrome-clipart.png);
+    background: url("img/logo-login.jpg");
     background-position: inherit;
     background-size: cover;
     background-clip: content-box;

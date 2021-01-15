@@ -11213,13 +11213,13 @@ a:focus {
 }
 
 .bg-login-image {
-    background: url(https://cpng.pikpng.com/pngl/s/209-2090002_your-logo-here-png-monochrome-clipart.png);
+    background: url("../img/logo-login.jpg");
     background-position: center;
     background-size: cover;
 }
 
 .bg-register-image {
-    background: url(https://cpng.pikpng.com/pngl/s/209-2090002_your-logo-here-png-monochrome-clipart.png);
+    background: url("../img/logo-login.jpg");
     background-position: center;
     background-size: cover;
 }

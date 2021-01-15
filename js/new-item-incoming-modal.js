@@ -30,7 +30,8 @@ function validateForm() {
 }
 $("form#add-item-form").submit(function(e) {
     e.preventDefault();
-    var $count = parseFloat($(this).find("#u1-val").val()) * parseFloat($(this).find("#divisor").val()) + parseFloat($(this).find("#u2-val").val());
+    var $count_by_u2 = parseFloat($(this).find("#u1-val").val()) * parseFloat($(this).find("#divisor").val());
+    var $count = parseFloat($(this).find("#u1-val").val());
     if (validateForm()) {
         $('#add-item-modal-incoming').modal('toggle');
         var formData = new FormData(this);
@@ -51,7 +52,7 @@ $("form#add-item-form").submit(function(e) {
                     });
                 } else {
                     var item_price = data.item_price_wholesale;
-                    var item_count = $count;
+                    var item_count = $count_by_u2;
                     var $id = data.item_id;
                     var sub_total = (parseFloat(item_price) * parseFloat($count)).toFixed(2);
                     $("#items").prepend(
@@ -72,9 +73,10 @@ $("form#add-item-form").submit(function(e) {
                         '</div>'
                     );
                     var $counter = parseInt($("#total_items").html()) + 1;
-                    $("#total").text((parseFloat($("#total").text()) + (parseFloat(item_price) * parseFloat(item_count))).toFixed(2));
+                    $("#total").text((parseFloat($("#total").text()) + (parseFloat(item_price) * parseFloat($count))).toFixed(2));
                     $("#total_items").text($counter);
                     $(".submit-transaction").slideDown();
+                    $('#add-item-form')[0].reset();
                 }
             },
             cache: false,
