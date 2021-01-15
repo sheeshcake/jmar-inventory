@@ -5,9 +5,11 @@
         "encoder" => ["account","all-items","inventory", "notification", "incoming", "default" =>"inventory"],
         "accountant" => ["account", "transaction", "return", "transaction-new", "default" =>"transaction-new"]
     ];
-    function guard(){
+    function guard($folder = false){
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/";
         if(!isset($_SESSION["user"])){
+            header('Location:' . $actual_link);
+        }else if($folder){
             header('Location:' . $actual_link);
         }else{
             return true;

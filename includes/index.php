@@ -1,4 +1,4 @@
 <?php
     include "../controller/core.php";
-    guard();
+    guard(true);
 ?>
