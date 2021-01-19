@@ -59,6 +59,14 @@ $("#d-btn").click(function() {
     window.location.href = res.join("/") + "/includes/damaged.php";
 });
 $(document).ready(function() {
+    $('#table-item-monitor').DataTable({
+        "order": [
+            [3, "asc"]
+        ],
+        scrollY: '50vh',
+        scrollCollapse: true,
+        paging: false
+    });
     var $now = new Date();
     var strDateTime = [
         [

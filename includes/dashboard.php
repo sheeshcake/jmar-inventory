@@ -113,6 +113,63 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Item Monitoring</h6>
+        </div>
+        <div class="card-body">
+            <?php
+                include "controller/connect.php";
+                $sql = "SELECT * FROM items INNER JOIN category ON items.category_id = category.category_id ORDER BY items.item_stock ASC";
+                $result = mysqli_query($conn, $sql);
+            ?>
+            <table class="table table-striped" id="table-item-monitor">
+                <thead>
+                    <th>Item ID</th>
+                    <th>Image</th>
+                    <th>Item Name & Description</th>
+                    <th>Item Status</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                <?php
+                while($data = $result->fetch_assoc()){
+                ?>
+                    <tr>
+                        <td><?php echo $data["item_id"] ?></td>
+                        <td>
+                            <img style="width: 100px; height: 100px" src="img/item/<?php echo $data["item_img"] ?>" alt="">
+                            
+                        </td>
+                        <td>
+                            <p><b><?php echo $data["item_name"] ?></b></p>
+                            <p><?php echo $data["item_desc"] ?></p>
+                        </td>
+                        <td>
+                            <?php
+                                if((int)$data["item_stock"] == 0){
+                                    echo '<input type="text" class="form-control is-invalid" value="Out Of Stock" readonly="">';
+                                }else if((int)$data["item_stock"] <= 2){
+                                    echo '<input type="text" class="form-control border border-warning is-invalid" value="' . $data["item_stock"] . '" readonly="">';
+                                }else{
+                                    echo '<input type="text" class="form-control is-valid" value="' . $data["item_stock"] . '" readonly="">';
+                                }
+                            ?>
+                        </td>
+                        <td>
+                                <button class="btn btn-primary">Report</button>
+                        </td>
+                    </tr>
+                <?php
+                    }
+                ?>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Calender Chart</h6>
