@@ -44,7 +44,8 @@
         <h4 id="transaction" >New Transaction</h4>
         <div class="alert alert-success" id="trans-message" role="alert" style="display: none">
         </div>
-        <div class="overflow-auto" style="max-height: 600px; min-height: 599px;min-width: 350px" id="items">
+        <input required type="text" class="form-control mb-1" id="courier" placeholder="Courier Name">
+        <div class="overflow-auto" style="max-height: 550px; min-height: 550px;min-width: 350px" id="items">
         </div>
         <div class="mt-2">
             <div class="d-flex"><p><b>Total Items:&nbsp;</b></p><p id="total_items">0</p></div>

@@ -60,9 +60,7 @@ $("#d-btn").click(function() {
 });
 $(document).ready(function() {
     $('#table-item-monitor').DataTable({
-        "order": [
-            [3, "asc"]
-        ],
+        "bSort": false,
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false

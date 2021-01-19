@@ -127,45 +127,52 @@ function formatAMPM(date) {
     return strTime;
 }
 $(".submit-transaction").click(function() {
-    $counter = 0;
-    var now = new Date();
-    var strDateTime = [
-        [
-            AddZero(now.getMonth() + 1),
-            AddZero(now.getDate()),
-            now.getFullYear()
-        ].join("-"), formatAMPM(new Date)
-    ].join(" ");
-    var $date = strDateTime;
-    var $all = $(".item").map(function() {
-        return $(this).attr("price") + "," + $(this).attr("item-id") + "," + $(this).attr("item-count") + "," + $(this).attr("item-unit");
-    }).get();
-    $.ajax({
-        url: url(window.location.href) + "/controller/transaction-new-controller.php",
-        method: "POST",
-        data: {
-            date: $date,
-            type: "transaction",
-            trans_type: "outgoing",
-            data: $all
-        },
-        success: function(d) {
-            var data = JSON.parse(d);
-            if (data["status"] == "success") {
-                $(".item").map(function() {
-                    $(this).fadeTo(1000, 500).slideUp(500, function() {
-                        $("#total").text(0);
-                        $("#total_items").text(0);
-                        $(this).remove();
+    if ($("#courier").val() != "") {
+        $counter = 0;
+        var now = new Date();
+        var strDateTime = [
+            [
+                AddZero(now.getMonth() + 1),
+                AddZero(now.getDate()),
+                now.getFullYear()
+            ].join("-"), formatAMPM(new Date)
+        ].join(" ");
+        var $date = strDateTime;
+        var $all = $(".item").map(function() {
+            return $(this).attr("price") + "," + $(this).attr("item-id") + "," + $(this).attr("item-count") + "," + $(this).attr("item-unit");
+        }).get();
+        $.ajax({
+            url: url(window.location.href) + "/controller/transaction-new-controller.php",
+            method: "POST",
+            data: {
+                date: $date,
+                type: "transaction",
+                trans_type: "outgoing",
+                courier: $("#courier").val(),
+                data: $all
+            },
+            success: function(d) {
+                console.log(d);
+                var data = JSON.parse(d);
+                if (data["status"] == "success") {
+                    $(".item").map(function() {
+                        $(this).fadeTo(1000, 500).slideUp(500, function() {
+                            $("#total").text(0);
+                            $("#total_items").text(0);
+                            $(this).remove();
+                        });
                     });
-                });
-                $(".submit-transaction").slideUp();
-                $("#trans-message").fadeTo(3000, 500).slideUp(500, function() {}).text(data["message"]).attr('class', 'alert-' + data['status']).addClass('alert');
-            } else {
+                    $(".submit-transaction").slideUp();
+                    $("#trans-message").fadeTo(3000, 500).slideUp(500, function() {}).text(data["message"]).attr('class', 'alert-' + data['status']).addClass('alert');
+                } else {
 
+                }
             }
-        }
-    })
+        });
+    } else {
+        alert("Please Enter The Courier Name\nPut 'None' if over the counter");
+        $("#courier").focus();
+    }
 });
 $(document).on("click", ".remove-item", function() {
     $btn = $(this);

@@ -16,6 +16,7 @@
                 <th>Transaction ID</th>
                 <th>Transaction Date Time</th>
                 <th>Total Items</th>
+                <th>Courier</th>
                 <th>Total Paid</th>
                 <th></th>
             </tr>
@@ -25,6 +26,7 @@
                 <th>Transaction ID</th>
                 <th>Transaction Date Time</th>
                 <th>Total Items</th>
+                <th>Courier</th>
                 <th>Total Paid</th>
                 <th></th>
             </tr>

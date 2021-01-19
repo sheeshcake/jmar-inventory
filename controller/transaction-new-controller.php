@@ -12,8 +12,10 @@
             $arr = $_POST["data"];
             $date_time = $_POST["date"];
             $type = $_POST["trans_type"];
-            $sql = "INSERT INTO transactions (transaction_type, transaction_datetime)
-                VALUES ('$type','$date_time')
+            $user_id = $_SESSION["user"]["user_id"];
+            $courier = $_POST["courier"];
+            $sql = "INSERT INTO transactions (transaction_type, transaction_datetime, user_id, courier)
+                VALUES ('$type','$date_time', '$user_id', '$courier')
             ";
             $result = mysqli_query($conn, $sql);
             $last_id = mysqli_insert_id($conn);

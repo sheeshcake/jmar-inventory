@@ -121,7 +121,7 @@
         <div class="card-body">
             <?php
                 include "controller/connect.php";
-                $sql = "SELECT * FROM items INNER JOIN category ON items.category_id = category.category_id ORDER BY items.item_stock ASC";
+                $sql = "SELECT * FROM items INNER JOIN category ON items.category_id = category.category_id ORDER BY CAST(CAST(items.item_stock AS float)/CAST(items.item_unit_divisor AS float) AS float) ASC";
                 $result = mysqli_query($conn, $sql);
             ?>
             <table class="table table-striped" id="table-item-monitor">
@@ -130,11 +130,16 @@
                     <th>Image</th>
                     <th>Item Name & Description</th>
                     <th>Item Status</th>
-                    <th></th>
                 </thead>
                 <tbody>
                 <?php
                 while($data = $result->fetch_assoc()){
+                    $u2_name = "";
+                    if($data["item_unit"] == "Box") $u2_name = "pieces";
+                    else if($data["item_unit"] == "Roll") $u2_name = "meter(s)";
+                    else if($data["item_unit"] == "Sack") $u2_name = "kilo(s)";
+                    $u1 = number_format((int)$data["item_stock"] / (int)$data["item_unit_divisor"], 0);
+                    $u2 = (int)$data["item_stock"] % (int)$data["item_unit_divisor"];
                 ?>
                     <tr>
                         <td><?php echo $data["item_id"] ?></td>
@@ -148,17 +153,14 @@
                         </td>
                         <td>
                             <?php
-                                if((int)$data["item_stock"] == 0){
+                                if((int)$data["item_stock"] / (int)$data["item_unit_divisor"] == 0){
                                     echo '<input type="text" class="form-control is-invalid" value="Out Of Stock" readonly="">';
-                                }else if((int)$data["item_stock"] <= 2){
-                                    echo '<input type="text" class="form-control border border-warning is-invalid" value="' . $data["item_stock"] . '" readonly="">';
+                                }else if((int)$data["item_stock"] / (int)$data["item_unit_divisor"] <= 2){
+                                    echo '<input type="text" class="form-control border border-warning is-invalid" value="' . $u1 . " " . $data["item_unit"] . " " . $u2 . " " . $u2_name . '" readonly="">';
                                 }else{
-                                    echo '<input type="text" class="form-control is-valid" value="' . $data["item_stock"] . '" readonly="">';
+                                    echo '<input type="text" class="form-control is-valid" value="' . $u1 . " "  . $data["item_unit"] . " " . $u2 . " " . $u2_name . '" readonly="">';
                                 }
                             ?>
-                        </td>
-                        <td>
-                                <button class="btn btn-primary">Report</button>
                         </td>
                     </tr>
                 <?php
@@ -188,8 +190,7 @@
         </div>
     </div>
 </div>
-<div style="filter: blur(8px);">
-<!-- <div> -->
+<!-- <div style="filter: blur(8px);">
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Sales(Weekly) Overview</h6>
@@ -200,7 +201,7 @@
         </div>
     </div>
 </div>
-</div>
+</div> -->
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script src="vendor/chart.js/Chart.min.js"></script>
 <script src="js/demo/chart-area-demo.js"></script>

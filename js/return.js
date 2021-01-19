@@ -28,7 +28,9 @@ $(document).on("click", ".open", function() {
         },
         success: function(d) {
             var data = JSON.parse(d);
+            console.log(d);
             $(".modal-body").html("");
+            $(".modal-body").append("<p><b>Courier:&nbsp;</b>" + data[0].courier + "</b></p>");
             data.forEach(function(element) {
                 if (element.item_type == "retail") {
                     var price = (((parseFloat(element.item_tax) / 100) * parseFloat(element.item_price)) + parseFloat(element.item_price)).toFixed(2);
