@@ -17,7 +17,7 @@
   This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
 </div>
 <div class="row mb-4">
-    <div class="shadow m-1 p-3" style="max-width: 72%; max-height: 800px; overflow-y: scroll;">
+    <div class="shadow m-1 p-3" style="max-width: 65%; max-height: 800px; overflow-y: scroll;">
         <table id="example"  class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -40,16 +40,29 @@
             </tbody>
         </table>			
     </div>
-    <div class="shadow m-1 p-3" style="max-height: 800px; max-width: 25%;">
+    <div class="shadow m-1 p-3" style="max-height: 1000px; width: 34%;">
         <h4 id="transaction" >New Transaction</h4>
         <div class="alert alert-success" id="trans-message" role="alert" style="display: none">
         </div>
-        <input required type="text" class="form-control mb-1" id="courier" placeholder="Courier Name">
-        <div class="overflow-auto" style="max-height: 550px; min-height: 550px;min-width: 350px" id="items">
+        <div class="d-flex"><p>FOR DELIVERY?</p>
+            <input type="radio" id="delivery" name="answer" value="yes" />YES&nbsp;&nbsp;<br>
+        <input type="radio" name="answer" value="no">
+        <label for="male">NO</label><br>
+        </div>
+        <input style="display:none;" required type="text" class="form-control mb-1" id="courier" name="courier" placeholder="Courier Name">
+        <div class="overflow-auto" style="max-height: 470px; min-height: 470px;min-width: 350px" id="items">
         </div>
         <div class="mt-2">
-            <div class="d-flex"><p><b>Total Items:&nbsp;</b></p><p id="total_items">0</p></div>
-            <div class="d-flex"><p><b>Total:&nbsp;</b>₱</p><p id="total">0</p></div>
+            <div class="d-flex"><p><b>Items:&nbsp;</b></p><p id="total_items">0</p></div>
+            <div class="d-flex"><p><b>TOTAL AMOUNT:&nbsp;</b>₱</p><p id="total">0</p></div>
+            <div class="d-flex">
+                <p><b>CASH:</b></p>
+                <input required type="number" class="form-control mb-1" id="cash">
+            </div>
+            <div class="d-flex">
+                <p><b>CHANGE:</b></p>
+                <p><b id="change"></b></p>
+            </div>
             <button class="submit-transaction btn btn-primary" style="display: none; min-width: 100%">Submit</button>
         </div>
     </div>

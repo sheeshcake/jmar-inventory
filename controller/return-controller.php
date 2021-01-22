@@ -19,8 +19,11 @@
                     WHERE 
                         transactions.transaction_id = $id";
             $result = mysqli_query($conn, $sql);
-            $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            echo json_encode($data);
+            $all_data = [];
+            while($data = $result->fetch_assoc()){
+                array_push($all_data, $data);
+            }
+            echo json_encode($all_data);
         }else if($_POST["type"] == "return"){
             
         }else if($_POST["type"] == "damaged"){

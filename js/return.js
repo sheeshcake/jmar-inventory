@@ -29,6 +29,7 @@ $(document).on("click", ".open", function() {
         success: function(d) {
             var data = JSON.parse(d);
             console.log(d);
+            var $total = 0;
             $(".modal-body").html("");
             $(".modal-body").append("<p><b>Courier:&nbsp;</b>" + data[0].courier + "</b></p>");
             data.forEach(function(element) {
@@ -76,7 +77,14 @@ $(document).on("click", ".open", function() {
                     '</div> ' +
                     '</div> '
                 );
+                $total = (parseFloat($total) + parseFloat(formatter(price * unit_count))).toFixed(2);
             });
+            $(".modal-body").append(
+                "<p><b>Total:&nbsp;</b><b class='float-right'>₱" + $total + "</b></p>" +
+                "<p><b>Cash:&nbsp;</b><b class='float-right'>₱" + data[0].cash + "</b></p>" +
+                "<hr class='sidebar-divider'>" +
+                "<p><b>Change:&nbsp;</b><b class='float-right'>₱" + (parseFloat(data[0].cash) - $total).toFixed(2) + "</b></p>"
+            );
         }
     });
 });

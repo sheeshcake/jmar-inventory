@@ -52,7 +52,7 @@
         }
         if($_FILES["user_img"]["name"] != ""){
             $user_img = urldecode($_FILES["user_img"]["name"]);
-            move_uploaded_file($_FILES["user_img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/jmar-inventory-1/img/" . $user_img);
+            move_uploaded_file($_FILES["user_img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/img/" . $user_img);
             $sql = "UPDATE user
                     SET user_img = '$user_img'
                     WHERE user_id = '$user_id'

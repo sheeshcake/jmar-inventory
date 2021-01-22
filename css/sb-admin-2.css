@@ -215,7 +215,7 @@ figure {
 }
 
 img {
-    min-width: 50%;
+    min-width: 37%;
     vertical-align: middle;
     border-style: none;
 }
@@ -631,8 +631,8 @@ pre code {
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin-right: -0.75rem;
-    margin-left: -0.75rem;
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
 }
 
 .no-gutters {
@@ -4769,7 +4769,7 @@ input[type="button"].btn-block {
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
-    padding: 1.25rem;
+    padding: 0.25rem;
     border: ridge;
 }
 
@@ -8014,6 +8014,7 @@ button.bg-dark:focus {
 .mt-2,
 .my-2 {
     margin-top: 0.5rem !important;
+    border-top-style: groove;
 }
 
 .mr-2,
