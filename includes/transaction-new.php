@@ -52,7 +52,7 @@
             <div class="flex-fill m-1">
                 <div class="d-flex">
                     <input style="display:none;" required type="text" class="form-control mb-1" id="courier" name="courier" placeholder="Courier Name">
-                    <select class="form-control w-50" id="payment" name="payment">
+                    <select class="form-control w-50" id="payment" name="payment" style="display:none;">
                                 <option value="cod">COD</option>
                                 <option value="Roll">Term 7(days)</option>
                                 <option value="Box">Term 15(days)</option>

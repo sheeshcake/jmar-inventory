@@ -32,6 +32,7 @@ function reload() {
     }, 500);
 }
 $(document).ready(function() {
+    $("#customer").tooltip();
     $("#page-top").toggleClass("sidebar-toggled");
     $("#accordionSidebar").toggleClass("toggled");
     reload();
