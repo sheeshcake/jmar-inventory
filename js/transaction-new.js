@@ -228,8 +228,14 @@ $(document).ready(function() {
     $("input[type='radio']").change(function() {
         if ($(this).val() == "yes") {
             $("#courier").show();
+            $("#payment").show();
+            $("#customer").show();
+
+
         } else {
             $("#courier").hide();
+            $("#payment").hide();
+            $("#customer").hide();
         }
     });
 });
