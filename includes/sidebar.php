@@ -10,7 +10,6 @@
             </a>
 
             <?php sidebar_core() ?>
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

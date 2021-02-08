@@ -631,8 +631,8 @@ pre code {
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin-right: 0.25rem;
-    margin-left: 0.25rem;
+    margin-right: 2.25rem;
+    margin-left: 4.25rem;
 }
 
 .no-gutters {

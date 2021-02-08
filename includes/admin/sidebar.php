@@ -74,8 +74,31 @@
         <i class="fas fa-fw fa-user"></i>
         <span>My Account</span>
     </a>
+    <a class="nav-link" id="note-button">
+    <i class="fa fa-sticky-note" aria-hidden="true"></i>
+        <span>Open Stickynotes</span>
+    </a>
 </li>
+<div id="notes" style="z-index: 100">
+    <div class="bg-warning border-rounded">
+        <h5 class="float-left">Notes</h5>
+        <button class="btn float-right" id="minimize-note"><i class="fa fa-window-minimize" aria-hidden="true"></i></button>
+        <?php
+            $sql = "SELECT * FROM notes WHERE user_id = '" . $_SESSION["user"]["user_id"] . "'";
+            $result = mysqli_query($conn, $sql);
+            if($result){
+                $data = $result->fetch_assoc();
+            }
+        ?>
+        <input type="text" id="note_note_id" value="<?php if(isset($data))echo $data["note_id"]["note_id"] ?>" hidden>
+        <input type="text" id="note_user_id" value="<?php echo $_SESSION["user"]["user_id"] ?>" hidden>
+        <div class="card-body" id="note-data" style="min-heigth: 200px">
+            <textarea name="note" id="note-field" style="width:100%;"><?php if(isset($data))echo $data["note_data"]; ?></textarea>
+        </div>
+    </div>
+</div>
 <?php include "includes/sidebar-category.php"; ?>
+<script src="js/note.js"></script>
 <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
