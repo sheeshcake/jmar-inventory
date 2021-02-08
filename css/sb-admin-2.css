@@ -2491,7 +2491,7 @@ fieldset:disabled a.btn {
 .btn-primary {
     color: #fff;
     background-color: #3a3f47;
-    border-color: ##bbbbbb;
+    border-color: #bbbbbb;
 }
 
 .btn-primary:hover {
@@ -3134,7 +3134,7 @@ fieldset:disabled a.btn {
     border-radius: 0.3rem;
 }
 
-,
+
 .btn-group-sm>.btn {
     height: 50px;
     border-color: #bbbbbb;
@@ -4797,7 +4797,7 @@ input[type="button"].btn-block {
 .card-header {
     padding: 0.75rem 1.25rem;
     margin-bottom: 0;
-    background-color: ##e74a3b47;
+    background-color: #e74a3b47;
     border-bottom: 1px solid #e3e6f0;
 }
 
@@ -7900,7 +7900,7 @@ button.bg-dark:focus {
 }
 
 .w-50 {
-    width: 75% !important;
+    width: 50% !important;
 }
 
 .w-75 {
@@ -10093,7 +10093,7 @@ a.text-dark:focus {
     }
     .table-bordered th,
     .table-bordered td {
-        border: 1px solid ##bbbbbb !important;
+        border: 1px solid s#bbbbbb !important;
     }
     .table-dark {
         color: inherit;
