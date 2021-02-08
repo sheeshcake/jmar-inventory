@@ -90,7 +90,7 @@
                 $data = $result->fetch_assoc();
             }
         ?>
-        <input type="text" id="note_note_id" value="<?php if(isset($data))echo $data["note_id"]["note_id"] ?>" hidden>
+        <input type="text" id="note_note_id" value="<?php if(isset($data))echo $data["note_id"] ?>" hidden>
         <input type="text" id="note_user_id" value="<?php echo $_SESSION["user"]["user_id"] ?>" hidden>
         <div class="card-body" id="note-data" style="min-heigth: 200px">
             <textarea name="note" id="note-field" style="width:100%;"><?php if(isset($data))echo $data["note_data"]; ?></textarea>
