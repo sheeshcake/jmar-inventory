@@ -49,7 +49,22 @@
         <input type="radio" name="answer" value="no">
         <label for="male">NO</label><br>
         </div>
-        <input style="display:none;" required type="text" class="form-control mb-1" id="courier" name="courier" placeholder="Courier Name">
+            <div class="flex-fill m-1">
+                <div class="d-flex">
+                    <input style="display:none;" required type="text" class="form-control mb-1" id="courier" name="courier" placeholder="Courier Name">
+                    <select class="form-control w-50" id="payment" name="payment">
+                                <option value="cod">COD</option>
+                                <option value="Roll">Term 7(days)</option>
+                                <option value="Box">Term 15(days)</option>
+                                <option value="Box">Term 30(days)</option>
+                                <option value="Box">Term 60(days)</option>
+                                <option value="Box">Term 90(days)</option>
+                                <option value="Box"></option>
+                    </select>
+                    <input style="display:none;" required type="text" class="form-control mb-1" id="customer" name="customer" placeholder="Customer Details" data-toggle="tooltip" data-placement="bottom" title="Customer Name, Adderess & Contact No.">
+                    
+                </div>
+            </div>
         <div class="overflow-auto" style="max-height: 470px; min-height: 470px;min-width: 350px" id="items">
         </div>
         <div class="mt-2">
