@@ -1,12 +1,10 @@
 <?php
     include "../controller/connect.php";
     session_start();
-    if(isset($_FILES["item_img"]["name"])){
+    if(isset($_POST["submit"])){
         // var_dump($_POST);
         // var_dump($_FILES);
         // Add Code 
-        $item_img = urldecode($_FILES["item_img"]["name"]);
-        move_uploaded_file($_FILES["item_img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/img/item/" . $item_img);
         $item_name = $_POST["item_name"];
         $item_brand = $_POST["item_brand"];
         $item_desc = $_POST["item_desc"];
@@ -24,6 +22,11 @@
         $sql = "SELECT * FROM items WHERE item_name = '$item_name' and item_brand='$item_brand'";
         $result = mysqli_query($conn, $sql);
         if(mysqli_num_rows($result) == 0){
+            $item_img = "item.jpg";
+            if(isset($_FILES["item_img"])){
+                $item_img = urldecode($_FILES["item_img"]["name"]);
+                move_uploaded_file($_FILES["item_img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/img/item/" . $item_img);
+            }
             $sql = "INSERT INTO items (item_img, item_name, item_brand, item_desc, item_unit, item_price, item_tax, item_price_wholesale, item_unit_divisor, item_tax_wholesale, item_stock, item_added, category_id, supplier_id) VALUES (
                 '$item_img', '$item_name', '$item_brand', '$item_desc', '$item_unit', '$item_price', '$item_tax', '$item_price_wholesale', '$item_unit_divisor', '$item_tax_wholesale', '$item_stock', '$item_added', '$category_id', '$supplier_id')";
             $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: " . mysqli_error($conn), E_USER_ERROR);

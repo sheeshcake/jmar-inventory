@@ -14,9 +14,12 @@
             $type = $_POST["trans_type"];
             $user_id = $_SESSION["user"]["user_id"];
             $courier = $_POST["courier"];
+            $payment = $_POST["payment"];
+            $customer = $_POST["customer"];
             $cash = $_POST["cash"];
-            $sql = "INSERT INTO transactions (transaction_type, transaction_datetime, user_id, courier, cash)
-                VALUES ('$type','$date_time', '$user_id', '$courier','$cash')
+            $reciept_no = $_POST["reciept_no"];
+            $sql = "INSERT INTO transactions (reciept_no, transaction_type, transaction_datetime, user_id, courier, payment, customer, cash)
+                VALUES ('$reciept_no','$type','$date_time', '$user_id', '$courier','$payment','$customer','$cash')
             ";
             $result = mysqli_query($conn, $sql);
             $last_id = mysqli_insert_id($conn);

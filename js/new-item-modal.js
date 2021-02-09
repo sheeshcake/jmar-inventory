@@ -33,6 +33,7 @@ $("form#add-item-form").submit(function(e) {
     if (validateForm()) {
         $('#add-item-modal').modal('toggle');
         var formData = new FormData(this);
+        formData.set("submit", "submit");
         console.log(formData);
         $.ajax({
             url: url(window.location.href) + "/controller/add-item.php",
@@ -46,6 +47,7 @@ $("form#add-item-form").submit(function(e) {
                 $(".alert").fadeTo(3000, 500).slideUp(500, function() {
                     $(".alert").slideUp(500);
                 });
+                $('#add-item-form')[0].reset();
             },
             cache: false,
             contentType: false,

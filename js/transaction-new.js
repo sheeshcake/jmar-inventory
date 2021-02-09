@@ -1,5 +1,7 @@
 var $t;
 var $last_data;
+var $id;
+var $reciept_no;
 
 function reload() {
     setTimeout(function() {
@@ -24,7 +26,27 @@ function reload() {
             url: url(window.location.href) + "/controller/transaction-new-controller.php",
             method: "GET",
             success: function(d) {
-                $("#transaction").text("Transaction ID: " + (parseInt(JSON.parse(d).transaction_id) + 1));
+                if (d != "null") {
+                    if ((parseInt(JSON.parse(d).transaction_id) + 1) != $id) {
+                        $("#transaction").text("Transaction ID: " + (parseInt(JSON.parse(d).transaction_id) + 1));
+                        $id = (parseInt(JSON.parse(d).transaction_id) + 1);
+                    }
+                } else {
+                    $("#transaction").text("Transaction ID: 1");
+                }
+            }
+        });
+        $.ajax({
+            url: url(window.location.href) + "/controller/get-reciept-number.php",
+            method: "GET",
+            success: function(d) {
+                if (d != "null") {
+                    $data = JSON.parse(d);
+                    if (parseInt($data.reciept_no) + 1 != $reciept_no) {
+                        $("#reciept").val(parseInt($data.reciept_no) + 1);
+                        $reciept_no = parseInt($data.reciept_no) + 1;
+                    }
+                }
             }
         });
         $('#example_wrapper').css("width", "100%");
@@ -43,7 +65,8 @@ $(document).on("input", "#cash", function() {
     var $total = $("#total").html();
     var $cash = $(this).val();
     var $change = (parseFloat($cash) - parseFloat($total)).toFixed(2);
-    if ($change < 0 || $change == "NaN") {
+    console.log($(".item").length);
+    if ($change < 0 || $change == "NaN" && $(".item").length > 0) {
         $("#change").html("Please Input Valid Cash");
         $("#change").removeClass("text-success");
         $("#change").addClass("text-danger");
@@ -142,7 +165,7 @@ function formatAMPM(date) {
     return strTime;
 }
 
-function send_transaction(courier) {
+function send_transaction(courier, payment, customer) {
     $counter = 0;
     var now = new Date();
     var strDateTime = [
@@ -153,6 +176,8 @@ function send_transaction(courier) {
         ].join("-"), formatAMPM(new Date)
     ].join(" ");
     var $courier = courier;
+    var $payment = payment;
+    var $customer = customer;
     var $date = strDateTime;
     var $all = $(".item").map(function() {
         return $(this).attr("price") + "," + $(this).attr("item-id") + "," + $(this).attr("item-count") + "," + $(this).attr("item-unit");
@@ -165,6 +190,7 @@ function send_transaction(courier) {
             type: "transaction",
             trans_type: "outgoing",
             cash: $("#cash").val(),
+            reciept_no: $("#reciept").val(),
             courier: $courier,
             data: $all
         },
@@ -190,13 +216,16 @@ function send_transaction(courier) {
     });
 }
 $(".submit-transaction").click(function() {
-    if ($("#courier").val() != "" && $('#delivery').is(':checked')) {
-        send_transaction($("#courier").val());
+    if ($("#courier").val() != "" && $("#customer").val() != "" && $('#delivery').is(':checked')) {
+        send_transaction($("#courier").val(), $("#payment").val(), $("#customer").val());
     } else if (!$('#delivery').is(':checked')) {
-        send_transaction("counter");
-    } else {
+        send_transaction("counter", "none", "none");
+    } else if ($("#courier").val() == "") {
         alert("Please Enter The Courier Name");
         $("#courier").focus();
+    } else if ($("#customer").val() == "") {
+        alert("Please Enter The Customer Details");
+        $("#customer").focus();
     }
 });
 $(document).on("click", ".remove-item", function() {
@@ -214,7 +243,7 @@ $(document).on("click", ".remove-item", function() {
     elem.slideUp("normal", function() {
         $(this).remove();
         $(".submit-transaction").prop('disabled', false);
-        if (!$(".item").length) {
+        if ($(".item").length > 0) {
             $(".submit-transaction").slideUp();
         } else {
             $(".submit-transaction").slideDown();
@@ -228,15 +257,15 @@ $(document).on("click", ".remove-item", function() {
 $(document).ready(function() {
     $("input[type='radio']").change(function() {
         if ($(this).val() == "yes") {
-            $("#courier").show();
-            $("#payment").show();
-            $("#customer").show();
+            $("#courier").slideDown(500);
+            $("#payment").slideDown(500);
+            $("#customer").slideDown(500);
 
 
         } else {
-            $("#courier").hide();
-            $("#payment").hide();
-            $("#customer").hide();
+            $("#courier").slideUp(500);
+            $("#payment").slideUp(500);
+            $("#customer").slideUp(500);
         }
     });
 });

@@ -41,7 +41,14 @@
         </table>			
     </div>
     <div class="shadow m-1 p-3" style="max-height: 1000px; width: 34%;">
-        <h4 id="transaction" >New Transaction</h4>
+        <div class="d-flex">
+            <h4 id="transaction" >New Transaction</h4>
+            <div class="form-group ml-auto">
+                <label for="reciept">Reciept Number</label>
+                <input type="number" class="form-control" id="reciept" name="reciept_no" placeholder="Reciept No.">
+            </div>
+            
+        </div>
         <div class="alert alert-success" id="trans-message" role="alert" style="display: none">
         </div>
         <div class="d-flex"><p>FOR DELIVERY?</p>

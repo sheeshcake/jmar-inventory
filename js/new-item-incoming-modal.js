@@ -36,6 +36,7 @@ $("form#add-item-form").submit(function(e) {
         $('#add-item-modal-incoming').modal('toggle');
         var formData = new FormData(this);
         formData.set("item_stock", 0);
+        formData.set("submit", "submit");
         console.log(formData);
         $.ajax({
             url: url(window.location.href) + "/controller/add-item-incoming.php",

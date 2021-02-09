@@ -20,7 +20,7 @@
 ?>
 <tr>
     <td>
-        <img src="img/item/<?php echo $data["item_img"] ?>" alt="" width="100" >
+        <img src="img/item/<?php echo ($data["item_img"] == "") ? "item.jpg" : $data["item_img"]; ?>" alt="" width="100" >
     </td>
     <td>
         <p><b>ID: </b><?php echo $data["item_id"];?></p>

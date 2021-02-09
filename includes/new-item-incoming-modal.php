@@ -23,7 +23,7 @@
                             <div class="form-group ">
                                 <label for="image-file">Item Image</label>
                                 <div class="custom-file">
-                                    <input required type="file" class="custom-file-input" name="item_img" id="image-file">
+                                    <input type="file" class="custom-file-input" name="item_img" id="image-file" value="item.img">
                                     <label class="custom-file-label" for="image-file">Choose Image</label>
                                 </div>
                             </div>
