@@ -42,9 +42,11 @@ function reload() {
             success: function(d) {
                 if (d != "null") {
                     $data = JSON.parse(d);
-                    if (parseInt($data.reciept_no) + 1 != $reciept_no) {
-                        $("#reciept").val(parseInt($data.reciept_no) + 1);
-                        $reciept_no = parseInt($data.reciept_no) + 1;
+                    if($data.reciept_no != null){
+                        if (parseInt($data.reciept_no) + 1 != $reciept_no) {
+                            $("#reciept").val(parseInt($data.reciept_no) + 1);
+                            $reciept_no = parseInt($data.reciept_no) + 1;
+                        }
                     }
                 }
             }
@@ -192,6 +194,8 @@ function send_transaction(courier, payment, customer) {
             cash: $("#cash").val(),
             reciept_no: $("#reciept").val(),
             courier: $courier,
+            payment: $payment,
+            customer: $customer,
             data: $all
         },
         success: function(d) {
