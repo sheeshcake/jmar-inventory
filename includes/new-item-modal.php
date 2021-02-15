@@ -46,13 +46,17 @@
                             </select>
                         </div>
                     </div>
-                    <label for="capital_wholesale">Captial Wholesale</label>
-                    <div class="form-group w-25">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">₱</span>
+                    <hr>
+                    <center>
+                        <label for="capital_wholesale">Captial Wholesale</label>
+                        <div class="input-group w-25">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">₱</span>
+                            </div>
+                            <input required type="number" min="0" value="0" id="capital_wholesale" name="item_capital_wholesale" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price" style="margin-right: 2%;">
                         </div>
-                        <input type="text" class="form-control">
-                    </div>
+                    </center>
+
 <!---------------------- For Capital Input ----->                    
                     <div class="form-group d-flex">    
                         <div class="flex-fill m-1">

@@ -70,7 +70,7 @@ section {
 }
 
 body {
-    margin: 0;
+    margin: 0 auto !important;
     font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1rem;
     font-weight: 400;
@@ -78,6 +78,7 @@ body {
     color: #000000;
     text-align: left;
     background-color: #fff;
+    position: relative;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -89,7 +90,6 @@ hr {
     height: 0;
     overflow: visible;
 }
-
 h1,
 h2,
 h3,
@@ -631,8 +631,8 @@ pre code {
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin-right: 2.25rem;
-    margin-left: 4.25rem;
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
 }
 
 .no-gutters {
@@ -2491,7 +2491,7 @@ fieldset:disabled a.btn {
 .btn-primary {
     color: #fff;
     background-color: #3a3f47;
-    border-color: #bbbbbb;
+    border-color: ##bbbbbb;
 }
 
 .btn-primary:hover {
@@ -3134,7 +3134,7 @@ fieldset:disabled a.btn {
     border-radius: 0.3rem;
 }
 
-
+,
 .btn-group-sm>.btn {
     height: 50px;
     border-color: #bbbbbb;
@@ -4797,7 +4797,7 @@ input[type="button"].btn-block {
 .card-header {
     padding: 0.75rem 1.25rem;
     margin-bottom: 0;
-    background-color: #e74a3b47;
+    background-color: ##e74a3b47;
     border-bottom: 1px solid #e3e6f0;
 }
 
@@ -10093,7 +10093,7 @@ a.text-dark:focus {
     }
     .table-bordered th,
     .table-bordered td {
-        border: 1px solid s#bbbbbb !important;
+        border: 1px solid ##bbbbbb !important;
     }
     .table-dark {
         color: inherit;

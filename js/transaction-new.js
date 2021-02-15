@@ -259,8 +259,8 @@ $(document).on("click", ".remove-item", function() {
 });
 
 $(document).ready(function() {
-    $("input[type='radio']").change(function() {
-        if ($(this).val() == "yes") {
+    $("#delivery").click(function() {
+        if ($(this).is(':checked')) {
             $("#courier").slideDown(500);
             $("#payment").slideDown(500);
             $("#customer").slideDown(500);

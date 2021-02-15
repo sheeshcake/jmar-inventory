@@ -42,7 +42,13 @@
     </div>
     <div class="shadow m-1 p-3" style="max-height: 1000px; width: 34%;">
         <div class="d-flex">
-            <h4 id="transaction" >New Transaction</h4>
+            <div>
+                <h4 id="transaction" >New Transaction</h4>
+                <div class="custom-control custom-switch pt-2">
+                    <input type="checkbox" class="custom-control-input" id="delivery">
+                    <label class="custom-control-label" for="delivery">Delivery</label>
+                </div>
+            </div>
             <div class="form-group ml-auto">
                 <label for="reciept">Reciept Number</label>
                 <input type="number" class="form-control" id="reciept" name="reciept_no" placeholder="Reciept No.">
@@ -51,27 +57,22 @@
         </div>
         <div class="alert alert-success" id="trans-message" role="alert" style="display: none">
         </div>
-        <div class="d-flex"><p>FOR DELIVERY?</p>
-            <input type="radio" id="delivery" name="answer" value="yes" />YES&nbsp;&nbsp;<br>
-        <input type="radio" name="answer" value="no">
-        <label for="male">NO</label><br>
-        </div>
-            <div class="flex-fill m-1">
-                <div class="d-flex">
-                    <input style="display:none;" required type="text" class="form-control mb-1" id="courier" name="courier" placeholder="Courier Name">
-                    <select class="form-control w-50" id="payment" name="payment" style="display:none;">
-                                <option value="cod">COD</option>
-                                <option value="Roll">Term 7(days)</option>
-                                <option value="Box">Term 15(days)</option>
-                                <option value="Box">Term 30(days)</option>
-                                <option value="Box">Term 60(days)</option>
-                                <option value="Box">Term 90(days)</option>
-                                <option value="Box"></option>
-                    </select>
-                    <input style="display:none;" required type="text" class="form-control mb-1" id="customer" name="customer" placeholder="Customer Details" data-toggle="tooltip" data-placement="bottom" title="Customer Name, Adderess & Contact No.">
-                    
-                </div>
+        <div class="flex-fill m-1">
+            <div class="d-flex">
+                <input style="display:none;" required type="text" class="form-control mb-1" id="courier" name="courier" placeholder="Courier Name">
+                <select class="form-control w-50" id="payment" name="payment" style="display:none;">
+                            <option value="cod">COD</option>
+                            <option value="Roll">Term 7(days)</option>
+                            <option value="Box">Term 15(days)</option>
+                            <option value="Box">Term 30(days)</option>
+                            <option value="Box">Term 60(days)</option>
+                            <option value="Box">Term 90(days)</option>
+                            <option value="Box"></option>
+                </select>
+                <input style="display:none;" required type="text" class="form-control mb-1" id="customer" name="customer" placeholder="Customer Details" data-toggle="tooltip" data-placement="bottom" title="Customer Name, Adderess & Contact No.">
+                
             </div>
+        </div>
         <div class="overflow-auto" style="max-height: 470px; min-height: 470px;min-width: 350px" id="items">
         </div>
         <div class="mt-2">

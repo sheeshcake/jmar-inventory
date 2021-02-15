@@ -103,6 +103,7 @@
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/sidebar.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
