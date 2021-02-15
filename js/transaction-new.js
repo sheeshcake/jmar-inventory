@@ -263,13 +263,17 @@ $(document).ready(function() {
         if ($(this).is(':checked')) {
             $("#courier").slideDown(500);
             $("#payment").slideDown(500);
-            $("#customer").slideDown(500);
+            $("#customer-name").slideDown(500);
+            $("#customer-address").slideDown(500);
+            $("#customer-contact").slideDown(500);
 
 
         } else {
             $("#courier").slideUp(500);
             $("#payment").slideUp(500);
-            $("#customer").slideUp(500);
+            $("#customer-name").slideUp(500);
+            $("#customer-address").slideUp(500);
+            $("#customer-contact").slideUp(500);
         }
     });
 });

@@ -81,9 +81,10 @@
                                         <input required type="number" min="0" value="0" id="input-capital" name="item_capital" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price" readonly="true">
                                     </div>
                                     <div class="p-2">
-                                        <center>
-                                            <input type="checkbox"  id="manual-input" data-toggle="tooltip" data-placement="top" title="Manual Input">
-                                        </center>
+                                    <div class="custom-control custom-switch pt-2">
+                                        <input type="checkbox" class="custom-control-input" id="manual-input" >
+                                        <label class="custom-control-label" for="manual-input" data-toggle="tooltip" data-placement="top" title="Manual Input"></label>
+                                    </div>
                                     </div>
                                 </div>
                             </div>

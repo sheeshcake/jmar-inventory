@@ -18,7 +18,7 @@
   This is a success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
 </div>
 <div class="row">
-    <div class="shadow mb-4 p-3" style="max-width: 1200px; min-width: 65%; max-height: 800px; overflow-y: scroll;">
+    <div class="shadow mb-4 p-3" style="max-width: 1200px; min-width: 59%; max-height: 800px; overflow-y: scroll;">
         <table id="example"  class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -47,25 +47,25 @@
         <h4 id="transaction" >Incoming Transaction</h4>
         <div class="alert alert-success" id="trans-message" role="alert" style="display: none">
         </div>
-            <div class="flex-fill m-1">
+        <div class="flex-fill m-1">
                     <div class="d-flex" style="margin-bottom: -2%;">
                         <input  style="margin-right: 2%;" required type="text" class="form-control mb-1" id="supplier" name="supplier" placeholder="Supplier Name">
-                        <input  required type="text" class="form-control mb-1" id="sup-details" name="sup-details" placeholder="Address & Contact No.">
+                        <input  style="margin-right: 2%;" required type="text" class="form-control mb-1" id="supplier-address" name="supplier-address" placeholder="Address" data-toggle="tooltip" data-placement="top" title="Supplier Address">
+                        <input  required type="text" class="form-control mb-1" id="supplier-contact" name="supplier-contact" placeholder="Contact No." data-toggle="tooltip" data-placement="top" title="Supplier Contact Number">
                     </div>
                     <div class="d-flex">
-                    <select  style="margin-right: 2%;" class="form-control w-50" id="payment" name="payment" >
+                        <select  style="margin-right: 2%;" class="form-control w-25" id="payment" name="payment" data-toggle="tooltip" data-placement="top" title="Mode of Payment">
                                     <option value="cod">COD</option>
-                                    <option value="Roll">Term 7(days)</option>
-                                    <option value="Box">Term 15(days)</option>
-                                    <option value="Box">Term 30(days)</option>
-                                    <option value="Box">Term 60(days)</option>
-                                    <option value="Box">Term 90(days)</option>
-                                    <option value="Box"></option>
+                                    <option value="term-7">Term 7(days)</option>
+                                    <option value="term-15">Term 15(days)</option>
+                                    <option value="term-30">Term 30(days)</option>
+                                    <option value="term-60">Term 60(days)</option>
+                                    <option value="term-90">Term 90(days)</option>
                         </select>
-                        <button class="form-control w-50" data-toggle="modal" data-target=".add-item-modal" id="add-item">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                                Delivery Details
-                        </button>
+                        <div class="d-flex" style="margin-bottom: -2%;">
+                            <input  style="margin-right: 2%;" required type="text" class="form-control mb-1 w-50" id="delivery-details" name="delivery-details" placeholder="Driver's Name">
+                            <input  required type="text" class="form-control mb-1 w-50" id="delivery-details" name="delivery-details" placeholder="Plate No." data-toggle="tooltip" data-placement="top" title="Truck Plate Number">
+                        </div>
                     </div>
                 </div>
             

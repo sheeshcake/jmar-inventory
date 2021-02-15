@@ -57,22 +57,22 @@
         </div>
         <div class="alert alert-success" id="trans-message" role="alert" style="display: none">
         </div>
-        <div class="flex-fill m-1">
-            <div class="d-flex">
-                <input style="display:none;" required type="text" class="form-control mb-1" id="courier" name="courier" placeholder="Courier Name">
-                <select class="form-control w-50" id="payment" name="payment" style="display:none;">
-                            <option value="cod">COD</option>
-                            <option value="Roll">Term 7(days)</option>
-                            <option value="Box">Term 15(days)</option>
-                            <option value="Box">Term 30(days)</option>
-                            <option value="Box">Term 60(days)</option>
-                            <option value="Box">Term 90(days)</option>
-                            <option value="Box"></option>
-                </select>
-                <input style="display:none;" required type="text" class="form-control mb-1" id="customer" name="customer" placeholder="Customer Details" data-toggle="tooltip" data-placement="bottom" title="Customer Name, Adderess & Contact No.">
-                
-            </div>
-        </div>
+        <div class="d-flex" style="margin-bottom: -2%;">
+                    <input style="display:none; margin-right: 2%;" required type="text" class="form-control mb-1" id="courier" name="courier" placeholder="Courier Name">
+                    <select class="form-control w-50" id="payment" name="payment" style="display:none;" data-toggle="tooltip" data-placement="top" title="Mode of Payment">
+                                    <option value="cod">COD</option>
+                                    <option value="term-7">Term 7(days)</option>
+                                    <option value="term-15">Term 15(days)</option>
+                                    <option value="term-30">Term 30(days)</option>
+                                    <option value="term-60">Term 60(days)</option>
+                                    <option value="term-90">Term 90(days)</option>
+                    </select>
+                </div>
+                    <div class="d-flex" >
+                        <input  style="margin-right: 2%; display:none;" required type="text" class="form-control mb-1 w-50" id="customer-name" name="customer-name" placeholder="Customer's Name">
+                        <input  style="margin-right: 2%; display:none;" required type="text" class="form-control mb-1 w-50" id="customer-address" name="customer-address" placeholder="Address" data-toggle="tooltip" data-placement="top" title="Customer Address">
+                        <input  style="display:none;" required type="text" class="form-control mb-1 w-50" id="customer-contact" name="customer-contact" placeholder="Contact No." data-toggle="tooltip" data-placement="top" title="Customer Contact Number">
+                    </div>
         <div class="overflow-auto" style="max-height: 470px; min-height: 470px;min-width: 350px" id="items">
         </div>
         <div class="mt-2">
