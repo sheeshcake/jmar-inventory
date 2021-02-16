@@ -17,6 +17,17 @@
             ";
             $result = mysqli_query($conn, $sql);
             $last_id = mysqli_insert_id($conn);
+            $driver_name = $_POST["driver_name"];
+            $supplier_name = $_POST["supplier_name"];
+            $plate_no = $_POST["plate_no"];
+            $terms_of_payment = $_POST["terms_of_payment"];
+            $address = $_POST["address"];
+            $contact_no = $_POST["contact_no"];
+            $sql = "INSERT INTO incoming_details 
+                        (transaction_id, driver_name, supplier_name, plate_no, terms_of_payment, address, contact_no)
+                        VALUES
+                        ('$last_id', '$driver_name', '$supplier_name', '$plate_no', '$terms_of_payment', '$address', '$contact_no')";
+            mysqli_query($conn, $sql);
             $count = 0;
             foreach ($arr as &$value) {
                 $value = explode(",", $value);

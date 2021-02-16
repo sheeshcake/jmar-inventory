@@ -122,6 +122,47 @@ address {
     font-style: normal;
     line-height: inherit;
 }
+.ui-dialog {
+    border-radius: 2%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: absolute;
+    background-color: white;
+    z-index: 99999 !important;
+	padding: .2em;
+}
+.ui-button{
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 0.5;
+}
+.ui-dialog-titlebar{
+    width: 97%;
+    border-color: gray;
+    border-bottom: 1px;
+    position: absolute;
+}
+.ui-button:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+.ui-button:not(:disabled):not(.disabled):focus,
+.ui-button:not(:disabled):not(.disabled):hover {
+    opacity: 0.75;
+}
+
+button.ui-button {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+}
+#dialog{
+    padding: 2em
+}
 
 dl,
 ol,

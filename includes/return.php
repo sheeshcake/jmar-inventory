@@ -53,4 +53,14 @@
     </div>
   </div>
 </div>
+<div id="dialog" style="display: none;">
+  <form id="admin_pass">
+    <center><p>Please Enter the Admin Password</p></center>
+    <input type="password" name="password" class="form-control mb-2" placeholder="Password"/>
+    <center>
+      <input class="btn btn-primary" type="submit" name="submit" placeholder="Submit" value="submit"/>
+    </center>
+  </form>
+  
+</div>
 <script src="js/return.js"></script>

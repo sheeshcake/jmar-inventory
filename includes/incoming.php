@@ -49,12 +49,12 @@
         </div>
         <div class="flex-fill m-1">
                     <div class="d-flex" style="margin-bottom: -2%;">
-                        <input  style="margin-right: 2%;" required type="text" class="form-control mb-1" id="supplier" name="supplier" placeholder="Supplier Name">
-                        <input  style="margin-right: 2%;" required type="text" class="form-control mb-1" id="supplier-address" name="supplier-address" placeholder="Address" data-toggle="tooltip" data-placement="top" title="Supplier Address">
-                        <input  required type="text" class="form-control mb-1" id="supplier-contact" name="supplier-contact" placeholder="Contact No." data-toggle="tooltip" data-placement="top" title="Supplier Contact Number">
+                        <input  style="margin-right: 2%;" required type="text" class="form-control mb-1" id="supplier_name" name="supplier" placeholder="Supplier Name">
+                        <input  style="margin-right: 2%;" required type="text" class="form-control mb-1" id="address" name="supplier-address" placeholder="Address" data-toggle="tooltip" data-placement="top" title="Supplier Address">
+                        <input  required type="text" class="form-control mb-1" id="contact_no" name="supplier-contact" placeholder="Contact No." data-toggle="tooltip" data-placement="top" title="Supplier Contact Number">
                     </div>
                     <div class="d-flex">
-                        <select  style="margin-right: 2%;" class="form-control w-25" id="payment" name="payment" data-toggle="tooltip" data-placement="top" title="Mode of Payment">
+                        <select  style="margin-right: 2%;" class="form-control w-25" id="terms_of_payment" name="payment" data-toggle="tooltip" data-placement="top" title="Mode of Payment">
                                     <option value="cod">COD</option>
                                     <option value="term-7">Term 7(days)</option>
                                     <option value="term-15">Term 15(days)</option>
@@ -63,8 +63,8 @@
                                     <option value="term-90">Term 90(days)</option>
                         </select>
                         <div class="d-flex" style="margin-bottom: -2%;">
-                            <input  style="margin-right: 2%;" required type="text" class="form-control mb-1 w-50" id="delivery-details" name="delivery-details" placeholder="Driver's Name">
-                            <input  required type="text" class="form-control mb-1 w-50" id="delivery-details" name="delivery-details" placeholder="Plate No." data-toggle="tooltip" data-placement="top" title="Truck Plate Number">
+                            <input  style="margin-right: 2%;" required type="text" class="form-control mb-1 w-50" id="driver_name" name="delivery-details" placeholder="Driver's Name">
+                            <input  required type="text" class="form-control mb-1 w-50" id="plate_no" name="delivery-details" placeholder="Plate No." data-toggle="tooltip" data-placement="top" title="Truck Plate Number">
                         </div>
                     </div>
                 </div>

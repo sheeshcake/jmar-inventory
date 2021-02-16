@@ -118,6 +118,12 @@ $(".submit-transaction").click(function() {
         data: {
             date: $date,
             type: "transaction",
+            driver_name: $("#driver_name").val(),
+            supplier_name: $("#supplier_name").val(),
+            plate_no: $("#plate_no").val(),
+            terms_of_payment: $("#terms_of_payment").val(),
+            address: $("#address").val(),
+            contact_no: $("#contact_no").val(),
             trans_type: "incoming",
             data: $all
         },
