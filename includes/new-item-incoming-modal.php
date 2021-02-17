@@ -46,7 +46,16 @@
                             </select>
                         </div>
                     </div>
-
+                    <hr>
+                    <center>
+                        <label for="capital_wholesale">Captial Wholesale</label>
+                        <div class="input-group w-25">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">₱</span>
+                            </div>
+                            <input required type="number" min="0" value="0" id="capital_wholesale" name="item_capital_wholesale" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price" style="margin-right: 2%;">
+                        </div>
+                    </center>
 
 <!---------------------- For Capital Input ----->                    
                     <div class="form-group d-flex">    
@@ -72,9 +81,10 @@
                                         <input required type="number" min="0" value="0" id="input-capital" name="item_capital" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price" readonly="true">
                                     </div>
                                     <div class="p-2">
-                                        <center>
-                                            <input type="checkbox"  id="manual-input" data-toggle="tooltip" data-placement="top" title="Manual Input">
-                                        </center>
+                                    <div class="custom-control custom-switch pt-2">
+                                        <input type="checkbox" class="custom-control-input" id="manual-input" >
+                                        <label class="custom-control-label" for="manual-input" data-toggle="tooltip" data-placement="top" title="Manual Input"></label>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -129,24 +139,33 @@
                                 <div class="col-md-6 my-1">
                                     <label for="item-unit">Unit - 1</label>
                                     <input type="hidden" id="item_stock" name="item_stock" class="form-control" placeholder="Stock">
-                                        <div class="row pl-2 pr-2">
-                                            <select class="form-control w-50" id="item-unit" name="item_unit" required  >
-                                                <option value="Sack">Sack</option>
-                                                <option value="Roll">Roll</option>
-                                                <option value="Box">Box</option>
-                                                <option value="Box">Bundle</option>
-                                                <option value="Box">Bag</option>
-                                                <option value="Box"></option>
-                                            </select>
-                                            <input required type="number" name="item_unit_divisor" id="divisor" class="form-control w-50" placeholder="U1/U2" data-toggle="tooltip" data-placement="top" title="How Many U2 in U1?">
-                                        </div>
+                                    <div class="form-group d-flex m-0">
                                         <input required type="number" id="u1-val" class="form-control" placeholder="Stock">
-                                </div>
-                                    <div class="col-md-6 my-1">
-                                        <label for="item-unit">Unit - 2</label>
-                                        <input required type="text" class="form-control" id="unit-2" value="U2" readonly>
-                                        <input required type="number" id="u2-val" class="form-control" value="0" placeholder="Stock" disabled>
+                                        <select class="form-control " id="item-unit" name="item_unit" required  >
+                                            <option disabled>Select</option>
+                                            <option value="Sack">Sack</option>
+                                            <option value="Roll">Roll</option>
+                                            <option value="Box">Box</option>
+                                            <option value="Box">Bundle</option>
+                                            <option value="Box">Bag</option>
+                                            <option value="Box"></option>
+                                        </select>
                                     </div>
+                                    <div class="form-group d-flex m-0">
+                                        <input required type="number" name="item_unit_divisor" id="divisor" class="form-control w-50" placeholder="U1/U2" data-toggle="tooltip" data-placement="top" title="How Many U2 in U1?">
+                                        <select name="unit_name" id="unit_name" class="form-control w-50">
+                                            <option value="Kg">kg</option>
+                                            <option value="Kg">ml</option>
+                                            <option value="Kg">cm</option>
+                                            <option value="Kg">m</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 my-1">
+                                    <label for="item-unit">Unit - 2</label>
+                                    <input required type="text" class="form-control" id="unit-2" value="U2" readonly>
+                                    <input required type="number" id="u2-val" class="form-control" placeholder="Stock" value="0">
+                                </div>
                             </div>
                         </div>
                     </div>
