@@ -17,11 +17,16 @@
             <?php echo $data["item_stock"]; ?>
             <div class="d-flex" id="count_input_<?php echo $data["item_id"] ?>">
                 <input type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
+                <select id="unit" class="custom-select unit-select">
+                <option name="<?php echo $u2_name; ?>" value="<?php echo $data["item_stock"]; ?>"><?php echo $u2_name; ?></option>
+                <option name="<?php echo $data["item_unit"] ?>" value="<?php echo $u1; ?>"><?php echo $data["item_unit"] ?></option>
+            </select>
                 <button class="add btn btn-success" item_div="<?php echo $data["item_unit_divisor"] ?>" value="<?php echo $data["item_id"] ?>"><i class="fa fa-plus" aria-hidden="true"></i></button>
             </div>
             <div class="alert alert-success" role="alert" style="display: none">
                 Item Added!
             </div>
+            
         </td>
 </tr>
 
