@@ -28,9 +28,13 @@
         </td>
         <td width="200px">
             <div class="d-flex p-2"><b><p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></b></div>
-            <?php echo $data["item_stock"]; ?>
+            <?php echo $data["item_stock"]; ?>&nbsp;&nbsp;<?php echo $u2_name ?>
             <div class="d-flex" id="count_input_<?php echo $data["item_id"] ?>">
                 <input type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
+                <select id="unit" class="custom-select unit-select">
+                    <option name="<?php echo $u2_name; ?>" value="<?php echo $data["item_stock"]; ?>"><?php echo $u2_name; ?></option>
+                    <option name="<?php echo $data["item_unit"] ?>" value="<?php echo $u1; ?>"><?php echo $data["item_unit"] ?></option>
+                </select>
                 <button class="add btn btn-success" item-div="<?php echo $data["item_unit_divisor"] ?>" value="<?php echo $data["item_id"] ?>"><i class="fa fa-plus" aria-hidden="true"></i></button>
             </div>
             <div class="alert alert-success" role="alert" style="display: none">
