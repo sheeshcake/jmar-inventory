@@ -80,7 +80,11 @@
             <div class="d-flex"><p><b>TOTAL AMOUNT:&nbsp;</b>₱</p><p id="total">0</p></div>
             <div class="d-flex">
                 <p><b>CASH:</b></p>
-                <input required type="number" class="form-control mb-1" id="cash">
+                <input required type="number" class="form-control mb-1" id="cash" value="0">
+            </div>
+            <div class="d-flex">
+                <p><b>DISCOUNT:</b></p>
+                <input required type="number" class="form-control mb-1" id="discount" value="0">
             </div>
             <div class="d-flex">
                 <p><b>CHANGE:</b></p>

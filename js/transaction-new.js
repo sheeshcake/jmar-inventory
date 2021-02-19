@@ -61,24 +61,28 @@ $(document).ready(function() {
     $("#accordionSidebar").toggleClass("toggled");
     reload();
 });
-
-var $counter = 0;
-$(document).on("input", "#cash", function() {
+function calculate(){
+    var $discount = $("#discount").val();
+    var $cash = $("#cash").val();
     var $total = $("#total").html();
-    var $cash = $(this).val();
-    var $change = (parseFloat($cash) - parseFloat($total)).toFixed(2);
-    console.log($(".item").length);
-    if ($change < 0 || $change == "NaN" && $(".item").length > 0) {
+    var $change = (parseFloat($cash)  - (parseFloat($total)).toFixed(2) - (parseFloat($discount) / 100 * parseFloat($total))).toFixed(2);
+    console.log(parseInt($change));
+    console.log(parseInt($("#total_items").text()));
+    if(isNaN($change) || $change < 0 || parseInt($("#total_items").text()) == 0){
         $("#change").html("Please Input Valid Cash");
         $("#change").removeClass("text-success");
         $("#change").addClass("text-danger");
         $(".submit-transaction").slideUp();
-    } else {
+    }else {
         $("#change").removeClass("text-danger");
         $("#change").addClass("text-success");
         $("#change").html($change);
         $(".submit-transaction").slideDown();
     }
+}
+var $counter = 0;
+$(document).on("input", "#cash, #discount", function() {
+    calculate();
 });
 $(document).on("click", ".add", function() {
     var $id = $(this).val();
@@ -141,6 +145,7 @@ $(document).on("click", ".add", function() {
                 );
                 $("#total").text((parseFloat($("#total").text()) + (parseFloat(item_price) * parseFloat(item_count))).toFixed(2));
                 $("#total_items").text($counter);
+                calculate();
             }
         });
     } else {
@@ -211,6 +216,7 @@ function send_transaction(courier, payment, customer) {
                 });
                 $("#change").html("");
                 $("#cash").val(0);
+                $("#discount").val(0);
                 $(".submit-transaction").slideUp();
                 $("#trans-message").fadeTo(3000, 500).slideUp(500, function() {}).text(data["message"]).attr('class', 'alert-' + data['status']).addClass('alert');
             } else {
@@ -247,15 +253,11 @@ $(document).on("click", ".remove-item", function() {
     elem.slideUp("normal", function() {
         $(this).remove();
         $(".submit-transaction").prop('disabled', false);
-        if ($(".item").length > 0) {
-            $(".submit-transaction").slideUp();
-        } else {
-            $(".submit-transaction").slideDown();
-        }
     });
     $counter--;
     $("#total").text((parseFloat($("#total").text()) - parseFloat(elem.attr("price"))).toFixed(2));
     $("#total_items").text($counter);
+    calculate();
 });
 
 $(document).ready(function() {

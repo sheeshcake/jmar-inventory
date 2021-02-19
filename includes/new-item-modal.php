@@ -151,7 +151,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group d-flex m-0">
-                                        <input required type="number" name="item_unit_divisor" id="divisor" class="form-control w-50" placeholder="U1/U2" data-toggle="tooltip" data-placement="top" title="How Many U2 in U1?">
+                                        <input required type="number" id="u2-val" class="form-control" placeholder="Stock" value="0">
                                         <select name="unit_name" id="unit_name" class="form-control w-50">
                                             <option value="Kg">kg</option>
                                             <option value="Kg">ml</option>
@@ -163,7 +163,7 @@
                                 <div class="col-md-6 my-1">
                                     <label for="item-unit">Unit - 2</label>
                                     <input required type="text" class="form-control" id="unit-2" value="U2" readonly>
-                                    <input required type="number" id="u2-val" class="form-control" placeholder="Stock" value="0">
+                                    <input required type="number" name="item_unit_divisor" id="divisor" class="form-control" placeholder="U1/U2" data-toggle="tooltip" data-placement="top" title="How Many U2 in U1?">
                                 </div>
                             </div>
                         </div>

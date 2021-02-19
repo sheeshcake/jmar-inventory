@@ -1,5 +1,6 @@
 <?php
     include "../controller/connect.php";
+    session_start();
     $result;
     if($_POST["cat"] != "all"){
         $cat = $_POST["cat"];
@@ -64,13 +65,25 @@
     <td>
         <div class="p-2" style="width: 200px">
             <center><h5><b>RETAIL</b></h5></center>
+            <?php
+                if($_SESSION["user"]["role"] == "admin"){ 
+            ?>
             <div class="d-flex p-2"><b>Capital:&nbsp;₱</b><p id="capital<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_price"]?></p></div>
             <div class="d-flex p-2"><b>Revenue&nbsp;</b><p id="tax<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_tax"]?></p>%</div>
+            <?php 
+                }
+            ?>
             <div class="d-flex p-2"><b>Price:&nbsp;₱<?php echo $r_price?></b></div>
             <hr class="sidebar-divider">
             <center><h5><b>WHOLESALE</b></h5></center>
+            <?php
+                if($_SESSION["user"]["role"] == "admin"){ 
+            ?>
             <div class="d-flex p-2"><b>Capital:&nbsp;₱</b><p id="capital_w<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_price_wholesale"]?></p></div>
             <div class="d-flex p-2"><b>Revenue:&nbsp;</b><p id="tax_w<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_tax_wholesale"]?></p>%</div>
+            <?php 
+                }
+            ?>
             <div class="d-flex p-2"><b>Price:&nbsp;₱<?php echo $w_price?></b></div>
         </div>
     </td>

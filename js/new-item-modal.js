@@ -91,6 +91,13 @@ $(document).on("input", "#u1-val,#u2-val,#divisor", function() {
     var total = (u1 * divisor) + Number(u2);
     $("#item_stock").val(total);
 });
+$("#show_per_unit").change(function(){
+    if($(this).is(":checked")){
+        $("#per_unit").slideDown(500);
+    }else{
+        $("#per_unit").slideUp(500);
+    }
+});
 $(document).on("input", "#input-capital", function() {
     calculate("retail");
 });
