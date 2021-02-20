@@ -30,13 +30,19 @@
                 $item_id = $value[1];
                 $item_count = $value[2];
                 $item_type = $value[3];
+                // Get The Items to Warehouse or Store
+                $item_on_warehouse = intdiv($item_count, $data["item_unit_divisor"]);
+                $item_on_store = fmod($item_count, $data["item_unit_divisor"]);
                 // Update Item Stock
                 $sql1 = "UPDATE items
-                SET item_stock = item_stock - $item_count
+                SET 
+                    item_stock = item_stock - $item_on_store
+                    item_stock_warehouse = item_stock_warehouse - $item_on_warehouse
                 WHERE item_id = '$item_id'";
                 $result = mysqli_query($conn, $sql1);
                 //Insert Purchased Item
-                $sql1 = "INSERT INTO purchased_item (transaction_id, item_id, item_count, item_type) VALUES ($last_id, '$item_id', '$item_count','$item_type')";
+                $sql1 = "INSERT INTO purchased_item (transaction_id, item_id, item_count, item_type, item_on_warehouse, item_on_store) 
+                VALUES ($last_id, '$item_id', '$item_count','$item_type', '$item_on_warehouse', '$item_on_store')";
                 $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);
                 if(!$result1){
                     $data1 = array("message"=>"An Error Occured!", "status"=>"danger");
@@ -44,6 +50,7 @@
                     break;
                 }
                 $count++;
+
             }
             if($count == count($arr)){
                 $data1 = array("message"=>"Transaction Completed!", "status"=>"success");
