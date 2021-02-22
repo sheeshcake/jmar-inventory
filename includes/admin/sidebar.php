@@ -39,6 +39,7 @@
             <h6 class="collapse-header">Inventory Tools:</h6>
             <a class="collapse-item" href="?p=inventory">Inventory</a>
             <a class="collapse-item" href="?p=incoming">Incoming Items</a>
+            <a class="collapse-item" href="?p=transfer">Stock Transfer</a>
             <a class="collapse-item" href="includes/all-items.php">All Items</a>
             <h6 class="collapse-header">Categories:</h6>
             <?php
