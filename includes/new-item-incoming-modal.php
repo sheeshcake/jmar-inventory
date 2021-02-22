@@ -27,13 +27,27 @@
                                     <label class="custom-file-label" for="image-file">Choose Image</label>
                                 </div>
                             </div>
+                            <div class="form-group ">
+                            <label for="category">Category</label>
+                                <select class="form-control" id="category" name="category_id">
+                                <?php
+                                    $sql = "SELECT * FROM category";
+                                    $result = mysqli_query($conn, $sql);
+                                    while($data = $result->fetch_assoc()){
+                                ?>
+                                    <option value="<?php echo $data["category_id"] ?>"><?php echo $data["category_name"] ?></option>
+                                <?php
+                                    }
+                                ?>
+                                </select>
+                                </div>
                        </div>
                        <div class="form-group flex-fill m-1">
                             <div class="input-group">
-                                <textarea required class="form-control" id="item-description" rows="10" name="item_desc" placeholder="Item Description"></textarea>
+                                <textarea class="form-control" id="item-description" rows="10" name="item_desc" placeholder="Item Description"></textarea>
                             </div>
-                            <label for="item-unit">Supplier </label>
-                            <select required class="form-control" id="supplier" name="supplier" style="width:">
+                            <label style="margin-top: 8.5px;"for="item-unit">Supplier </label>
+                            <select class="form-control" id="supplier" name="supplier" style="width:">
                             <?php
                                 $sql = "SELECT * FROM supplier";
                                 $result = mysqli_query($conn, $sql);
@@ -47,59 +61,54 @@
                         </div>
                     </div>
                     <hr>
-                    <center>
-                        <label for="capital_wholesale">Captial Wholesale</label>
-                        <div class="input-group w-25">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">₱</span>
-                            </div>
-                            <input required type="number" min="0" value="0" id="capital_wholesale" name="item_capital_wholesale" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price" style="margin-right: 2%;">
-                        </div>
-                    </center>
+                    
 
 <!---------------------- For Capital Input ----->                    
                     <div class="form-group d-flex">    
                         <div class="flex-fill m-1">
-                            <div class="d-flex">
-                                <label for="item-unit">WHOLE SALE</label>
-                                <div class="ml-auto" style="margin-right: 40%;">
-                                    <label for="item-unit" >RETAIL</label>
-                                </div>
-                            </div>    
+                            
+                                <div class="d-flex">
+                                    <label for="item-unit">RETAIL</label>
+                                    <div class="ml-auto" style="margin-right: 17%;">
+                                        <label for="item-unit" >CAPITAL WHOLESALE</label>
+                                    </div>
+                                 </div>
+                               
                             <div class="d-flex bd-highlight mb-3">
                                 <div class="input-group w-50">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">₱</span>
                                     </div>
-                                    <input required type="number" min="0" value="0" id="input-capital-wholesale" name="item_capital_wholesale" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price" style="margin-right: 2%;">
-                                </div>
+                                    <input style="margin-right: 2%;" required type="number" min="0" value="0" id="input-capital" name="item_capital" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price">
+                                    </div>
                                 <div class="w-50 d-flex pl-1">
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">₱</span>
+                                        <div class="input-group-prepend" >
+                                            <span  id="peso-sign" class="input-group-text">₱</span>
                                         </div>
-                                        <input required type="number" min="0" value="0" id="input-capital" name="item_capital" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price" readonly="true">
+                                        <input  required type="number" min="0"  id="input-capital-wholesale" name="item_capital_wholesale" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Wholesale">
                                     </div>
+                                    
                                     <div class="p-2">
-                                    <div class="custom-control custom-switch pt-2">
-                                        <input type="checkbox" class="custom-control-input" id="manual-input" >
-                                        <label class="custom-control-label" for="manual-input" data-toggle="tooltip" data-placement="top" title="Manual Input"></label>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="d-flex bd-highlight mb-3">
-                                <div class="input-group w-100">
-                                    
-                                    <input required type="number" min="0" value="0" id="input-tax-wholesale" class="form-control" name="item_tax_wholesale" aria-label="Revenue" placeholder="Revenue">
-                                    <div class="input-group-append" style="margin-right: 2%;">
-                                        <span class="input-group-text">%</span>
-                                    </div>
+                                <div class="input-group w-100" style="margin-bottom: -5%;">
                                     <input required type="number" min="0" value="0" id="input-tax" class="form-control" name="item_tax" aria-label="Revenue" placeholder="Revenue">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">%</span>
+                                    <div class="input-group-append" style="margin-right: 2%; ">
+                                        <span style="margin-bottom: 70%; margin-right: 3px;" class="input-group-text">%</span>
                                     </div>
+                                    <hr>
+                                    <div class="custom-control custom-switch pt-2">
+                                        <input type="checkbox" class="custom-control-input" id="item-wholesale" >
+                                        <label class="custom-control-label" for="item-wholesale" data-toggle="tooltip" data-placement="top" title="It's for your wholesale price"></label>
+                                    </div>
+                                    <div class="input-group-append" style=" margin-right: 23%;">
+                                        <label style="margin-top: 8px;border-top-style: solid;border-width: thin;border-color: #e5e5e5;" for="item-wholesale">WHOLESALE</label>
+                                    </div>
+                                    
                                 </div>
                             </div>
 
@@ -107,13 +116,20 @@
                                 <div class="input-group w-100">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">₱</span>
+                                        <input required type="text" class="form-control" id="total-item-price2"  aria-label="Price" placeholder="Price" style="border-top-left-radius: 0;border-bottom-left-radius: 0px;" readonly>
                                     </div>
-                                    <input required type="text" class="form-control" id="total-item-price1" aria-label="Price" placeholder="Price" style="margin-right: 2%;" readonly>
+                                    <input style="display: none;margin-left: 2%;"required type="number" min="0" value="0" id="input-revenue-wholesale" class="form-control" name="item_revenue_wholesale" aria-label="Revenue" placeholder="Revenue">
+                                    <div  style="display: none;"class="input-group-append" id="item-wholesale-percentage">
+                                        <span  class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex bd-highlight mb-3">
+                                <div class="input-group w-100" style="margin-left: 50%;">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">₱</span>
+                                        <span style="display: none;    margin-left: 13%;" id="input-peso-sign" class="input-group-text">₱</span>
                                     </div>
-                                    <input required type="text" class="form-control" id="total-item-price2"  aria-label="Price" placeholder="Price" readonly>
-                                    
+                                    <input  style="display: none; " required type="text" class="form-control" id="total-item-price1" aria-label="Price" placeholder="Price"  readonly>
                                 </div>
                             </div>
                         </div>
@@ -122,55 +138,59 @@
                 
                         <div class="form-group flex-fill m-1">
                             <div class="col-md-12">
-                                <label for="category">Category</label>
-                                <select class="form-control" id="category" name="category_id">
-                                <?php
-                                    $sql = "SELECT * FROM category";
-                                    $result = mysqli_query($conn, $sql);
-                                    while($data = $result->fetch_assoc()){
-                                ?>
-                                    <option value="<?php echo $data["category_id"] ?>"><?php echo $data["category_name"] ?></option>
-                                <?php
-                                    }
-                                ?>
-                                </select>
+                                <div class="input-group w-100">
+                                    <div class="form-group mr-auto">
+                                        <label for="item-store">STORE</label>
+                                        <input style="width: 271px;" required type="number" class="form-control" id="item-store" name="item_store" placeholder="Stock in store" data-toggle="tooltip" data-placement="top" title="how many stock in your store?">
+                                    </div>
+                                    <div class="form-group mr-auto"style="margin-left: 17px;width: 265px;">
+                                        <label for="item-warehouse">WAREHOUSE</label>
+                                        <input required type="number" class="form-control" id="item-warehouse" name="item_warehouse" placeholder="Stock in warehouse" data-toggle="tooltip" data-placement="top" title="how many stock in your warehouse?">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="d-flex bd-highlight mb-3">
+                            <div class="d-flex bd-highlight mb-3" style="width: 200%;">
                                 <div class="col-md-6 my-1">
-                                    <label for="item-unit">Unit - 1</label>
-                                    <input type="hidden" id="item_stock" name="item_stock" class="form-control" placeholder="Stock">
-                                    <div class="form-group d-flex m-0">
-                                        <input required type="number" id="u1-val" class="form-control" placeholder="Stock">
-                                        <select class="form-control " id="item-unit" name="item_unit" required  >
-                                            <option disabled>Select</option>
-                                            <option value="Sack">Sack</option>
-                                            <option value="Roll">Roll</option>
-                                            <option value="Box">Box</option>
-                                            <option value="Box">Bundle</option>
-                                            <option value="Box">Bag</option>
-                                            <option value="Box"></option>
-                                        </select>
+                                    <div class="input-group-append">
+                                        <div class="custom-control custom-switch pt-2">
+                                            <input type="checkbox" class="custom-control-input" id="item-quantity" >
+                                            <label class="custom-control-label" for="item-quantity">Quantity per-Package</label>
+                                        </div>
                                     </div>
-                                    <div class="form-group d-flex m-0">
-                                        <input required type="number" name="item_unit_divisor" id="divisor" class="form-control w-50" placeholder="U1/U2" data-toggle="tooltip" data-placement="top" title="How Many U2 in U1?">
-                                        <select name="unit_name" id="unit_name" class="form-control w-50">
-                                            <option value="Kg">kg</option>
-                                            <option value="Kg">ml</option>
-                                            <option value="Kg">cm</option>
-                                            <option value="Kg">m</option>
-                                        </select>
+
+                                    <div class="d-flex bd-highlight mb-3">
+                                        <div style="display: none;"class="input-group w-100" id="quantity-per-package">
+                                            <div class="input-group-prepend">
+                                            <input required type="number" value="0" id="u1-val" class="form-control">
+                                            <select name="unit_name" id="unit_name" class="form-control w-25">
+                                                <option value="kilogram">kg</option>
+                                                <option value="milliliter">ml</option>
+                                                <option value="centimeter">cm</option>
+                                                <option value="meter">m</option>
+                                                <option value="pcs">pieces</option>
+                                            </select>
+                                            </div>
+
+                                            <div class="input-group-prepend"style="width: 225px;margin-left: 15px;">
+                                            <p style="width: 50px;">per 1</p>
+                                            <select class="form-control " id="item-unit" name="item_unit" style="margin-left: 10px;" required  >
+                                                <option disabled>Select</option>
+                                                <option value="sack">Sack</option>
+                                                <option value="Roll">Roll</option>
+                                                <option value="Box">Box</option>
+                                                <option value="Bundle">Bundle</option>
+                                                <option value="Bag">Bag</option>
+                                            </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 my-1">
-                                    <label for="item-unit">Unit - 2</label>
-                                    <input required type="text" class="form-control" id="unit-2" value="U2" readonly>
-                                    <input required type="number" id="u2-val" class="form-control" placeholder="Stock" value="0">
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <input required type="submit"  class="btn btn-primary" name="submit" id="btn-add-item"  value="Submit">
+                        <input required type="submit"  class="btn btn-primary" name="submit" id="btn-add-item" value="Submit">
                     </div>
                     
                 </form>

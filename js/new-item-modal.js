@@ -118,3 +118,29 @@ $("#manual-input").change(function() {
         calculate("retail");
     }
 });
+$(document).ready(function() {
+    $("#item-wholesale").click(function() {
+        if ($(this).is(':checked')) {
+            $("#input-revenue-wholesale").slideDown(500);
+            $("#item-wholesale-percentage").slideDown(500);
+            $("#total-item-price1").slideDown(500); 
+            $("#input-peso-sign").slideDown(500);
+        } else {
+            $("#input-revenue-wholesale").slideUp(500);
+            $("#item-wholesale-percentage").slideUp(500);
+            $("#total-item-price1").slideUp(500);
+            $("#input-peso-sign").slideUp(500);
+        }
+    });
+});
+$(document).ready(function() {
+    $("#item-quantity").click(function() {
+        if ($(this).is(':checked')) {
+            $("#quantity-per-package").slideDown(500);
+            
+        } else {
+            $("#quantity-per-package").slideUp(500);
+            
+        }
+    });
+});
