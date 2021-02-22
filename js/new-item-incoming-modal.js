@@ -36,7 +36,8 @@ $("form#add-item-form").submit(function(e) {
     if (validateForm()) {
         $('#add-item-modal-incoming').modal('toggle');
         var formData = new FormData(this);
-        formData.set("item_stock", 0);
+        if ($("#item-wholesale").attr("checked")) formData.append("sell_in_wholesale", "true");
+        else formData.append("sell_in_wholesale", "false");
         formData.set("submit", "submit");
         console.log(formData);
         $.ajax({
@@ -158,10 +159,11 @@ $(document).ready(function() {
     $("#item-quantity").click(function() {
         if ($(this).is(':checked')) {
             $("#quantity-per-package").slideDown(500);
-            
+            $("#q1-name").slideDown(500);
+            $("#u1-selected").text($("#item-unit").val());
         } else {
             $("#quantity-per-package").slideUp(500);
-            
+            $("#q1-name").slideUp(500);
         }
     });
 });

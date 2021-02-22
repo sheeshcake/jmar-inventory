@@ -19,9 +19,11 @@
         $result = mysqli_query($conn, $sql);
     }
     while($data = $result->fetch_assoc()){
+        if($data["sell_in_wholesale"] == "false")  $data["item_unit_divisor"] = "1";
+        if($data["sell_in_wholesale"] == "false")  $data["item_tax_wholesale"] = "1";
         $r_price = (floatval(($data["item_tax"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price"]);
         $w_price = (floatval(($data["item_tax_wholesale"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price_wholesale"]);
-        $u1 = intval($data["item_stock"] / $data["item_unit_divisor"]);
+        $u1 = intval($data["item_stock_warehouse"] / $data["item_unit_divisor"]);
         $u2 =  floatval($data["item_stock"] - ($u1 * $data["item_unit_divisor"]));
         if($u1 <= 2 && $u1 != 0) $color = "warning";
         else if($u1 == 0 && $u2 == 0) $color = "danger";
@@ -57,9 +59,25 @@
                         ?>
                         </select>
                     </div>
+
                 </p>
+                <?php if($_SESSION["user"]["role"] == "admin" && $data["sell_in_wholesale"] == "false") {?>
+                    <b class="float-left">Capital:&nbsp;₱&nbsp;</b><p id="capital_w<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_price_wholesale"]?></p>
+                <?php } ?>
             </div>
-            <div class="d-flex p-2"><b>Stock:&nbsp;</b><p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></div>
+
+            <hr>
+            <div class="d-flex p-2">
+                <b>Store Stock:&nbsp;</b>
+                    <p class="text-<?php echo $color; ?>">
+                    <?php echo $data["item_stock"] . " " . $u2_name ?>
+                    </p>
+                <b>Warehouse Stock:&nbsp;</b>
+                    <p class="text-<?php echo $color; ?>">
+                        <?php echo $u1 . " " . $data["item_unit"] ?>
+                    </p>
+            </div>
+            <hr>
         </div>
     </td>
     <td>
@@ -75,6 +93,7 @@
             ?>
             <div class="d-flex p-2"><b>Price:&nbsp;₱<?php echo $r_price?></b></div>
             <hr class="sidebar-divider">
+            <?php if($data["sell_in_wholesale"] == "true"){ ?>
             <center><h5><b>WHOLESALE</b></h5></center>
             <?php
                 if($_SESSION["user"]["role"] == "admin"){ 
@@ -85,6 +104,7 @@
                 }
             ?>
             <div class="d-flex p-2"><b>Price:&nbsp;₱<?php echo $w_price?></b></div>
+            <?php }?>
         </div>
     </td>
     <td>

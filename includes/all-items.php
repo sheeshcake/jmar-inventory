@@ -47,9 +47,11 @@
         <tbody>
 <?php
         while($data = $result -> fetch_assoc()){
+            if($data["sell_in_wholesale"] == "false")  $data["item_unit_divisor"] = "1";
+            if($data["sell_in_wholesale"] == "false")  $data["item_tax_wholesale"] = "1";
             $r_price = floatval($data["item_tax"]) / 100 * floatval($data["item_price"]) + floatval($data["item_price"]);
             $w_price = floatval($data["item_tax_wholesale"]) / 100 * floatval($data["item_price_wholesale"]) + floatval($data["item_price_wholesale"]);
-            $u1 = intval($data["item_stock"] / $data["item_unit_divisor"]);
+            $u1 = intval($data["item_stock_warehouse"] / $data["item_unit_divisor"]);
             $u2 =  floatval($data["item_stock"] - ($u1 * $data["item_unit_divisor"]));
             $u2_name = "";
             $total_in_wholesale = $data["item_stock"] * $r_price;
@@ -60,13 +62,18 @@
             if($data["item_unit"] == "Box") $u2_name = "pieces";
             else if($data["item_unit"] == "Roll") $u2_name = "meter(s)";
             else if($data["item_unit"] == "Sack") $u2_name = "kilo(s)";
+            else $u2_name = "Pieces";
             
 ?>
         <tr>
             <td><?php echo $data["item_id"]; ?></td>
             <td><img src="../img/item/<?php echo $data["item_img"] ?>" alt="" width="100" ></td>
             <td><?php echo $data["item_name"] . " " . $data["item_desc"]; ?></td>
-            <td><p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></td>
+            <td>
+                Store:<p class="text-<?php echo $color; ?>"><?php echo $data["item_stock"] . " " . $u2_name;?></p>
+                <hr>
+                Warehouse: <p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"];?></p>
+            </td>
             <td>
                 <?php            
                     echo "<p>₱" . number_format($data["item_price"], 2) . " per " . $u2_name . "</p>";

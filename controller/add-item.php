@@ -15,6 +15,8 @@
         $item_price_wholesale = $_POST["item_capital_wholesale"];
         $item_tax_wholesale = $_POST["item_tax_wholesale"];
         $item_stock = $_POST["item_stock"];
+        $item_stock_warehouse = $_POST["item_stock_warehouse"];
+        $sell_in_wholesale = $_POST["sell_in_wholesale"];
         $supplier_id = $_POST["supplier"];
         $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
         $item_added = $date->format("m-d-Y h:i a");
@@ -27,8 +29,8 @@
                 $item_img = urldecode($_FILES["item_img"]["name"]);
                 move_uploaded_file($_FILES["item_img"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/img/item/" . $item_img);
             }
-            $sql = "INSERT INTO items (item_img, item_name, item_brand, item_desc, item_unit, item_price, item_tax, item_price_wholesale, item_unit_divisor, item_tax_wholesale, item_stock, item_added, category_id, supplier_id) VALUES (
-                '$item_img', '$item_name', '$item_brand', '$item_desc', '$item_unit', '$item_price', '$item_tax', '$item_price_wholesale', '$item_unit_divisor', '$item_tax_wholesale', '$item_stock', '$item_added', '$category_id', '$supplier_id')";
+            $sql = "INSERT INTO items (item_img, item_name, item_brand, item_desc, item_unit, item_price, item_tax, item_price_wholesale, item_unit_divisor, item_tax_wholesale, item_stock, item_added, category_id, supplier_id, sell_in_wholesale, item_stock_warehouse) VALUES (
+                '$item_img', '$item_name', '$item_brand', '$item_desc', '$item_unit', '$item_price', '$item_tax', '$item_price_wholesale', '$item_unit_divisor', '$item_tax_wholesale', '$item_stock', '$item_added', '$category_id', '$supplier_id', '$sell_in_wholesale', '$item_stock_warehouse')";
             $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: " . mysqli_error($conn), E_USER_ERROR);
             if($result){
                 $last_id = $conn->insert_id;

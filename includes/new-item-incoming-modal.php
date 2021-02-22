@@ -1,4 +1,4 @@
-<div class="modal fade add-item-modal" id="add-item-modal-incoming" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade add-item-modal" id="add-item-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl ">
     <div class="modal-content">
         <div class="card">
@@ -125,9 +125,9 @@
                                 </div>
                             </div>
                             <div class="d-flex bd-highlight mb-3">
-                                <div class="input-group w-100" style="margin-left: 50%;">
+                                <div class="input-group w-50 ml-auto">
                                     <div class="input-group-prepend">
-                                        <span style="display: none;    margin-left: 13%;" id="input-peso-sign" class="input-group-text">₱</span>
+                                        <span style="display: none;" id="input-peso-sign" class="input-group-text">₱</span>
                                     </div>
                                     <input  style="display: none; " required type="text" class="form-control" id="total-item-price1" aria-label="Price" placeholder="Price"  readonly>
                                 </div>
@@ -144,8 +144,13 @@
                                         <input style="width: 271px;" required type="number" class="form-control" id="item-store" name="item_store" placeholder="Stock in store" data-toggle="tooltip" data-placement="top" title="how many stock in your store?">
                                     </div>
                                     <div class="form-group mr-auto"style="margin-left: 17px;width: 265px;">
-                                        <label for="item-warehouse">WAREHOUSE</label>
+                                        <label for="inputGroupSelect01">WAREHOUSE</label>
+                                        <div class="input-group">
                                         <input required type="number" class="form-control" id="item-warehouse" name="item_warehouse" placeholder="Stock in warehouse" data-toggle="tooltip" data-placement="top" title="how many stock in your warehouse?">
+                                            <div class="input-group-append" id="q1-name" style="display: none">
+                                                <label class="input-group-text" for="item-warehouse" id="u1-selected"></label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -162,7 +167,7 @@
                                         <div style="display: none;"class="input-group w-100" id="quantity-per-package">
                                             <div class="input-group-prepend">
                                             <input required type="number" value="0" id="u1-val" class="form-control">
-                                            <select name="unit_name" id="unit_name" class="form-control w-25">
+                                            <select name="unit_name" id="unit_name" class="form-control w-50">
                                                 <option value="kilogram">kg</option>
                                                 <option value="milliliter">ml</option>
                                                 <option value="centimeter">cm</option>
@@ -171,11 +176,11 @@
                                             </select>
                                             </div>
 
-                                            <div class="input-group-prepend"style="width: 225px;margin-left: 15px;">
-                                            <p style="width: 50px;">per 1</p>
-                                            <select class="form-control " id="item-unit" name="item_unit" style="margin-left: 10px;" required  >
+                                            <div class="input-group-prepend" style="width: 225px;margin-left: 15px;">
+                                            <p class="my-1">Per 1(one)</p>
+                                            <select class="form-control " id="item-unit" name="item_unit" required  >
                                                 <option disabled>Select</option>
-                                                <option value="sack">Sack</option>
+                                                <option value="Sack">Sack</option>
                                                 <option value="Roll">Roll</option>
                                                 <option value="Box">Box</option>
                                                 <option value="Bundle">Bundle</option>
@@ -199,4 +204,4 @@
     </div>
   </div>
 </div>
-<script src="js/new-item-incoming-modal.js"></script>
+<script src="js/new-item-modal.js"></script>

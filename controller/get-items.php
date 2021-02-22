@@ -8,7 +8,7 @@
     while($data = $result->fetch_assoc()){
         $r_price = floatval($data["item_tax"]) / 100 * floatval($data["item_price"]) + floatval($data["item_price"]);
         $w_price = floatval($data["item_tax_wholesale"]) / 100 * floatval($data["item_price_wholesale"]) + floatval($data["item_price_wholesale"]);
-        $u1 = intval($data["item_stock"] / $data["item_unit_divisor"]);
+        $u1 = intval($data["item_stock_warehouse"] / $data["item_unit_divisor"]);
         $u2 =  floatval($data["item_stock"] - ($u1 * $data["item_unit_divisor"]));
         $u2_name = "";
         if($u1 <= 2 && $u1 != 0) $color = "warning";
@@ -17,6 +17,7 @@
         if($data["item_unit"] == "Box") $u2_name = "pieces";
         else if($data["item_unit"] == "Roll") $u2_name = "meter(s)";
         else if($data["item_unit"] == "Sack") $u2_name = "kilo(s)";
+        else $u2_name = $data["item_unit"];
 ?>
 <tr>
     <td>
@@ -33,11 +34,10 @@
         <?php            
             echo "<b>₱" . number_format($r_price, 2) . " per " . $u2_name . "</b></br>";
             echo '<hr class="sidebar-divider">';
-            echo "<b>₱" . number_format($w_price, 2) . " per " . $data["item_unit"] . "</b>";
+            if($data["item_unit"] != "Pieces") echo "<b>₱" . number_format($w_price, 2) . " per " . $data["item_unit"] . "</b>";
         ?>
     </td>
     <td width="200px">
-        <div class="d-flex p-2"><b><p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></b></div>
         <?php
             if($data["item_stock"] > 0){
         ?>
@@ -48,7 +48,7 @@
         </div>
         <div class="d-flex" id="count_input_<?php echo $data["item_id"] ?>">
             <input min="1" max="<?php echo $data["item_stock"]; ?>" type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
-            <select id="unit" class="custom-select unit-select">
+            <select id="unit" class="custom-select unit-select" <?php if($data["item_unit"] == "Pieces") echo "disabled" ?>>
                 <option name="<?php echo $u2_name; ?>" value="1"><?php echo $u2_name; ?></option>
                 <option name="<?php echo $data["item_unit"] ?>" value="<?php echo $data["item_unit_divisor"]; ?>"><?php echo $data["item_unit"] ?></option>
             </select>

@@ -37,8 +37,11 @@ $("form#add-item-form").submit(function(e) {
     if (validateForm()) {
         $('#add-item-modal').modal('toggle');
         var formData = new FormData(this);
+        if ($("#item-wholesale").attr("checked")) formData.append("sell_in_wholesale", "true");
+        else formData.append("sell_in_wholesale", "false");
+        if ($("#item-wholesale").attr("checked")) formData.append("sell_in_wholesale", "true");
+        else formData.append("sell_in_wholesale", "false");
         formData.set("submit", "submit");
-        console.log(formData);
         $.ajax({
             url: url(window.location.href) + "/controller/add-item.php",
             method: "POST",
@@ -76,13 +79,7 @@ $('#image-file').change(function() {
 });
 $(document).on("change", "#item-unit", function() {
     var $unit = $(this).val();
-    if ($unit == "Roll") {
-        $("#unit-2").val("Meter");
-    } else if ($unit == "Sack") {
-        $("#unit-2").val("Kilo");
-    } else {
-        $("#unit-2").val("Pieces");
-    }
+    $("#u1-selected").text($unit);
 });
 $(document).on("input", "#u1-val,#u2-val,#divisor", function() {
     var u1 = $("#u1-val").val();
@@ -137,10 +134,11 @@ $(document).ready(function() {
     $("#item-quantity").click(function() {
         if ($(this).is(':checked')) {
             $("#quantity-per-package").slideDown(500);
-            
+            $("#q1-name").slideDown(500);
+            $("#u1-selected").text($("#item-unit").val());
         } else {
             $("#quantity-per-package").slideUp(500);
-            
+            $("#q1-name").slideUp(500);
         }
     });
 });

@@ -6,6 +6,8 @@
     ";
     $result = mysqli_query($conn, $sql);
     while($data = $result->fetch_assoc()){
+        if($data["sell_in_wholesale"] == "false")  $data["item_unit_divisor"] = "1";
+        if($data["sell_in_wholesale"] == "false")  $data["item_tax_wholesale"] = "1";
         $r_price = (floatval(($data["item_tax"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price"]);
         $w_price = (floatval(($data["item_tax_wholesale"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price_wholesale"]);
         $u1 = intval($data["item_stock"] / $data["item_unit_divisor"]);
@@ -27,7 +29,7 @@
         <p><b>Description: </b><?php echo $data["item_desc"];?></p>
     </td>
     <td>
-        <?php            
+        <?php
             $price = (floatval(($data["item_tax"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price"]); 
             $price_w = (floatval(($data["item_tax_wholesale"]) / 100) * floatval($data["item_price_wholesale"])) + floatval($data["item_price_wholesale"]) * $data["item_unit_divisor"]; 
             echo "<b>₱" . $price . " per " . $u2_name . "</b></br>";
@@ -35,7 +37,6 @@
         ?>
     </td>
     <td width="200px">
-        <div class="d-flex p-2"><b><p><?php echo $u1 . " " . $data["item_unit"] . " and " . $u2 . " " . $u2_name;?></p></b></div>
         <?php
             if($data["item_stock"] > 0){
         ?>

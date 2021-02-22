@@ -118,16 +118,16 @@
                                         <span class="input-group-text">₱</span>
                                         <input required type="text" class="form-control" id="total-item-price2"  aria-label="Price" placeholder="Price" style="border-top-left-radius: 0;border-bottom-left-radius: 0px;" readonly>
                                     </div>
-                                    <input style="display: none;margin-left: 2%;"required type="number" min="0" value="0" id="input-revenue-wholesale" class="form-control" name="item_revenue_wholesale" aria-label="Revenue" placeholder="Revenue">
+                                    <input style="display: none;margin-left: 2%;"required type="number" min="0" value="0" id="input-revenue-wholesale" class="form-control" name="item_tax_wholesale" aria-label="Revenue" placeholder="Revenue">
                                     <div  style="display: none;"class="input-group-append" id="item-wholesale-percentage">
                                         <span  class="input-group-text">%</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex bd-highlight mb-3">
-                                <div class="input-group w-100" style="margin-left: 50%;">
+                                <div class="input-group w-50 ml-auto">
                                     <div class="input-group-prepend">
-                                        <span style="display: none;    margin-left: 13%;" id="input-peso-sign" class="input-group-text">₱</span>
+                                        <span style="display: none;" id="input-peso-sign" class="input-group-text">₱</span>
                                     </div>
                                     <input  style="display: none; " required type="text" class="form-control" id="total-item-price1" aria-label="Price" placeholder="Price"  readonly>
                                 </div>
@@ -141,11 +141,16 @@
                                 <div class="input-group w-100">
                                     <div class="form-group mr-auto">
                                         <label for="item-store">STORE</label>
-                                        <input style="width: 271px;" required type="number" class="form-control" id="item-store" name="item_store" placeholder="Stock in store" data-toggle="tooltip" data-placement="top" title="how many stock in your store?">
+                                        <input style="width: 271px;" required type="number" class="form-control" id="item-store" name="item_stock" placeholder="Stock in store" data-toggle="tooltip" data-placement="top" title="how many stock in your store?">
                                     </div>
                                     <div class="form-group mr-auto"style="margin-left: 17px;width: 265px;">
-                                        <label for="item-warehouse">WAREHOUSE</label>
-                                        <input required type="number" class="form-control" id="item-warehouse" name="item_warehouse" placeholder="Stock in warehouse" data-toggle="tooltip" data-placement="top" title="how many stock in your warehouse?">
+                                        <label for="inputGroupSelect01">WAREHOUSE</label>
+                                        <div class="input-group">
+                                        <input required type="number" class="form-control" id="item-warehouse" name="item_stock_warehouse" placeholder="Stock in warehouse" data-toggle="tooltip" data-placement="top" title="how many stock in your warehouse?">
+                                            <div class="input-group-append" id="q1-name" style="display: none">
+                                                <label class="input-group-text" for="item-warehouse" id="u1-selected"></label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -161,8 +166,8 @@
                                     <div class="d-flex bd-highlight mb-3">
                                         <div style="display: none;"class="input-group w-100" id="quantity-per-package">
                                             <div class="input-group-prepend">
-                                            <input required type="number" value="0" id="u1-val" class="form-control">
-                                            <select name="unit_name" id="unit_name" class="form-control w-25">
+                                            <input required type="number" value="0" id="u1-val" name="item_unit_divisor" class="form-control">
+                                            <select name="unit_name" id="unit_name" class="form-control w-50">
                                                 <option value="kilogram">kg</option>
                                                 <option value="milliliter">ml</option>
                                                 <option value="centimeter">cm</option>
@@ -171,11 +176,11 @@
                                             </select>
                                             </div>
 
-                                            <div class="input-group-prepend"style="width: 225px;margin-left: 15px;">
-                                            <p >per 1</p>
-                                            <select class="form-control w-50 " id="item-unit" name="item_unit" style="margin-left: -120px;" required  >
+                                            <div class="input-group-prepend" style="width: 225px;margin-left: 15px;">
+                                            <p class="my-1">Per 1(one)</p>
+                                            <select class="form-control " id="item-unit" name="item_unit" required  >
                                                 <option disabled>Select</option>
-                                                <option value="sack">Sack</option>
+                                                <option value="Sack">Sack</option>
                                                 <option value="Roll">Roll</option>
                                                 <option value="Box">Box</option>
                                                 <option value="Bundle">Bundle</option>

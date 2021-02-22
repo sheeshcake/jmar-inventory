@@ -37,7 +37,7 @@
                 $item_count = $value[2] * $data2["item_unit_divisor"];
                 // Update Item Stock
                 $sql1 = "UPDATE items
-                SET item_stock = item_stock + $item_count
+                SET item_stock_warehouse = item_stock_warehouse + $item_count
                 WHERE item_id = '$item_id'";
                 $result = mysqli_query($conn, $sql1);
                 //Insert Purchased Item
