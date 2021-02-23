@@ -32,6 +32,7 @@
             foreach ($arr as &$value) {
                 $value = explode(",", $value);
                 $item_id = $value[1];
+                $user_id = $_SESSION["user"]["user_id"];
                 $sql = "SELECT item_unit_divisor FROM items WHERE item_id='$item_id'";
                 $data2 = mysqli_query($conn, $sql) -> fetch_assoc();
                 $item_count = $value[2] * $data2["item_unit_divisor"];
@@ -41,7 +42,7 @@
                 WHERE item_id = '$item_id'";
                 $result = mysqli_query($conn, $sql1);
                 //Insert Purchased Item
-                $sql1 = "INSERT INTO incoming_transaction (transaction_id, item_id, item_count) VALUES ($last_id, '$item_id', '$item_count')";
+                $sql1 = "INSERT INTO incoming_transaction (transaction_id, item_id, item_count, user_id) VALUES ($last_id, '$item_id', '$item_count', '$user_id')";
                 $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);
                 if(!$result1){
                     $data1 = array("message"=>"An Error Occured!", "status"=>"danger");
