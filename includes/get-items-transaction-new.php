@@ -46,7 +46,7 @@
         </div>
         <div class="d-flex" id="count_input_<?php echo $data["item_id"] ?>">
             <input min="1" max="<?php echo $data["item_stock"]; ?>" type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
-            <select id="unit" class="custom-select unit-select">
+            <select id="unit_<?php echo $data["item_id"] ?>" class="custom-select unit-select">
                 <option name="<?php echo $u2_name; ?>" value="<?php echo $data["item_stock"]; ?>"><?php echo $u2_name; ?></option>
                 <option name="<?php echo $data["item_unit"] ?>" value="<?php echo $u1; ?>"><?php echo $data["item_unit"] ?></option>
             </select>

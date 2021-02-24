@@ -2,6 +2,10 @@ var $t;
 var $last_data;
 var $id;
 var $reciept_no;
+var $counter = 0;
+var $max = 0;
+var $removed_to_warehouse = 0;
+var $removed_to_store = 0;
 
 function reload() {
     setTimeout(function() {
@@ -42,7 +46,7 @@ function reload() {
             success: function(d) {
                 if (d != "null") {
                     $data = JSON.parse(d);
-                    if($data.reciept_no != null){
+                    if(parseInt($data.reciept_no)){
                         if (parseInt($data.reciept_no) + 1 != $reciept_no) {
                             $("#reciept").val(parseInt($data.reciept_no) + 1);
                             $reciept_no = parseInt($data.reciept_no) + 1;
@@ -56,6 +60,7 @@ function reload() {
     }, 500);
 }
 $(document).ready(function() {
+
     $("#customer").tooltip();
     $("#page-top").toggleClass("sidebar-toggled");
     $("#accordionSidebar").toggleClass("toggled");
@@ -65,7 +70,8 @@ function calculate(){
     var $discount = $("#discount").val();
     var $cash = $("#cash").val();
     var $total = $("#total").html();
-    var $change = (parseFloat($cash)  - (parseFloat($total)).toFixed(2) - (parseFloat($discount) / 100 * parseFloat($total))).toFixed(2);
+    $("#total_amount").text(($total - ($total * $discount / 100)).toFixed(2));
+    var $change = ($cash  - ($total - ($total * $discount / 100))).toFixed(2);
     console.log(parseInt($change));
     console.log(parseInt($("#total_items").text()));
     if(isNaN($change) || $change < 0 || parseInt($("#total_items").text()) == 0){
@@ -80,31 +86,126 @@ function calculate(){
         $(".submit-transaction").slideDown();
     }
 }
-var $counter = 0;
+
 $(document).on("input", "#cash, #discount", function() {
     calculate();
 });
-$(document).on("click", ".add", function() {
-    var $id = $(this).val();
-    var $count = $(this).prev().prev();
-    var $item_unit = $(this).prev();
-    console.log($count.val());
-    console.log($item_unit.prop("options")[$item_unit.prop("options").selectedIndex]["value"] * $count.val());
-    var $total_count = $item_unit.prop("options")[$item_unit.prop("options").selectedIndex]["value"] * $count.val();
-    if (parseFloat($total_count) <= parseFloat($("#stock_" + $id).val()).toFixed(2) && parseFloat($total_count).toFixed(2) > 0) {
-        $("#stock_" + $id).val((parseFloat(parseFloat($("#stock_" + $id).val()) - parseFloat($total_count))).toFixed(2));
-        $("#item_" + $id).removeClass("border-danger");
-        $("#item_" + $id).addClass("border-success");
-        $(this).parent().next().text("Item Added!");
-        $(this).parent().next().attr('class', 'alert-success').addClass('alert');
-        $(this).parent().next().fadeTo(3000, 500).slideUp(500, function() {});
-        if (parseFloat($("#stock_" + $id).val()) == 0) {
-            $("#count_input_" + $id).removeClass("d-flex");
-            $("#stock_" + $id).removeClass("border-success");
-            $("#stock_" + $id).addClass("is-invalid");
-            $("#count_input_" + $id).fadeOut();
+$(document).on("change", ".unit-select", function(){
+    $id = $(this).next().val();
+    if($(this).val() != "1"){
+        $warehouse_total = $("#stock_warehouse_" + $id).val();
+        $store_total = math.divide($("#stock_" + $id).val(), $(this).val());
+        $max = math.add($warehouse_total, $store_total);
+        $(this).prev().attr("max", $max.toFixed(2));
+    }else{
+        $warehouse_total = math.multiply($(this).next().attr("unit_divisor") , $("#stock_warehouse_" + $id).val());
+        $store_total = $("#stock_" + $id).val();
+        $max = math.add($warehouse_total , $store_total);
+        $(this).prev().attr("max", $max.toFixed(2));
+    }
+
+});
+
+function update_stock_on_add($btn){
+    var $id = $btn.val();
+    var $count = $btn.prev().prev();
+    var $item_unit = $btn.prev();
+    var ware_house = 0;
+    var store = 0;
+    if(parseInt($count.attr("max")) >= parseInt($count.val()) && 0 < parseInt($count.val())){
+        if($btn.attr("unit_divisor") == "1"){
+            store = math.subtract($("#stock_" + $id).val(), $count.val());
+            if(store < 0){
+                console.log(store);
+                ware_house = math.subtract($("#stock_warehouse_" + $id).val(), math.abs(store));
+                $removed_to_store = $("#stock_" + $id).val();
+                $removed_to_warehouse = math.subtract($("#stock_warehouse_" + $id).val(), ware_house);
+                store = 0;
+            }else if(store == 0){
+                $removed_to_store = $count.val();
+                ware_house = $("#stock_warehouse_" + $id).val();
+                $removed_to_warehouse = 0;
+            }else{
+                $removed_to_store = $count.val();
+                ware_house = $("#stock_warehouse_" + $id).val();
+                $removed_to_warehouse = 0;
+            }
+            $("#stock_warehouse_" + $id).val(ware_house);
+            $("#stock_" + $id).val(store);
+        }else{
+            if(parseInt($item_unit.val()) != 1){
+                ware_house = math.subtract($("#stock_warehouse_" + $id).val(), math.floor($count.val()));
+                if(math.subtract($("#stock_warehouse_" + $id).val(), $count.val()) < 0){
+                    store = math.subtract($("#stock_" + $id).val(), math.multiply($item_unit.val(), math.abs(math.subtract($("#stock_warehouse_" + $id).val(), $count.val()))));
+                    ware_house = 0;
+                    $removed_to_warehouse = $("#stock_warehouse_" + $id).val();
+                    $removed_to_store = math.subtract($("#stock_" + $id).val(), store);
+                }else if(ware_house == 0){
+                    store = $("#stock_" + $id).val();
+                    $removed_to_warehouse = $("#stock_warehouse_" + $id).val();
+                    $removed_to_store = math.subtract($("#stock_" + $id).val(), store);
+                }else{
+                    var x1 = math.subtract($("#stock_warehouse_" + $id).val(), $count.val());
+                    var x2 = math.subtract(math.subtract($("#stock_warehouse_" + $id).val(), $count.val()), math.floor(x1));
+                    if(x2 > 0 && x1 < 0){
+                        store = math.subtract($("#stock_" + $id).val(), math.multiply(x1, $btn.attr("unit_divisor")));
+                        $removed_to_warehouse = ware_house;
+                        $removed_to_store = math.subtract($("#stock_" + $id).val(), store);
+                        
+                    }else if(x1 > 0){
+                        $removed_to_warehouse = math.subtract($("#stock_warehouse_" + $id).val() ,ware_house);
+                        $removed_to_store = 0;
+                        store = $("#stock_" + $id).val();
+                    }else{
+                        store = math.subtract($("#stock_" + $id).val(), math.mod($count.val(), ware_house));
+                        $removed_to_warehouse = ware_house;
+                        $removed_to_store = math.subtract($("#stock_" + $id).val(), store);
+                    }
+                }
+                $("#stock_warehouse_" + $id).val(ware_house);
+                $("#stock_" + $id).val(store);
+            }else{
+                if(parseInt($("#stock_" + $id).val()) < parseInt($count.val())){
+                    store = math.subtract($("#stock_" + $id).val(),math.subtract($count.val(), $btn.attr("unit_divisor")));
+                    ware_house = math.subtract($("#stock_warehouse_" + $id).val(), math.floor(math.divide($count.val(), $btn.attr("unit_divisor"))));
+                    $("#stock_warehouse_" + $id).val(ware_house);
+                    $removed_to_warehouse = math.floor(math.divide($count.val(), $btn.attr("unit_divisor")));
+                    $removed_to_store = math.subtract($("#stock_" + $id).val(), store);
+                }else{
+                    store = math.subtract($("#stock_" + $id).val(), $count.val());
+                    $removed_to_warehouse = 0;
+                    $removed_to_store = math.subtract($("#stock_" + $id).val(), store);
+                }
+                $("#stock_" + $id).val(store);
+            }
         }
+        return true;
+    }else if(parseInt($count.val()) < 0){
+        $("#item_" + $id).val($count.attr("min"));
+        $("#item_" + $id).focus().addClass("border-danger");
+        $btn.parent().next().text("Input is Invalid");
+        $btn.parent().next().attr('class', 'alert-danger').addClass('alert');
+        $btn.parent().next().fadeTo(3000, 500).slideUp(500, function() {});
+        return false;
+    }else {
+        $("#item_" + $id).val($count.attr("max"));
+        $("#item_" + $id).focus().addClass("border-danger");
+        $btn.parent().next().text("Requested Item Exeeded!");
+        $btn.parent().next().attr('class', 'alert-danger').addClass('alert');
+        $btn.parent().next().fadeTo(3000, 500).slideUp(500, function() {});
+        return false;
+    }
+
+}
+
+
+$(document).on("click", ".add", function() {
+    if(update_stock_on_add($(this))){
         $counter++;
+        var $id = $(this).val();
+        var $count = $(this).prev().prev();
+        var $item_unit = $(this).prev();
+        var $total_count = $item_unit.prop("options")[$item_unit.prop("options").selectedIndex]["value"] * $count.val();
         $.ajax({
             url: url(window.location.href) + "/controller/transaction-new-controller.php",
             method: "POST",
@@ -129,7 +230,7 @@ $(document).on("click", ".add", function() {
                 $("#items").prepend(
                     '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '" item-unit="' + item_unit + '">' +
                     '<div class="card-body">' +
-                    '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '" value="' + $total_count + '">x</button>' +
+                    '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse  +'">x</button>' +
                     '<div class="d-flex">' +
                     '<img style="max-width: 100px" src="img/item/' + data.item_img + '">' +
                     '<div class="ml-3">' +
@@ -148,12 +249,6 @@ $(document).on("click", ".add", function() {
                 calculate();
             }
         });
-    } else {
-        $("#item_" + $id).val($("#stock_" + $id).val());
-        $("#item_" + $id).focus().addClass("border-danger");
-        $(this).parent().next().text("Requested Item Exeeded!");
-        $(this).parent().next().attr('class', 'alert-danger').addClass('alert');
-        $(this).parent().next().fadeTo(3000, 500).slideUp(500, function() {});
     }
 });
 
@@ -201,6 +296,7 @@ function send_transaction(courier, payment, customer) {
             courier: $courier,
             payment: $payment,
             customer: $customer,
+            discount: $("#discount").val(),
             data: $all
         },
         success: function(d) {
@@ -216,6 +312,7 @@ function send_transaction(courier, payment, customer) {
                 });
                 $("#change").html("");
                 $("#cash").val(0);
+                $("#total_amount").val(0);
                 $("#discount").val(0);
                 $(".submit-transaction").slideUp();
                 $("#trans-message").fadeTo(3000, 500).slideUp(500, function() {}).text(data["message"]).attr('class', 'alert-' + data['status']).addClass('alert');
@@ -241,14 +338,15 @@ $(".submit-transaction").click(function() {
 $(document).on("click", ".remove-item", function() {
     $btn = $(this);
     $btn.prop('disabled', true);
+    var r_store = $(this).attr("r_store");
+    var r_warehouse = $(this).attr("r_warehouse");
     $(".submit-transaction").prop('disabled', true);
     $("#count_input_" + $btn.attr("item_id")).addClass("d-flex");
     $("#stock_" + $btn.attr("item_id")).removeClass("is-invalid");
     $("#stock_" + $btn.attr("item_id")).addClass("border-success");
     $("#count_input_" + $btn.attr("item_id")).fadeIn();
-    var d1 = parseFloat($btn.val());
-    var d2 = parseFloat($("#stock_" + $(this).attr("item_id")).val());
-    $("#stock_" + $(this).attr("item_id")).val((d1 + d2).toFixed(2));
+    $("#stock_" + $(this).attr("item_id")).val(math.sum($("#stock_" + $(this).attr("item_id")).val(), r_store));
+    $("#stock_warehouse_" + $(this).attr("item_id")).val(math.sum($("#stock_warehouse_" + $(this).attr("item_id")).val(), r_warehouse));
     var elem = $(this).parent().parent();
     elem.slideUp("normal", function() {
         $(this).remove();

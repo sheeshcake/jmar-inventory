@@ -81,10 +81,12 @@ $(document).on("click", ".open", function() {
                 $total = (parseFloat($total) + parseFloat(formatter(price * unit_count))).toFixed(2);
             });
             $(".modal-body").append(
-                "<p><b>Total:&nbsp;</b><b class='float-right'>₱" + $total + "</b></p>" +
+                "<p><b>Sub Total:&nbsp;</b><b class='float-right'>₱" + $total + "</b></p>" +
+                "<p><b>Discount:&nbsp;</b><b class='float-right'>" + data[0].discount + "%</b></p>" +
+                "<p><b>Total:&nbsp;</b><b class='float-right'>₱" + ($total - ($total * data[0].discount / 100)).toFixed(2) + "</b></p>" +
                 "<p><b>Cash:&nbsp;</b><b class='float-right'>₱" + data[0].cash + "</b></p>" +
                 "<hr class='sidebar-divider'>" +
-                "<p><b>Change:&nbsp;</b><b class='float-right'>₱" + (parseFloat(data[0].cash) - $total).toFixed(2) + "</b></p>"
+                "<p><b>Change:&nbsp;</b><b class='float-right'>₱" + (parseFloat(data[0].cash) - ($total - ($total * data[0].discount / 100))).toFixed(2) + "</b></p>"
             );
         }
     });
@@ -188,10 +190,12 @@ function void_item($btn){
                             $total = (parseFloat($total) + parseFloat(formatter(price * unit_count))).toFixed(2);
                         });
                         $(".modal-body").append(
-                            "<p><b>Total:&nbsp;</b><b class='float-right'>₱" + $total + "</b></p>" +
+                            "<p><b>Sub Total:&nbsp;</b><b class='float-right'>₱" + $total + "</b></p>" +
+                            "<p><b>Discount:&nbsp;</b><b class='float-right'>" + data[0].discount + "%</b></p>" +
+                            "<p><b>Total:&nbsp;</b><b class='float-right'>₱" + ($total - ($total * data[0].discount / 100)).toFixed(2) + "</b></p>" +
                             "<p><b>Cash:&nbsp;</b><b class='float-right'>₱" + data[0].cash + "</b></p>" +
                             "<hr class='sidebar-divider'>" +
-                            "<p><b>Change:&nbsp;</b><b class='float-right'>₱" + (parseFloat(data[0].cash) - $total).toFixed(2) + "</b></p>"
+                            "<p><b>Change:&nbsp;</b><b class='float-right'>₱" + (parseFloat(data[0].cash) - ($total - ($total * data[0].discount / 100))).toFixed(2) + "</b></p>"
                         );
                     }
                 });
@@ -281,10 +285,12 @@ function rep_damage($btn){
                             $total = (parseFloat($total) + parseFloat(formatter(price * unit_count))).toFixed(2);
                         });
                         $(".modal-body").append(
-                            "<p><b>Total:&nbsp;</b><b class='float-right'>₱" + $total + "</b></p>" +
+                            "<p><b>Sub Total:&nbsp;</b><b class='float-right'>₱" + $total + "</b></p>" +
+                            "<p><b>Discount:&nbsp;</b><b class='float-right'>" + data[0].discount + "%</b></p>" +
+                            "<p><b>Total:&nbsp;</b><b class='float-right'>₱" + ($total - ($total * data[0].discount / 100)).toFixed(2) + "</b></p>" +
                             "<p><b>Cash:&nbsp;</b><b class='float-right'>₱" + data[0].cash + "</b></p>" +
                             "<hr class='sidebar-divider'>" +
-                            "<p><b>Change:&nbsp;</b><b class='float-right'>₱" + (parseFloat(data[0].cash) - $total).toFixed(2) + "</b></p>"
+                            "<p><b>Change:&nbsp;</b><b class='float-right'>₱" + (parseFloat(data[0].cash) - ($total - ($total * data[0].discount / 100))).toFixed(2) + "</b></p>"
                         );
                     }
                 });

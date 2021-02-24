@@ -18,6 +18,9 @@
         else if($data["item_unit"] == "Roll") $u2_name = "meter(s)";
         else if($data["item_unit"] == "Sack") $u2_name = "kilo(s)";
         else $u2_name = $data["item_unit"];
+        if($data["sell_in_wholesale"] == "false")$data["item_unit_divisor"] = 1;
+        $items_on_warehouse = intval($data["item_stock_warehouse"] / $data["item_unit_divisor"]);
+        $items_on_store = $data["item_stock"];
 ?>
 <tr>
     <td>
@@ -39,20 +42,21 @@
     </td>
     <td width="200px">
         <?php
-            if($data["item_stock"] > 0){
+            if($data["item_stock"] > 0 || $data["item_stock_warehouse"]){
         ?>
         <div class="d-flex mb-2">
-            <b class="p-2">Total: </b>
-            <input type="text" class="form-control border-success" id="stock_<?php echo $data["item_id"] ?>" value="<?php echo $data["item_stock"] ?>" readonly>
-                <b class="p-2"><?php echo $u2_name ?></b>
+            Warehouse:&nbsp;<input type="text" class="form-control border-success" id="stock_warehouse_<?php echo $data["item_id"] ?>" value="<?php echo $items_on_warehouse ?>" readonly><b class="p-2"><?php echo $data["item_unit"] ?></b>
+        </div>
+        <div class="d-flex mb-2">
+            Store:&nbsp;<input type="text" class="form-control border-success" id="stock_<?php echo $data["item_id"] ?>" value="<?php echo $items_on_store ?>" readonly><b class="p-2"><?php echo $u2_name ?></b>
         </div>
         <div class="d-flex" id="count_input_<?php echo $data["item_id"] ?>">
-            <input min="1" max="<?php echo $data["item_stock"]; ?>" type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
-            <select id="unit" class="custom-select unit-select" <?php if($data["item_unit"] == "Pieces") echo "disabled" ?>>
+            <input min="1" max="<?php echo intval($data["item_stock"] + $data["item_stock_warehouse"]); ?>" type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
+            <select id="unit_<?php echo $data["item_id"] ?>" class="custom-select unit-select" <?php if($data["item_unit"] == "Pieces") echo "disabled" ?>>
                 <option name="<?php echo $u2_name; ?>" value="1"><?php echo $u2_name; ?></option>
                 <option name="<?php echo $data["item_unit"] ?>" value="<?php echo $data["item_unit_divisor"]; ?>"><?php echo $data["item_unit"] ?></option>
             </select>
-            <button class="add btn btn-success" value="<?php echo $data["item_id"] ?>"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            <button class="add btn btn-success" value="<?php echo $data["item_id"] ?>" unit_divisor="<?php echo $data["item_unit_divisor"] ?>" ><i class="fa fa-plus" aria-hidden="true"></i></button>
         </div>
         <?php
             }else{

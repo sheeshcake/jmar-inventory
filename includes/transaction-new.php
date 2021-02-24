@@ -77,14 +77,15 @@
         </div>
         <div class="mt-2">
             <div class="d-flex"><p><b>Items:&nbsp;</b></p><p id="total_items">0</p></div>
-            <div class="d-flex"><p><b>TOTAL AMOUNT:&nbsp;</b>₱</p><p id="total">0</p></div>
+            <div class="d-flex"><p><b>SUB TOTAL:&nbsp;</b>₱</p><p id="total">0</p></div>
+            <div class="d-flex">
+                <p><b>DISCOUNT:</b></p>
+                <input required type="number" class="form-control mb-1" id="discount" value="0" max="100" min="0">
+            </div>
+            <div class="d-flex"><p><b>TOTAL:&nbsp;</b>₱</p><p id="total_amount">0</p></div>
             <div class="d-flex">
                 <p><b>CASH:</b></p>
                 <input required type="number" class="form-control mb-1" id="cash" value="0">
-            </div>
-            <div class="d-flex">
-                <p><b>DISCOUNT:</b></p>
-                <input required type="number" class="form-control mb-1" id="discount" value="0">
             </div>
             <div class="d-flex">
                 <p><b>CHANGE:</b></p>
@@ -96,4 +97,5 @@
 
 </div>
 <?php include "new-item-modal.php"; ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.2.0/math.js" integrity="sha512-SewEag0kt1xsJdbfAXgLyLvYXeAoGEla4M6JSitT6ocJVI+VeUbFXkgrbloNn4cVgq46caRf31un2eoalq6YOw==" crossorigin="anonymous"></script>
 <script src="js/transaction-new.js"></script>
