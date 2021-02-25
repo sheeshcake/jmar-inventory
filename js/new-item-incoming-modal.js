@@ -1,16 +1,10 @@
 //update this then minify
 function calculate(type) {
-    if (type == "retail") {
-        var price = parseFloat($("#input-capital").val());
-        var tax = parseFloat($("#input-tax").val());
-        var total = ((tax / 100) * price) + price;
-        $("#total-item-price2").val(total.toFixed(2));
-    } else {
-        var price = parseFloat($("#input-capital-wholesale").val());
-        var tax = parseFloat($("#input-tax-wholesale").val());
-        var total = ((tax / 100) * price) + price;
-        $("#total-item-price1").val(total.toFixed(2));
-    }
+    var capital = $("#input-capital-wholesale").val();
+    var revenue = $("#input-tax").val();
+    var total = 0;
+    total = math.add(capital, math.multiply(math.divide(revenue, 100), capital)).toFixed(2);
+    $("#input-capital").val(total);
 }
 $(function() {
     $('[data-toggle="tooltip"]').tooltip(

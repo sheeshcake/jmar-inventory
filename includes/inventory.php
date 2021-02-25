@@ -46,4 +46,5 @@
 <script>
     var $cat = "<?php if(isset($_GET["cat"])) echo $_GET["cat"]; else echo "all";?>";
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.2.0/math.js" integrity="sha512-SewEag0kt1xsJdbfAXgLyLvYXeAoGEla4M6JSitT6ocJVI+VeUbFXkgrbloNn4cVgq46caRf31un2eoalq6YOw==" crossorigin="anonymous"></script>
 <script src="js/inventory.js"></script>

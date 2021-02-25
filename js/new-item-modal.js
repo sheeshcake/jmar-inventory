@@ -1,16 +1,11 @@
 //update this then minify
-function calculate(type) {
-    if (type == "retail") {
-        var price = parseFloat($("#input-capital").val());
-        var tax = parseFloat($("#input-tax").val());
-        var total = ((tax / 100) * price) + price;
-        $("#total-item-price2").val(total.toFixed(2));
-    } else {
-        var price = parseFloat($("#input-capital-wholesale").val());
-        var tax = parseFloat($("#input-tax-wholesale").val());
-        var total = ((tax / 100) * price) + price;
-        $("#total-item-price1").val(total.toFixed(2));
-    }
+function calculate_retail() {
+    var capital = $("#input-capital-wholesale").val();
+    var revenue = $("#input-tax").val();
+    var total = 0;
+    total = math.add(capital, math.multiply(math.divide(revenue, 100), capital)).toFixed(2);
+    console.log(total);
+    $("#input-capital").val(total);
 }
 $(function() {
     $('[data-toggle="tooltip"]').tooltip(
@@ -95,16 +90,11 @@ $("#show_per_unit").change(function(){
         $("#per_unit").slideUp(500);
     }
 });
-$(document).on("input", "#input-capital", function() {
-    calculate("retail");
+$(document).on("input", "#input-capital-wholesale", function() {
+    calculate_retail();
 });
-$(document).on("input", "#divisor, #input-tax", function() {
-    $("#input-capital").val(($("#input-capital-wholesale").val() / $("#divisor").val()).toFixed(2));
-    calculate("retail");
-});
-$(document).on("input", "#input-capital-wholesale, #input-tax-wholesale", function() {
-    $("#input-capital").val(($("#input-capital-wholesale").val() / $("#divisor").val()).toFixed(2));
-    calculate("wholesale");
+$(document).on("input", "#input-tax", function() {
+    calculate_retail();
 });
 $("#manual-input").change(function() {
     if ($(this).is(':checked')) {
@@ -112,7 +102,6 @@ $("#manual-input").change(function() {
     } else {
         $(this).parent().parent().prev().children().last().attr("readonly", true);
         $("#input-capital").val(($("#input-capital-wholesale").val() / $("#divisor").val()).toFixed(2));
-        calculate("retail");
     }
 });
 $(document).ready(function() {
