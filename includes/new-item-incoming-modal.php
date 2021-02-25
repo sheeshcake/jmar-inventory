@@ -66,71 +66,46 @@
 <!---------------------- For Capital Input ----->                    
                     <div class="form-group d-flex">    
                         <div class="flex-fill m-1">
-                            
                                 <div class="d-flex">
-                                    <label for="item-unit">RETAIL</label>
-                                    <div class="ml-auto" style="margin-right: 17%;">
-                                        <label for="item-unit" >CAPITAL WHOLESALE</label>
+                                    <label for="item-unit">CAPITAL</label>
+                                    <div class="ml-auto" style="margin-right: 33%;">
+                                        <label for="item-unit" >REVENUE</label>
                                     </div>
-                                 </div>
-                               
+                                </div>
                             <div class="d-flex bd-highlight mb-3">
-                                <div class="input-group w-50">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">₱</span>
-                                    </div>
-                                    <input style="margin-right: 2%;" required type="number" min="0" value="0" id="input-capital" name="item_capital" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price">
-                                    </div>
                                 <div class="w-50 d-flex pl-1">
                                     <div class="input-group">
                                         <div class="input-group-prepend" >
                                             <span  id="peso-sign" class="input-group-text">₱</span>
                                         </div>
-                                        <input  required type="number" min="0"  id="input-capital-wholesale" name="item_capital_wholesale" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Wholesale">
+                                        <input  style="margin-right: 2%;" required type="number" min="0"  id="input-capital-wholesale" name="item_capital_wholesale" class="form-control w-25" aria-label="Capital Price" placeholder="Capital">
                                     </div>
                                     
                                     <div class="p-2">
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="d-flex bd-highlight mb-3">
-                                <div class="input-group w-100" style="margin-bottom: -5%;">
-                                    <input required type="number" min="0" value="0" id="input-tax" class="form-control" name="item_tax" aria-label="Revenue" placeholder="Revenue">
-                                    <div class="input-group-append" style="margin-right: 2%; ">
-                                        <span style="margin-bottom: 70%; margin-right: 3px;" class="input-group-text">%</span>
-                                    </div>
-                                    <hr>
-                                    <div class="custom-control custom-switch pt-2">
-                                        <input type="checkbox" class="custom-control-input" id="item-wholesale" >
-                                        <label class="custom-control-label" for="item-wholesale" data-toggle="tooltip" data-placement="top" title="It's for your wholesale price"></label>
-                                    </div>
-                                    <div class="input-group-append" style=" margin-right: 23%;">
-                                        <label style="margin-top: 8px;border-top-style: solid;border-width: thin;border-color: #e5e5e5;" for="item-wholesale">WHOLESALE</label>
-                                    </div>
-                                    
+                                <div class="input-group-prepend" style=" margin-top: 10px;margin-right: 5px;">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
                                 </div>
-                            </div>
-
-                            <div class="d-flex bd-highlight mb-3">
-                                <div class="input-group w-100">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">₱</span>
-                                        <input required type="text" class="form-control" id="total-item-price2"  aria-label="Price" placeholder="Price" style="border-top-left-radius: 0;border-bottom-left-radius: 0px;" readonly>
-                                    </div>
-                                    <input style="display: none;margin-left: 2%;"required type="number" min="0" value="0" id="input-revenue-wholesale" class="form-control" name="item_revenue_wholesale" aria-label="Revenue" placeholder="Revenue">
-                                    <div  style="display: none;"class="input-group-append" id="item-wholesale-percentage">
-                                        <span  class="input-group-text">%</span>
+                                <!---RETAIL--->
+                                <div class="d-flex bd-highlight mb-3">
+                                    <div class="input-group w-100" style="margin-bottom: -19%;">
+                                    <input required type="number" min="0"  id="input-tax" class="form-control" name="item_tax" aria-label="Revenue" placeholder="Revenue">
+                                        <div class="input-group-append" style="margin-right: 2%; ">
+                                            <span style="margin-bottom: 70%; margin-right: 3px;" class="input-group-text">%</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex bd-highlight mb-3">
-                                <div class="input-group w-50 ml-auto">
-                                    <div class="input-group-prepend">
-                                        <span style="display: none;" id="input-peso-sign" class="input-group-text">₱</span>
+                            <!---- REVENUE--->
+                            <div class="d-flex bd-highlight mb-3" style="margin-left: 35px;">
+                                    <label style="margin-right: 2%;" class="py-2" for="item-unit">RETAIL PRICE</label>
+                                    <div class="input-group w-50">
+                                        <div class="input-group-prepend">
+                                            <span style="margin-bottom: 70%;"class="input-group-text">₱</span>
+                                        </div>
+                                        <input  required type="number" min="0" value="0" id="input-capital" name="item_capital" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price">
                                     </div>
-                                    <input  style="display: none; " required type="text" class="form-control" id="total-item-price1" aria-label="Price" placeholder="Price"  readonly>
-                                </div>
                             </div>
                         </div>
                     
