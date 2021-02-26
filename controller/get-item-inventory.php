@@ -19,19 +19,11 @@
         $result = mysqli_query($conn, $sql);
     }
     while($data = $result->fetch_assoc()){
-        if($data["sell_in_wholesale"] == "false")  $data["item_unit_divisor"] = "1";
-        if($data["sell_in_wholesale"] == "false")  $data["item_tax_wholesale"] = "1";
-        $r_price = (floatval(($data["item_tax"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price"]);
-        $w_price = (floatval(($data["item_tax_wholesale"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price_wholesale"]);
         $u1 = intval($data["item_stock_warehouse"] / $data["item_unit_divisor"]);
         $u2 =  floatval($data["item_stock"] - ($u1 * $data["item_unit_divisor"]));
         if($u1 <= 2 && $u1 != 0) $color = "warning";
         else if($u1 == 0 && $u2 == 0) $color = "danger";
         else $color = "success";
-        $u2_name = "";
-        if($data["item_unit"] == "Box") $u2_name = "pieces";
-        else if($data["item_unit"] == "Roll") $u2_name = "meter(s)";
-        else if($data["item_unit"] == "Sack") $u2_name = "kilo(s)";
 ?>
 <tr>
     <td>
@@ -40,11 +32,11 @@
     <td>
         <div class="p-2">
             <div class="d-flex p-2"><b>ID:&nbsp;</b><p><?php echo $data["item_id"]?></p></div>
-            <div class="d-flex p-2"><b>Name:&nbsp;</b><p id="name<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_name"]?></p></div>
-            <div class="d-flex p-2"><b>Brand:&nbsp;</b><p id="brand<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_brand"]?></p></div>
-            <div class="d-flex p-2"><b>Description:&nbsp;</b><p id="desc<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_desc"]?></p></div>
+            <div class="d-flex p-2"><b class="py-1">Name:&nbsp;</b><p id="name<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_name"]?></p></div>
+            <div class="d-flex p-2"><b class="py-1">Brand:&nbsp;</b><p id="brand<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_brand"]?></p></div>
+            <div class="d-flex p-2"><b class="py-1">Description:&nbsp;</b><p id="desc<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_desc"]?></p></div>
             <div class="d-flex p-2">
-                <b>Category:&nbsp;</b>
+                <b class="py-1">Category:&nbsp;</b>
                 <p style="width: 1px">
                     <div class="form-group">
                         <select class="form-control" style="width: 200px" id="category<?php echo $data["item_id"]?>">
@@ -59,18 +51,15 @@
                         ?>
                         </select>
                     </div>
-
                 </p>
-                <?php if($_SESSION["user"]["role"] == "admin" && $data["sell_in_wholesale"] == "false") {?>
-                    <b class="float-left">Capital:&nbsp;₱&nbsp;</b><p id="capital_w<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_price_wholesale"]?></p>
-                <?php } ?>
+                <b class="float-left py-1">Capital:&nbsp;₱&nbsp;</b><p id="item_capital_<?php echo $data["item_id"]?>" class="edit capital" item_id="<?php echo $data["item_id"]?>" contenteditable><?php echo $data["item_capital"]?></p>
             </div>
 
             <hr>
             <div class="d-flex p-2">
                 <b>Store Stock:&nbsp;</b>
                     <p class="text-<?php echo $color; ?>">
-                    <?php echo $data["item_stock"] . " " . $u2_name ?>
+                    <?php echo $data["item_stock"] . " " . $data["item_unit_package"] ?>
                     </p>
                 <b>Warehouse Stock:&nbsp;</b>
                     <p class="text-<?php echo $color; ?>">
@@ -86,25 +75,16 @@
             <?php
                 if($_SESSION["user"]["role"] == "admin"){ 
             ?>
-            <div class="d-flex p-2"><b>Capital:&nbsp;₱</b><p id="capital<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_price"]?></p></div>
-            <div class="d-flex p-2"><b>Revenue&nbsp;</b><p id="tax<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_tax"]?></p>%</div>
+            <div class="d-flex p-2">
+                <b class="py-1">Capital&nbsp;</b>
+                <p id="tax<?php echo $data["item_id"]?>" class="edit tax" item_id="<?php echo $data["item_id"]?>" contenteditable><?php echo floatval($data["item_capital"] / $data["item_unit_divisor"])?></p>
+                <b class="py-1">%</b>
+            </div>
+            <div class="d-flex p-2"><b class="py-1">Revenue&nbsp;</b><p id="tax<?php echo $data["item_id"]?>" class="edit tax" item_id="<?php echo $data["item_id"]?>" contenteditable><?php echo $data["item_tax"]?></p><b class="py-1">%</b></div>
             <?php 
                 }
             ?>
-            <div class="d-flex p-2"><b>Price:&nbsp;₱<?php echo $r_price?></b></div>
-            <hr class="sidebar-divider">
-            <?php if($data["sell_in_wholesale"] == "true"){ ?>
-            <center><h5><b>WHOLESALE</b></h5></center>
-            <?php
-                if($_SESSION["user"]["role"] == "admin"){ 
-            ?>
-            <div class="d-flex p-2"><b>Capital:&nbsp;₱</b><p id="capital_w<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_price_wholesale"]?></p></div>
-            <div class="d-flex p-2"><b>Revenue:&nbsp;</b><p id="tax_w<?php echo $data["item_id"]?>" class="edit" contenteditable><?php echo $data["item_tax_wholesale"]?></p>%</div>
-            <?php 
-                }
-            ?>
-            <div class="d-flex p-2"><b>Price:&nbsp;₱<?php echo $w_price?></b></div>
-            <?php }?>
+            <div class="d-flex p-2"><b>Price:&nbsp;₱<b id="price_<?php echo $data["item_id"]?>"><?php echo $data["item_price"]?></b></b></div>
         </div>
     </td>
     <td>

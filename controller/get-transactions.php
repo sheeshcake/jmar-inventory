@@ -16,25 +16,22 @@
                 WHERE 
                     transaction_id = '$id'";
         $result1 = mysqli_query($conn, $sql1);
-        $total_paid = 0;
         $total_items = mysqli_num_rows($result1);
         if($total_items > 0){
+            $total = 0;
+            $sub_total = 0;
             while($data1 = $result1->fetch_assoc()){
-                if($data1["item_type"] == "wholesale"){
-                    $total_paid += ((($data1["item_tax_wholesale"] / 100) * $data1["item_price_wholesale"]) + $data1["item_price_wholesale"]) * ($data1["item_count"] / $data1["item_unit_divisor"]);
-                }
-                else{
-                    $total_paid += ((($data1["item_tax"] / 100) * $data1["item_price"]) + $data1["item_price"]) * $data1["item_count"];
-                }
-                
+                $total_price = $data1["item_price"] * $data1["item_count"];
+                $sub_total = floatval($total_price + $sub_total);
             }
+            $sub_total = floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
 ?>
             <tr>
                 <td><?php echo $data["transaction_id"] ?></td>
                 <td><?php echo $data["transaction_datetime"] ?></td>
                 <td><?php echo $total_items ?></td>
                 <td><?php echo $data["courier"] ?></td>
-                <td>₱<?php echo number_format($total_paid, 2) ?></td>
+                <td>₱<?php echo number_format($sub_total, 2) ?></td>
                 <td><button class="open btn btn-primary" value="<?php echo $data["transaction_id"] ?>" data-toggle="modal" data-target="#transmodal">Open</button></td>
             </tr>
 <?php   

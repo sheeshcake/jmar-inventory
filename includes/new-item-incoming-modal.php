@@ -78,7 +78,7 @@
                                         <div class="input-group-prepend" >
                                             <span  id="peso-sign" class="input-group-text">₱</span>
                                         </div>
-                                        <input  style="margin-right: 2%;" required type="number" min="0"  id="input-capital-wholesale" name="item_capital_wholesale" class="form-control w-25" aria-label="Capital Price" placeholder="Capital">
+                                        <input  style="margin-right: 2%;" required type="number" min="0"  id="input-capital-wholesale" name="item_capital" class="form-control w-25" aria-label="Capital Price" placeholder="Capital">
                                     </div>
                                     
                                     <div class="p-2">
@@ -104,7 +104,7 @@
                                         <div class="input-group-prepend">
                                             <span style="margin-bottom: 70%;"class="input-group-text">₱</span>
                                         </div>
-                                        <input  required type="number" min="0" value="0" id="input-capital" name="item_capital" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price">
+                                        <input  required type="float" min="0" value="0" id="input-capital" step="any" name="item_price" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price">
                                     </div>
                             </div>
                         </div>
@@ -141,13 +141,13 @@
                                     <div class="d-flex bd-highlight mb-3">
                                         <div style="display: none;"class="input-group w-100" id="quantity-per-package">
                                             <div class="input-group-prepend">
-                                            <input required type="number" value="0" id="u1-val" class="form-control">
-                                            <select name="unit_name" id="unit_name" class="form-control w-50">
+                                            <input required type="number" value="1" name="item_unit_divisor" id="u1-val" class="form-control">
+                                            <select name="unit_name" id="unit_name" name="item_unit_package" class="form-control w-50">
+                                                <option selected value="pcs">pieces</option>
                                                 <option value="kilogram">kg</option>
                                                 <option value="milliliter">ml</option>
                                                 <option value="centimeter">cm</option>
                                                 <option value="meter">m</option>
-                                                <option value="pcs">pieces</option>
                                             </select>
                                             </div>
 

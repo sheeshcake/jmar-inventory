@@ -41,62 +41,62 @@
         </thead>
         <tbody>
     <?php
-        // $sql = "SELECT t.transaction_datetime, t.transaction_type, t.transaction_id, p.item_type, p.transaction_id, i.item_name, i.item_desc, i.item_price, i.item_unit, i.item_price_wholesale, i.item_unit_divisor, i.item_tax_wholesale, i.item_tax, i.item_id, SUM(p.item_count) AS total_quantity
-        //         FROM purchased_item as p
-        //         INNER JOIN items as i
-        //         INNER JOIN transactions as t
-        //         ON p.item_id = i.item_id
-        //         WHERE t.transaction_datetime LIKE '$date_now%'
-        //         AND t.transaction_type = 'outgoing'
-        //         AND t.transaction_id = p.transaction_id
-        //         GROUP BY i.item_id, p.item_type
-        //      ";
         $sql = "SELECT *
-                FROM transactions as t
-                INNER JOIN purchased_item as p
-                ON t.transaction_id = p.transaction_id
-                INNER JOIN items as i
-                ON i.item_id = p.item_id
-                WHERE t.transaction_datetime LIKE '$date_now%'
-                AND t.transaction_type = 'outgoing' 
-                ORDER BY t.transaction_id ASC
+                FROM transactions WHERE 
+                transaction_type = 'outgoing' AND
+                transaction_datetime LIKE '$date_now%'
                 ";
         $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
         $total = 0;
-        $transaction_id = 0;
+        $sub_total_discount = 0;
         while($data = $result->fetch_assoc()){
-            if($data["item_unit"] == "Box") $item_u2 = "pieces";
-            if($data["item_unit"] == "Sack") $item_u2 = "kilo(s)";
-            if($data["item_unit"] == "Roll") $item_u2 = "meter(s)";
-            if($data["item_type"] == "wholesale"){
-                $price = (floatval(($data["item_tax_wholesale"]) / 100) * floatval($data["item_price_wholesale"])) + floatval($data["item_price_wholesale"]);
-                $item_u2 = $data["item_unit"];
-                $sub_total = $price * $data["item_count"] / floatval($data["item_unit_divisor"]);
-                $quantity = $data["item_count"] / $data["item_unit_divisor"];
-            }else{
-                $price = (floatval(($data["item_tax"]) / 100) * floatval($data["item_price"])) + floatval($data["item_price"]);
-                $sub_total = $price * $data["item_count"];
-                $quantity = $data["item_count"];
-            }
-            $total += $sub_total;
-            if($transaction_id != $data["transaction_id"]){
-                echo '<tr class="table-success table-borderless">
+            $id = $data["transaction_id"];
+            echo '<tr class="table-success table-borderless">
                         <td colspan="4"><b>Transaction ID:</b> <u>' . $data["transaction_id"] . '</u> <b>Reciept No:</b> <u>' . $data["reciept_no"] . '</u><td>
                     </tr>';
-                $transaction_id = $data["transaction_id"];
-            }
+            $sql1 = "SELECT * FROM items as i
+                    INNER JOIN purchased_item as p
+                    ON i.item_id = p.item_id
+                    WHERE p.transaction_id = '$id'
+            ";
+            $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);
+            while($data1 = $result1->fetch_assoc()){
+                $sub_total = $data1["item_price"] * $data1["item_count"];
     ?>
         <tr>
-            <td><?php echo $data["item_id"]; ?></td>
-            <td><?php echo $data["item_name"] . " " . $data["item_desc"]; ?></td>
+            <td><?php echo $data1["item_id"]; ?></td>
+            <td><?php echo $data1["item_name"] . " " . $data1["item_desc"]; ?></td>
             <td>
-                <?php echo "<b>" . $data["item_type"] . ":</b> " . $quantity . $item_u2; ?>
+                <?php echo "<b>" . $data1["item_unit_package"] . ":</b> " . $data1["item_count"] . $data1["item_unit_package"]; ?>
             </td>
-            <td><?php echo "₱" . number_format($price, 2, '.', ','); ?></td>
+            <td><?php echo "₱" . number_format($data1["item_price"], 2, '.', ','); ?></td>
             <td class="table-warning"><?php echo "₱" . number_format($sub_total, 2, '.', ','); ?></td>
         </tr>
     <?php
-        }
+                }
+                $sub_total_discount += floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
+                echo "<tr>" .
+                        "<td></td>" .
+                        "<td></td>" .
+                        "<td></td>" .
+                        "<td class='bg-light'>Discount:</td>" .
+                        "<td class='bg-light'>" .
+                            $data["discount"] . "%".
+                        "</td>".
+                    "</tr>" .
+                    "<tr>" .
+                        "<td></td>" .
+                        "<td></td>" .
+                        "<td></td>" .
+                        "<td class='bg-light'>Sub Total:</td>" .
+                        "<td class='bg-light'>" .
+                            "₱" . number_format($sub_total_discount, 2) .
+                        "</td>".
+                    "</tr>";
+                $total += $sub_total_discount;
+                $sub_total = 0;
+                $sub_total_discount = 0;
+            }
     ?> 
         <tfoot>
             <tr>

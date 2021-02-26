@@ -123,12 +123,10 @@ $(document).on("click", ".update", function() {
         data: {
             submit: "submit",
             item_id: $id,
-            item_capital: parseFloat($("#capital" + $id).text()).toFixed(2),
-            item_capital_wholesale: parseFloat($("#capital_w" + $id).text()).toFixed(2),
+            item_capital: parseFloat($("#item_capital_" + $id).text()).toFixed(2),
             item_name: strtrim($("#name" + $id).text()),
             item_brand: strtrim($("#brand" + $id).text()),
             item_tax: parseFloat($("#tax" + $id).text()).toFixed(2),
-            item_tax_wholesale: parseFloat($("#tax_w" + $id).text()).toFixed(2),
             item_desc: strtrim($("#desc" + $id).text()),
             category_id: $("#category" + $id).val()
         },
@@ -143,6 +141,13 @@ $(document).on("click", ".update", function() {
     });
 });
 
+$(".tax").change(function(){
+    var id = $(this).attr("item_id");
+    var capital = $("#item_capital_" + id).text();
+    var tax = $("#item_capital_" + id).text();
+    var total = math.add(capital, math.multiply(capital, math.divide(tax, 100)));
+    $("#price_" + id).val(total.toFixed(2));
+});
 
 $(document).on('change', '.custom-file-input', function(e) {
     var name = $('input[type=file]').val().split('\\').pop();

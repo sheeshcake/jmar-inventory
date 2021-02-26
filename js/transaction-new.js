@@ -90,122 +90,56 @@ function calculate(){
 $(document).on("input", "#cash, #discount", function() {
     calculate();
 });
-$(document).on("change", ".unit-select", function(){
-    $id = $(this).next().val();
-    if($(this).val() != "1"){
-        $warehouse_total = $("#stock_warehouse_" + $id).val();
-        $store_total = math.divide($("#stock_" + $id).val(), $(this).val());
-        $max = math.add($warehouse_total, $store_total);
-        $(this).prev().attr("max", $max.toFixed(2));
-    }else{
-        $warehouse_total = math.multiply($(this).next().attr("unit_divisor") , $("#stock_warehouse_" + $id).val());
-        $store_total = $("#stock_" + $id).val();
-        $max = math.add($warehouse_total , $store_total);
-        $(this).prev().attr("max", $max.toFixed(2));
-    }
-
-});
-
 function update_stock_on_add($btn){
     var $id = $btn.val();
-    var $count = $btn.prev().prev();
-    var $item_unit = $btn.prev();
-    var ware_house = 0;
-    var store = 0;
+    var $count = $btn.prev();
+    var ware_house = 0, store = 0;
     if(parseInt($count.attr("max")) >= parseInt($count.val()) && 0 < parseInt($count.val())){
-        if($btn.attr("unit_divisor") == "1"){
-            store = math.subtract($("#stock_" + $id).val(), $count.val());
-            if(store < 0){
-                console.log(store);
-                ware_house = math.subtract($("#stock_warehouse_" + $id).val(), math.abs(store));
-                $removed_to_store = $("#stock_" + $id).val();
-                $removed_to_warehouse = math.subtract($("#stock_warehouse_" + $id).val(), ware_house);
-                store = 0;
-            }else if(store == 0){
-                $removed_to_store = $count.val();
-                ware_house = $("#stock_warehouse_" + $id).val();
-                $removed_to_warehouse = 0;
-            }else{
-                $removed_to_store = $count.val();
-                ware_house = $("#stock_warehouse_" + $id).val();
-                $removed_to_warehouse = 0;
-            }
-            $("#stock_warehouse_" + $id).val(ware_house);
+        if($btn.attr("loc") == "store"){
+            $removed_to_store = $count.val();
+            store = math.subtract($("#stock_" + $id).val(), $removed_to_store);
             $("#stock_" + $id).val(store);
         }else{
-            if(parseInt($item_unit.val()) != 1){
-                ware_house = math.subtract($("#stock_warehouse_" + $id).val(), math.floor($count.val()));
-                if(math.subtract($("#stock_warehouse_" + $id).val(), $count.val()) < 0){
-                    store = math.subtract($("#stock_" + $id).val(), math.multiply($item_unit.val(), math.abs(math.subtract($("#stock_warehouse_" + $id).val(), $count.val()))));
-                    ware_house = 0;
-                    $removed_to_warehouse = $("#stock_warehouse_" + $id).val();
-                    $removed_to_store = math.subtract($("#stock_" + $id).val(), store);
-                }else if(ware_house == 0){
-                    store = $("#stock_" + $id).val();
-                    $removed_to_warehouse = $("#stock_warehouse_" + $id).val();
-                    $removed_to_store = math.subtract($("#stock_" + $id).val(), store);
-                }else{
-                    var x1 = math.subtract($("#stock_warehouse_" + $id).val(), $count.val());
-                    var x2 = math.subtract(math.subtract($("#stock_warehouse_" + $id).val(), $count.val()), math.floor(x1));
-                    if(x2 > 0 && x1 < 0){
-                        store = math.subtract($("#stock_" + $id).val(), math.multiply(x1, $btn.attr("unit_divisor")));
-                        $removed_to_warehouse = ware_house;
-                        $removed_to_store = math.subtract($("#stock_" + $id).val(), store);
-                        
-                    }else if(x1 > 0){
-                        $removed_to_warehouse = math.subtract($("#stock_warehouse_" + $id).val() ,ware_house);
-                        $removed_to_store = 0;
-                        store = $("#stock_" + $id).val();
-                    }else{
-                        store = math.subtract($("#stock_" + $id).val(), math.mod($count.val(), ware_house));
-                        $removed_to_warehouse = ware_house;
-                        $removed_to_store = math.subtract($("#stock_" + $id).val(), store);
-                    }
-                }
-                $("#stock_warehouse_" + $id).val(ware_house);
-                $("#stock_" + $id).val(store);
-            }else{
-                if(parseInt($("#stock_" + $id).val()) < parseInt($count.val())){
-                    store = math.subtract($("#stock_" + $id).val(),math.subtract($count.val(), $btn.attr("unit_divisor")));
-                    ware_house = math.subtract($("#stock_warehouse_" + $id).val(), math.floor(math.divide($count.val(), $btn.attr("unit_divisor"))));
-                    $("#stock_warehouse_" + $id).val(ware_house);
-                    $removed_to_warehouse = math.floor(math.divide($count.val(), $btn.attr("unit_divisor")));
-                    $removed_to_store = math.subtract($("#stock_" + $id).val(), store);
-                }else{
-                    store = math.subtract($("#stock_" + $id).val(), $count.val());
-                    $removed_to_warehouse = 0;
-                    $removed_to_store = math.subtract($("#stock_" + $id).val(), store);
-                }
-                $("#stock_" + $id).val(store);
-            }
+            $removed_to_warehouse = $count.val();
+            ware_house = math.subtract($("#stock_warehouse_" + $id).val(), $removed_to_warehouse);
+            $("#stock_warehouse_" + $id).val(ware_house);
         }
+        $("#alert_" + $btn.attr("loc") + "_" + $id).text("Item Added!");
+        $("#alert_" + $btn.attr("loc") + "_" + $id).attr('class', 'alert-success').addClass('alert');
+        $("#alert_" + $btn.attr("loc") + "_" + $id).slideUp(500, function() {});
         return true;
     }else if(parseInt($count.val()) < 0){
-        $("#item_" + $id).val($count.attr("min"));
+        $("#item_" + $btn.attr("loc") + "_" + $id).val($count.attr("min"));
         $("#item_" + $id).focus().addClass("border-danger");
-        $btn.parent().next().text("Input is Invalid");
-        $btn.parent().next().attr('class', 'alert-danger').addClass('alert');
-        $btn.parent().next().fadeTo(3000, 500).slideUp(500, function() {});
+        $("#alert_" + $btn.attr("loc") + "_" + $id).text("Input is Invalid");
+        $("#alert_" + $btn.attr("loc") + "_" + $id).attr('class', 'alert-danger').addClass('alert');
+        $("#alert_" + $btn.attr("loc") + "_" + $id).slideUp(500, function() {});
         return false;
     }else {
-        $("#item_" + $id).val($count.attr("max"));
+        $("#item_" + $btn.attr("loc") + "_" + $id).val($count.attr("max"));
         $("#item_" + $id).focus().addClass("border-danger");
-        $btn.parent().next().text("Requested Item Exeeded!");
-        $btn.parent().next().attr('class', 'alert-danger').addClass('alert');
-        $btn.parent().next().fadeTo(3000, 500).slideUp(500, function() {});
+        $("#alert_" + $btn.attr("loc") + "_" + $id).text("Requested Item Exeeded!");
+        $("#alert_" + $btn.attr("loc") + "_" + $id).attr('class', 'alert-danger').addClass('alert');
+        $("#alert_" + $btn.attr("loc") + "_" + $id).fadeTo(3000, 500).slideUp(500, function() {});
         return false;
     }
 
 }
 
-
+var $this_btn = "";
 $(document).on("click", ".add", function() {
+    $removed_to_warehouse = 0;
+    $removed_to_store = 0;
     if(update_stock_on_add($(this))){
         $counter++;
+        $this_btn = $(this);
         var $id = $(this).val();
-        var $count = $(this).prev().prev();
-        var $item_unit = $(this).prev();
-        var $total_count = $item_unit.prop("options")[$item_unit.prop("options").selectedIndex]["value"] * $count.val();
+        var $total_count = 0;
+        if($(this).attr("loc") == "warehouse"){
+            var $total_count = $(this).attr("unit_divisor") * $removed_to_warehouse;
+        }else{
+            $total_count = $removed_to_store;
+        }
         $.ajax({
             url: url(window.location.href) + "/controller/transaction-new-controller.php",
             method: "POST",
@@ -215,20 +149,23 @@ $(document).on("click", ".add", function() {
             },
             success: function(d) {
                 var data = JSON.parse(d);
-                var item_count = $count.val();
-                if ($item_unit.prop("options").selectedIndex == 0) {
-                    var item_unit = "retail";
-                    var item_price = (parseFloat(data.item_tax) / 100 * parseFloat(data.item_price) + parseFloat(data.item_price)).toFixed(2);
-                    var sub_total = (parseFloat(item_price) * parseFloat(item_count)).toFixed(2);
+                var item_count = $total_count;
+                var count_in_package = 0;
+                var item_unit, item_price, sub_total;
+                if ($this_btn.attr("loc") == "store") {
+                    item_unit = "retail";
+                    count_in_package = $total_count;
+                    item_price = (parseFloat(data.item_tax) / 100 * parseFloat(data.item_price) + parseFloat(data.item_price)).toFixed(2);
+                    sub_total = (parseFloat(item_price) * parseFloat(item_count)).toFixed(2);
                 } else {
-                    var item_unit = "wholesale";
-                    var item_price = (parseFloat(data.item_tax_wholesale) / 100 * parseFloat(data.item_price_wholesale) + parseFloat(data.item_price_wholesale)).toFixed(2);
-                    var sub_total = (parseFloat(item_price) * parseFloat(item_count)).toFixed(2);
+                    item_unit = "wholesale";
+                    count_in_package = math.divide($total_count, data.item_unit_divisor);
+                    item_price = (parseFloat(data.item_tax) / 100 * parseFloat(data.item_price) + parseFloat(data.item_price)).toFixed(2);
+                    sub_total = (parseFloat(item_price) * parseFloat(item_count)).toFixed(2);
                 }
-                console.log(item_price);
-                console.log(item_count);
+                var u2 = $this_btn.attr("unit");
                 $("#items").prepend(
-                    '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '" item-unit="' + item_unit + '">' +
+                    '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat(item_count).toFixed(2) + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse + '">' +
                     '<div class="card-body">' +
                     '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse  +'">x</button>' +
                     '<div class="d-flex">' +
@@ -237,7 +174,7 @@ $(document).on("click", ".add", function() {
                     '<p><b>Name:</b>&nbsp;' + data.item_name + '</p>' +
                     '<p><b>Brand:</b>&nbsp;' + data.item_brand + '</p>' +
                     '<p><b>Price:</b>&nbsp;₱&nbsp;' + item_price + '</p>' +
-                    '<p><b>' + $item_unit.prop("options")[$item_unit.prop("options").selectedIndex]["label"] + ':</b>&nbsp;' + $count.val() + '</p>' +
+                    '<p><b>' + u2 + ':</b>&nbsp;' + count_in_package + '</p>' +
                     '<p><b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
                     '</div>' +
                     '<div>' +
@@ -282,8 +219,9 @@ function send_transaction(courier, payment, customer) {
     var $customer = customer;
     var $date = strDateTime;
     var $all = $(".item").map(function() {
-        return $(this).attr("price") + "," + $(this).attr("item-id") + "," + $(this).attr("item-count") + "," + $(this).attr("item-unit");
+        return $(this).attr("price") + "," + $(this).attr("item-id") + "," + $(this).attr("item-count") + "," + $(this).attr("r_store") + "," + $(this).attr("r_warehouse");
     }).get();
+    console.log($all);
     $.ajax({
         url: url(window.location.href) + "/controller/transaction-new-controller.php",
         method: "POST",

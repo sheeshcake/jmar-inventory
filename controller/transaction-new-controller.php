@@ -27,22 +27,15 @@
             $count = 0;
             foreach ($arr as &$value) {
                 $value = explode(",", $value);
-                // var_dump($value);
                 $item_id = $value[1];
                 $item_count = $value[2];
-                $item_type = $value[3];
+                $item_on_store = $value[3];
+                $item_on_warehouse = $value[4];
                 // Get item data
                 $sql = "SELECT * FROM items WHERE item_id = $item_id";
                 $result = mysqli_query($conn, $sql);
                 $data = $result->fetch_assoc();
                 // Get The Items to Warehouse or Store Algorithm
-                if($item_count > $data["item_stock"]){
-                    $item_on_warehouse = intdiv($item_count, $data["item_unit_divisor"]) * $data["item_unit_divisor"];
-                    $item_on_store = fmod($item_count, $data["item_unit_divisor"]);
-                }else{
-                    $item_on_warehouse = 0;
-                    $item_on_store = $item_count;
-                }
                 $remaining_store = $data["item_stock"] - $item_on_store;
                 $remaining_warehouse = $data["item_stock_warehouse"] - $item_on_warehouse;
                 // Update Item Stock
@@ -53,8 +46,8 @@
                 WHERE item_id = '$item_id'";
                 $result = mysqli_query($conn, $sql1);
                 //Insert Purchased Item
-                $sql1 = "INSERT INTO purchased_item (transaction_id, item_id, item_count, item_type, item_on_warehouse, item_on_store) 
-                VALUES ($last_id, '$item_id', '$item_count','$item_type', '$item_on_warehouse', '$item_on_store')";
+                $sql1 = "INSERT INTO purchased_item (transaction_id, item_id, item_count, item_on_warehouse, item_on_store) 
+                VALUES ($last_id, '$item_id', '$item_count', '$item_on_warehouse', '$item_on_store')";
                 $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);
                 if(!$result1){
                     $data1 = array("message"=>"An Error Occured!", "status"=>"danger");

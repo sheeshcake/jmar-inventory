@@ -66,6 +66,7 @@
                                     <option value="term-30">Term 30(days)</option>
                                     <option value="term-60">Term 60(days)</option>
                                     <option value="term-90">Term 90(days)</option>
+                                    <option value="cash">Cash</option>
                     </select>
                 </div>
                     <div class="d-flex" >

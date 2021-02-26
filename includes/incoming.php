@@ -61,6 +61,7 @@
                                     <option value="term-30">Term 30(days)</option>
                                     <option value="term-60">Term 60(days)</option>
                                     <option value="term-90">Term 90(days)</option>
+                                    <option value="cash">Cash</option>
                         </select>
                         <div class="d-flex" style="margin-bottom: -2%;">
                             <input  style="margin-right: 2%;" required type="text" class="form-control mb-1 w-50" id="driver_name" name="delivery-details" placeholder="Driver's Name">

@@ -6,10 +6,9 @@
     ";
     $result = mysqli_query($conn, $sql);
     while($data = $result->fetch_assoc()){
-        $u1 = intval($data["item_stock_warehouse"] / $data["item_unit_divisor"]);
-        $u2 =  floatval($data["item_stock_warehouse"] - ($u1 * $data["item_unit_divisor"]));
-        if($u1 <= 2 && $u1 != 0) $color = "warning";
-        else if($u1 == 0 && $u2 == 0) $color = "danger";
+        $total_stock = intval($data["item_stock_warehouse"] / $data["item_unit_divisor"]);
+        if($total_stock<= 2 && $total_stock != 0) $color = "warning";
+        else if($data["item_stock"] == 0 && $total_stock == 0) $color = "danger";
         else $color = "success";
 ?>
 <tr>
@@ -20,12 +19,12 @@
         </td>
         <td><?php echo $data["category_name"]; ?></td>
         <td>
-            <p>₱<?php echo $data["item_price_wholesale"] . "/" . $data["item_unit"]; ?></p>
+            <p>₱<?php echo $data["item_capital"]; ?></p>
         </td>
         <td width="200px">
-            <div class="d-flex p-2"><b><p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"];?></p></b></div>
+            <div class="d-flex p-2"><b><p class="text-<?php echo $color; ?>"><?php echo $total_stock . " " . $data["item_unit"];?></p></b></div>
             <div class="d-flex" id="count_input_<?php echo $data["item_id"] ?>">
-                <input type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1">
+                <input type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1" min="1">
                 <div class="input-group-append">
                     <span class="input-group-text" id="item_<?php echo $data["item_id"] ?>"><?php echo $data["item_unit"] ?></span>
                 </div>

@@ -62,7 +62,6 @@
                     </div>
                     <hr>
                     
-
 <!---------------------- For Capital Input ----->                    
                     <div class="form-group d-flex">    
                         <div class="flex-fill m-1">
@@ -73,17 +72,24 @@
                                         <label for="item-unit" >REVENUE</label>
                                     </div>
                                  </div>
-                               
+                               <style>
+                               .movable{
+                                transition: 1s;
+                               }
+                                .move-up{
+                                    transform: translate(100px, -50px);
+                                }
+                                .move-down{
+                                    transform: translate(0px,50px);
+                                }
+                               </style>
                             <div class="d-flex bd-highlight mb-3">
                                 <div class="w-50 d-flex pl-1">
-                                    <div class="input-group">
+                                    <div class="input-group movable" id="no_qpp">
                                         <div class="input-group-prepend" >
                                             <span  id="peso-sign" class="input-group-text">₱</span>
                                         </div>
-                                        <input  style="margin-right: 2%;" required type="number" min="0"  id="input-capital-wholesale" name="item_capital_wholesale" class="form-control w-25" aria-label="Capital Price" placeholder="Capital">
-                                    </div>
-                                    
-                                    <div class="p-2">
+                                        <input  style="margin-right: 2%;" required type="number" min="0"  id="input-capital-wholesale" name="item_capital" class="form-control w-25" aria-label="Capital Price" placeholder="Capital">
                                     </div>
                                 </div>
                                 <div class="input-group-prepend" style=" margin-top: 10px;margin-right: 5px;">
@@ -91,7 +97,7 @@
                                 </div>
                                 <!---RETAIL--->
                                 <div class="d-flex bd-highlight mb-3">
-                                    <div class="input-group w-100" style="margin-bottom: -19%;">
+                                    <div class="input-group w-100 movable" id="rev" style="margin-bottom: -19%;">
                                     <input required type="number" min="0"  id="input-tax" class="form-control" name="item_tax" aria-label="Revenue" placeholder="Revenue">
                                         <div class="input-group-append" style="margin-right: 2%; ">
                                             <span style="margin-bottom: 70%; margin-right: 3px;" class="input-group-text">%</span>
@@ -107,7 +113,7 @@
                                         <div class="input-group-prepend">
                                             <span style="margin-bottom: 70%;"class="input-group-text">₱</span>
                                         </div>
-                                        <input  required type="number" min="0" value="0" id="input-capital" name="item_capital" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price">
+                                        <input  required type="float" min="0" value="0" id="input-capital" step="any" name="item_price" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price">
                                     </div>
                             </div>
                             
@@ -145,20 +151,20 @@
                                     <div class="d-flex bd-highlight mb-3">
                                         <div style="display: none;"class="input-group w-100" id="quantity-per-package">
                                             <div class="input-group-prepend">
-                                            <input required type="number" value="0" id="u1-val" name="item_unit_divisor" class="form-control">
-                                            <select name="unit_name" id="unit_name" class="form-control w-50">
+                                            <input required type="number" value="1" name="item_unit_divisor" id="u1-val" class="form-control">
+                                            <select id="unit_name" name="item_unit_package" class="form-control w-50">
+                                                <option selected value="Pieces">pieces</option>
                                                 <option value="kilogram">kg</option>
                                                 <option value="milliliter">ml</option>
                                                 <option value="centimeter">cm</option>
                                                 <option value="meter">m</option>
-                                                <option value="pcs">pieces</option>
                                             </select>
                                             </div>
 
                                             <div class="input-group-prepend" style="width: 225px;margin-left: 15px;">
                                             <p class="my-1">Per 1(one)</p>
                                             <select class="form-control " id="item-unit" name="item_unit" required  >
-                                                <option disabled>Select</option>
+                                                <option selected value="Pieces">Select</option>
                                                 <option value="Sack">Sack</option>
                                                 <option value="Roll">Roll</option>
                                                 <option value="Box">Box</option>

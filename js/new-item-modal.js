@@ -32,10 +32,6 @@ $("form#add-item-form").submit(function(e) {
     if (validateForm()) {
         $('#add-item-modal').modal('toggle');
         var formData = new FormData(this);
-        if ($("#item-wholesale").attr("checked")) formData.append("sell_in_wholesale", "true");
-        else formData.append("sell_in_wholesale", "false");
-        if ($("#item-wholesale").attr("checked")) formData.append("sell_in_wholesale", "true");
-        else formData.append("sell_in_wholesale", "false");
         formData.set("submit", "submit");
         $.ajax({
             url: url(window.location.href) + "/controller/add-item.php",
@@ -105,29 +101,18 @@ $("#manual-input").change(function() {
     }
 });
 $(document).ready(function() {
-    $("#item-wholesale").click(function() {
-        if ($(this).is(':checked')) {
-            $("#input-revenue-wholesale").slideDown(500);
-            $("#item-wholesale-percentage").slideDown(500);
-            $("#total-item-price1").slideDown(500); 
-            $("#input-peso-sign").slideDown(500);
-        } else {
-            $("#input-revenue-wholesale").slideUp(500);
-            $("#item-wholesale-percentage").slideUp(500);
-            $("#total-item-price1").slideUp(500);
-            $("#input-peso-sign").slideUp(500);
-        }
-    });
-});
-$(document).ready(function() {
     $("#item-quantity").click(function() {
         if ($(this).is(':checked')) {
             $("#quantity-per-package").slideDown(500);
             $("#q1-name").slideDown(500);
             $("#u1-selected").text($("#item-unit").val());
+            $("#no_qpp").addClass("move-up");
+            $("#rev").addClass("move-down");
         } else {
             $("#quantity-per-package").slideUp(500);
             $("#q1-name").slideUp(500);
+            $("#no_qpp").removeClass("move-up");
+            $("#rev").removeClass("move-down");
         }
     });
 });
