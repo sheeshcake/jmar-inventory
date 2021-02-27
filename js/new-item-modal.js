@@ -8,11 +8,9 @@ function calculate_retail() {
     $("#input-capital").val(total);
 }
 $(function() {
-    $('[data-toggle="tooltip"]').tooltip(
-        {
-            container: "body"
-         }
-    );
+    $('[data-toggle="tooltip"]').tooltip({
+        container: "body"
+    });
 });
 
 function validateForm() {
@@ -79,10 +77,10 @@ $(document).on("input", "#u1-val,#u2-val,#divisor", function() {
     var total = (u1 * divisor) + Number(u2);
     $("#item_stock").val(total);
 });
-$("#show_per_unit").change(function(){
-    if($(this).is(":checked")){
+$("#show_per_unit").change(function() {
+    if ($(this).is(":checked")) {
         $("#per_unit").slideDown(500);
-    }else{
+    } else {
         $("#per_unit").slideUp(500);
     }
 });
@@ -108,11 +106,13 @@ $(document).ready(function() {
             $("#u1-selected").text($("#item-unit").val());
             $("#no_qpp").addClass("move-up");
             $("#rev").addClass("move-down");
+            $("#retail_p").addClass("move-down");
         } else {
             $("#quantity-per-package").slideUp(500);
             $("#q1-name").slideUp(500);
             $("#no_qpp").removeClass("move-up");
             $("#rev").removeClass("move-down");
+            $("#retail_p").removeClass("move-down");
         }
     });
 });

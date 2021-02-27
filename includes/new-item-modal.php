@@ -70,10 +70,10 @@
                                         transition: 1s;
                                     }
                                         .move-up{
-                                            transform: translate(100px, -50px);
+                                            transform: translate(140px, 0px);
                                         }
                                         .move-down{
-                                            transform: translate(0px,50px);
+                                            transform: translate(0px,75px);
                                         }
                                     </style>
                                     <div class="row bd-highlight mb-3">
@@ -86,9 +86,7 @@
                                                 <input  style="margin-right: 2%;" required type="number" min="0"  id="input-capital-wholesale" name="item_capital" class="form-group form-control" aria-label="Capital Price" placeholder="Capital">
                                             </div>
                                         </div>
-                                        <div class="input-group-prepend" style=" margin-top: 10px;margin-right: 5px;">
-                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                        </div>
+                                        
                                         <!---RETAIL--->
                                         <div class="col bd-highlight mb-3 movable" id="rev">
                                             <label for="input-capital-wholesale">Revenue</label>
@@ -101,7 +99,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="d-flex bd-highlight mb-3" style="margin-left: 35px;">
+                                            <div class="d-flex bd-highlight mb-3 movable" style="margin-left: 35px;" id="retail_p">
                                                 <label style="margin-right: 2%;" class="py-2" for="item-unit">RETAIL PRICE</label>
                                                 <div class="input-group w-50">
                                                     <div class="input-group-prepend">
