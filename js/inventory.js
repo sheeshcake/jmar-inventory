@@ -124,6 +124,7 @@ $(document).on("click", ".update", function() {
             submit: "submit",
             item_id: $id,
             item_capital: parseFloat($("#item_capital_" + $id).text()).toFixed(2),
+            item_capital_retail: $("#item_capital_retail" + $id).text(),
             item_name: strtrim($("#name" + $id).text()),
             item_brand: strtrim($("#brand" + $id).text()),
             item_tax: parseFloat($("#tax" + $id).text()).toFixed(2),

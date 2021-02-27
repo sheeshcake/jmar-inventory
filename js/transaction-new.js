@@ -74,17 +74,24 @@ function calculate(){
     var $change = ($cash  - ($total - ($total * $discount / 100))).toFixed(2);
     console.log(parseInt($change));
     console.log(parseInt($("#total_items").text()));
-    if(isNaN($change) || $change < 0 || parseInt($("#total_items").text()) == 0){
-        $("#change").html("Please Input Valid Cash");
-        $("#change").removeClass("text-success");
-        $("#change").addClass("text-danger");
-        $(".submit-transaction").slideUp();
-    }else {
-        $("#change").removeClass("text-danger");
-        $("#change").addClass("text-success");
-        $("#change").html($change);
-        $(".submit-transaction").slideDown();
+    if($('#delivery').is(':checked') && $("#payment").val() != "cash"){
+        if(parseInt($("#total_items").text()) != 0){
+            $(".submit-transaction").slideDown();
+        }
+    }else{
+        if(isNaN($change) || $change < 0 || parseInt($("#total_items").text()) == 0){
+            $("#change").html("Please Input Valid Cash");
+            $("#change").removeClass("text-success");
+            $("#change").addClass("text-danger");
+            $(".submit-transaction").slideUp();
+        }else {
+            $("#change").removeClass("text-danger");
+            $("#change").addClass("text-success");
+            $("#change").html($change);
+            $(".submit-transaction").slideDown();
+        }
     }
+
 }
 
 $(document).on("input", "#cash, #discount", function() {
@@ -136,7 +143,7 @@ $(document).on("click", ".add", function() {
         var $id = $(this).val();
         var $total_count = 0;
         if($(this).attr("loc") == "warehouse"){
-            var $total_count = $(this).attr("unit_divisor") * $removed_to_warehouse;
+            $total_count = $(this).attr("unit_divisor") * $removed_to_warehouse;
         }else{
             $total_count = $removed_to_store;
         }
@@ -149,39 +156,38 @@ $(document).on("click", ".add", function() {
             },
             success: function(d) {
                 var data = JSON.parse(d);
-                var item_count = $total_count;
-                var count_in_package = 0;
-                var item_unit, item_price, sub_total;
-                if ($this_btn.attr("loc") == "store") {
-                    item_unit = "retail";
-                    count_in_package = $total_count;
-                    item_price = (parseFloat(data.item_tax) / 100 * parseFloat(data.item_price) + parseFloat(data.item_price)).toFixed(2);
-                    sub_total = (parseFloat(item_price) * parseFloat(item_count)).toFixed(2);
-                } else {
-                    item_unit = "wholesale";
-                    count_in_package = math.divide($total_count, data.item_unit_divisor);
-                    item_price = (parseFloat(data.item_tax) / 100 * parseFloat(data.item_price) + parseFloat(data.item_price)).toFixed(2);
-                    sub_total = (parseFloat(item_price) * parseFloat(item_count)).toFixed(2);
-                }
                 var u2 = $this_btn.attr("unit");
+                var sub_total = 0;
+                var price = 0;
+                var item_count = 0;
+                console.log($total_count);
+                if(u2 != "Pieces"){
+                    item_count = math.divide($total_count, data.item_unit_divisor).toFixed(2);
+                    price = math.multiply(data.item_price, data.item_unit_divisor);
+                    sub_total = math.multiply(item_count, price);
+                }else{
+                    item_count = $total_count;
+                    price = data.item_price;
+                    sub_total = math.multiply($total_count, price).toFixed(2);
+                }
                 $("#items").prepend(
-                    '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat(item_count).toFixed(2) + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse + '">' +
+                    '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse + '">' +
                     '<div class="card-body">' +
                     '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse  +'">x</button>' +
                     '<div class="d-flex">' +
-                    '<img style="max-width: 100px" src="img/item/' + data.item_img + '">' +
+                    '<img style="max-width: 50px" src="img/item/' + data.item_img + '">' +
                     '<div class="ml-3">' +
-                    '<p><b>Name:</b>&nbsp;' + data.item_name + '</p>' +
-                    '<p><b>Brand:</b>&nbsp;' + data.item_brand + '</p>' +
-                    '<p><b>Price:</b>&nbsp;₱&nbsp;' + item_price + '</p>' +
-                    '<p><b>' + u2 + ':</b>&nbsp;' + count_in_package + '</p>' +
-                    '<p><b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
+                    '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
+                    '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
+                    '<b>Price:</b>&nbsp;₱&nbsp;' + price + '<br>' +
+                    '<b>' + u2 + ':</b>&nbsp;' + item_count + '<br>' +
+                    '<b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
                     '</div>' +
                     '<div>' +
                     '</div>' +
                     '</div>'
                 );
-                $("#total").text((parseFloat($("#total").text()) + (parseFloat(item_price) * parseFloat(item_count))).toFixed(2));
+                $("#total").text((parseFloat($("#total").text()) + (parseFloat(price) * parseFloat(item_count))).toFixed(2));
                 $("#total_items").text($counter);
                 calculate();
             }
@@ -289,13 +295,24 @@ $(document).on("click", ".remove-item", function() {
     elem.slideUp("normal", function() {
         $(this).remove();
         $(".submit-transaction").prop('disabled', false);
+        if($('#delivery').is(':checked') && parseInt($("#total_items").text()) == 0){
+            $(".submit-transaction").slideDown();
+        }
     });
     $counter--;
     $("#total").text((parseFloat($("#total").text()) - parseFloat(elem.attr("price"))).toFixed(2));
     $("#total_items").text($counter);
     calculate();
 });
-
+$("#payment").on("change", function(){
+    if($(this).val() == "cash"){
+        $("#cash").prop("readonly", false);
+        $("#show_change").slideDown(500);
+    }else{
+        $("#cash").prop("readonly", true);
+        $("#show_change").slideUp(500);
+    }
+});
 $(document).ready(function() {
     $("#delivery").click(function() {
         if ($(this).is(':checked')) {
@@ -304,14 +321,19 @@ $(document).ready(function() {
             $("#customer-name").slideDown(500);
             $("#customer-address").slideDown(500);
             $("#customer-contact").slideDown(500);
-
-
+            if($("#payment").val() != "cash"){
+                $("#cash").prop("readonly", true);
+                $("#show_change").slideUp(500);
+            }
+            calculate();
         } else {
             $("#courier").slideUp(500);
             $("#payment").slideUp(500);
             $("#customer-name").slideUp(500);
             $("#customer-address").slideUp(500);
             $("#customer-contact").slideUp(500);
+            $("#cash").prop("readonly", false);
+            $("#show_change").slideDown(500);
         }
     });
 });

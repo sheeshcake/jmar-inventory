@@ -24,6 +24,9 @@
         <p><b>Brand: </b><?php echo $data["item_brand"];?></p>
         <p><b>Category: </b><?php echo $data["category_name"];?></p>
         <p><b>Description: </b><?php echo $data["item_desc"];?></p>
+        <?php if($data["item_unit"] != "Pieces"){ ?>
+        <p><b>Net Content:&nbsp;</b><?php echo $data["item_unit_divisor"] . " " . $data["item_unit_package"] . " per 1(one) " . $data["item_unit"]?><p>
+        <?php }?>
     </td>
     <td>
         <?php            

@@ -76,22 +76,43 @@
                     </div>
         <div class="overflow-auto" style="max-height: 470px; min-height: 470px;min-width: 350px" id="items">
         </div>
-        <div class="mt-2">
-            <div class="d-flex"><p><b>Items:&nbsp;</b></p><p id="total_items">0</p></div>
-            <div class="d-flex"><p><b>SUB TOTAL:&nbsp;</b>₱</p><p id="total">0</p></div>
+        <hr>
+        <div >
             <div class="d-flex">
-                <p><b>DISCOUNT:</b></p>
-                <input required type="number" class="form-control mb-1" id="discount" value="0" max="100" min="0">
-            </div>
-            <div class="d-flex"><p><b>TOTAL:&nbsp;</b>₱</p><p id="total_amount">0</p></div>
-            <div class="d-flex">
-                <p><b>CASH:</b></p>
-                <input required type="number" class="form-control mb-1" id="cash" value="0">
+                <p class="my-0">
+                    <b>Items:&nbsp;</b>
+                </p>
+                <p class="my-0" id="total_items">0</p>
             </div>
             <div class="d-flex">
-                <p><b>CHANGE:</b></p>
-                <p><b id="change"></b></p>
+                <p class="my-0">
+                    <b>SUB TOTAL:&nbsp;</b>₱
+                </p>
+                <p class="my-0" id="total">0</p>
             </div>
+            <div class="d-flex">
+                <p class="my-0">
+                    <b>DISCOUNT:</b>
+                </p>
+                <input required type="number" class="form-control my-0" id="discount" value="0" max="100" min="0">
+            </div>
+            <div class="d-flex">
+                <p class="my-0">
+                    <b>TOTAL:&nbsp;</b>₱
+                </p>
+                <p class="my-0" id="total_amount">0</p>
+            </div>
+            <div class="d-flex">
+                <p class="my-0"><b>CASH:</b></p>
+                <input required type="number" class="form-control my-0" id="cash" value="0">
+            </div>
+            <div id="show_change">
+                <div class="d-flex">
+                    <p class="my-0"><b>CHANGE:</b></p>
+                    <p class="my-0"><b id="change"></b></p>
+                </div>
+            </div>
+            <hr>
             <button class="submit-transaction btn btn-primary" style="display: none; min-width: 100%">Submit</button>
         </div>
     </div>

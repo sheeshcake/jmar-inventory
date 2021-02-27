@@ -3,10 +3,21 @@ function calculate_retail() {
     var capital = $("#input-capital-wholesale").val();
     var revenue = $("#input-tax").val();
     var total = 0;
-    total = math.add(capital, math.multiply(math.divide(revenue, 100), capital)).toFixed(2);
+    if($("#item-quantity").is(':checked')){
+        console.log("checked");
+        var qpp = $("#u1-val").val();
+        var retail_capital = math.divide(capital, qpp);
+        $("#r_capital").val(retail_capital.toFixed(2));
+        total = math.add(retail_capital, math.multiply(math.divide(revenue, 100), retail_capital)).toFixed(2);
+    }else{
+        $("#u1-val").val(1);
+        $("#r_capital").val(capital);
+        total = math.add(capital, math.multiply(math.divide(revenue, 100), capital)).toFixed(2);
+    }
     console.log(total);
     $("#input-capital").val(total);
 }
+
 $(function() {
     $('[data-toggle="tooltip"]').tooltip({
         container: "body"
@@ -70,12 +81,10 @@ $(document).on("change", "#item-unit", function() {
     var $unit = $(this).val();
     $("#u1-selected").text($unit);
 });
-$(document).on("input", "#u1-val,#u2-val,#divisor", function() {
-    var u1 = $("#u1-val").val();
-    var u2 = $("#u2-val").val();
-    var divisor = $("#divisor").val();
-    var total = (u1 * divisor) + Number(u2);
-    $("#item_stock").val(total);
+$(document).on("change", "#unit_name", function() {
+    var $unit = $(this).val();
+    $("#u2-selected").text($unit);
+    $("#naming").text("Retail per " + $unit);
 });
 $("#show_per_unit").change(function() {
     if ($(this).is(":checked")) {
@@ -83,6 +92,9 @@ $("#show_per_unit").change(function() {
     } else {
         $("#per_unit").slideUp(500);
     }
+});
+$(document).on("input", "#u1-val", function() {
+    calculate_retail();
 });
 $(document).on("input", "#input-capital-wholesale", function() {
     calculate_retail();
@@ -101,18 +113,26 @@ $("#manual-input").change(function() {
 $(document).ready(function() {
     $("#item-quantity").click(function() {
         if ($(this).is(':checked')) {
+            calculate_retail();
             $("#quantity-per-package").slideDown(500);
-            $("#q1-name").slideDown(500);
             $("#u1-selected").text($("#item-unit").val());
             $("#no_qpp").addClass("move-up");
             $("#rev").addClass("move-down");
             $("#retail_p").addClass("move-down");
+            $("#retail-capital").slideDown(500);
         } else {
+            calculate_retail();
             $("#quantity-per-package").slideUp(500);
-            $("#q1-name").slideUp(500);
+            $("#u1-selected").text("Pieces");
+            $("#u2-selected").text("Pieces");
+            $("#unit_name").val("Pieces");
+            $("#unit-name").val("Pieces");
+            $("#item-unit").val("Pieces");
+            $("#naming").text("Retail per Pieces");
             $("#no_qpp").removeClass("move-up");
             $("#rev").removeClass("move-down");
             $("#retail_p").removeClass("move-down");
+            $("#retail-capital").slideUp(500);
         }
     });
 });

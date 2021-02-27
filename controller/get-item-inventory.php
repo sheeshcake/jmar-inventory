@@ -54,7 +54,9 @@
                 </p>
                 <b class="float-left py-1">Capital:&nbsp;₱&nbsp;</b><p id="item_capital_<?php echo $data["item_id"]?>" class="edit capital" item_id="<?php echo $data["item_id"]?>" contenteditable><?php echo $data["item_capital"]?></p>
             </div>
-
+            <?php if($data["item_unit"] != "Pieces"){ ?>
+            <div class="d-flex p-2"><b>Net Content:&nbsp;</b><p class="w-50"><?php echo $data["item_unit_divisor"] . " " . $data["item_unit_package"] . " per 1(one) " . $data["item_unit"]?></p></div>
+            <?php }?>
             <hr>
             <div class="d-flex p-2">
                 <b>Store Stock:&nbsp;</b>
@@ -76,14 +78,16 @@
                 if($_SESSION["user"]["role"] == "admin"){ 
             ?>
             <div class="d-flex p-2">
-                <b class="py-1">Capital&nbsp;</b>
-                <p id="tax<?php echo $data["item_id"]?>" class="edit tax" item_id="<?php echo $data["item_id"]?>" contenteditable><?php echo floatval($data["item_capital"] / $data["item_unit_divisor"])?></p>
+                <b class="py-1">Capital Retail&nbsp;</b>
+                <p id="item_capital_retail<?php echo $data["item_id"]?>" class="edit" item_id="<?php echo $data["item_id"]?>" contenteditable><?php echo $data["item_capital_retail"]?></p>
                 <b class="py-1">%</b>
             </div>
-            <div class="d-flex p-2"><b class="py-1">Revenue&nbsp;</b><p id="tax<?php echo $data["item_id"]?>" class="edit tax" item_id="<?php echo $data["item_id"]?>" contenteditable><?php echo $data["item_tax"]?></p><b class="py-1">%</b></div>
+            <hr>
+            <div class="d-flex p-2"><b class="py-1">Percentage Revenue&nbsp;</b><p id="tax<?php echo $data["item_id"]?>" class="edit tax" item_id="<?php echo $data["item_id"]?>" contenteditable><?php echo $data["item_tax"]?></p><b class="py-1">%</b></div>
             <?php 
                 }
             ?>
+            <hr>
             <div class="d-flex p-2"><b>Price:&nbsp;₱<b id="price_<?php echo $data["item_id"]?>"><?php echo $data["item_price"]?></b></b></div>
         </div>
     </td>
