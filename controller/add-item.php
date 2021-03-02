@@ -2,7 +2,7 @@
     include "../controller/connect.php";
     session_start();
     if(isset($_POST["submit"])){
-        var_dump($_POST);
+        // var_dump($_POST);
         // var_dump($_FILES);
         // Add Code 
         $item_name = $_POST["item_name"];

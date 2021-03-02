@@ -21,16 +21,31 @@
         <td>
             <p>₱<?php echo $data["item_capital"]; ?></p>
         </td>
-        <td width="200px">
-            <div class="d-flex p-2"><b><p class="text-<?php echo $color; ?>"><?php echo $total_stock . " " . $data["item_unit"];?></p></b></div>
-            <div class="d-flex" id="count_input_<?php echo $data["item_id"] ?>">
-                <input type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1" min="1">
-                <div class="input-group-append">
-                    <span class="input-group-text" id="item_<?php echo $data["item_id"] ?>"><?php echo $data["item_unit"] ?></span>
+        <td>
+            <div class="row">
+                <div class="row">
+                    <b>Warehouse: <p class="text-<?php echo $color; ?>"><?php echo $total_stock . " " . $data["item_unit"];?></p></b>
                 </div>
-                <button class="add btn btn-success" item-div="<?php echo $data["item_unit_divisor"] ?>" value="<?php echo $data["item_id"] ?>"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <div class="row">
+                    <b>Store: <p class="text-<?php echo $color; ?>"><?php echo $data["item_stock"] . " " . $data["item_unit_package"];?></p></b>
+                </div>
             </div>
-            <div class="alert alert-success" role="alert" style="display: none">
+            <div class="row" id="count_input_<?php echo $data["item_id"] ?>">
+                <div class="input-group">
+                    <input type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control" value="1" min="1">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="item_<?php echo $data["item_id"] ?>"><?php echo $data["item_unit"] ?></span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <select name="location" id="location_<?php echo $data["item_id"];  ?>" class="custom-select">
+                        <option value="store">Store</option>
+                        <option value="warehouse">Warehouse</option>
+                    </select>
+                    <button class="add btn btn-success" item-div="<?php echo $data["item_unit_divisor"] ?>" value="<?php echo $data["item_id"] ?>"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="alert alert-success" id="alert_<?php echo $data["item_id"];  ?>" role="alert" style="display: none">
                 Item Added!
             </div>
         </td>

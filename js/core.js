@@ -27,6 +27,9 @@ function getData(div) {
     })
     return inputValues.join(',');
 }
+$(document).ready(function(){
+    document.body.style.zoom = "90%";
+});
 $(document).on("click", "#b-reg", function() {
     $.ajax({
         url: url(window.location.href) + "/controller/page-controller.php",

@@ -35,10 +35,14 @@
                 $user_id = $_SESSION["user"]["user_id"];
                 $sql = "SELECT item_unit_divisor FROM items WHERE item_id='$item_id'";
                 $data2 = mysqli_query($conn, $sql) -> fetch_assoc();
-                $item_count = $value[2] * $data2["item_unit_divisor"];
+                $a_store = $value[2];
+                $a_warehouse = $value[3];
+                $item_count = $value[4];
                 // Update Item Stock
                 $sql1 = "UPDATE items
-                SET item_stock_warehouse = item_stock_warehouse + $item_count
+                SET 
+                    item_stock = item_stock + $a_store,
+                    item_stock_warehouse = item_stock_warehouse + $a_warehouse
                 WHERE item_id = '$item_id'";
                 $result = mysqli_query($conn, $sql1);
                 //Insert Purchased Item

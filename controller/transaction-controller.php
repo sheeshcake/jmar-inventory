@@ -5,6 +5,7 @@
         $user_id = $_SESSION["user"]["user_id"];
         $num = $_POST["num"];
         $id = $_POST["id"];
+        $location = "";
         $sql = "SELECT * FROM items WHERE item_id = $id";
         $result = mysqli_query($conn, $sql);
         if($result){

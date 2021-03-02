@@ -83,7 +83,7 @@ $(document).ready(function() {
             type: "sales-daily",
         },
         success: function($data) {
-            $("#daily-total").text("₱" + formatter($data));
+            $("#daily-total").text("₱" + $data);
         }
     });
     $.ajax({
@@ -94,7 +94,7 @@ $(document).ready(function() {
         },
         success: function(data) {
             console.log(data);
-            $("#daily-expenses").text("₱" + formatter(data));
+            $("#daily-expenses").text("₱" + data);
         }
     });
     $.ajax({
@@ -104,7 +104,7 @@ $(document).ready(function() {
             type: "sales-monthly",
         },
         success: function($data) {
-            $("#monthly-total").text("₱" + formatter($data));
+            $("#monthly-total").text("₱" + $data);
         }
     });
     $.ajax({

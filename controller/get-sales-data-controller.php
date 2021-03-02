@@ -13,6 +13,7 @@
                     ";
             $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
             $total = 0;
+            $total_paid = 0;
             $sub_total_discount = 0;
             while($data = $result->fetch_assoc()){
                 $id = $data["transaction_id"];
@@ -25,12 +26,15 @@
                 while($data1 = $result1->fetch_assoc()){
                     $sub_total = $data1["item_price"] * $data1["item_count"];
                 }
-                    $sub_total_discount += floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
-                    $total += $sub_total_discount;
-                    $sub_total = 0;
-                    $sub_total_discount = 0;
+                $sub_total_discount += floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
+                $total += $sub_total_discount;
+                if($data["paid"] == "true"){
+                    $total_paid += $sub_total_discount;
+                }
+                $sub_total = 0;
+                $sub_total_discount = 0;
             }
-            echo $total;
+            echo number_format($total, 2) . "(" . number_format($total_paid, 2)  . ")";
         }else if($type == "sales-monthly"){
             $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
             $month_now = $date->format("m");
@@ -45,6 +49,7 @@
                 ";
             $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
             $total = 0;
+            $total_paid = 0;
             $sub_total_discount = 0;
             while($data = $result->fetch_assoc()){
                 $id = $data["transaction_id"];
@@ -57,12 +62,15 @@
                 while($data1 = $result1->fetch_assoc()){
                     $sub_total = $data1["item_price"] * $data1["item_count"];
                 }
-                    $sub_total_discount += floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
-                    $total += $sub_total_discount;
-                    $sub_total = 0;
-                    $sub_total_discount = 0;
+                $sub_total_discount += floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
+                $total += $sub_total_discount;
+                if($data["paid"] == "true"){
+                    $total_paid += $sub_total_discount;
+                }
+                $sub_total = 0;
+                $sub_total_discount = 0;
             }
-            echo $total;
+            echo number_format($total, 2) . "(" . number_format($total_paid, 2)  . ")";
         }else if($type == "daily-expenses"){
             $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
             $date_now = $date->format("m-d-Y");
@@ -76,13 +84,15 @@
             $total = 0;
             $sub_total = 0;
             while($data = $result->fetch_assoc()){
+                $id = $data["transaction_id"];
                 $sql1 = "SELECT * FROM items as i
-                        INNER JOIN incoming_transaction as inc
-                        ON i.item_id = inc.item_id
+                    INNER JOIN incoming_transaction as inc
+                    ON i.item_id = inc.item_id
+                    WHERE inc.transaction_id = '$id'
                 ";
                 $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);
                 while($data1 = $result1->fetch_assoc()){
-                    $total_price = floatval($data1["item_capital"] * intval($data1["item_count"] / $data1["item_unit_divisor"]));
+                    $total_price = floatval($data1["item_capital"] * floatval($data1["item_count"] / $data1["item_unit_divisor"]));
                     $sub_total += $total_price;
                 }
                     $total += $sub_total;

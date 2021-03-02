@@ -2,6 +2,13 @@ var $t;
 var $last_data;
 var $counter = 0;
 
+function check_if_ready(){
+    if($(".items")){
+        $(".submit-transaction").slideDown(500);
+    }else{
+        $(".submit-transaction").slideUp(500);
+    }
+}
 
 function reload() {
     setTimeout(function() {
@@ -30,58 +37,66 @@ $(document).ready(function() {
     reload();
 });
 
+function alert(id, message, status){
+    $("#alert_" + id).addClass("alert-" + status);
+    $("#alert_" + id).text(message);
+    $("#alert_" + id).fadeTo(3000, 500).slideUp(500, function() {
+        $("#alert_" + id).slideUp(500);
+    });
+}
+
 $(document).on("click", ".add", function() {
     var $id = $(this).val();
-    var $count = $("#item_" + $id);
-    var $item_divisor = $(this).attr("item-div");
-    $(".submit-transaction").slideDown();
-    $("#stock_" + $id).val((parseFloat(parseFloat($("#stock_" + $id).val()) - parseFloat($count.val()))).toFixed(2));
-    $("#item_" + $id).removeClass("border-danger");
-    $("#item_" + $id).addClass("border-success");
-    $(this).parent().next().text("Item Added!");
-    $(this).parent().next().attr('class', 'alert-success').addClass('alert');
-    $(this).parent().next().fadeTo(3000, 500).slideUp(500, function() {});
-    if (parseFloat($("#stock_" + $id).val()) == 0) {
-        $("#count_input_" + $id).removeClass("d-flex");
-        $("#stock_" + $id).removeClass("border-success");
-        $("#stock_" + $id).addClass("is-invalid");
-        $("#count_input_" + $id).fadeOut();
+    var $item_unit_divisor = $(this).attr("item-div");
+    var $item_count_input = $("#item_" + $id).val();
+    var $total_count = math.multiply($item_unit_divisor, $item_count_input);
+    var $storage = $("#location_" + $id).val();
+    if(parseInt($total_count) > 0){
+        $.ajax({
+            url: url(window.location.href) + "/controller/transaction-new-controller.php",
+            method: "POST",
+            data: {
+                id: $id,
+                type: "get-item"
+            },
+            success: function(d) {
+                check_if_ready();
+                var data = JSON.parse(d);
+                var sub_total = math.multiply(data.item_capital, $item_count_input);
+                var $added_to_store = 0;
+                var $added_to_warehouse = 0;
+                if($storage == "store"){
+                    $added_to_store = $total_count;
+                }else{
+                    $added_to_warehouse = $total_count;
+                }
+                $("#items").prepend(
+                    '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '" a_store="' + $added_to_store + '" a_warehouse="' + $added_to_warehouse + '">' +
+                    '<div class="card-body">' +
+                    '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '">x</button>' +
+                    '<div class="d-flex">' +
+                    '<img style="max-width: 23% !important" src="img/item/' + data.item_img + '">' +
+                    '<div class="ml-3">' +
+                    '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
+                    '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
+                    '<b>Price:</b>&nbsp;₱&nbsp;' + data.item_capital + '<br>' +
+                    '<b>' + data.item_unit + ':</b>&nbsp;' + $item_count_input + '<br>' +
+                    '<b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
+                    '</div>' +
+                    '<div>' +
+                    '</div>' +
+                    '</div>'
+                );
+                $counter++;
+                var total = $("#total").text();
+                $("#total").text(math.add(total, sub_total));
+                $("#total_items").text($counter);
+            }
+        });
+    }else{
+        alert($id, "Input Error!", "danger");
     }
-    $counter++;
-    $.ajax({
-        url: url(window.location.href) + "/controller/transaction-new-controller.php",
-        method: "POST",
-        data: {
-            id: $id,
-            type: "get-item"
-        },
-        success: function(d) {
-            var data = JSON.parse(d);
-            var item_price = data.item_price_wholesale;
-            var item_count_in_div = $item_divisor * $count.val();
-            var item_count = $count.val();
-            var sub_total = (parseFloat(item_price) * parseFloat($count.val())).toFixed(2);
-            $("#items").prepend(
-                '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($count.val()).toFixed(2) + '">' +
-                '<div class="card-body">' +
-                '<div class="d-flex">' +
-                '<img style="max-width: 100px" src="img/item/' + data.item_img + '">' +
-                '<div class="ml-3">' +
-                '<p><b>Name:</b>&nbsp;' + data.item_name + '</p>' +
-                '<p><b>Brand:</b>&nbsp;' + data.item_brand + '</p>' +
-                '<p><b>Price:</b>&nbsp;₱&nbsp;' + item_price + '</p>' +
-                '<p><b>' + data.item_unit + ':</b>&nbsp;' + item_count + '</p>' +
-                '<p><b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
-                '</div>' +
-                '<button class="remove-item btn btn-danger" style="height: 40px;" item_id="' + $id + '" value="' + item_count + '">x</button>' +
-                '<div>' +
-                '</div>' +
-                '</div>'
-            );
-            $("#total").text((parseFloat($("#total").text()) + (parseFloat(item_price) * parseFloat(item_count))).toFixed(2));
-            $("#total_items").text(parseInt($("#total_items").html()) + 1);
-        }
-    });
+
 });
 
 function AddZero(num) {
@@ -110,7 +125,7 @@ $(".submit-transaction").click(function() {
     ].join(" ");
     var $date = strDateTime;
     var $all = $(".item").map(function() {
-        return $(this).attr("price") + "," + $(this).attr("item-id") + "," + $(this).attr("item-count");
+        return $(this).attr("price") + "," + $(this).attr("item-id") + "," + $(this).attr("a_store") + "," + $(this).attr("a_warehouse") + "," + $(this).attr("item-count");
     }).get();
     $.ajax({
         url: url(window.location.href) + "/controller/incoming-transaction-controller.php",
@@ -147,15 +162,9 @@ $(".submit-transaction").click(function() {
 });
 $(document).on("click", ".remove-item", function() {
     $btn = $(this);
+    $btn.attr("disabled", true);
     $(".submit-transaction").prop('disabled', true);
-    $("#count_input_" + $btn.attr("item_id")).addClass("d-flex");
-    $("#stock_" + $btn.attr("item_id")).removeClass("is-invalid");
-    $("#stock_" + $btn.attr("item_id")).addClass("border-success");
-    $("#count_input_" + $btn.attr("item_id")).fadeIn();
-    var d1 = parseFloat($btn.val());
-    var d2 = parseFloat($("#stock_" + $(this).attr("item_id")).val());
-    $("#stock_" + $(this).attr("item_id")).val((d1 + d2).toFixed(2));
-    var elem = $(this).parent().parent().parent()
+    var elem = $(this).parent().parent();
     elem.slideUp("normal", function() {
         $(this).remove();
         $(".submit-transaction").prop('disabled', false);
@@ -166,6 +175,9 @@ $(document).on("click", ".remove-item", function() {
         }
     });
     $counter--;
-    $("#total").text((parseFloat($("#total").text()) - parseFloat(elem.attr("price"))).toFixed(2));
-    $("#total_items").text(parseInt($("#total_items").html()) - 1);
+    var price = $btn.parent().parent().attr("price");
+    var total = $("#total").text();
+    $("#total").text(math.subtract(total, price));
+    $("#total_items").text($counter);
+    check_if_ready();
 });

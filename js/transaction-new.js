@@ -6,6 +6,7 @@ var $counter = 0;
 var $max = 0;
 var $removed_to_warehouse = 0;
 var $removed_to_store = 0;
+var $paid = "false";
 
 function reload() {
     setTimeout(function() {
@@ -60,7 +61,6 @@ function reload() {
     }, 500);
 }
 $(document).ready(function() {
-
     $("#customer").tooltip();
     $("#page-top").toggleClass("sidebar-toggled");
     $("#accordionSidebar").toggleClass("toggled");
@@ -77,6 +77,7 @@ function calculate(){
     if($('#delivery').is(':checked') && $("#payment").val() != "cash"){
         if(parseInt($("#total_items").text()) != 0){
             $(".submit-transaction").slideDown();
+            $paid = "false";
         }
     }else{
         if(isNaN($change) || $change < 0 || parseInt($("#total_items").text()) == 0){
@@ -89,6 +90,7 @@ function calculate(){
             $("#change").addClass("text-success");
             $("#change").html($change);
             $(".submit-transaction").slideDown();
+            $paid = "true";
         }
     }
 
@@ -175,7 +177,7 @@ $(document).on("click", ".add", function() {
                     '<div class="card-body">' +
                     '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse  +'">x</button>' +
                     '<div class="d-flex">' +
-                    '<img style="max-width: 50px" src="img/item/' + data.item_img + '">' +
+                    '<img style="max-width: 23% !important" src="img/item/' + data.item_img + '">' +
                     '<div class="ml-3">' +
                     '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
                     '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
@@ -210,7 +212,7 @@ function formatAMPM(date) {
     return strTime;
 }
 
-function send_transaction(courier, payment, customer) {
+function send_transaction(courier, payment, customer, address, contact_no) {
     $counter = 0;
     var now = new Date();
     var strDateTime = [
@@ -223,6 +225,8 @@ function send_transaction(courier, payment, customer) {
     var $courier = courier;
     var $payment = payment;
     var $customer = customer;
+    var $address = address;
+    var $contact_no = contact_no;
     var $date = strDateTime;
     var $all = $(".item").map(function() {
         return $(this).attr("price") + "," + $(this).attr("item-id") + "," + $(this).attr("item-count") + "," + $(this).attr("r_store") + "," + $(this).attr("r_warehouse");
@@ -240,6 +244,9 @@ function send_transaction(courier, payment, customer) {
             courier: $courier,
             payment: $payment,
             customer: $customer,
+            address: $address,
+            contact_no: $contact_no,
+            paid: $paid,
             discount: $("#discount").val(),
             data: $all
         },
@@ -267,16 +274,22 @@ function send_transaction(courier, payment, customer) {
     });
 }
 $(".submit-transaction").click(function() {
-    if ($("#courier").val() != "" && $("#customer").val() != "" && $('#delivery').is(':checked')) {
-        send_transaction($("#courier").val(), $("#payment").val(), $("#customer").val());
+    if ($("#courier").val() != "" && $("#customer-name").val() != "" && $('#delivery').is(':checked')) {
+        send_transaction($("#courier").val(), $("#payment").val(), $("#customer-name").val(), $("#customer-address").val(), $("#customer-contact").val());
     } else if (!$('#delivery').is(':checked')) {
         send_transaction("counter", "none", "none");
     } else if ($("#courier").val() == "") {
         alert("Please Enter The Courier Name");
         $("#courier").focus();
-    } else if ($("#customer").val() == "") {
+    } else if ($("#customer-name").val() == "") {
         alert("Please Enter The Customer Details");
-        $("#customer").focus();
+        $("#customer-name").focus();
+    } else if ($("#customer-address").val() == "") {
+        alert("Please Enter The Customer Address");
+        $("#customer-address").focus();
+    } else if ($("#customer-contact").val() == "") {
+        alert("Please Enter The Customer Contact Number");
+        $("#customer-contact").focus();
     }
 });
 $(document).on("click", ".remove-item", function() {
@@ -337,6 +350,3 @@ $(document).ready(function() {
         }
     });
 });
-// $(document).on("change", ".unit-select", function() {
-//     $(this).prev().attr("max", $(this).val());
-// });

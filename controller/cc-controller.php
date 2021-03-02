@@ -4,7 +4,14 @@
         // var_dump($_POST);
         if($_POST["submit"] == "damage"){
             $item_id = $_POST["item_id"];
-            $item_count = $_POST["item_count"];
+            $item_count = 0;
+            $sql = "SELECT * FROM items WHERE item_id = '$item_id'";
+            $d = mysqli_query($conn, $sql)->fetch_assoc();
+            if($_POST["location"] == "warehouse"){
+                $item_count = number_format(floatval($_POST["item_count"] * $d["item_unit_divisor"]), 2);
+            }else{
+                $item_count = $_POST["item_count"];
+            }
             $purchased_id = $_POST["purchased_id"];
             $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
             $damage_datetime = $date->format("m-d-Y h:i a");
@@ -54,13 +61,22 @@
             }
         }else{
             $item_id = $_POST["item_id"];
-            $item_count = $_POST["item_count"];
+            $item_count = 0;
+            $location = $_POST["location"];
+            $item_input = $_POST["item_count"];
+            $sql = "SELECT * FROM items WHERE item_id = '$item_id'";
+            $d = mysqli_query($conn, $sql)->fetch_assoc();
+            if($location == "warehouse"){
+                $item_count = number_format(floatval($_POST["item_count"] * $d["item_unit_divisor"]), 2);
+            }else{
+                $item_count = $_POST["item_count"];
+            }
             $purchased_id = $_POST["purchased_id"];
             $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
             $damage_datetime = $date->format("m-d-Y h:i a");
             $sql = "UPDATE items
                     SET 
-                        item_stock = item_stock + $item_count
+                        item_stock = item_stock + $item_count,
                     WHERE
                         item_id = '$item_id'
                     ";
@@ -68,7 +84,8 @@
             if($result){
                 $sql = "UPDATE purchased_item
                             SET 
-                                item_count = item_count - $item_count
+                                item_count = item_count - $item_count,
+                                item_on_$location = item_on_$location - $item_input
                             WHERE
                                 purchased_id = '$purchased_id'
                             ";

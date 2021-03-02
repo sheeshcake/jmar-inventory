@@ -1,9 +1,20 @@
 //update this then minify
-function calculate(type) {
+function calculate_retail() {
     var capital = $("#input-capital-wholesale").val();
     var revenue = $("#input-tax").val();
     var total = 0;
-    total = math.add(capital, math.multiply(math.divide(revenue, 100), capital)).toFixed(2);
+    if($("#item-quantity").is(':checked')){
+        console.log("checked");
+        var qpp = $("#u1-val").val();
+        var retail_capital = math.divide(capital, qpp);
+        $("#r_capital").val(retail_capital.toFixed(2));
+        total = math.add(retail_capital, math.multiply(math.divide(revenue, 100), retail_capital)).toFixed(2);
+    }else{
+        $("#u1-val").val(1);
+        $("#r_capital").val(capital);
+        total = math.add(capital, math.multiply(math.divide(revenue, 100), capital)).toFixed(2);
+    }
+    console.log(total);
     $("#input-capital").val(total);
 }
 $(function() {
@@ -25,7 +36,7 @@ function validateForm() {
 }
 $("form#add-item-form").submit(function(e) {
     e.preventDefault();
-    var $count_by_u2 = parseFloat($(this).find("#u1-val").val()) * parseFloat($(this).find("#divisor").val());
+    var $item_count = $("#item-warehouse").val();
     var $count = parseFloat($(this).find("#u1-val").val());
     if (validateForm()) {
         $('#add-item-modal-incoming').modal('toggle');
@@ -48,30 +59,40 @@ $("form#add-item-form").submit(function(e) {
                         $(".alert").slideUp(500);
                     });
                 } else {
-                    var item_price = data.item_price_wholesale;
-                    var item_count = $count_by_u2;
-                    var $id = data.item_id;
-                    var sub_total = (parseFloat(item_price) * parseFloat($count)).toFixed(2);
+                    var u2 = $this_btn.attr("unit");
+                    var sub_total = 0;
+                    var price = 0;
+                    var item_count = 0;
+                    console.log($total_count);
+                    if(u2 != "Pieces"){
+                        item_count = math.divide($total_count, data.item_unit_divisor).toFixed(2);
+                        price = math.multiply(data.item_price, data.item_unit_divisor);
+                        sub_total = math.multiply(item_count, price);
+                    }else{
+                        item_count = $total_count;
+                        price = data.item_price;
+                        sub_total = math.multiply($total_count, price).toFixed(2);
+                    }
                     $("#items").prepend(
-                        '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($count).toFixed(2) + '">' +
+                        '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse + '">' +
                         '<div class="card-body">' +
+                        '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse  +'">x</button>' +
                         '<div class="d-flex">' +
-                        '<img style="max-width: 100px" src="img/item/' + data.item_img + '">' +
+                        '<img style="max-width: 50px" src="img/item/' + data.item_img + '">' +
                         '<div class="ml-3">' +
-                        '<p><b>Name:</b>&nbsp;' + data.item_name + '</p>' +
-                        '<p><b>Brand:</b>&nbsp;' + data.item_brand + '</p>' +
-                        '<p><b>Price:</b>&nbsp;₱&nbsp;' + item_price + '</p>' +
-                        '<p><b>' + data.item_unit + ':</b>&nbsp;' + $count + '</p>' +
-                        '<p><b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
+                        '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
+                        '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
+                        '<b>Price:</b>&nbsp;₱&nbsp;' + price + '<br>' +
+                        '<b>' + u2 + ':</b>&nbsp;' + item_count + '<br>' +
+                        '<b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
                         '</div>' +
-                        '<button class="remove-item btn btn-danger" style="height: 40px;" item_id="' + $id + '" value="' + item_count + '">x</button>' +
                         '<div>' +
                         '</div>' +
                         '</div>'
                     );
-                    var $counter = parseInt($("#total_items").html()) + 1;
-                    $("#total").text((parseFloat($("#total").text()) + (parseFloat(item_price) * parseFloat($count))).toFixed(2));
+                    $("#total").text((parseFloat($("#total").text()) + (parseFloat(price) * parseFloat(item_count))).toFixed(2));
                     $("#total_items").text($counter);
+                    calculate();
                     $(".submit-transaction").slideDown();
                     $('#add-item-form')[0].reset();
                 }
@@ -99,31 +120,28 @@ $('#image-file').change(function() {
 });
 $(document).on("change", "#item-unit", function() {
     var $unit = $(this).val();
-    if ($unit == "Roll") {
-        $("#unit-2").val("Meter");
-    } else if ($unit == "Sack") {
-        $("#unit-2").val("Kilo");
+    $("#u1-selected").text($unit);
+});
+$(document).on("change", "#unit_name", function() {
+    var $unit = $(this).val();
+    $("#u2-selected").text($unit);
+    $("#naming").text("Retail per " + $unit);
+});
+$("#show_per_unit").change(function() {
+    if ($(this).is(":checked")) {
+        $("#per_unit").slideDown(500);
     } else {
-        $("#unit-2").val("Pieces");
+        $("#per_unit").slideUp(500);
     }
 });
-$(document).on("input", "#u1-val,#u2-val,#divisor", function() {
-    var u1 = $("#u1-val").val();
-    var u2 = $("#u2-val").val();
-    var divisor = $("#divisor").val();
-    var total = (u1 * divisor) + Number(u2);
-    $("#item_stock").val(total);
+$(document).on("input", "#u1-val", function() {
+    calculate_retail();
 });
-$(document).on("input", "#input-capital", function() {
-    calculate("retail");
+$(document).on("input", "#input-capital-wholesale", function() {
+    calculate_retail();
 });
-$(document).on("input", "#divisor, #input-tax", function() {
-    $("#input-capital").val(($("#input-capital-wholesale").val() / $("#divisor").val()).toFixed(2));
-    calculate("retail");
-});
-$(document).on("input", "#input-capital-wholesale, #input-tax-wholesale", function() {
-    $("#input-capital").val(($("#input-capital-wholesale").val() / $("#divisor").val()).toFixed(2));
-    calculate("wholesale");
+$(document).on("input", "#input-tax", function() {
+    calculate_retail();
 });
 $("#manual-input").change(function() {
     if ($(this).is(':checked')) {
@@ -131,33 +149,31 @@ $("#manual-input").change(function() {
     } else {
         $(this).parent().parent().prev().children().last().attr("readonly", true);
         $("#input-capital").val(($("#input-capital-wholesale").val() / $("#divisor").val()).toFixed(2));
-        calculate("retail");
     }
-});
-$(document).ready(function() {
-    $("#item-wholesale").click(function() {
-        if ($(this).is(':checked')) {
-            $("#input-revenue-wholesale").slideDown(500);
-            $("#item-wholesale-percentage").slideDown(500);
-            $("#total-item-price1").slideDown(500); 
-            $("#input-peso-sign").slideDown(500);
-        } else {
-            $("#input-revenue-wholesale").slideUp(500);
-            $("#item-wholesale-percentage").slideUp(500);
-            $("#total-item-price1").slideUp(500);
-            $("#input-peso-sign").slideUp(500);
-        }
-    });
 });
 $(document).ready(function() {
     $("#item-quantity").click(function() {
         if ($(this).is(':checked')) {
+            calculate_retail();
             $("#quantity-per-package").slideDown(500);
-            $("#q1-name").slideDown(500);
             $("#u1-selected").text($("#item-unit").val());
+            $("#no_qpp").addClass("move-up");
+            $("#rev").addClass("move-down");
+            $("#retail_p").addClass("move-down");
+            $("#retail-capital").slideDown(500);
         } else {
+            calculate_retail();
             $("#quantity-per-package").slideUp(500);
-            $("#q1-name").slideUp(500);
+            $("#u1-selected").text("Pieces");
+            $("#u2-selected").text("Pieces");
+            $("#unit_name").val("Pieces");
+            $("#unit-name").val("Pieces");
+            $("#item-unit").val("Pieces");
+            $("#naming").text("Retail per Pieces");
+            $("#no_qpp").removeClass("move-up");
+            $("#rev").removeClass("move-down");
+            $("#retail_p").removeClass("move-down");
+            $("#retail-capital").slideUp(500);
         }
     });
 });

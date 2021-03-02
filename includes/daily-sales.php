@@ -51,15 +51,16 @@
         $sub_total_discount = 0;
         while($data = $result->fetch_assoc()){
             $id = $data["transaction_id"];
-            echo '<tr class="table-success table-borderless">
-                        <td colspan="4"><b>Transaction ID:</b> <u>' . $data["transaction_id"] . '</u> <b>Reciept No:</b> <u>' . $data["reciept_no"] . '</u><td>
-                    </tr>';
             $sql1 = "SELECT * FROM items as i
                     INNER JOIN purchased_item as p
                     ON i.item_id = p.item_id
                     WHERE p.transaction_id = '$id'
             ";
             $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);
+            if(mysqli_num_rows($result1) > 0){
+                echo '<tr class="table-success table-borderless">
+                    <td colspan="4"><b>Transaction ID:</b> <u>' . $data["transaction_id"] . '</u> <b>Reciept No:</b> <u>' . $data["reciept_no"] . '</u><td>
+                </tr>';
             while($data1 = $result1->fetch_assoc()){
                 $sub_total = $data1["item_price"] * $data1["item_count"];
     ?>
@@ -74,28 +75,29 @@
         </tr>
     <?php
                 }
-                $sub_total_discount += floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
-                echo "<tr>" .
-                        "<td></td>" .
-                        "<td></td>" .
-                        "<td></td>" .
-                        "<td class='bg-light'>Discount:</td>" .
-                        "<td class='bg-light'>" .
-                            $data["discount"] . "%".
-                        "</td>".
-                    "</tr>" .
-                    "<tr>" .
-                        "<td></td>" .
-                        "<td></td>" .
-                        "<td></td>" .
-                        "<td class='bg-light'>Sub Total:</td>" .
-                        "<td class='bg-light'>" .
-                            "₱" . number_format($sub_total_discount, 2) .
-                        "</td>".
-                    "</tr>";
-                $total += $sub_total_discount;
-                $sub_total = 0;
-                $sub_total_discount = 0;
+                    $sub_total_discount += floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
+                    echo "<tr>" .
+                            "<td></td>" .
+                            "<td></td>" .
+                            "<td></td>" .
+                            "<td class='bg-light'>Discount:</td>" .
+                            "<td class='bg-light'>" .
+                                $data["discount"] . "%".
+                            "</td>".
+                        "</tr>" .
+                        "<tr>" .
+                            "<td></td>" .
+                            "<td></td>" .
+                            "<td></td>" .
+                            "<td class='bg-light'>Sub Total:</td>" .
+                            "<td class='bg-light'>" .
+                                "₱" . number_format($sub_total_discount, 2) .
+                            "</td>".
+                        "</tr>";
+                    $total += $sub_total_discount;
+                    $sub_total = 0;
+                    $sub_total_discount = 0;
+                }
             }
     ?> 
         <tfoot>

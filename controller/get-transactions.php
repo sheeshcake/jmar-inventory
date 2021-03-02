@@ -21,13 +21,24 @@
             $total = 0;
             $sub_total = 0;
             while($data1 = $result1->fetch_assoc()){
-                $total_price = $data1["item_price"] * $data1["item_count"];
-                $sub_total = floatval($total_price + $sub_total);
+                if($data["paid"] == "true"){
+                    $total_price = $data1["item_price"] * $data1["item_count"];
+                    $sub_total = floatval($total_price + $sub_total);
+                }
             }
             $sub_total = floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
 ?>
             <tr>
-                <td><?php echo $data["transaction_id"] ?></td>
+                <td>
+                    <?php 
+                        echo $data["transaction_id"] . "/" . $data["reciept_no"];
+                        if($data["paid"] == "true"){
+                            echo '<span class="badge badge-success">Paid</span>';
+                        }else{
+                            echo '<span class="badge badge-danger">Unpaid</span>';
+                        }
+                    ?>
+                </td>
                 <td><?php echo $data["transaction_datetime"] ?></td>
                 <td><?php echo $total_items ?></td>
                 <td><?php echo $data["courier"] ?></td>

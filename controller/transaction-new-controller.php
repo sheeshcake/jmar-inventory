@@ -17,10 +17,13 @@
             $discount = $_POST["discount"];
             $payment = $_POST["payment"];
             $customer = $_POST["customer"];
+            $address = $_POST["address"];
+            $contact_no = $_POST["contact_no"];
             $cash = $_POST["cash"];
+            $paid = $_POST["paid"];
             $reciept_no = $_POST["reciept_no"];
-            $sql = "INSERT INTO transactions (reciept_no, transaction_type, transaction_datetime, user_id, courier, payment, customer, cash, discount)
-                VALUES ('$reciept_no','$type','$date_time', '$user_id', '$courier','$payment','$customer','$cash', '$discount')
+            $sql = "INSERT INTO transactions (reciept_no, transaction_type, transaction_datetime, user_id, courier, payment, customer, address, contact_no, cash, discount, paid)
+                VALUES ('$reciept_no','$type','$date_time', '$user_id', '$courier','$payment','$customer', '$address', '$contact_no','$cash', '$discount', '$paid')
             ";
             $result = mysqli_query($conn, $sql);
             $last_id = mysqli_insert_id($conn);
@@ -36,15 +39,15 @@
                 $result = mysqli_query($conn, $sql);
                 $data = $result->fetch_assoc();
                 // Get The Items to Warehouse or Store Algorithm
-                $remaining_store = $data["item_stock"] - $item_on_store;
-                $remaining_warehouse = $data["item_stock_warehouse"] - $item_on_warehouse;
+                $remaining_store = $data["item_stock"] - $item_count;
+                $remaining_warehouse = $data["item_stock_warehouse"] - $item_count;
                 // Update Item Stock
                 $sql1 = "UPDATE items
                 SET 
                     item_stock = $remaining_store,
                     item_stock_warehouse = $remaining_warehouse
                 WHERE item_id = '$item_id'";
-                $result = mysqli_query($conn, $sql1);
+                $result = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);;
                 //Insert Purchased Item
                 $sql1 = "INSERT INTO purchased_item (transaction_id, item_id, item_count, item_on_warehouse, item_on_store) 
                 VALUES ($last_id, '$item_id', '$item_count', '$item_on_warehouse', '$item_on_store')";
