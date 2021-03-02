@@ -277,7 +277,7 @@ $(".submit-transaction").click(function() {
     if ($("#courier").val() != "" && $("#customer-name").val() != "" && $('#delivery').is(':checked')) {
         send_transaction($("#courier").val(), $("#payment").val(), $("#customer-name").val(), $("#customer-address").val(), $("#customer-contact").val());
     } else if (!$('#delivery').is(':checked')) {
-        send_transaction("counter", "none", "none");
+        send_transaction("counter", "over the counter", "none", "none", "none");
     } else if ($("#courier").val() == "") {
         alert("Please Enter The Courier Name");
         $("#courier").focus();

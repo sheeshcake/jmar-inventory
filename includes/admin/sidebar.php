@@ -56,6 +56,18 @@
             <button id="open-cat" class="collapse-item btn btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;Manage Category</button>
         </div>
     </div>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsehistory" aria-expanded="true" aria-controls="collapsehistory">
+        <i class="fa fa-history" aria-hidden="true"></i>
+        <span>History</span>
+    </a>
+    <div id="collapsehistory" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="?p=sale-daily-history">Sales Daily</a>
+            <a class="collapse-item" href="?p=sale-monthly-history">Sales Monthly</a>
+            <a class="collapse-item" href="?p=incoming-history">Incoming</a>
+            <a class="collapse-item" href="?p=stock-transfer-history">Stock Transfer</a>
+        </div>
+    </div>
 </li>
 
 <!-- Divider -->

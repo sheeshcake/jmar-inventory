@@ -1,4 +1,4 @@
 <?php
     include "controller/connect.php";
 ?>
-Under Development..
+This Feature is disabled please contact the <a href="http://pylonglobalsolutions.com/">service provider</a>.
