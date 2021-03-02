@@ -103,7 +103,7 @@ function update_stock_on_add($btn){
     var $id = $btn.val();
     var $count = $btn.prev();
     var ware_house = 0, store = 0;
-    if(parseInt($count.attr("max")) >= parseInt($count.val()) && 0 < parseInt($count.val())){
+    if(parseInt($count.attr("max")) >= parseInt($count.val()) && 0 < parseInt($count.val()) && parseInt($btn.parent().prev().find(".form-control").val()) > 0){
         if($btn.attr("loc") == "store"){
             $removed_to_store = $count.val();
             store = math.subtract($("#stock_" + $id).val(), $removed_to_store);
@@ -336,6 +336,7 @@ $(document).ready(function() {
             $("#customer-contact").slideDown(500);
             if($("#payment").val() != "cash"){
                 $("#cash").prop("readonly", true);
+                $("#cash").val(0);
                 $("#show_change").slideUp(500);
             }
             calculate();

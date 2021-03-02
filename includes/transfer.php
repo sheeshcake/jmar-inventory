@@ -53,15 +53,21 @@
             <b><label for="name" class="control-label">STORE</label></b>
         </center>
         <div class="shadow m-1 p-3" style="max-width: 100%;min-height: 800px; max-height: 800px;">
-                <div class="form-group ">
-                    <div class="input-group w-100">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">DATE:</span>
-                            <input required type="text" class="form-control" id="total-item-price2"  aria-label="Price" placeholder="Price" style="border-top-left-radius: 0;border-bottom-left-radius: 0px;" readonly>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Date</span>
+                            </div>
+                            <input required type="date" class="form-control" id="total-item-price2"  aria-label="Price" placeholder="Price">
                         </div>
-                        <div style="margin-right: 2px;" class="input-group-prepend">
-                            <span style="margin-left: 10px;" class="input-group-text">time</span>
-                            <input required type="text" class="form-control" id="total-item-price2"  aria-label="Price" placeholder="Price" style="border-top-left-radius: 0;border-bottom-left-radius: 0px;" readonly>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Time</span>
+                            </div>
+                            <input required type="time" class="form-control" id="total-item-price2"  aria-label="Price" placeholder="Price">
                         </div>
                     </div>
                 </div>
