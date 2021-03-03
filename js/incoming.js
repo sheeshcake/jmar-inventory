@@ -62,35 +62,77 @@ $(document).on("click", ".add", function() {
             success: function(d) {
                 check_if_ready();
                 var data = JSON.parse(d);
+                var has_same = false;
                 var sub_total = math.multiply(data.item_capital, $item_count_input);
                 var $added_to_store = 0;
                 var $added_to_warehouse = 0;
-                if($storage == "store"){
-                    $added_to_store = $total_count;
-                }else{
-                    $added_to_warehouse = $total_count;
+                $("#items").children(".item").each(function(i, obj){
+                    if($(this).attr("item-id") == $id){
+                        if($storage == "store"){
+                            $added_to_store = $total_count;
+                        }else{
+                            $added_to_warehouse = $total_count;
+                        }
+                        $added_to_store =  math.add($added_to_store, $(this).attr("a_store"));
+                        $added_to_warehouse =  math.add($added_to_warehouse, $(this).attr("a_warehouse"));
+                        sub_total =  math.add(sub_total, $(this).attr("price"));
+                        $total_count = math.add($total_count, $(this).attr("item-count"));
+                        $("#items").prepend(
+                            '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '" a_store="' + $added_to_store + '" a_warehouse="' + $added_to_warehouse + '">' +
+                            '<div class="card-body">' +
+                            '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '">x</button>' +
+                            '<div class="d-flex">' +
+                            '<img style="max-width: 23% !important" src="img/item/' + data.item_img + '">' +
+                            '<div class="ml-3">' +
+                            '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
+                            '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
+                            '<b>Price:</b>&nbsp;₱&nbsp;' + data.item_capital + '<br>' +
+                            '<b>' + data.item_unit + ':</b>&nbsp;' + $item_count_input + '<br>' +
+                            '<b>Warehouse:</b>&nbsp;' + $added_to_warehouse + '<br>' +
+                            '<b>Store:</b>&nbsp;' + $added_to_store + '<br>' +
+                            '<b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
+                            '</div>' +
+                            '<div>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                        $(this).remove();
+                        has_same = true;
+                        $("#total").text((parseFloat($("#total").text()) + (parseFloat(price) * parseFloat(item_count))).toFixed(2));
+                        $("#total_items").text($counter);
+                        calculate();
+                    }
+                });
+                if(!has_same){
+                    $counter++;
+                    if($storage == "store"){
+                        $added_to_store = $total_count;
+                    }else{
+                        $added_to_warehouse = $total_count;
+                    }
+                    $("#items").prepend(
+                        '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '" a_store="' + $added_to_store + '" a_warehouse="' + $added_to_warehouse + '">' +
+                        '<div class="card-body">' +
+                        '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '">x</button>' +
+                        '<div class="d-flex">' +
+                        '<img style="max-width: 23% !important" src="img/item/' + data.item_img + '">' +
+                        '<div class="ml-3">' +
+                        '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
+                        '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
+                        '<b>Price:</b>&nbsp;₱&nbsp;' + data.item_capital + '<br>' +
+                        '<b>' + data.item_unit + ':</b>&nbsp;' + $item_count_input + '<br>' +
+                        '<b>Warehouse:</b>&nbsp;' + $added_to_warehouse + '<br>' +
+                        '<b>Store:</b>&nbsp;' + $added_to_store + '<br>' +
+                        '<b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
+                        '</div>' +
+                        '<div>' +
+                        '</div>' +
+                        '</div>'
+                    );
+                    var total = $("#total").text();
+                    $("#total").text(math.add(total, sub_total));
+                    $("#total_items").text($counter);
                 }
-                $("#items").prepend(
-                    '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '" a_store="' + $added_to_store + '" a_warehouse="' + $added_to_warehouse + '">' +
-                    '<div class="card-body">' +
-                    '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '">x</button>' +
-                    '<div class="d-flex">' +
-                    '<img style="max-width: 23% !important" src="img/item/' + data.item_img + '">' +
-                    '<div class="ml-3">' +
-                    '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
-                    '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
-                    '<b>Price:</b>&nbsp;₱&nbsp;' + data.item_capital + '<br>' +
-                    '<b>' + data.item_unit + ':</b>&nbsp;' + $item_count_input + '<br>' +
-                    '<b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
-                    '</div>' +
-                    '<div>' +
-                    '</div>' +
-                    '</div>'
-                );
-                $counter++;
-                var total = $("#total").text();
-                $("#total").text(math.add(total, sub_total));
-                $("#total_items").text($counter);
             }
         });
     }else{

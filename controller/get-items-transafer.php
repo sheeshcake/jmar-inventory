@@ -24,7 +24,7 @@
     </td>
     <td width="200px">
         <?php
-            if($data["item_stock"] > 0){
+            if($data["item_stock_warehouse"] > 0){
         ?>
         <div class="d-flex mb-2">
             <div class="input-group">

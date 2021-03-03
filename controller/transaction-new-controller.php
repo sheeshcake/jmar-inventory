@@ -39,8 +39,8 @@
                 $result = mysqli_query($conn, $sql);
                 $data = $result->fetch_assoc();
                 // Get The Items to Warehouse or Store Algorithm
-                $remaining_store = $data["item_stock"] - $item_count;
-                $remaining_warehouse = $data["item_stock_warehouse"] - $item_count;
+                $remaining_store = $data["item_stock"] - $item_on_store;
+                $remaining_warehouse = $data["item_stock_warehouse"] - intval($item_on_warehouse * $data["item_unit_divisor"]);
                 // Update Item Stock
                 $sql1 = "UPDATE items
                 SET 

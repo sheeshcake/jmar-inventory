@@ -40,70 +40,54 @@
                 <th>Name & Description</th>
                 <th>Item Stock</th>
                 <th>Item Capital</th>
-                <th>Price</th>
-                <th>Total</th>
+                <th>Price Retail</th>
             </tr>
         </thead>
         <tbody>
 <?php
         while($data = $result -> fetch_assoc()){
-            if($data["sell_in_wholesale"] == "false")  $data["item_unit_divisor"] = "1";
-            if($data["sell_in_wholesale"] == "false")  $data["item_tax_wholesale"] = "1";
-            $r_price = floatval($data["item_tax"]) / 100 * floatval($data["item_price"]) + floatval($data["item_price"]);
-            $w_price = floatval($data["item_tax_wholesale"]) / 100 * floatval($data["item_price_wholesale"]) + floatval($data["item_price_wholesale"]);
-            $u1 = intval($data["item_stock_warehouse"] / $data["item_unit_divisor"]);
-            $u2 =  floatval($data["item_stock"] - ($u1 * $data["item_unit_divisor"]));
-            $u2_name = "";
-            $total_in_wholesale = $data["item_stock"] * $r_price;
-            $total_in_retail = ($data["item_stock"] / $data["item_unit_divisor"]) * $w_price;;
-            if($u1 <= 2 && $u1 != 0) $color = "warning";
-            else if($u1 == 0 && $u2 == 0) $color = "danger";
-            else $color = "success";
-            if($data["item_unit"] == "Box") $u2_name = "pieces";
-            else if($data["item_unit"] == "Roll") $u2_name = "meter(s)";
-            else if($data["item_unit"] == "Sack") $u2_name = "kilo(s)";
-            else $u2_name = "Pieces";
             
 ?>
         <tr>
             <td><?php echo $data["item_id"]; ?></td>
             <td><img src="../img/item/<?php echo $data["item_img"] ?>" alt="" width="100" ></td>
-            <td><?php echo $data["item_name"] . " " . $data["item_desc"]; ?></td>
             <td>
-                Store:<p class="text-<?php echo $color; ?>"><?php echo $data["item_stock"] . " " . $u2_name;?></p>
+                <?php 
+                    echo "<p>" . $data["item_name"] . "</p><hr><p>" . $data["item_desc"] . "</p>"; 
+                    if($data["item_unit"] != "Pieces"){
+                        echo "<hr>";
+                        echo "<p>Net Content: " . $data["item_unit_divisor"] . " " . $data["item_unit_package"] . " per 1(one) " . $data["item_unit"] . "</p>";
+                    }
+                ?>
+            </td>
+            <td>
+                Store:<p><?php echo $data["item_stock"] . " " . $data["item_unit_package"];?></p>
                 <hr>
-                Warehouse: <p class="text-<?php echo $color; ?>"><?php echo $u1 . " " . $data["item_unit"];?></p>
+                Warehouse: <p><?php echo intval($data["item_stock_warehouse"] / $data["item_unit_divisor"]) . " " . $data["item_unit"];?></p>
             </td>
             <td>
                 <?php            
-                    echo "<p>₱" . number_format($data["item_price"], 2) . " per " . $u2_name . "</p>";
-                    echo "<p>₱" . number_format($data["item_price_wholesale"], 2) . " per " . $data["item_unit"] . "</p>";
+                    echo "<p>₱" . number_format($data["item_capital"], 2) . " per " . $data["item_unit"] . "</p>";
+                    if($data["item_unit"] != "Pieces"){
+                        echo "<hr>";
+                        echo "<p>₱" . number_format($data["item_capital_retail"], 2) . " per " . $data["item_unit_package"] . "</p>";
+                    }
                 ?>
             </td>
             <td>
                 <?php            
-                    echo "<p>₱" . number_format($r_price, 2) . " per " . $u2_name . "</p>";
-                    echo "<p>₱" . number_format($w_price, 2) . " per " . $data["item_unit"] . "</p>";
+                    echo "<p>₱" . number_format(floatval($data["item_price"] * $data["item_unit_divisor"]), 2) . " per " . $data["item_unit"] . "</p>";
+                    if($data["item_unit"] != "Pieces"){
+                        echo "<hr>";
+                        echo "<p>₱" . number_format($data["item_price"], 2) . " per " . $data["item_unit_package"] . "</p>";
+                    }
                 ?>
-            </td>
-            <td class="table-warning">
-                <p><?php echo "Retail: ₱" . number_format($total_in_retail, 2); ?></p>
-                <p><?php echo "Wholesale: ₱" . number_format($total_in_wholesale, 2); ?></p>
             </td>
         </tr>
 <?php
         }
     }    
 ?>
-        <!-- <tfoot>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th class="table-secondary">Total</th>
-                <th class="table-secondary"><?php echo "₱"; ?></th>
-            </tr>
-        </tfoot> -->
     </tbody>
 
     </table>

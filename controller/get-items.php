@@ -35,7 +35,7 @@
     </td>
     <td width="200px">
         <?php
-            if($data["item_stock"] > 0 || $data["item_stock_warehouse"]){
+            if($data["item_stock"] > 0 || $data["item_stock_warehouse"] > 0){
         ?>
         <div class="d-flex mb-2">
             Warehouse:&nbsp;<input type="text" class="form-control border-success" id="stock_warehouse_<?php echo $data["item_id"] ?>" value="<?php echo $items_on_warehouse ?>" readonly><b class="p-2"><?php echo $data["item_unit"] ?></b>

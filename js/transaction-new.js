@@ -140,7 +140,6 @@ $(document).on("click", ".add", function() {
     $removed_to_warehouse = 0;
     $removed_to_store = 0;
     if(update_stock_on_add($(this))){
-        $counter++;
         $this_btn = $(this);
         var $id = $(this).val();
         var $total_count = 0;
@@ -158,40 +157,86 @@ $(document).on("click", ".add", function() {
             },
             success: function(d) {
                 var data = JSON.parse(d);
+                var has_same = false;
                 var u2 = $this_btn.attr("unit");
                 var sub_total = 0;
                 var price = 0;
                 var item_count = 0;
-                console.log($total_count);
-                if(u2 != "Pieces"){
-                    item_count = math.divide($total_count, data.item_unit_divisor).toFixed(2);
-                    price = math.multiply(data.item_price, data.item_unit_divisor);
-                    sub_total = math.multiply(item_count, price);
-                }else{
-                    item_count = $total_count;
-                    price = data.item_price;
-                    sub_total = math.multiply($total_count, price).toFixed(2);
+                $("#items").children(".item").each(function(i, obj){
+                    if($(this).attr("item-id") == $id){
+                        if(u2 != "Pieces"){
+                            item_count = math.divide($total_count, data.item_unit_divisor).toFixed(2);
+                            price = math.multiply(data.item_price, data.item_unit_divisor);
+                            sub_total = math.multiply(item_count, price);
+                        }else{
+                            item_count = $total_count;
+                            price = data.item_price;
+                            sub_total = math.multiply($total_count, price).toFixed(2);
+                        }
+                        sub_total = math.add(sub_total, $(this).attr("price"));
+                        $total_count = math.add($total_count, $(this).attr("item-count"));
+                        $removed_to_store = math.add($removed_to_store, $(this).attr("r_store"));
+                        $removed_to_warehouse = math.add($removed_to_warehouse, $(this).attr("r_warehouse"));
+                        $("#items").prepend(
+                            '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse + '">' +
+                            '<div class="card-body">' +
+                            '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse  +'">x</button>' +
+                            '<div class="d-flex">' +
+                            '<img style="max-width: 23% !important" src="img/item/' + data.item_img + '">' +
+                            '<div class="ml-3">' +
+                            '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
+                            '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
+                            '<b>Price:</b>&nbsp;₱&nbsp;' + price + '<br>' +
+                            '<b>' + u2 + ':</b>&nbsp;' + $total_count + '<br>' +
+                            '<b>Warehouse:</b>&nbsp;' + $removed_to_warehouse + '<br>' +
+                            '<b>Store:</b>&nbsp;' + $removed_to_store + '<br>' +
+                            '<b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
+                            '</div>' +
+                            '<div>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                        $(this).remove();
+                        has_same = true;
+                        $("#total").text((parseFloat($("#total").text()) + (parseFloat(price) * parseFloat(item_count))).toFixed(2));
+                        $("#total_items").text($counter);
+                        calculate();
+                    }
+                });
+                if(!has_same){
+                    $counter++;
+                    if(u2 != "Pieces"){
+                        item_count = math.divide($total_count, data.item_unit_divisor).toFixed(2);
+                        price = math.multiply(data.item_price, data.item_unit_divisor);
+                        sub_total = math.multiply(item_count, price);
+                    }else{
+                        item_count = $total_count;
+                        price = data.item_price;
+                        sub_total = math.multiply($total_count, price).toFixed(2);
+                    }
+                    $("#items").prepend(
+                        '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse + '">' +
+                        '<div class="card-body">' +
+                        '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse  +'">x</button>' +
+                        '<div class="d-flex">' +
+                        '<img style="max-width: 23% !important" src="img/item/' + data.item_img + '">' +
+                        '<div class="ml-3">' +
+                        '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
+                        '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
+                        '<b>Price:</b>&nbsp;₱&nbsp;' + price + '<br>' +
+                        '<b>' + u2 + ':</b>&nbsp;' + item_count + '<br>' +
+                        '<b>Warehouse:</b>&nbsp;' + $removed_to_warehouse + '<br>' +
+                        '<b>Store:</b>&nbsp;' + $removed_to_store + '<br>' +
+                        '<b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
+                        '</div>' +
+                        '<div>' +
+                        '</div>' +
+                        '</div>'
+                    );
+                    $("#total").text((parseFloat($("#total").text()) + (parseFloat(price) * parseFloat(item_count))).toFixed(2));
+                    $("#total_items").text($counter);
+                    calculate();
                 }
-                $("#items").prepend(
-                    '<div class="item card mb-1" price="' + sub_total + '" item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse + '">' +
-                    '<div class="card-body">' +
-                    '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '" r_store="' + $removed_to_store + '" r_warehouse="' + $removed_to_warehouse  +'">x</button>' +
-                    '<div class="d-flex">' +
-                    '<img style="max-width: 23% !important" src="img/item/' + data.item_img + '">' +
-                    '<div class="ml-3">' +
-                    '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
-                    '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
-                    '<b>Price:</b>&nbsp;₱&nbsp;' + price + '<br>' +
-                    '<b>' + u2 + ':</b>&nbsp;' + item_count + '<br>' +
-                    '<b>Sub Total:</b>&nbsp;₱&nbsp;' + sub_total + '</p>' +
-                    '</div>' +
-                    '<div>' +
-                    '</div>' +
-                    '</div>'
-                );
-                $("#total").text((parseFloat($("#total").text()) + (parseFloat(price) * parseFloat(item_count))).toFixed(2));
-                $("#total_items").text($counter);
-                calculate();
             }
         });
     }

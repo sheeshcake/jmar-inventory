@@ -1,6 +1,3 @@
-<?php
-    //include "controller/connect.php";
-?>
 <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>

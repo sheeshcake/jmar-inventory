@@ -46,7 +46,7 @@
                 WHERE item_id = '$item_id'";
                 $result = mysqli_query($conn, $sql1);
                 //Insert Purchased Item
-                $sql1 = "INSERT INTO incoming_transaction (transaction_id, item_id, item_count, user_id) VALUES ($last_id, '$item_id', '$item_count', '$user_id')";
+                $sql1 = "INSERT INTO incoming_transaction (transaction_id, item_id, item_count, user_id, item_on_warehouse, item_on_store) VALUES ($last_id, '$item_id', '$item_count', '$user_id', '$a_warehouse', '$a_store')";
                 $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);
                 if(!$result1){
                     $data1 = array("message"=>"An Error Occured!", "status"=>"danger");
