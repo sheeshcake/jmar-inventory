@@ -83,7 +83,7 @@
                                             <div class="input-group-prepend" >
                                                 <span  id="peso-sign" class="input-group-text">₱</span>
                                             </div>
-                                            <input required type="number" min="0"  id="input-capital-wholesale" name="item_capital" class="form-group form-control" aria-label="Capital Price" placeholder="Capital">
+                                            <input required type="number" min="0" step="any" id="input-capital-wholesale" name="item_capital" class="form-group form-control" aria-label="Capital Price" placeholder="Capital">
                                         </div>
                                     </div>
                                     
@@ -95,13 +95,13 @@
                                                 <div class="input-group-prepend">
                                                     <span  class="input-group-text">₱</span>
                                                 </div>
-                                                <input required type="number" min="0"  class="form-control" id="r_capital" name="retail_capital" aria-label="Retail Capital" placeholder="Retail Capital" value="0">
+                                                <input required type="number" min="0" step="any" class="form-control" id="r_capital" name="retail_capital" aria-label="Retail Capital" placeholder="Retail Capital" value="0">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <label for="input-capital-wholesale">Percent Revenue</label>
                                             <div class="input-group">
-                                                <input required type="number" min="0"  id="input-tax" class="form-control" name="item_tax" aria-label="Revenue" placeholder="Revenue" value="0">
+                                                <input required type="number" min="0" step="any" id="input-tax" class="form-control" name="item_tax" aria-label="Revenue" placeholder="Revenue" value="0">
                                                     <div class="input-group-append">
                                                         <span  class="input-group-text">%</span>
                                                     </div>
@@ -116,7 +116,7 @@
                                                 <div class="input-group-prepend">
                                                     <span style="margin-bottom: 70%;"class="input-group-text">₱</span>
                                                 </div>
-                                                <input  required type="float" min="0" value="0" id="input-capital" step="any" name="item_price" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price">
+                                                <input  required type="number" min="0" value="0" id="input-capital" step="any" name="item_price" class="form-control w-25" aria-label="Capital Price" placeholder="Capital Price">
                                             </div>
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@
                                         <div class="col">
                                             <label for="item-store">STORE</label>
                                             <div class="input-group">
-                                                    <input required type="number" class="form-control" id="item-store" name="item_stock" placeholder="Stock in store" data-toggle="tooltip" data-placement="top" title="how many stock in your store?" value="0" readonly>
+                                                    <input required type="number" min="0" step="any" class="form-control" id="item-store" name="item_stock" placeholder="Stock in store" data-toggle="tooltip" data-placement="top" title="how many stock in your store?" value="0" readonly>
                                                     <div class="input-group-append" id="q2-name">
                                                         <label class="input-group-text" for="item-store" id="u2-selected">Pieces</label>
                                                     </div>
@@ -136,7 +136,7 @@
                                             <div class="row">
                                                 <label for="inputGroupSelect01">WAREHOUSE</label>
                                                 <div class="input-group">
-                                                    <input required type="number" class="form-control" id="item-warehouse" name="item_stock_warehouse" placeholder="Stock in warehouse" data-toggle="tooltip" data-placement="top" title="how many stock in your warehouse?" value="0" readonly>
+                                                    <input required type="number" min="0" step="any" class="form-control" id="item-warehouse" name="item_stock_warehouse" placeholder="Stock in warehouse" data-toggle="tooltip" data-placement="top" title="how many stock in your warehouse?" value="0" readonly>
                                                     <div class="input-group-append" id="q1-name">
                                                         <label class="input-group-text" for="item-warehouse" id="u1-selected">Pieces</label>
                                                     </div>

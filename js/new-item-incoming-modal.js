@@ -24,10 +24,13 @@ $(function() {
 
 function validateForm() {
     console.log("checking..");
-    $("form#add-item-form :input").each(function() {
-        var data = $(this).val();
-        console.log(data);
+    $("#add-item-form").filter(":input").each(function() {
+        console.log($(this).attr("type"));
         if (data == '') {
+            $(this).addClass("border,border-danger");
+            return false
+        }
+        if($(this).attr("type") == "number" && $(this).val() < 0){
             $(this).addClass("border,border-danger");
             return false
         }
@@ -142,14 +145,6 @@ $(document).on("input", "#input-capital-wholesale", function() {
 });
 $(document).on("input", "#input-tax", function() {
     calculate_retail();
-});
-$("#manual-input").change(function() {
-    if ($(this).is(':checked')) {
-        $(this).parent().parent().prev().children().last().attr("readonly", false);
-    } else {
-        $(this).parent().parent().prev().children().last().attr("readonly", true);
-        $("#input-capital").val(($("#input-capital-wholesale").val() / $("#divisor").val()).toFixed(2));
-    }
 });
 $(document).ready(function() {
     $("#item-quantity").click(function() {

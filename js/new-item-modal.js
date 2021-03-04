@@ -26,15 +26,22 @@ $(function() {
 
 function validateForm() {
     console.log("checking..");
-    $("form#add-item-form :input").each(function() {
-        var data = $(this).val();
-        console.log(data);
-        if (data == '') {
-            $(this).addClass("border,border-danger");
-            return false
+    var is_true = true;
+    $("#add-item-form *").filter(":input").each(function(i, obj) {
+        console.log($(obj).attr("type"));
+        if ($(obj).val() == '' && $(obj).attr("type") == "text") {
+            $(obj).addClass("border border-danger");
+            is_true = false;
+            return false;
         }
+        if($(obj).attr("type") == "number" && $(obj).val() < 0){
+            $(obj).addClass("border border-danger");
+            is_true = false;
+            return false;
+        }
+        $(obj).removeClass("border border-danger").addClass("border border-success");
     });
-    return true;
+    return is_true;
 }
 $("form#add-item-form").submit(function(e) {
     e.preventDefault();
@@ -101,14 +108,6 @@ $(document).on("input", "#input-capital-wholesale", function() {
 });
 $(document).on("input", "#input-tax", function() {
     calculate_retail();
-});
-$("#manual-input").change(function() {
-    if ($(this).is(':checked')) {
-        $(this).parent().parent().prev().children().last().attr("readonly", false);
-    } else {
-        $(this).parent().parent().prev().children().last().attr("readonly", true);
-        $("#input-capital").val(($("#input-capital-wholesale").val() / $("#divisor").val()).toFixed(2));
-    }
 });
 $(document).ready(function() {
     $("#item-quantity").click(function() {
