@@ -32,21 +32,6 @@ function open_data(d, btn){
     );
     for(var i = 1; i < data.length; i++){
         console.log(data[i]);
-        var $unit = "";
-        var $item_count = 0;
-        var $item_price = 0;
-        var $location = "";
-        if(parseInt(data[i].item_on_store) > 0){
-            $unit = data[i].item_unit_package;
-            $item_count = data[i].item_on_store;
-            $item_price = data[i].item_price;
-            $location = "store";
-        }else{
-            $unit = data[i].item_unit;
-            $item_count = data[i].item_on_warehouse;
-            $item_price = math.multiply(data[i].item_price, data[i].item_unit_divisor);
-            $location = "warehouse";
-        }
         $(".modal-body").append(
             '<div class="card p-2 mb-2">' +
             '<div class="alert alert-success" style="display: none" role="alert" id="alert_' + data[i].purchased_id + '">' +
@@ -56,21 +41,26 @@ function open_data(d, btn){
             '<div class="p-2">' +
             '<p><b>Name:&nbsp;</b>' + data[i].item_name + '</p>' +
             '<p><b>Brand:&nbsp;</b>' + data[i].item_brand + '</p>' +
-            '<p id="item_count_' + data[i].purchased_id + '"><b>' + $unit + ':&nbsp;</b>' + $item_count + '</p>' +
-            '<p><b>Price:&nbsp;</b>' + formatter($item_price) + '</p>' +
-            '<p><b>Total:&nbsp;</b>' + formatter($item_price * $item_count) + '</p>' +
+            '<p><b>' + data[i].item_unit_package + ':&nbsp;</b>' + data[i].item_count + '</p>' +
+            '<p><b>Store:&nbsp;</b><b id="item_count_store_' + data[i].item_id + '">' + data[i].item_on_store + '</b>' + data[i]["item_unit_package"] + '</p>' +
+            '<p><b>Warehouse:&nbsp;</b><b id="item_count_warehouse_' + data[i].item_id + '">' + data[i].item_on_warehouse + '</b>' + data[i]["item_unit"] + '</p>' +
+            '<p><b>Price:&nbsp;</b>' + formatter(data[i].item_price) + '</p>' +
+            '<p><b>Total:&nbsp;</b>' + formatter(data[i].item_price * data[i].item_count) + '</p>' +
             '</div>' +
             '</div>' +
             '<div class="d-flex mb-2">' +
-            '<input class="form-control m-2 void-count" type="number" value="0" item_count="' + $item_count + '" />' +
-            '<button style="width: 100%;" class="void btn btn-warning m-2" value="' + data[i].item_id + '" purchased_void_id="' + data[i].purchased_id + '" location="' + $location + '">Void</button>' +
-            '<button style="width: 100%;" class="damage btn btn-danger m-2" value="' + data[i].item_id + '" purchased_damage_id="' + data[i].purchased_id + '">Damage</button>' +
+            '<input class="form-control m-2 void-count" id="input_data_' + data[i].item_id + '" type="number" item_count="' + data[i].item_count + '" />' +
+            '<select class="custom-select m-2 location_select"/>' +
+            '<option value="store">Store</option>' +
+            '<option value="warehouse">Warehouse</option>' +
+            '</select>' +
+            '<button style="width: 100%;" class="void btn btn-warning m-2" value="' + data[i].item_id + '" purchased_void_id="' + data[i].purchased_id + '" location="store">Void</button>' +
             '<div class="form-check m-2">' +
             '</div>' +
             '</div> ' +
             '</div> '
         );
-        $total = (parseFloat($total) + parseFloat($item_price * $item_count)).toFixed(2);
+        $total = math.add(parseFloat($total) , parseFloat(data[i].item_price * data[i].item_count)).toFixed(2);
     }
     $(".modal-body").append(
         "<p><b>Sub Total:&nbsp;</b><b class='float-right'>₱" + $total + "</b></p>" +
@@ -134,11 +124,13 @@ $(document).on("click", ".paid", function() {
     });
 });
 $(document).on("input", ".void-count", function() {
-    var count = $(this).attr("item_count");
-    var void_count = $(this).val();
-    var diff = count - void_count;
-    if (diff < 0) {
-        $(this).val(count);
+    var count = $(this).val();
+    var loc = $(this).next().val();
+    var id = $(this).next().next().val();
+    if (parseInt(count) < 0) {
+        $(this).val(0);
+    }else if(parseInt(count) > parseInt($("#item_count_" + loc + "_" + id).text())){
+        $(this).val($("#item_count_" + loc + "_" + id).text());
     }
 });
 $(document).on("change", ".form-check-input", function() {
@@ -155,7 +147,7 @@ function verify(btn, t){
 function void_item($btn){
     var $item_id = $btn.val();
     var $purchased_id = $btn.attr("purchased_void_id");
-    var $void_count = $btn.prev().val();
+    var $void_count = $("#transmodal").find("#input_data_" + $btn.val()).val();
     var $location = $btn.attr("location");
     $.ajax({
         url: url(window.location.href) + "/controller/cc-controller.php",
@@ -181,68 +173,7 @@ function void_item($btn){
                         type: "open"
                     },
                     success: function(d) {
-                        console.log(d);
-                        var data = JSON.parse(d);
-                        var $total = 0;
-                        $(".modal-body").html("");
-                        $(".modal-body").append("<p><b>Courier:&nbsp;</b>" + data[0].courier + "</b></p>");
-                        for(var i = 1; i < data.length; i++){
-                            console.log(data[i]);
-                            var $unit = "";
-                            var $item_count = 0;
-                            var $item_price = 0;
-                            if(parseInt(data[i].item_on_store) > 0){
-                                $unit = data[i].item_unit_package;
-                                $item_count = data[i].item_on_store;
-                                $item_price = data[i].item_price;
-                            }else{
-                                $unit = data[i].item_unit;
-                                $item_count = data[i].item_on_warehouse;
-                                $item_price = math.multiply(data[i].item_price, data[i].item_unit_divisor);
-                            }
-                            $("#transmodalLabel").text("Transaction: " + data[i].transaction_id);
-                            $(".modal-body").append(
-                                '<div class="card p-2 mb-2">' +
-                                '<div class="alert alert-success" style="display: none" role="alert" id="alert_' + data[i].purchased_id + '">' +
-                                '</div>' +
-                                '<div class="d-flex mb-2">' +
-                                '<img width="100" style="max-heigth: 100px" src="img/item/' + data[i].item_img + '" alt="">' +
-                                '<div class="p-2">' +
-                                '<p><b>Name:&nbsp;</b>' + data[i].item_name + '</p>' +
-                                '<p><b>Brand:&nbsp;</b>' + data[i].item_brand + '</p>' +
-                                '<p id="item_count_' + data[i].purchased_id + '"><b>' + $unit + ':&nbsp;</b>' + $item_count + '</p>' +
-                                '<p><b>Price:&nbsp;</b>' + formatter($item_price) + '</p>' +
-                                '<p><b>Total:&nbsp;</b>' + formatter($item_price * $item_count) + '</p>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="d-flex mb-2">' +
-                                '<input class="form-control m-2 void-count" type="number" value="0" item_count="' + $item_count + '" />' +
-                                '<button style="width: 100%;" class="void btn btn-warning m-2" value="' + data[i].item_id + '" purchased_void_id="' + data[i].purchased_id + '">Void</button>' +
-                                '<button style="width: 100%;" class="damage btn btn-danger m-2" value="' + data[i].item_id + '" purchased_damage_id="' + data[i].purchased_id + '">Damage</button>' +
-                                '<div class="form-check m-2">' +
-                                '</div>' +
-                                '</div> ' +
-                                '</div> '
-                            );
-                            $total = (parseFloat($total) + parseFloat($item_price * $item_count)).toFixed(2);
-                        }
-                        $(".modal-body").append(
-                            "<p><b>Sub Total:&nbsp;</b><b class='float-right'>₱" + $total + "</b></p>" +
-                            "<p><b>Discount:&nbsp;</b><b class='float-right'>" + data[0].discount + "%</b></p>" +
-                            "<p><b>Total:&nbsp;</b><b class='float-right'>₱" + ($total - ($total * data[0].discount / 100)).toFixed(2) + "</b></p>" +
-                            "<p><b>Cash:&nbsp;</b><b class='float-right'>₱" + data[0].cash + "</b></p>" +
-                            "<hr class='sidebar-divider'>"
-                        );
-                        if(data[0].paid == "false"){
-                            $(".modal-body").append(
-                                '<div class="d-flex">' +
-                                '<input class="form-control m-2" id="amount_' + data[0].transaction_id + '" type="number" value="0" />' +
-                                '<button class="btn btn-primary paid" transaction_id="' + data[0].transaction_id + '">Paid</button>' +
-                                '</div>'
-                            );
-                        }else{
-                            $(".modal-body").append("<p><b>Change:&nbsp;</b><b class='float-right'>₱" + (parseFloat(data[0].cash) - ($total - ($total * data[0].discount / 100))).toFixed(2) + "</b></p>");
-                        }
+                        open_data(JSON.parse(d), $btn);
                     }
                 });
             });
@@ -253,7 +184,7 @@ function rep_damage($btn){
     var $btn = $btn;
     var $item_id = $btn.val();
     $purchased_id = $btn.attr("purchased_damage_id");
-    var $damaged_count = $btn.prev().prev().val();
+    var $damaged_count = $("#transmodal").find("#input_data_" + $btn.val()).val();
     $.ajax({
         url: url(window.location.href) + "/controller/cc-controller.php",
         method: "POST",
@@ -278,68 +209,7 @@ function rep_damage($btn){
                         type: "open"
                     },
                     success: function(d) {
-                        console.log(d);
-                        var data = JSON.parse(d);
-                        var $total = 0;
-                        $(".modal-body").html("");
-                        $(".modal-body").append("<p><b>Courier:&nbsp;</b>" + data[0].courier + "</b></p>");
-                        for(var i = 1; i < data.length; i++){
-                            console.log(data[i]);
-                            var $unit = "";
-                            var $item_count = 0;
-                            var $item_price = 0;
-                            if(parseInt(data[i].item_on_store) > 0){
-                                $unit = data[i].item_unit_package;
-                                $item_count = data[i].item_on_store;
-                                $item_price = data[i].item_price;
-                            }else{
-                                $unit = data[i].item_unit;
-                                $item_count = data[i].item_on_warehouse;
-                                $item_price = math.multiply(data[i].item_price, data[i].item_unit_divisor);
-                            }
-                            $("#transmodalLabel").text("Transaction: " + data[i].transaction_id);
-                            $(".modal-body").append(
-                                '<div class="card p-2 mb-2">' +
-                                '<div class="alert alert-success" style="display: none" role="alert" id="alert_' + data[i].purchased_id + '">' +
-                                '</div>' +
-                                '<div class="d-flex mb-2">' +
-                                '<img width="100" style="max-heigth: 100px" src="img/item/' + data[i].item_img + '" alt="">' +
-                                '<div class="p-2">' +
-                                '<p><b>Name:&nbsp;</b>' + data[i].item_name + '</p>' +
-                                '<p><b>Brand:&nbsp;</b>' + data[i].item_brand + '</p>' +
-                                '<p id="item_count_' + data[i].purchased_id + '"><b>' + $unit + ':&nbsp;</b>' + $item_count + '</p>' +
-                                '<p><b>Price:&nbsp;</b>' + formatter($item_price) + '</p>' +
-                                '<p><b>Total:&nbsp;</b>' + formatter($item_price * $item_count) + '</p>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="d-flex mb-2">' +
-                                '<input class="form-control m-2 void-count" type="number" value="0" item_count="' + $item_count + '" />' +
-                                '<button style="width: 100%;" class="void btn btn-warning m-2" value="' + data[i].item_id + '" purchased_void_id="' + data[i].purchased_id + '">Void</button>' +
-                                '<button style="width: 100%;" class="damage btn btn-danger m-2" value="' + data[i].item_id + '" purchased_damage_id="' + data[i].purchased_id + '">Damage</button>' +
-                                '<div class="form-check m-2">' +
-                                '</div>' +
-                                '</div> ' +
-                                '</div> '
-                            );
-                            $total = (parseFloat($total) + parseFloat($item_price * $item_count)).toFixed(2);
-                        }
-                        $(".modal-body").append(
-                            "<p><b>Sub Total:&nbsp;</b><b class='float-right'>₱" + $total + "</b></p>" +
-                            "<p><b>Discount:&nbsp;</b><b class='float-right'>" + data[0].discount + "%</b></p>" +
-                            "<p><b>Total:&nbsp;</b><b class='float-right'>₱" + ($total - ($total * data[0].discount / 100)).toFixed(2) + "</b></p>" +
-                            "<p><b>Cash:&nbsp;</b><b class='float-right'>₱" + data[0].cash + "</b></p>" +
-                            "<hr class='sidebar-divider'>"
-                        );
-                        if(data[0].paid == "false"){
-                            $(".modal-body").append(
-                                '<div class="d-flex">' +
-                                '<input class="form-control m-2" id="amount_' + data[0].transaction_id + '" type="number" value="0" />' +
-                                '<button class="btn btn-primary paid" transaction_id="' + data[0].transaction_id + '">Paid</button>' +
-                                '</div>'
-                            );
-                        }else{
-                            $(".modal-body").append("<p><b>Change:&nbsp;</b><b class='float-right'>₱" + (parseFloat(data[0].cash) - ($total - ($total * data[0].discount / 100))).toFixed(2) + "</b></p>");
-                        }
+                        open_data(JSON.parse(d), $btn);
                     }
                 });
             });
@@ -349,9 +219,10 @@ function rep_damage($btn){
 function success(d){
     var $btn = $button;
     var result = d == "true";
+    console.log($("#transmodal").find("#input_data_" + $btn.val()).val());
     if(result){
-        if ($btn.prev().prev().val() == "") {
-            $btn.prev().prev().focus();
+        if ($("#transmodal").find("#input_data_" + $btn.val()).val() == "") {
+            $("#transmodal").find("#input_data_" + $btn.val()).focus();
         } else if(type == "void"){
             void_item($btn);
             $('#dialog').dialog('close');
@@ -386,4 +257,11 @@ $(document).on("click", ".void", function() {
 $(document).on("click", ".damage", function() {
     var $btn = $(this);
     verify($btn, "damage");
+});
+
+$(document).on("change", ".location_select", function(){
+    var value = $(this).val();
+    console.log(value);
+    $(this).next().attr("location", value);
+    $(this).next().next().attr("location", value);
 });

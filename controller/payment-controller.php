@@ -14,11 +14,11 @@
         WHERE p.transaction_id = '$id'";
         $result = mysqli_query($conn, $sql);
         while($data1 = $result->fetch_assoc()){
-            $sub_total = $data1["item_price"] * $data1["item_count"];
-            $sub_total_discount += floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
-            $total += $sub_total_discount;
+            $sub_total += $data1["item_price"] * $data1["item_count"];
+            $total += $sub_total;
         }
-        if(floatval($total - floatval($value + $data['cash'])) < 0){
+        echo ($value + $data['cash']) . " " .  floatval($total - floatval($total * floatval($data["discount"] / 100)));;
+        if($total - ($value + $data['cash']) < 0){
             $sql = "UPDATE transactions
             SET 
                 cash = cash + $value,

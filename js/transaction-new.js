@@ -93,7 +93,6 @@ function calculate(){
             $paid = "true";
         }
     }
-
 }
 
 $(document).on("input", "#cash, #discount", function() {
@@ -107,10 +106,12 @@ function update_stock_on_add($btn){
         if($btn.attr("loc") == "store"){
             $removed_to_store = $count.val();
             store = math.subtract($("#stock_" + $id).val(), $removed_to_store);
+            $count.attr("max", store);
             $("#stock_" + $id).val(store);
         }else{
             $removed_to_warehouse = $count.val();
             ware_house = math.subtract($("#stock_warehouse_" + $id).val(), $removed_to_warehouse);
+            $count.attr("max", ware_house);
             $("#stock_warehouse_" + $id).val(ware_house);
         }
         $("#alert_" + $btn.attr("loc") + "_" + $id).text("Item Added!");
@@ -357,6 +358,10 @@ $(document).on("click", ".remove-item", function() {
             $(".submit-transaction").slideDown();
         }
     });
+    var store = $("#stock_" + $(this).attr("item_id")).val();
+    var warehouse = $("#stock_warehouse_" + $(this).attr("item_id")).val();
+    $("#item_store_" + $(this).attr("item_id")).attr("max", store);
+    $("#item_warehouse_" + $(this).attr("item_id")).attr("max", warehouse);
     $counter--;
     $("#total").text((parseFloat($("#total").text()) - parseFloat(elem.attr("price"))).toFixed(2));
     $("#total_items").text($counter);

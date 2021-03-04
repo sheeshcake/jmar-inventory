@@ -134,14 +134,6 @@
                 <tbody>
                 <?php
                 while($data = $result->fetch_assoc()){
-                    $u2_name = "";
-                    if($data["item_unit"] == "Box") $u2_name = "pieces";
-                    else if($data["item_unit"] == "Roll") $u2_name = "meter(s)";
-                    else if($data["item_unit"] == "Sack") $u2_name = "kilo(s)";
-                    if ((int)$data["item_unit_divisor"] != 0) {
-                        $u1 = number_format((int)$data["item_stock"] / (int)$data["item_unit_divisor"], 0);
-                        $u2 = (int)$data["item_stock"] % (int)$data["item_unit_divisor"];
-                    }
                 ?>
                     <tr>
                         <td><?php echo $data["item_id"] ?></td>
@@ -155,23 +147,54 @@
                         </td>
                         <td>
                             <?php
-                                if($data["item_unit_divisor"] != 0){
-                                    if((int)$data["item_stock"] / (int)$data["item_unit_divisor"] == 0){
+                                    echo "<div class='input-group'>";
+                                    if((int)$data["item_stock_warehouse"] < 0){
+                                        echo '<div class="input-group-prepend input-group-prepend is-invalid">
+                                                <span class="input-group-text">
+                                                Warehouse
+                                                </span>
+                                                </div>';
                                         echo '<input type="text" class="form-control is-invalid" value="Out Of Stock" readonly="">';
-                                    }else if((int)$data["item_stock"] / (int)$data["item_unit_divisor"] <= 2){
-                                        echo '<input type="text" class="form-control border border-warning is-invalid" value="' . $u1 . " " . $data["item_unit"] . " " . $u2 . " " . $u2_name . '" readonly="">';
+                                    }else if((int)$data["item_stock_warehouse"] <= 2){
+                                        echo '<div class="input-group-prepend input-group-prepend is-invalid">
+                                                <span class="input-group-text">
+                                                Warehouse
+                                                </span>
+                                                </div>';
+                                        echo '<input type="text" class="form-control border border-warning is-invalid" value="' . $data["item_stock_warehouse"] . " " . $data["item_unit"] . '" readonly="">';
                                     }else{
-                                        echo '<input type="text" class="form-control is-valid" value="' . $u1 . " "  . $data["item_unit"] . " " . $u2 . " " . $u2_name . '" readonly="">';
+                                        echo '<div class="input-group-prepend input-group-prepend is-invalid">
+                                                <span class="input-group-text">
+                                                Warehouse
+                                                </span>
+                                                </div>';
+                                        echo '<input type="text" class="form-control is-valid" value="' . $data["item_stock_warehouse"] . " "  . $data["item_unit"] . '" readonly="">';
                                     }
-                                }else{
-                                    if((int)$data["item_stock"] == 0){
+                                    echo "</div>";
+                                    echo "<div class='input-group'>";
+                                    if((int)$data["item_stock"] < 0){
+                                        echo '<div class="input-group-prepend input-group-prepend is-invalid">
+                                                <span class="input-group-text">
+                                                Store
+                                                </span>
+                                                </div>';
                                         echo '<input type="text" class="form-control is-invalid" value="Out Of Stock" readonly="">';
                                     }else if((int)$data["item_stock"] <= 2){
-                                        echo '<input type="text" class="form-control border border-warning is-invalid" value="' . $u1 . " " . $data["item_unit"] . " " . $u2 . " " . $u2_name . '" readonly="">';
+                                        echo '<div class="input-group-prepend input-group-prepend is-invalid">
+                                                <span class="input-group-text">
+                                                Store
+                                                </span>
+                                                </div>';
+                                        echo '<input type="text" class="form-control border border-warning is-invalid" value="' . $data["item_stock"] . " " . $data["item_unit_package"] . '" readonly="">';
                                     }else{
-                                        echo '<input type="text" class="form-control is-valid" value="' . $data["item_stock"] . " " . $u2_name . '" readonly="">';
+                                        echo '<div class="input-group-prepend input-group-prepend is-invalid">
+                                                <span class="input-group-text">
+                                                Store
+                                                </span>
+                                                </div>';
+                                        echo '<input type="text" class="form-control is-valid" value="' . $data["item_stock"] . " " . $data["item_unit_package"] . '" readonly="">';
                                     }
-                                }
+                                    echo "</div>";
                             ?>
                         </td>
                     </tr>
