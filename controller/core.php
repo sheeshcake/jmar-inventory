@@ -1,8 +1,8 @@
 <?php
     session_start();
     $roles = [
-        "admin" => ["account", "transaction", "notification", "inventory", "transaction-new", "transfer", "transfer-history", "sale-daily-history", "sale-monthly-history", "incoming-history", "stock-transfer-history", "register", "incoming", "all-items", "return", "default" =>"dashboard"],
-        "encoder" => ["account","all-items","inventory", "notification", "incoming", "default" =>"inventory"],
+        "admin" => ["account", "transaction", "notification", "inventory", "transaction-new", "transfer", "transfer-history", "sale-daily-history", "sale-monthly-history", "incoming-history", "stock-transfer-history", "register", "incoming", "all-items", "return", "damaged-items", "default" =>"dashboard"],
+        "encoder" => ["account","all-items","inventory", "notification", "incoming", "damaged-items", "default" =>"inventory"],
         "accountant" => ["account", "transaction", "return", "transaction-new", "default" =>"transaction-new"]
     ];
     function guard($folder = false){
