@@ -16,6 +16,7 @@
             $total_paid = 0;
             $sub_total_discount = 0;
             while($data = $result->fetch_assoc()){
+                $sub_total = 0;
                 $id = $data["transaction_id"];
                 $sql1 = "SELECT * FROM items as i
                         INNER JOIN purchased_item as p
@@ -52,6 +53,7 @@
             $total_paid = 0;
             $sub_total_discount = 0;
             while($data = $result->fetch_assoc()){
+                $sub_total = 0;
                 $id = $data["transaction_id"];
                 $sql1 = "SELECT * FROM items as i
                         INNER JOIN purchased_item as p
