@@ -20,7 +20,7 @@
                 $sql1 = "SELECT * FROM items as i
                         INNER JOIN purchased_item as p
                         ON i.item_id = p.item_id
-                        WHERE p.transaction_id = '$id'
+                        WHERE p.transaction_id = '$id' AND p.item_count > 0
                 ";
                 $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);
                 while($data1 = $result1->fetch_assoc()){
@@ -45,7 +45,7 @@
                 AND 
                     transaction_datetime LIKE '%-$year_now%'
                 AND 
-                    transaction_type = 'outgoing'
+                    transaction_type = 'outgoing' 
                 ";
             $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
             $total = 0;
@@ -56,7 +56,7 @@
                 $sql1 = "SELECT * FROM items as i
                         INNER JOIN purchased_item as p
                         ON i.item_id = p.item_id
-                        WHERE p.transaction_id = '$id'
+                        WHERE p.transaction_id = '$id' AND p.item_count > 0
                 ";
                 $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);
                 while($data1 = $result1->fetch_assoc()){

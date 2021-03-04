@@ -78,9 +78,7 @@
                 if($_SESSION["user"]["role"] == "admin"){ 
             ?>
             <div class="d-flex p-2">
-                <b class="py-1">Capital Retail&nbsp;</b>
-                <p id="item_capital_retail<?php echo $data["item_id"]?>" class="edit" item_id="<?php echo $data["item_id"]?>" contenteditable><?php echo $data["item_capital_retail"]?></p>
-                <b class="py-1">%</b>
+                <p id="item_capital_retail<?php echo $data["item_id"]?>" item_id="<?php echo $data["item_id"]?>"><b>Capital Retail: ₱<?php echo $data["item_capital_retail"]?></b></p>
             </div>
             <hr>
             <div class="d-flex p-2"><b class="py-1">Percentage Revenue&nbsp;</b><p id="tax<?php echo $data["item_id"]?>" class="edit tax" item_id="<?php echo $data["item_id"]?>" contenteditable><?php echo $data["item_tax"]?></p><b class="py-1">%</b></div>
