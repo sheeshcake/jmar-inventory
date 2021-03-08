@@ -1,8 +1,10 @@
 <?php
     include "../controller/connect.php";
+    include "core.php";
     session_start();
     if(isset($_POST["submit"])){
         // var_dump($_POST);
+        logs("edit-item", $_SESSION['user']['user_id']);
         $item_id = $_POST["item_id"];
         $sql = "SELECT * FROM items WHERE item_id = '$item_id'";
         $result = mysqli_query($conn, $sql);

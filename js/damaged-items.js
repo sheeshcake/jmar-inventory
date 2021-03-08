@@ -15,7 +15,7 @@ function refresh(){
         url: url(window.location.href) + "/controller/get-items-damaged.php",
         method: "GET",
         success: function(d){
-            $("#item-damaged").html(d);
+            $("#items-damaged").html(d);
             $t = $('#example2').DataTable();
             $(document).find("#example2_filter").css("position", "sticky");
             $(document).find("#example2_filter").css("top", "0");
@@ -29,17 +29,17 @@ $(document).ready(function(){
     refresh();
 });
 
-function alert(id, message, status){
-    $("#alert_" + id).addClass("alert-" + status);
-    $("#alert_" + id).text(message);
-    $("#alert_" + id).fadeTo(3000, 500).slideUp(500, function() {
-        $("#alert_" + id).slideUp(500);
+function alert(id, message, status, name){
+    $("#alert_" + name + "_" + id).addClass("alert-" + status);
+    $("#alert_" + name + "_"  + id).text(message);
+    $("#alert_" + name + "_"  + id).fadeTo(3000, 500).slideUp(500, function() {
+        $("#alert_" + name + "_"  + id).slideUp(500);
         refresh();
     });
 }
 
 $(document).on("click", ".add", function(){
-    $count = $("#item_" + $(this).val()).val();
+    $count = $("#item_report_" + $(this).val()).val();
     $id = $(this).val();
     $.ajax({
         url: url(window.location.href) + "/controller/damage-controller.php",
@@ -51,12 +51,12 @@ $(document).on("click", ".add", function(){
         },
         success: function(d){
             var data = JSON.parse(d);
-            alert($id, data.message, data.status);
+            alert($id, data.message, data.status, "report");
         }
     });
 });
 $(document).on("click", ".replace", function(){
-    $count = $("#item_" + $(this).val()).val();
+    $count = $("#item_damaged_" + $(this).val()).val();
     $item_id = $(this).val();
     $damage_id = $(this).attr("damage_id");
     $.ajax({
@@ -70,7 +70,7 @@ $(document).on("click", ".replace", function(){
         },
         success: function(d){
             var data = JSON.parse(d);
-            alert($item_id, data.message, data.status);
+            alert($item_id, data.message, data.status, "damaged");
         }
     });
 });

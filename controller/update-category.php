@@ -1,5 +1,6 @@
 <?php
     include "../controller/connect.php";
+    include "core.php";
     session_start();
     if(isset($_POST["submit"]) && isset($_POST["id"]) && isset($_POST["name"])){
         $id = $_POST["id"];
@@ -7,6 +8,7 @@
         $sql = "SELECT * FROM category WHERE category_id = '$id'";
         $result = mysqli_query($conn, $sql);
         $data1 = $result->fetch_assoc();
+        logs("update-category", $_SESSION['user']['user_id']);
         if(mysqli_num_rows($result) == 1){
             $sql = "UPDATE category SET category_name = '$name' WHERE category_id='$id'";
             $result = mysqli_query($conn, $sql);

@@ -1,11 +1,11 @@
 <?php
-    session_start();
     $roles = [
-        "admin" => ["account", "transaction", "notification", "inventory", "transaction-new", "transfer", "transfer-history", "sale-daily-history", "sale-monthly-history", "incoming-history", "stock-transfer-history", "register", "incoming", "all-items", "return", "damaged-items", "default" =>"dashboard"],
+        "admin" => ["account", "transaction", "notification", "inventory", "transaction-new", "transfer", "transfer-history", "sale-daily-history", "sale-monthly-history", "incoming-history", "stock-transfer-history", "register", "incoming", "all-items", "return", "damaged-items", "logs", "default" =>"dashboard"],
         "encoder" => ["account","all-items","inventory", "notification", "incoming", "damaged-items", "default" =>"inventory"],
         "accountant" => ["account", "transaction", "return", "transaction-new", "default" =>"transaction-new"]
     ];
     function guard($folder = false){
+        session_start();
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/";
         if(!isset($_SESSION["user"])){
             header('Location:' . $actual_link);
@@ -16,6 +16,7 @@
         }
     }
     function page(){
+        session_start();
         if(isset($_SESSION["page"])){
             include "includes/" . $_SESSION["page"] . ".php";
         }else{
@@ -27,12 +28,20 @@
         }
     }
 
+    function logs($action, $id){
+        include "connect.php";
+        $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
+        $datetime = $date->format("m-d-Y h:i a");
+        $sql = "INSERT INTO logs (action, datetime, user_id) 
+                VALUES ('$action', '$datetime', '$id') ";
+        $result = mysqli_query($conn, $sql);
+    }
+
     function dashboard_core($action){
         include "includes/$action.php";
     }
 
     function home_core($reason = NULL, $reason2 = NULL){
-
         if($reason != NULL){
             if($reason == "get"){
                 return $GLOBALS['roles'][$_SESSION["user"]["role"]]["default"];

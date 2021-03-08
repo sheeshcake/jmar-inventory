@@ -9,7 +9,7 @@
         $r_price = floatval($data["item_tax"]) / 100 * floatval($data["item_price"]) + floatval($data["item_price"]);
         $u1 = intval($data["item_stock_warehouse"] / $data["item_unit_divisor"]);
         if($u1 <= 2 && $u1 != 0) $color = "warning";
-        else if($u1 == 0 && $u2 == 0) $color = "danger";
+        else if($data["item_stock"] == 0 && $data["item_stock_warehouse"] == 0) $color = "danger";
         else $color = "success";
         $items_on_warehouse = intval($data["item_stock_warehouse"] / $data["item_unit_divisor"]);
         $items_on_store = $data["item_stock"];

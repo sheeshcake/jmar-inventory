@@ -1,5 +1,6 @@
 <?php
     include "connect.php";
+    include "core.php";
     if(isset($_POST["submit"])){
         if($_POST["submit"] == "report"){
             $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
@@ -54,7 +55,7 @@
                         ";
                 $result = mysqli_query($conn, $sql);
                 if($result){
-                    $data= array("message"=>"Item Reported!", "status"=>"success");
+                    $data= array("message"=>"Item Replaced!", "status"=>"success");
                     echo json_encode($data);
                 }else{
                     $data= array("message"=>"An Error Occured!", "status"=>"warning");

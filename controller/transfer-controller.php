@@ -1,5 +1,6 @@
 <?php
     include "../controller/connect.php";
+    include "core.php";
     session_start();
     if(isset($_POST["type"])){
         if($_POST["type"] == "get-item"){
@@ -9,6 +10,7 @@
             $data = $result->fetch_assoc();
             echo json_encode($data);
         }else if($_POST["type"] == "transfer"){
+            logs("transfer-item", $_SESSION['user']['user_id']);
             // var_dump($_POST);
             $date = $_POST["date"];
             $time = $_POST["time"];

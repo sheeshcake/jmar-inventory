@@ -1,10 +1,12 @@
 <?php
     include "../controller/connect.php";
+    include "core.php";
     session_start();
     if(isset($_POST["submit"])){
         // var_dump($_POST);
         // var_dump($_FILES);
         // Add Code 
+        logs("add-item", $_SESSION['user']['user_id']);
         $item_name = $_POST["item_name"];
         $item_brand = $_POST["item_brand"];
         $item_desc = $_POST["item_desc"];

@@ -89,8 +89,12 @@
         <span>My Account</span>
     </a>
     <a class="nav-link" id="note-button">
-    <i class="fa fa-sticky-note" aria-hidden="true"></i>
+        <i class="fa fa-sticky-note" aria-hidden="true"></i>
         <span>Open Stickynotes</span>
+    </a>
+    <a class="nav-link" href="?p=logs">
+        <i class="fa fa-list-ol" aria-hidden="true"></i>
+        Logs
     </a>
 </li>
 <div id="notes" style="z-index: 100">

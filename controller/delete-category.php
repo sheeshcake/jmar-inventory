@@ -1,7 +1,9 @@
 <?php
     include "../controller/connect.php";
+    include "core.php";
     session_start();
     if(isset($_POST["submit"]) && $_POST["id"] != ""){
+        logs("delete-category", $_SESSION['user']['user_id']);
         $id = $_POST["id"];
         $sql = "SELECT * FROM category WHERE category_id = '$id'";
         $result = mysqli_query($conn, $sql);

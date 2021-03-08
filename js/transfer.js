@@ -51,6 +51,8 @@ function update_stock_on_add(btn){
     var $id= btn.val();
     var $count = $("#item_" + $id);
     if(parseInt($count.attr("max")) >= parseInt($count.val()) && 0 < parseInt($count.val()) && parseInt(btn.parent().prev().find(".form-control").val()) > 0){
+        count = math.subtract($("#stock_" + $id).val(), $count.val());
+        $count.attr("max", count);
         $("#stock_" + $id).val(math.subtract($("#stock_" + $id).val(), $count.val()));
         $("#alert_" + $id).text("Item Added!");
         $("#alert_" + $id).attr('class', 'alert-danger').addClass('alert');
@@ -93,21 +95,48 @@ $(document).on("click", ".add", function() {
             },
             success: function(d) {
                 var data = JSON.parse(d);
-                $("#items").prepend(
-                    '<div class="item card mb-1"  item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '">' +
-                    '<div class="card-body">' +
-                    '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '" item_count="' + $count + '">x</button>' +
-                    '<div class="d-flex">' +
-                    '<img style="max-width: 23% !important" src="img/item/' + data.item_img + '">' +
-                    '<div class="ml-3">' +
-                    '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
-                    '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
-                    '<b>' + data.item_unit + ':</b>&nbsp;' + $count + '<br>' +
-                    '</div>' +
-                    '<div>' +
-                    '</div>' +
-                    '</div>'
-                );
+                var has_same = false;
+                $("#items").children(".item").each(function(i, obj){
+                    if($(this).attr("item-id") == $id){
+                        var $new_total_count = math.add($(this).attr("item-count"), $total_count);
+                        var $new_count = math.add($("#item_count_" + $id).text(), $count);
+                        $("#items").prepend(
+                            '<div class="item card mb-1"  item-id="' + $id + '" item-count="' + parseFloat($new_total_count).toFixed(2) + '">' +
+                            '<div class="card-body">' +
+                            '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '" item_count="' + $new_count + '">x</button>' +
+                            '<div class="d-flex">' +
+                            '<img style="max-width: 23% !important" src="img/item/' + data.item_img + '">' +
+                            '<div class="ml-3">' +
+                            '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
+                            '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
+                            '<b>' + data.item_unit + ':</b>&nbsp;<b id="item_count_' + $id + '">' + $new_count + '</b><br>' +
+                            '</div>' +
+                            '<div>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                        $(this).remove();
+                        has_same = true;
+                        return false;
+                    }
+                });
+                if(!has_same){
+                    $("#items").prepend(
+                        '<div class="item card mb-1"  item-id="' + $id + '" item-count="' + parseFloat($total_count).toFixed(2) + '">' +
+                        '<div class="card-body">' +
+                        '<button class="remove-item btn btn-danger float-right" style="height: 40px;" item_id="' + $id + '" item_count="' + $count + '">x</button>' +
+                        '<div class="d-flex">' +
+                        '<img style="max-width: 23% !important" src="img/item/' + data.item_img + '">' +
+                        '<div class="ml-3">' +
+                        '<p><b>Name:</b>&nbsp;' + data.item_name + '<br>' +
+                        '<b>Brand:</b>&nbsp;' + data.item_brand + '<br>' +
+                        '<b>' + data.item_unit + ':</b>&nbsp;<b id="item_count_' + $id + '">' + $count + '</b><br>' +
+                        '</div>' +
+                        '<div>' +
+                        '</div>' +
+                        '</div>'
+                    );
+                }
                 check_items();
             }
         });
@@ -115,6 +144,10 @@ $(document).on("click", ".add", function() {
 });
 
 $(document).on("click", ".remove-item", function() {
+    var $id = $(this).attr("item_id");
+    var count = math.add($("#stock_" + $id).val(), $(this).attr("item_count"));
+    $("#item_" + $id).attr("max", count);
+    $("#stock_" + $id).val(count);
     $(".submit-transaction").prop('disabled', true);
     var elem = $(this).parent().parent();
     elem.slideUp("normal", function() {

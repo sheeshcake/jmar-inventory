@@ -26,7 +26,7 @@
         <td>
             <div class="row">
                 <div class="input-group">
-                    <input type="number" id="item_<?php echo $data["item_id"] ?>" class="form-control damage-count" value="1" min="1" max="<?php echo $data["item_count"] ?>">
+                    <input type="number" id="item_damaged_<?php echo $data["item_id"] ?>" class="form-control damage-count" value="1" min="1" max="<?php echo $data["item_count"] ?>">
                     <div class="input-group-append input-group-prepend">
                         <span class="input-group-text"><?php echo $data["item_unit_package"] ?></span>
                     </div>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div class="alert alert-success" id="alert_<?php echo $data["item_id"];  ?>" role="alert" style="display: none">
+            <div class="alert alert-success" id="alert_damaged_<?php echo $data["item_id"];  ?>" role="alert" style="display: none">
                 Item Added!
             </div>
         </td>

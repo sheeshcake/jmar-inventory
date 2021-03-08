@@ -1,9 +1,11 @@
 <?php
     include "../controller/connect.php";
+    include "core.php";
     session_start();
     if(isset($_POST["submit"])){
         $id = $_POST["item_id"];
         $sql = "DELETE FROM items WHERE item_id=$id";
+        logs("delete-item", $_SESSION['user']['user_id']);
         $result = mysqli_query($conn, $sql);
         if($result){
             $data= array("message"=>"Item Deleted! Refreshing Items Please wait..", "status"=>"success");

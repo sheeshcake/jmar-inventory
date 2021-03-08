@@ -1,5 +1,6 @@
 <?php
     include "../controller/connect.php";
+    include "../controller/core.php";
     session_start();
     if(isset($_POST["submit"])){
         $username = $_POST["username"];
@@ -8,6 +9,7 @@
         $result = mysqli_query($conn, $sql);
         if(mysqli_num_rows($result) == 1){
             $_SESSION['user'] = $result->fetch_assoc();
+            logs("login", $_SESSION['user']['user_id']);
             if(password_verify($password, $_SESSION['user']['password'])){
                 $_SESSION["page"] = "home";
                 header('Location: ' . $_SERVER['HTTP_REFERER']);

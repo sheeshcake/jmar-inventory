@@ -1,5 +1,6 @@
 <?php
     include "../controller/connect.php";
+    include "core.php";
     session_start();
     if(isset($_POST['submit'])){
         $f_name = $_POST['f_name'];
@@ -9,6 +10,7 @@
         $role = $_POST['role'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $sql = "SELECT * FROM user WHERE username = '" . $username . "' OR email ='" . $email . "'";
+        logs("register-account", $_SESSION['user']['user_id']);
         $result = mysqli_query($conn, $sql);
         if(mysqli_num_rows($result) == 0){
             $sql = "INSERT INTO user 
