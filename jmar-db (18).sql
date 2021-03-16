@@ -44,7 +44,7 @@ INSERT INTO `category` (`category_id`, `category_name`) VALUES
 (5, 'Cement'),
 (6, 'Pipes'),
 (7, 'Nails'),
-(8, 'Misc'),
+(8, 'Misc');
 
 -- --------------------------------------------------------
 
