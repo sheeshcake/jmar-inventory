@@ -1,47 +1,47 @@
-//Dri sha na bug
-
-
 $(document).on("click", ".cat-del", function() {
-    var $row_data = $t.row($(this).parents('tr')).data();
-    $(document).find(".cat:contains('" + $row_data[1] + "')").remove();
+    var t = $t.row($(this).parents("tr")).data();
     $.ajax({
         url: url(window.location.href) + "/controller/delete-category.php",
         method: "POST",
-        data: {
-            submit: "submit",
-            id: $row_data[0]
-        },
-        success: function(d) {
-            var data = JSON.parse(d);
-            $("#cat-alert").html(
-                '<div class="m-alert alert alert-' + data.status + ' role="alert" style="display:none">' +
-                data.message +
-                '</div>'
-            );
-            $(".m-alert").show(500);
+        data: { submit: "submit", id: t[0] },
+        success: function(t) {
+            var e = JSON.parse(t);
+            $("#category-message").html('<div class="m-alert alert alert-' + e.status + ' role="alert id="category_modal_message" style="display:none">' + e.message + "</div>"), $("#category-message").show(500);
+            $("#category option[value='" + e.id + "']").each(function() {
+                $(this).remove();
+            });
+            $("#category_modal_message").fadeTo(3000, 500).slideUp(500, function() {
+                $("#category_modal_message").slideUp(500);
+            });
+            $(document).find("#sc_" + e.id).remove();
         }
-    });
-    $t.row($(this).parents('tr')).remove().draw();
+    }), $t.row($(this).parents("tr")).remove().draw()
 });
-
-// $(document).on("click", ".cat-up", function() {
-//     var $row_data = $t.row($(this).parents('tr')).data();
-//     $(document).find(".cat:contains('" + $row_data[1] + "')").text();
-//     $.ajax({
-//         url: url(window.location.href) + "/controller/delete-category.php",
-//         method: "POST",
-//         data: {
-//             submit: "submit",
-//             id: $row_data[0]
-//         },
-//         success: function(d) {
-//             var data = JSON.parse(d);
-//             $("#cat-alert").html(
-//                 '<div class="m-alert alert alert-' + data.status + ' role="alert" style="display:none">' +
-//                 data.message +
-//                 '</div>'
-//             );
-//             $(".m-alert").show(500);
-//         }
-//     });
-// });
+var edited;
+$(document).on("click", ".cat-up", function() {
+    var t = $t.row($(this).parents("tr")).data();
+    $.ajax({
+        url: url(window.location.href) + "/controller/update-category.php",
+        method: "POST",
+        data: { submit: "submit", id: t[0], name: t[1] },
+        success: function(t) {
+            var e = JSON.parse(t);
+            $("#category-message").html('<div class="m-alert alert alert-' + e.status + ' role="alert" id="category_modal_message" style="display:none">' + e.message + "</div>"), $("#category-message").show(500);
+            $("#category option[value='" + e.id + "']").each(function() {
+                $(this).html(edited);
+            });
+            $("#category_modal_message").fadeTo(3000, 500).slideUp(500, function() {
+                $("#category_modal_message").slideUp(500);
+            });
+            $(document).find("#sc_" + e.id).html(edited);
+            $(document).find("#sc_" + e.id).attr("href", "?p=inventory&cat=" + edited);
+        }
+    })
+});
+$('.cat_edit').blur(function() {
+    var t = $t.row($(this).parents("tr")).data();
+    if (t[1] != $(this).html()) {
+        t[1] = $(this).html();
+        edited = $(this).html();
+    }
+});

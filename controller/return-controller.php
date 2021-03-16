@@ -8,23 +8,23 @@
                         * 
                     FROM 
                         transactions 
-                    INNER JOIN 
-                        purchased_item
-                    ON
-                        transactions.transaction_id = purchased_item.transaction_id
-                    INNER JOIN 
-                        items
-                    ON
-                        purchased_item.item_id = items.item_id
                     WHERE 
                         transactions.transaction_id = $id";
             $result = mysqli_query($conn, $sql);
-            $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            echo json_encode($data);
-        }else if($_POST["type"] == "return"){
-            
-        }else if($_POST["type"] == "damaged"){
-
+            $data = $result->fetch_assoc();
+            $all_data = [$data];
+            $id = $data["transaction_id"];
+            $sql1 = "SELECT * FROM purchased_item as p
+                    INNER JOIN items as i 
+                    ON
+                        p.item_id = i.item_id
+                    WHERE p.transaction_id = '$id'
+            ";
+            $result1 = mysqli_query($conn, $sql1);
+            while($data1 = $result1->fetch_assoc()){
+                array_push($all_data, $data1);
+            }
+            echo json_encode($all_data);
         }
     }
 

@@ -16,21 +16,37 @@
                 WHERE 
                     transaction_id = '$id'";
         $result1 = mysqli_query($conn, $sql1);
-        $total_items = 0;
-        $total_paid = 0;
-        while($data1 = $result1->fetch_assoc()){
-            $total_items = mysqli_num_rows($result1);
-            $total_paid += ((($data1["item_tax"] / 100) * $data1["item_price"]) + $data1["item_price"]) * $data1["item_count"];
-        }
+        $total_items = mysqli_num_rows($result1);
+        if($total_items > 0){
+            $total = 0;
+            $sub_total = 0;
+            while($data1 = $result1->fetch_assoc()){
+                if($data["paid"] == "true"){
+                    $total_price = $data1["item_price"] * $data1["item_count"];
+                    $sub_total = floatval($total_price + $sub_total);
+                }
+            }
+            $sub_total = floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
 ?>
             <tr>
-                <td><?php echo $data["transaction_id"] ?></td>
+                <td>
+                    <?php 
+                        echo $data["transaction_id"] . "/" . $data["reciept_no"];
+                        if($data["paid"] == "true"){
+                            echo '<span class="badge badge-success">Paid</span>';
+                        }else{
+                            echo '<span class="badge badge-danger">Unpaid</span>';
+                        }
+                    ?>
+                </td>
                 <td><?php echo $data["transaction_datetime"] ?></td>
                 <td><?php echo $total_items ?></td>
-                <td><?php echo $total_paid ?></td>
+                <td><?php echo $data["courier"] ?></td>
+                <td>₱<?php echo number_format($sub_total, 2) ?></td>
                 <td><button class="open btn btn-primary" value="<?php echo $data["transaction_id"] ?>" data-toggle="modal" data-target="#transmodal">Open</button></td>
             </tr>
-<?php
+<?php   
+        }
     }
 
 ?>

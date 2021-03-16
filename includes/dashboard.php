@@ -4,7 +4,7 @@
 </div>
 <div class="row">
     <!-- Earnings (Monthly) Card Example -->
-    <a href="#" id="ds-btn" class="col-xl-3 col-md-6 mb-4">
+    <a href="?p=sale-daily-history" class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -22,7 +22,7 @@
     </a>
 
     <!-- Earnings (Monthly) Card Example -->
-    <a href="#" id="ms-btn" class="col-xl-3 col-md-6 mb-4">
+    <a href="?p=sale-monthly-history" class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -40,7 +40,7 @@
     </a>
 
     <!-- Earnings (Monthly) Card Example -->
-    <a href="#" id="de-btn" class="col-xl-3 col-md-6 mb-4">
+    <a href="?p=incoming-history" class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-info shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -62,7 +62,7 @@
     </a>
 
     <!-- Pending Requests Card Example -->
-    <a href="#" id="d-btn" class="col-xl-3 col-md-6 mb-4">
+    <a href="?p=damaged" class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -79,33 +79,167 @@
         </div>
     </a>
 </div>
-
-
-<div class="card shadow mb-4">
-    <!-- Card Header - Dropdown -->
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Sales Overview(Weekly)</h6>
-        <div class="dropdown no-arrow">
-            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="">
-                <div class="dropdown-header">Dropdown Header:</div>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+<div class="row">
+    <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Sales(Yearly) Overview</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="myAreaChart" style="display: block; width: 400px; height: 160px;" width="400" height="160" class="chartjs-render-monitor"></canvas>
+                </div>
             </div>
         </div>
     </div>
-    <!-- Card Body -->
-    <div class="card-body">
-        <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-            <canvas id="myAreaChart" style="display: block; width: 411px; height: 320px;" width="411" height="320" class="chartjs-render-monitor"></canvas>
+
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Number Of Items</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="myPieChart" width="400" height="208" class="chartjs-render-monitor" style="display: block; width: 400px; height: 208px;"></canvas>
+                </div>
+                <div class="mt-4 text-center small" id="legend">
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Item Monitoring</h6>
+        </div>
+        <div class="card-body">
+            <?php
+                include "controller/connect.php";
+                $sql = "SELECT * FROM items INNER JOIN category ON items.category_id = category.category_id ORDER BY CAST(CAST(items.item_stock AS float)/CAST(items.item_unit_divisor AS float) AS float) ASC";
+                $result = mysqli_query($conn, $sql);
+            ?>
+            <table class="table table-striped" id="table-item-monitor">
+                <thead>
+                    <th>Item ID</th>
+                    <th>Image</th>
+                    <th>Item Name & Description</th>
+                    <th>Item Status</th>
+                </thead>
+                <tbody>
+                <?php
+                while($data = $result->fetch_assoc()){
+                ?>
+                    <tr>
+                        <td><?php echo $data["item_id"] ?></td>
+                        <td>
+                            <img style="width: 100px; height: 100px" src="img/item/<?php echo $data["item_img"] ?>" alt="">
+                            
+                        </td>
+                        <td>
+                            <p><b><?php echo $data["item_name"] ?></b></p>
+                            <p><?php echo $data["item_desc"] ?></p>
+                        </td>
+                        <td>
+                            <?php
+                                    echo "<div class='input-group'>";
+                                    if((int)$data["item_stock_warehouse"] < 0){
+                                        echo '<div class="input-group-prepend input-group-prepend is-invalid">
+                                                <span class="input-group-text">
+                                                Warehouse
+                                                </span>
+                                                </div>';
+                                        echo '<input type="text" class="form-control is-invalid" value="Out Of Stock" readonly="">';
+                                    }else if((int)$data["item_stock_warehouse"] <= 2){
+                                        echo '<div class="input-group-prepend input-group-prepend is-invalid">
+                                                <span class="input-group-text">
+                                                Warehouse
+                                                </span>
+                                                </div>';
+                                        echo '<input type="text" class="form-control border border-warning is-invalid" value="' . $data["item_stock_warehouse"] . " " . $data["item_unit"] . '" readonly="">';
+                                    }else{
+                                        echo '<div class="input-group-prepend input-group-prepend is-invalid">
+                                                <span class="input-group-text">
+                                                Warehouse
+                                                </span>
+                                                </div>';
+                                        echo '<input type="text" class="form-control is-valid" value="' . $data["item_stock_warehouse"] . " "  . $data["item_unit"] . '" readonly="">';
+                                    }
+                                    echo "</div>";
+                                    echo "<div class='input-group'>";
+                                    if((int)$data["item_stock"] < 0){
+                                        echo '<div class="input-group-prepend input-group-prepend is-invalid">
+                                                <span class="input-group-text">
+                                                Store
+                                                </span>
+                                                </div>';
+                                        echo '<input type="text" class="form-control is-invalid" value="Out Of Stock" readonly="">';
+                                    }else if((int)$data["item_stock"] <= 2){
+                                        echo '<div class="input-group-prepend input-group-prepend is-invalid">
+                                                <span class="input-group-text">
+                                                Store
+                                                </span>
+                                                </div>';
+                                        echo '<input type="text" class="form-control border border-warning is-invalid" value="' . $data["item_stock"] . " " . $data["item_unit_package"] . '" readonly="">';
+                                    }else{
+                                        echo '<div class="input-group-prepend input-group-prepend is-invalid">
+                                                <span class="input-group-text">
+                                                Store
+                                                </span>
+                                                </div>';
+                                        echo '<input type="text" class="form-control is-valid" value="' . $data["item_stock"] . " " . $data["item_unit_package"] . '" readonly="">';
+                                    }
+                                    echo "</div>";
+                            ?>
+                        </td>
+                    </tr>
+                <?php
+                    }
+                ?>
+                </tbody>
+            </table>
 
+        </div>
+    </div>
+</div>
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Calender Chart</h6>
+    </div>
+    <div class="card-body">
+        <div class="input-group mb-3 row">
+            <div class="input-group-prepend pl-1">
+                <span class="input-group-text" id="date_label">Date</span>
+            </div>
+            <input type="date" class="form-control mx-1" aria-label="Date" aria-describedby="date_label" id="date-pick">
+            <button class="btn btn-secondary mx-1" id="remove-chart">Remove Last</button>
+            <button class="btn btn-danger mx-1" id="clear-chart">Clear All</button>
+        </div>
+        <div id="container">
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
+</div>
+<!-- <div style="filter: blur(8px);">
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Sales(Weekly) Overview</h6>
+    </div>
+    <div class="card-body">
+        <div class="chart-bar"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+            <canvas id="myBarChart" width="400" height="160" class="chartjs-render-monitor" style="display: block; width: 400px; height: 160px;"></canvas>
+        </div>
+    </div>
+</div>
+</div> -->
+<script src="https://momentjs.com/downloads/moment.js"></script>
 <script src="vendor/chart.js/Chart.min.js"></script>
 <script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-bar-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
 <script src="js/dashboard.js"></script>

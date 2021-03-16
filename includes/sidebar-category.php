@@ -36,7 +36,7 @@
                             ?>
                                 <tr>
                                     <td><?php echo $data["category_id"] ?></td>
-                                    <td contenteditable><?php echo $data["category_name"] ?></td>
+                                    <td contenteditable class="cat_edit"><?php echo $data["category_name"] ?></td>
                                     <td>
                                         <button class="cat-del btn btn-danger btn-sm">Delete</button>
                                         <button class="cat-up btn btn-success btn-sm">Update</button>

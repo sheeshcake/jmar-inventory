@@ -12,24 +12,46 @@
             $arr = $_POST["data"];
             $date_time = $_POST["date"];
             $type = $_POST["trans_type"];
-            $sql = "INSERT INTO transactions (transaction_type, transaction_datetime)
-                VALUES ('$type','$date_time')
+            $user_id = $_SESSION["user"]["user_id"];
+            $courier = $_POST["courier"];
+            $discount = $_POST["discount"];
+            $discount_type = $_POST["discount_type"];
+            $payment = $_POST["payment"];
+            $customer = $_POST["customer"];
+            $address = $_POST["address"];
+            $contact_no = $_POST["contact_no"];
+            $cash = $_POST["cash"];
+            $paid = $_POST["paid"];
+            $reciept_no = $_POST["reciept_no"];
+            $sql = "INSERT INTO transactions (reciept_no, transaction_type, transaction_datetime, user_id, courier, payment, customer, address, contact_no, cash, discount, discount_type, paid)
+                VALUES ('$reciept_no','$type','$date_time', '$user_id', '$courier','$payment','$customer', '$address', '$contact_no','$cash', '$discount', '$discount_type', '$paid')
             ";
             $result = mysqli_query($conn, $sql);
             $last_id = mysqli_insert_id($conn);
             $count = 0;
             foreach ($arr as &$value) {
                 $value = explode(",", $value);
-                // var_dump($value);
                 $item_id = $value[1];
                 $item_count = $value[2];
+                $item_on_store = $value[3];
+                $item_on_warehouse = $value[4];
+                // Get item data
+                $sql = "SELECT * FROM items WHERE item_id = $item_id";
+                $result = mysqli_query($conn, $sql);
+                $data = $result->fetch_assoc();
+                // Get The Items to Warehouse or Store Algorithm
+                $remaining_store = $data["item_stock"] - $item_on_store;
+                $remaining_warehouse = $data["item_stock_warehouse"] - intval($item_on_warehouse * $data["item_unit_divisor"]);
                 // Update Item Stock
                 $sql1 = "UPDATE items
-                SET item_stock = item_stock - $item_count
+                SET 
+                    item_stock = $remaining_store,
+                    item_stock_warehouse = $remaining_warehouse
                 WHERE item_id = '$item_id'";
-                $result = mysqli_query($conn, $sql1);
+                $result = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);;
                 //Insert Purchased Item
-                $sql1 = "INSERT INTO purchased_item (transaction_id, item_id, item_count) VALUES ($last_id, '$item_id', '$item_count')";
+                $sql1 = "INSERT INTO purchased_item (transaction_id, item_id, item_count, item_on_warehouse, item_on_store) 
+                VALUES ($last_id, '$item_id', '$item_count', '$item_on_warehouse', '$item_on_store')";
                 $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);
                 if(!$result1){
                     $data1 = array("message"=>"An Error Occured!", "status"=>"danger");
@@ -37,6 +59,7 @@
                     break;
                 }
                 $count++;
+
             }
             if($count == count($arr)){
                 $data1 = array("message"=>"Transaction Completed!", "status"=>"success");

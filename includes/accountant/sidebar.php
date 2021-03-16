@@ -6,15 +6,11 @@
 
 <!-- Nav Item - Dashboard -->
 
-<li class="nav-item">
-    <a class="nav-link" href="?p=transaction">
-        <i class="fa fa-exchange" aria-hidden="true"></i>  
-        <span>Transaction</span></a>
-</li>
+
 <li class="nav-item">
     <a class="nav-link" href="?p=transaction-new">
         <i class="fa fa-exchange" aria-hidden="true"></i>  
-        <span>New Transaction</span></a>
+        <span>Transaction</span></a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="?p=return">
@@ -39,6 +35,7 @@
 <?php include "includes/sidebar-category.php"; ?>  
 <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js"></script>

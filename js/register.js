@@ -3,10 +3,10 @@ $(document).on("click", "#b-lgn", function() {
         url: url(window.location.href) + "/controller/page-controller.php",
         method: "POST",
         data: {
-            "page": "login"
+            "page": "home"
         },
         success: function(data) {
-            $(".main-content").fadeIn(500).html(data);
+            location.reload();
         },
         error: function(xhr, textStatus, errorThrown) {
             if (textStatus == 'timeout') {

@@ -1,10 +1,12 @@
 <?php
     include "../controller/connect.php";
+    include "core.php";
     session_start();
     if(isset($_POST["submit"]) && $_POST["category"] != ""){
         $category = $_POST["category"];
         $sql = "SELECT * FROM category WHERE category_name = '$category'";
         $result = mysqli_query($conn, $sql);
+        logs("add-category", $_SESSION['user']['user_id']);
         if(mysqli_num_rows($result) == 0){
             $sql = "INSERT INTO category (category_name) VALUES ('$category')";
             $result = mysqli_query($conn, $sql);

@@ -1,15 +1,12 @@
-table.dataTable th {
-    width: 100px;
-    max-width: 100px;
-    word-break: break-all;
-    white-space: pre-line;
+p {
+    width: 100%;
 }
 
-table.dataTable td {
-    width: 100px;
-    max-width: 100px;
-    word-break: break-all;
-    white-space: pre-line;
+.edit {
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 

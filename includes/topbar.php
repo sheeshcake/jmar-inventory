@@ -54,7 +54,7 @@
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['user']['f_name'] . " " . $_SESSION['user']['l_name'] ?></span>
             <img class="img-profile rounded-circle"
-                src="img/undraw_profile.svg">
+                src="img/<?php echo $_SESSION['user']['user_img'];?>" style="width: 40px; heigth: 50px">
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -63,9 +63,9 @@
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 My Account
             </a>
-            <a class="dropdown-item" href="?p=activity" disabled>
+            <a class="dropdown-item" href="?p=notification" disabled>
                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                Activity Log
+                Notification
             </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" data-toggle="modal" id='logout-modal' data-target="#logoutModal">

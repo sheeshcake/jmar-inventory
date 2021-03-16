@@ -1,9 +1,7 @@
 <?php
-    $_SESSION["page"] = "register";
     // var_dump($_SESSION);
 ?>
 <div class="container">
-
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
@@ -41,6 +39,14 @@
                                 <input type="text" name="username" class="form-control form-control-user"
                                     placeholder="Username">
                             </div>
+                            <div class="form-group">
+                                <select type="text" name="role" class="form-control"  require>
+                                    <option value="" selected disabled>Select Role</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="encoder">Encoder</option>
+                                    <option value="accountant">Accountant</option>
+                                </select>
+                            </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <input type="password" name="password" class="form-control form-control-user"
@@ -55,8 +61,8 @@
                                 Register Account
                             </button>
                             <hr>
-                            <a class="btn btn-secondary btn-user btn-block" id="b-lgn">Login</a>
                         </form>
+                        <a class="btn btn-danger btn-user btn-block" id="b-lgn">Back</a>
                         <hr>
                         <div class="text-center">
                             <!-- <a class="small" href="forgot-password.html">Forgot Password?</a> -->

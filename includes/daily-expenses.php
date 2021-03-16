@@ -1,5 +1,7 @@
 <?php
     include "../controller/connect.php";
+    include "../controller/core.php";
+    guard();
     $date = new DateTime("now", new DateTimeZone('Asia/Singapore') );
     $date_now = $date->format("m-d-Y");
 ?>
@@ -39,32 +41,54 @@
         </thead>
         <tbody>
     <?php
-        $sql = "SELECT t.transaction_datetime, t.transaction_type, t.transaction_id, p.transaction_id, i.item_name, i.item_desc, i.item_price, i.item_tax, i.item_id, SUM(p.item_count) AS total_quantity
-                FROM incoming_transaction as p
-                INNER JOIN items as i
-                INNER JOIN transactions as t
-                ON p.item_id = i.item_id
-                WHERE t.transaction_datetime LIKE '$date_now%'
-                AND t.transaction_type = 'incoming'
-                AND t.transaction_id = p.transaction_id
-                GROUP BY i.item_id
+        $sql = "SELECT *
+                FROM transactions
+                WHERE transaction_datetime LIKE '$date_now%'
+                AND transaction_type = 'incoming'
              ";
         $result = mysqli_query($conn, $sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($conn), E_USER_ERROR);
         $total = 0;
+        $sub_total = 0;
         while($data = $result->fetch_assoc()){
-            $price = $data["item_price"];
-            $sub_total = $price * $data["total_quantity"];
-            $total += $sub_total;
+            $id = $data["transaction_id"];
+            echo '<tr class="table-success table-borderless">
+                        <td colspan="4"><b>Transaction ID:</b> <u>' . $data["transaction_id"] . '</u><td>
+                    </tr>';
+            $sql1 = "SELECT * FROM items as i
+                    INNER JOIN incoming_transaction as inc
+                    ON i.item_id = inc.item_id
+                    WHERE inc.transaction_id = '$id'
+            ";
+            $result1 = mysqli_query($conn, $sql1) or trigger_error("Query Failed! SQL: $sql1 - Error: ".mysqli_error($conn), E_USER_ERROR);
+            while($data1 = $result1->fetch_assoc()){
+                $total_items = intval($data1["item_count"] / $data1["item_unit_divisor"]);
+                $price = $data1["item_capital"];
+                $sub_total += $price * $total_items;
     ?>
         <tr>
-            <td><?php echo $data["item_id"]; ?></td>
-            <td><?php echo $data["item_name"] . " " . $data["item_desc"]; ?></td>
-            <td><?php echo $data["total_quantity"]; ?></td>
+            <td><?php echo $data1["item_id"]; ?></td>
+            <td><?php echo $data1["item_name"] . " " . $data1["item_desc"]; ?></td>
+            <td>
+                <?php echo "<b>" . $data1["item_unit"] . ":</b> " . $total_items . $data1["item_unit"]; ?>
+            </td>
             <td><?php echo "₱" . number_format($price, 2, '.', ','); ?></td>
-            <td class="table-warning"><?php echo "₱" . number_format($sub_total, 2, '.', ','); ?></td>
+            <td class="table-warning"><?php echo "₱" . number_format(floatval($price * $total_items), 2, '.', ','); ?></td>
         </tr>
     <?php
-        }
+                }
+                echo 
+                    "<tr>" .
+                        "<td></td>" .
+                        "<td></td>" .
+                        "<td></td>" .
+                        "<td class='bg-light'>Sub Total:</td>" .
+                        "<td class='bg-light'>" .
+                            "₱" . number_format($sub_total, 2) .
+                        "</td>".
+                    "</tr>";
+                $total += $sub_total;
+                $sub_total = 0;
+            }
     ?> 
         <tfoot>
             <tr>

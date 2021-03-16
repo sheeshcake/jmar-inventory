@@ -1,3 +1,36 @@
+var $t;
+var $last_data;
+var $counter = 0;
+
+
+function reload() {
+    setTimeout(function() {
+        if ($(".item").length == 0) {
+            $.ajax({
+                url: url(window.location.href) + "/controller/get-item-inventory.php",
+                method: "POST",
+                data: {
+                    cat: $cat
+                },
+                success: function(d) {
+                    if ($last_data != d.replace(/\s/g, '')) {
+                        $last_data = d.replace(/\s/g, '');
+                        $("#item_data").html(d);
+                        $t = $('#example').DataTable();
+                        $(document).find("#example_filter").css("position", "sticky");
+                        $(document).find("#example_filter").css("top", "0");
+                        $(document).find("#example_filter").css("background", "white");
+                        $(document).find("#example_filter").css("z-index", "100");
+                    }
+                }
+            });
+        }
+        $('#example_wrapper').css("width", "100%");
+        reload();
+    }, 500);
+}
+
+
 function strtrim(x) {
     return x.replace(/^\s+|\s+$/gm, '');
 }
@@ -34,26 +67,9 @@ $(document).on("click", ".close-details", function() {
 });
 var $t;
 $(document).ready(function() {
-    $t = $('#example').DataTable({
-        "responsive": true
-            // // scrollY: "300px",
-            // scrollX: true,
-            // // "columnDefs": [
-            // //     { "width": "20%", "targets": 0 }
-            // // ],
-            // scrollCollapse: true,
-            // paging: false,
-            // fixedColumns: {
-            //     leftColumns: 1,
-            //     rightColumns: 1
-            // }
-    });
-    // $('#example_wrapper').css("margin", "0");
-    // $('#example').css("width", "2000px");
-    // $('tbody').css("overflow-x", "auto");
-    // $('tbody,tr,td').attr("width", "300px");
-    // $('#example_wrapper').removeAttr('class');
-
+    $("#page-top").toggleClass("sidebar-toggled");
+    $("#accordionSidebar").toggleClass("toggled");
+    reload();
 });
 $(document).on("click", "#confirm-delete", function() {
     var $id = $(this).val();
@@ -70,7 +86,6 @@ $(document).on("click", "#confirm-delete", function() {
             $(".alert").text(data.message);
             $(".alert").fadeTo(3000, 500).slideUp(500, function() {
                 $(".alert").slideUp(500);
-                location.reload();
             });
         }
     });
@@ -81,9 +96,10 @@ $(document).on("click", ".delete", function() {
     $('.alert').alert('show');
     $("#exampleModalLabel").text("Please Confirm Item Delete");
     $(".modal-body").html(
-        '<b>Item Name:</b> ' + $("#name" + $id).val() + "</br>" +
-        '<b>Item Brand:</b> ' + $("#brand" + $id).val() + "</br>" +
-        '<b>Description:</b> ' + $("#desc" + $id).val() + "</br>"
+        '<img src="' + url(window.location.href) + "/" + $("#img" + $id).attr("src") + '" width="200"/></br>' +
+        '<b>Item Name:</b> ' + $("#name" + $id).text() + "</br>" +
+        '<b>Item Brand:</b> ' + $("#brand" + $id).text() + "</br>" +
+        '<b>Description:</b> ' + $("#desc" + $id).text() + "</br>"
     );
     $(".modal-footer").html(
         '<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>' +
@@ -100,12 +116,13 @@ $(document).on("click", ".update", function() {
         data: {
             submit: "submit",
             item_id: $id,
-            item_capital: parseFloat($("#capital" + $id).text()).toFixed(2),
+            item_capital: parseFloat($("#item_capital_" + $id).text()).toFixed(2),
+            item_capital_retail: $("#item_capital_retail" + $id).text(),
             item_name: strtrim($("#name" + $id).text()),
             item_brand: strtrim($("#brand" + $id).text()),
             item_tax: parseFloat($("#tax" + $id).text()).toFixed(2),
             item_desc: strtrim($("#desc" + $id).text()),
-            item_category: $("#cat" + $id).attr("cat-id"),
+            category_id: $("#category" + $id).val()
         },
         success: function(d) {
             var data = JSON.parse(d);
@@ -118,6 +135,13 @@ $(document).on("click", ".update", function() {
     });
 });
 
+$(".tax").change(function(){
+    var id = $(this).attr("item_id");
+    var capital = $("#item_capital_" + id).text();
+    var tax = $("#item_capital_" + id).text();
+    var total = math.add(capital, math.multiply(capital, math.divide(tax, 100)));
+    $("#price_" + id).val(total.toFixed(2));
+});
 
 $(document).on('change', '.custom-file-input', function(e) {
     var name = $('input[type=file]').val().split('\\').pop();
@@ -126,17 +150,31 @@ $(document).on('change', '.custom-file-input', function(e) {
         var shortname = name.substring(0, 20) + " ...";
     }
     $(".custom-file-label").text(shortname);
-})
+});
 
-function calculate() {
-    var price = parseFloat($("#input-capital").val());
-    var tax = parseFloat($("#input-tax").val());
-    var total = ((tax / 100) * price) + price;
-    $("#total-item-price").val(total);
+function calculate(type) {
+    if (type == "retail") {
+        var price = parseFloat($("#input-capital").val());
+        var tax = parseFloat($("#input-tax").val());
+        var total = ((tax / 100) * price) + price;
+        $("#total-item-price2").val(total.toFixed(2));
+    } else {
+        var price = parseFloat($("#input-capital-wholesale").val());
+        var tax = parseFloat($("#input-tax-wholesale").val());
+        var total = ((tax / 100) * price) + price;
+        $("#total-item-price1").val(total.toFixed(2));
+    }
 }
 $(document).on("input", "#input-capital", function() {
-    calculate();
+    calculate("retail");
 });
 $(document).on("input", "#input-tax", function() {
-    calculate();
+    calculate("retail");
+});
+
+$(document).on("input", "#input-capital-wholesale", function() {
+    calculate("wholesale");
+});
+$(document).on("input", "#input-tax-wholesale", function() {
+    calculate("wholesale");
 });
