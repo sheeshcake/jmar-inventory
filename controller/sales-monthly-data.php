@@ -47,6 +47,7 @@
                     echo '<tr class="table-success table-borderless">
                         <td colspan="4"><b>Transaction ID:</b> <u>' . $data["transaction_id"] . '</u> <b>Reciept No:</b> <u>' . $data["reciept_no"] . '</u><td>
                     </tr>';
+                $sub_total_discount = 0;
                 while($data1 = $result1->fetch_assoc()){
                     $sub_total = $data1["item_price"] * $data1["item_count"];
 ?>
@@ -67,14 +68,21 @@
     </tr>
 <?php
                 }
-                    $sub_total_discount += floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
+                    $discount_type_output = "";
+                    if($data["discount_type"] == "percent"){
+                        $sub_total_discount += floatval($sub_total - floatval($sub_total * floatval($data["discount"] / 100)));
+                        $discount_type_output = $data["discount"] . "%";
+                    }else{
+                        $sub_total_discount += floatval($sub_total - $data["discount"]);
+                        $discount_type_output = "₱" . $data["discount"];
+                    }
                     echo "<tr>" .
                             "<td></td>" .
                             "<td></td>" .
                             "<td></td>" .
                             "<td class='bg-light'>Discount:</td>" .
                             "<td class='bg-light'>" .
-                                $data["discount"] . "%".
+                            $discount_type_output .
                             "</td>".
                         "</tr>" .
                         "<tr>" .

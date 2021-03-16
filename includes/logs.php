@@ -9,6 +9,7 @@
             $user = mysqli_query($conn, $sql)->fetch_assoc();
             switch($data["action"]){
                 case "login": $verb = " Logged in at "; break;
+                case "logout": $verb = " Logged out at "; break;
                 case "edit-item": $verb = " Edited an Item at "; break;
                 case "delete-item": $verb = " Deleted an Item at "; break;
                 case "add-item": $verb = " Added an Item at "; break;

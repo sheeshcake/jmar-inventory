@@ -68,10 +68,16 @@ $(document).ready(function() {
 });
 function calculate(){
     var $discount = $("#discount").val();
+    var $discount_type = $("#discount").attr("discount_type");
     var $cash = $("#cash").val();
     var $total = $("#total").html();
-    $("#total_amount").text(($total - ($total * $discount / 100)).toFixed(2));
-    var $change = ($cash  - ($total - ($total * $discount / 100))).toFixed(2);
+    if($discount_type == "percent"){
+        $("#total_amount").text(($total - ($total * $discount / 100)).toFixed(2));
+        var $change = ($cash  - ($total - ($total * $discount / 100))).toFixed(2);
+    }else{
+        $("#total_amount").text(($total - $discount).toFixed(2));
+        var $change = ($cash  - ($total - $discount)).toFixed(2);
+    }
     console.log(parseInt($change));
     console.log(parseInt($("#total_items").text()));
     if($('#delivery').is(':checked') && $("#payment").val() != "cash"){
@@ -294,6 +300,7 @@ function send_transaction(courier, payment, customer, address, contact_no) {
             contact_no: $contact_no,
             paid: $paid,
             discount: $("#discount").val(),
+            discount_type: $("#discount").attr("discount_type"),
             data: $all
         },
         success: function(d) {
@@ -376,6 +383,18 @@ $("#payment").on("change", function(){
         $("#show_change").slideUp(500);
     }
 });
+$("#discount_type").click(function(){
+    if($(this).val() == "percent"){
+        $("#discount").attr("discount_type", "peso");
+        $(this).val("peso");
+        $(this).html("Peso (₱)");
+    }else{
+        $("#discount").attr("discount_type", "percent");
+        $(this).val("percent");
+        $(this).html("Percent (%)");
+    }
+    calculate();
+})
 $(document).ready(function() {
     $("#delivery").click(function() {
         if ($(this).is(':checked')) {

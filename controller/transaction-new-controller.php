@@ -15,6 +15,7 @@
             $user_id = $_SESSION["user"]["user_id"];
             $courier = $_POST["courier"];
             $discount = $_POST["discount"];
+            $discount_type = $_POST["discount_type"];
             $payment = $_POST["payment"];
             $customer = $_POST["customer"];
             $address = $_POST["address"];
@@ -22,8 +23,8 @@
             $cash = $_POST["cash"];
             $paid = $_POST["paid"];
             $reciept_no = $_POST["reciept_no"];
-            $sql = "INSERT INTO transactions (reciept_no, transaction_type, transaction_datetime, user_id, courier, payment, customer, address, contact_no, cash, discount, paid)
-                VALUES ('$reciept_no','$type','$date_time', '$user_id', '$courier','$payment','$customer', '$address', '$contact_no','$cash', '$discount', '$paid')
+            $sql = "INSERT INTO transactions (reciept_no, transaction_type, transaction_datetime, user_id, courier, payment, customer, address, contact_no, cash, discount, discount_type, paid)
+                VALUES ('$reciept_no','$type','$date_time', '$user_id', '$courier','$payment','$customer', '$address', '$contact_no','$cash', '$discount', '$discount_type', '$paid')
             ";
             $result = mysqli_query($conn, $sql);
             $last_id = mysqli_insert_id($conn);

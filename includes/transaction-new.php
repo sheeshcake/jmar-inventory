@@ -88,7 +88,12 @@
                 <p class="my-0">
                     <b>DISCOUNT:</b>
                 </p>
-                <input required type="number" class="form-control my-0" id="discount" value="0" max="100" min="0">
+                <div class="input-group">
+                    <input required type="number" class="form-control my-0" id="discount" value="0" max="100" min="0" discount_type="percent">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" id="discount_type" data-toggle="tooltip" data-placement="top" title="Click to change the discount type" value="percent">Percent (%)</button>
+                    </div>
+                </div>
             </div>
             <div class="d-flex">
                 <p class="my-0">

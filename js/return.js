@@ -62,10 +62,19 @@ function open_data(d, btn){
         );
         $total = math.add(parseFloat($total) , parseFloat(data[i].item_price * data[i].item_count)).toFixed(2);
     }
+    var all_total = 0;
+    var discount = "";
+    if(data[0].discount_type == "percent"){
+        all_total = ($total - ($total * data[0].discount / 100)).toFixed(2);
+        discount = data[0].discount + "%";
+    }else{
+        all_total = ($total - data[0].discount).toFixed(2);
+        discount = "₱" + data[0].discount;
+    }
     $(".modal-body").append(
         "<p><b>Sub Total:&nbsp;</b><b class='float-right'>₱" + $total + "</b></p>" +
-        "<p><b>Discount:&nbsp;</b><b class='float-right'>" + data[0].discount + "%</b></p>" +
-        "<p><b>Total:&nbsp;</b><b class='float-right'>₱" + ($total - ($total * data[0].discount / 100)).toFixed(2) + "</b></p>" +
+        "<p><b>Discount:&nbsp;</b><b class='float-right'>" + discount + "</b></p>" +
+        "<p><b>Total:&nbsp;</b><b class='float-right'>₱" + all_total + "</b></p>" +
         "<p><b>Cash:&nbsp;</b><b class='float-right'>₱" + data[0].cash + "</b></p>" +
         "<hr class='sidebar-divider'>"
     );
@@ -77,7 +86,7 @@ function open_data(d, btn){
             '</div>'
         );
     }else{
-        $(".modal-body").append("<p><b>Change:&nbsp;</b><b class='float-right'>₱" + (parseFloat(data[0].cash) - ($total - ($total * data[0].discount / 100))).toFixed(2) + "</b></p>");
+        $(".modal-body").append("<p><b>Change:&nbsp;</b><b class='float-right'>₱" + (parseFloat(data[0].cash) - all_total).toFixed(2) + "</b></p>");
     }
 }
 $(document).on("click", ".open", function() {
