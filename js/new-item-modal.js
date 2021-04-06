@@ -1,27 +1,61 @@
 //update this then minify
+
+
+
+
 function calculate_retail() {
     var capital = $("#input-capital-wholesale").val();
     var revenue = $("#input-tax").val();
     var total = 0;
-    if($("#item-quantity").is(':checked')){
-        console.log("checked");
-        var qpp = $("#u1-val").val();
-        var retail_capital = math.divide(capital, qpp);
-        $("#r_capital").val(retail_capital.toFixed(2));
-        total = math.add(retail_capital, math.multiply(math.divide(revenue, 100), retail_capital)).toFixed(2);
+    if($("#tax_type").val() == "percent"){
+        if($("#item-quantity").is(':checked')){
+            console.log("checked");
+            var qpp = $("#u1-val").val();
+            var retail_capital = math.divide(capital, qpp);
+            $("#r_capital").val(retail_capital.toFixed(2));
+            total = math.add(retail_capital, math.multiply(math.divide(revenue, 100), retail_capital)).toFixed(2);
+        }else{
+            $("#u1-val").val(1);
+            $("#r_capital").val(capital);
+            total = math.add(capital, math.multiply(math.divide(revenue, 100), capital)).toFixed(2);
+        }
+        console.log(total);
+        $("#input-capital").val(total);
     }else{
-        $("#u1-val").val(1);
-        $("#r_capital").val(capital);
-        total = math.add(capital, math.multiply(math.divide(revenue, 100), capital)).toFixed(2);
+        if($("#item-quantity").is(':checked')){
+            console.log("checked");
+            var qpp = $("#u1-val").val();
+            var retail_capital = math.divide(capital, qpp);
+            $("#r_capital").val(retail_capital.toFixed(2));
+            total = math.add(retail_capital, revenue).toFixed(2);
+        }else{
+            $("#u1-val").val(1);
+            $("#r_capital").val(capital);
+            total = math.add(capital, revenue).toFixed(2);
+        }
+        console.log(total);
+        $("#input-capital").val(total);
     }
-    console.log(total);
-    $("#input-capital").val(total);
+
 }
 
 $(function() {
     $('[data-toggle="tooltip"]').tooltip({
         container: "body"
     });
+});
+
+$("#tax_type").click(function(){
+    if($(this).val() == "peso"){
+        $(this).html("Percent (%)");
+        $(this).val("percent");
+        $("#item_tax_type_value").val("percent");
+    }else{
+        $(this).html("Peso (₱)");
+        $(this).val("peso");
+        $("#item_tax_type_value").val("peso");
+    }
+    calculate_retail();
 });
 
 function validateForm() {

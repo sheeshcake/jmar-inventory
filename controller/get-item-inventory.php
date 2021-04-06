@@ -81,7 +81,24 @@
                 <p id="item_capital_retail<?php echo $data["item_id"]?>" item_id="<?php echo $data["item_id"]?>"><b>Capital Retail: ₱<?php echo $data["item_capital_retail"]?></b></p>
             </div>
             <hr>
-            <div class="d-flex p-2"><b class="py-1">Percentage Revenue&nbsp;</b><p id="tax<?php echo $data["item_id"]?>" class="edit tax" item_id="<?php echo $data["item_id"]?>" contenteditable><?php echo $data["item_tax"]?></p><b class="py-1">%</b></div>
+            <div class="d-flex p-2">
+                <b class="py-1">Revenue&nbsp;</b>
+                <?php
+                    if($data["item_tax_type"] == "percent"){
+                ?>
+                <p id="tax<?php echo $data["item_id"]?>" class="edit tax" item_id="<?php echo $data["item_id"]?>" contenteditable>
+                    <?php echo $data["item_tax"]?>
+                </p>
+                <b class="py-1">%</b>
+                <?php
+                    }else{
+                ?>
+                <b class="py-1">₱</b>
+                <p id="tax<?php echo $data["item_id"]?>" class="edit tax" item_id="<?php echo $data["item_id"]?>" contenteditable>
+                    <?php echo $data["item_tax"]?>
+                </p>
+                <?php } ?> 
+            </div>
             <?php 
                 }
             ?>

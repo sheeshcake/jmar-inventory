@@ -6,7 +6,11 @@
     ";
     $result = mysqli_query($conn, $sql);
     while($data = $result->fetch_assoc()){
-        $r_price = floatval($data["item_tax"]) / 100 * floatval($data["item_price"]) + floatval($data["item_price"]);
+        if($data["item_tax_type"] == "percent"){
+            $r_price = floatval($data["item_tax"]) / 100 * floatval($data["item_price"]) + floatval($data["item_price"]);
+        }else{
+            $r_price = floatval($data["item_price"]);
+        }
         $u1 = intval($data["item_stock_warehouse"] / $data["item_unit_divisor"]);
         if($u1 <= 2 && $u1 != 0) $color = "warning";
         else if($data["item_stock"] == 0 && $data["item_stock_warehouse"] == 0) $color = "danger";

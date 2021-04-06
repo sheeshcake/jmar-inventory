@@ -13,8 +13,13 @@
         $item_brand = $_POST["item_brand"];
         $item_capital = $_POST["item_capital"];
         $item_tax = $_POST["item_tax"];
-        $item_capital_retail = number_format(floatval($item_capital / $data["item_unit_divisor"]));
-        $item_price = number_format(floatval(floatval($item_capital_retail) + floatval(floatval($item_capital_retail) * floatval(floatval($item_tax) / 100))));
+        if($data["item_tax_type"] == "percent"){
+            $item_capital_retail = number_format(floatval($item_capital / $data["item_unit_divisor"]));
+            $item_price = number_format(floatval(floatval($item_capital_retail) + floatval(floatval($item_capital_retail) * floatval(floatval($item_tax) / 100))));
+        }else{
+            $item_capital_retail = number_format(floatval($item_capital / $data["item_unit_divisor"]));
+            $item_price = number_format(floatval($item_capital_retail) + floatval($item_tax));
+        }
         $item_desc = $_POST["item_desc"];
         $category_id = $_POST["category_id"];
         $sql = "UPDATE items

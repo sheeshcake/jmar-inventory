@@ -98,12 +98,13 @@
                                                 <input required type="number" min="0" step="any" class="form-control" id="r_capital" name="retail_capital" aria-label="Retail Capital" placeholder="Retail Capital" value="0">
                                             </div>
                                         </div>
+                                        <input type="hidden" value="peso" name="item_tax_type" id="item_tax_type_value">
                                         <div class="col">
-                                            <label for="input-capital-wholesale">Percent Revenue</label>
+                                            <label for="input-capital-wholesale">Revenue</label>
                                             <div class="input-group">
                                                 <input required type="number" min="0"  id="input-tax" step="any" class="form-control" name="item_tax" aria-label="Revenue" placeholder="Revenue" value="0">
                                                     <div class="input-group-append">
-                                                        <span  class="input-group-text">%</span>
+                                                        <button type="button" class="btn btn-outline-secondary" value="peso" id="tax_type">Peso (₱)</button>
                                                     </div>
                                                 </div>
                                             </div>
