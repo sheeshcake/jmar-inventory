@@ -17,8 +17,8 @@
             $item_capital_retail = number_format(floatval($item_capital / $data["item_unit_divisor"]));
             $item_price = number_format(floatval(floatval($item_capital_retail) + floatval(floatval($item_capital_retail) * floatval(floatval($item_tax) / 100))));
         }else{
-            $item_capital_retail = number_format(floatval($item_capital / $data["item_unit_divisor"]));
-            $item_price = number_format(floatval($item_capital_retail) + floatval($item_tax));
+            $item_capital_retail = floatval($item_capital / $data["item_unit_divisor"]);
+            $item_price = $item_capital_retail + $item_tax;
         }
         $item_desc = $_POST["item_desc"];
         $category_id = $_POST["category_id"];
